@@ -442,7 +442,7 @@ export default function Home() {
 
           <div className="hidden md:block bg-[#c4c0b8]" />
 
-          <div className="md:pl-8 py-8">
+          <div className="md:pl-8">
             {[
               {
                 category: "Cloud / Infra",
@@ -463,7 +463,7 @@ export default function Home() {
             ].map((group, i) => (
               <div
                 key={group.category}
-                className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 py-4 ${
+                className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 py-6 ${
                   i > 0 ? "border-t border-[#d8dde7]" : ""
                 }`}
               >
@@ -519,7 +519,7 @@ export default function Home() {
                   sub: "MW 통신병 · 2022.05 — 2023.11",
                 },
               ].map((item) => (
-                <div key={item.label} className="py-3 border-b border-[#d8dde7]">
+                <div key={item.label} className="py-3 border-[#d8dde7]">
                   <p className="text-[10px] uppercase tracking-[2px] text-[#5a6775] font-bold mb-2">
                     {item.label}
                   </p>
@@ -572,7 +572,7 @@ export default function Home() {
               ].map((item) => (
                 <div
                   key={item.key}
-                  className="py-3 border-b border-[#d8dde7]"
+                  className="py-3"
                 >
                   <p className="text-[10px] uppercase tracking-[2px] text-[#5a6775] mb-1">
                     {item.key}
@@ -581,7 +581,7 @@ export default function Home() {
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[15px] font-semibold text-[#111418] border-b border-[#d8dde7] hover:border-[#111418] pb-px"
+                    className="text-[15px] font-semibold text-[#111418] pb-px"
                   >
                     {item.val}
                   </a>
@@ -614,7 +614,7 @@ export default function Home() {
             ))}
           </div>
           <p className="text-[11px] text-[#d8dde7]">
-            &copy; 2024 임우진 (Woojin Lim) &mdash; All rights reserved.
+            &copy; 2026 임우진 (Woojin Lim) &mdash; All rights reserved.
           </p>
         </div>
       </main>
