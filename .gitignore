@@ -54,3 +54,4 @@ ehthumbs.db
 # Optional tooling caches
 .vercel/
 .turbo/
+.omx/
