@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>임우진 | DevOps Engineer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    header .subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    header .age {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    header .intro {
+      font-size: 20px;
+      color: #333;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    nav {
+      margin-top: 28px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 14px;
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 6px 0;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    nav a:hover {
+      border-bottom-color: #1a1a1a;
+    }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid #d4d4d4;
+      margin: 48px 0;
+    }
+
+    hr.thick {
+      border-top: 2px solid #1a1a1a;
+    }
+
+    hr.dashed {
+      border-top: 1px dashed #ccc;
+    }
+
+    hr.dotted {
+      border-top: 2px dotted #ddd;
+    }
+
+    hr.double {
+      border-top: 3px double #bbb;
+    }
+
+    /* ── Section ── */
+    section {
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #999;
+      margin-bottom: 28px;
+    }
+
+    /* ── Stats Row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      text-align: center;
+    }
+
+    .stat {
+      padding: 20px 0;
+      border: 1px solid #e0e0e0;
+    }
+
+    .stat .number {
+      font-size: 28px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat .label {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── About ── */
+    .about p {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .about p strong {
+      color: #1a1a1a;
+    }
+
+    /* ── Blockquote ── */
+    blockquote {
+      border-left: 3px solid #1a1a1a;
+      padding: 16px 24px;
+      margin: 24px 0;
+      font-size: 17px;
+      font-style: italic;
+      color: #444;
+      background: #f5f5f5;
+    }
+
+    /* ── Tags / Badges ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 4px 12px;
+      border: 1px solid #ccc;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .tag.filled {
+      background: #1a1a1a;
+      color: #fff;
+      border-color: #1a1a1a;
+    }
+
+    /* ── Contact Grid ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 8px 16px;
+    }
+
+    .contact-grid .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+    }
+
+    .contact-grid .value {
+      font-size: 15px;
+    }
+
+    .contact-grid .value a {
+      color: #1a1a1a;
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 1px;
+    }
+
+    .contact-grid .value a:hover {
+      border-bottom-color: #1a1a1a;
+    }
+
+    /* ── Project Card ── */
+    .project-card {
+      border: 1px solid #ddd;
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: #1a1a1a;
+    }
+
+    .project-card .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .project-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .project-card .status {
+      font-size: 12px;
+      padding: 2px 10px;
+      border: 1px solid;
+    }
+
+    .project-card .status.live {
+      color: #16a34a;
+      border-color: #16a34a;
+    }
+
+    .project-card .status.active {
+      color: #2563eb;
+      border-color: #2563eb;
+    }
+
+    .project-card .meta {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .project-card p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .project-card .achievements {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 4px;
+      bottom: 4px;
+      width: 1px;
+      background: #ccc;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid #1a1a1a;
+      background: #fafafa;
+      border-radius: 50%;
+    }
+
+    .timeline-item .date {
+      font-size: 12px;
+      color: #999;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-item .org {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item p {
+      font-size: 14px;
+      color: #777;
+    }
+
+    /* ── Skills Table ── */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .skills-table th {
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+      padding: 10px 0;
+      border-bottom: 2px solid #1a1a1a;
+    }
+
+    .skills-table td {
+      font-size: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid #e8e8e8;
+      vertical-align: top;
+    }
+
+    .skills-table td:first-child {
+      font-weight: 600;
+      width: 180px;
+      color: #333;
+    }
+
+    .skills-table td:last-child {
+      color: #555;
+    }
+
+    /* ── Two Column Grid ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .two-col .col-item {
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .two-col .col-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .two-col .col-item p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* ── Award List ── */
+    .award-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .award-item:first-child {
+      border-top: 1px solid #eee;
+    }
+
+    .award-item .award-badge {
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      padding: 4px 0;
+    }
+
+    .award-item .award-badge.top {
+      color: #b45309;
+    }
+
+    .award-item .award-date {
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+    }
+
+    .award-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .award-item p {
+      font-size: 13px;
+      color: #777;
+    }
+
+    /* ── Accordion / FAQ ── */
+    details {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    details:first-of-type {
+      border-top: 1px solid #e0e0e0;
+    }
+
+    summary {
+      padding: 16px 0;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      font-size: 20px;
+      font-weight: 300;
+      color: #999;
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    details .answer {
+      padding: 0 0 20px 0;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* ── Info Row ── */
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .info-row:first-child {
+      border-top: 1px solid #eee;
+    }
+
+    .info-row .info-label {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .info-row .info-value {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* ── Contact Cards ── */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .contact-card {
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+      text-decoration: none;
+      color: #1a1a1a;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: #1a1a1a;
+      background: #f5f5f5;
+    }
+
+    .contact-card .cc-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #999;
+      margin-bottom: 6px;
+    }
+
+    .contact-card .cc-value {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+    }
+
+    footer .copyright {
+      font-size: 12px;
+      color: #bbb;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 48px 20px;
+      }
+
+      header h1 {
+        font-size: 28px;
+      }
+
+      header .intro {
+        font-size: 17px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .award-item {
+        grid-template-columns: 60px 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 80px 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ━━ Header ━━ -->
+    <header>
+      <h1>임우진 (Woojin Lim)</h1>
+      <div class="subtitle">DevOps Engineer</div>
+      <div class="age">남 2001년 (만25세)</div>
+      <p class="intro">
+        서비스 전체를 이해하고 유연한 구조를 설계하는 엔지니어입니다.
+      </p>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#awards">Awards</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <hr class="thick">
+
+    <!-- ━━ Stats ━━ -->
+    <section>
+      <div class="stats">
+        <div class="stat">
+          <span class="number">3</span>
+          <span class="label">Projects</span>
+        </div>
+        <div class="stat">
+          <span class="number">5</span>
+          <span class="label">Awards</span>
+        </div>
+        <div class="stat">
+          <span class="number">40</span>
+          <span class="label">MAU</span>
+        </div>
+        <div class="stat">
+          <span class="number">4.22</span>
+          <span class="label">GPA</span>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ━━ About ━━ -->
+    <section id="about" class="about">
+      <div class="section-title">About</div>
+      <p>
+        <strong>기술 스택에 얽매이기보다 문제와 개념을 먼저 이해</strong>하고,
+        해결에 가장 적절한 기술을 빠르게 학습하고 적용하는 것을 중요하게 생각합니다.
+        FE와 BE를 포함해 네트워크, 시스템, 하드웨어, ML/DL 등 다양한 영역의 프로젝트 경험을 바탕으로
+        서비스 전체를 이해하고 구조와 흐름을 고려하는 개발자로 성장하고 있습니다.
+      </p>
+      <p>
+        기술은 결국 사람의 문제를 해결하기 위한 도구입니다.
+        팀원들과 적극적으로 소통하며 지식을 공유하고, 협업을 통해 문제를 해결합니다.
+        연구실과 여러 프로젝트에서 <strong>랩장과 팀장을 맡아 팀의 소통과 협업을 이끌어왔으며,
+        실제 운영 중인 시스템과 40 MAU 규모의 서비스를 개발하고 운영한 경험</strong>이 있습니다.
+      </p>
+    </section>
+
+    <hr class="dashed">
+
+    <!-- ━━ Contact Info ━━ -->
+    <section>
+      <div class="section-title">Contact Info</div>
+      <div class="contact-grid">
+        <span class="label">Phone</span>
+        <span class="value">010-2296-1280</span>
+        <span class="label">Email</span>
+        <span class="value"><a href="mailto:woojin2296@gmail.com">woojin2296@gmail.com</a></span>
+        <span class="label">GitHub</span>
+        <span class="value"><a href="https://github.com/woojin2296">github.com/woojin2296</a></span>
+        <span class="label">Tech Blog</span>
+        <span class="value"><a href="https://velog.io/@talking_tomato">velog.io/@talking_tomato</a></span>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ━━ Skills ━━ -->
+    <section id="skills">
+      <div class="section-title">Skills</div>
+
+      <table class="skills-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Technologies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cloud / Infra</td>
+            <td>AWS, Terraform, Docker, Linux</td>
+          </tr>
+          <tr>
+            <td>Platform / CI</td>
+            <td>Git, GitHub Actions</td>
+          </tr>
+          <tr>
+            <td>Backend</td>
+            <td>Spring Boot, Java, MySQL</td>
+          </tr>
+          <tr>
+            <td>Frontend</td>
+            <td>Next.js, TypeScript, JavaScript, Python</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- ━━ Experience ━━ -->
+    <section id="experience">
+      <div class="section-title">Experience</div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="date">2025.09 -- 2025.02</div>
+          <h3>인턴 사원</h3>
+          <div class="org">(주)유머스트알엔디</div>
+          <p>도봉라이프 애플리케이션의 AWS 인프라 구축 및 운영</p>
+          <p>리눅스 기반 Qt로 저선량 X-ray 관절염 치료기기(AMUST) GUI 개발</p>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2024.01 -- 2026.02</div>
+          <h3>학부연구생 (랩장)</h3>
+          <div class="org">순천향대학교 UBICOMP LAB</div>
+          <p>연구실 데이터 수집장치 관제 시스템 판옵티콘(Panopticon) 개발</p>
+          <p>ROS 기반 Lidar 및 Depth Camera의 PCD 수집 파이프라인 개발</p>
+          <p>2025 한국컴퓨터종합학술대회(KCC2025) 학부생 논문 게재</p>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2022.05 -- 2023.11</div>
+          <h3>육군 병장 만기 전역</h3>
+          <div class="org">MW 통신병</div>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2020.03 -- 2026.08</div>
+          <h3>순천향대학교 사물인터넷학과</h3>
+          <div class="org">졸업예정 | 평점 4.22/4.5</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="double">
+
+    <!-- ━━ Projects ━━ -->
+    <section id="projects">
+      <div class="section-title">Key Projects</div>
+
+      <div class="project-card">
+        <div class="card-header">
+          <h3>도봉라이프 (Dobong Life)</h3>
+          <span class="status live">Live</span>
+        </div>
+        <div class="meta">(주)유머스트알엔디 | 인턴사원 | 2025.12 -- 2026.02 (3m)</div>
+        <p>서울시 도봉구 지역상권 활성화 애플리케이션의 AWS 인프라를 구축 및 운영.</p>
+        <p class="achievements">- AWS(VPC, EC2, RDS, S3) 기반 서비스 인프라 설계 및 구축</p>
+        <p class="achievements">- Terraform을 활용한 IaC로 인프라 재현성 확보</p>
+        <p class="achievements">- SSM + GitHub Actions(OIDC) 기반 CI/CD 파이프라인 구축</p>
+        <p class="achievements">- CloudWatch 기반 로그 수집/모니터링 환경 구축</p>
+        <div class="tags">
+          <span class="tag filled">AWS</span>
+          <span class="tag filled">Terraform</span>
+          <span class="tag">Docker Compose</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">CloudWatch</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-header">
+          <h3>판옵티콘 (Panopticon)</h3>
+          <span class="status active">Active</span>
+        </div>
+        <div class="meta">UBICOMP LAB | 학부연구생 | 2024.07 -- 2026.02 (1y 7m)</div>
+        <p>연구실 AI 훈련용 실험 데이터 수집 파이프라인의 관제 및 이상 알림 시스템.</p>
+        <p class="achievements">- Next.js + Spring Boot 기반 풀스택 개발 및 Docker Compose 배포</p>
+        <p class="achievements">- GitHub Actions(self-hosted runner) 기반 On-prem CI/CD 구축</p>
+        <p class="achievements">- 수집 지연/중단 자동 감지 및 Slack 기반 실시간 알림</p>
+        <div class="tags">
+          <span class="tag filled">Next.js</span>
+          <span class="tag filled">Spring Boot</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Docker Compose</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-header">
+          <h3>SCH MiniProject Submission System</h3>
+          <span class="status active">Active</span>
+        </div>
+        <div class="meta">개인 프로젝트 | 2025.06 -- 2026.02 (9m)</div>
+        <p>학과 ML/DL 강의에서 사용하는 과제 제출 및 랭킹 관리 시스템. 월 평균 40명 이용.</p>
+        <p class="achievements">- 과제 제출, 평가, 랭킹 관리를 통합한 웹 서비스</p>
+        <p class="achievements">- 세션 기반 인증 및 계층형 권한 구조 구현</p>
+        <p class="achievements">- Docker Compose 기반 배포 및 감사 로그 시스템 구축</p>
+        <div class="tags">
+          <span class="tag filled">Next.js</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Docker Compose</span>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ━━ Awards ━━ -->
+    <section id="awards">
+      <div class="section-title">Awards</div>
+
+      <div class="award-item">
+        <div>
+          <div class="award-badge top">최우수상</div>
+          <div class="award-date">2024.11</div>
+        </div>
+        <div>
+          <h4>2024 제1회 SW융합대학 학술제 (E-Sports 개발)</h4>
+          <p>캐주얼 리듬게임 - 탭 스페이스 (Tab Space)</p>
+        </div>
+      </div>
+
+      <div class="award-item">
+        <div>
+          <div class="award-badge">장려상</div>
+          <div class="award-date">2025.11</div>
+        </div>
+        <div>
+          <h4>2025 SCHU AI SW Festival SW 프로젝트 경진대회</h4>
+          <p>AI 기반 발표 연습 보조 서비스 - 플라보 (PLAVO)</p>
+        </div>
+      </div>
+
+      <div class="award-item">
+        <div>
+          <div class="award-badge">장려상</div>
+          <div class="award-date">2025.11</div>
+        </div>
+        <div>
+          <h4>2025 캡스톤 디자인 및 AI 해커톤 경진대회</h4>
+          <p>장소에 맞는 음악 생성 서비스 - 카라멜 (Caramel)</p>
+        </div>
+      </div>
+
+      <div class="award-item">
+        <div>
+          <div class="award-badge">장려상</div>
+          <div class="award-date">2025.08</div>
+        </div>
+        <div>
+          <h4>2025 글로벌 캡스톤디자인 경진대회</h4>
+          <p>AI 기반 발표 연습 보조 서비스 - 플라보 (PLAVO)</p>
+        </div>
+      </div>
+
+      <div class="award-item">
+        <div>
+          <div class="award-badge">장려상</div>
+          <div class="award-date">2024.10</div>
+        </div>
+        <div>
+          <h4>2024 캡스톤디자인 및 AI 해커톤 경진대회</h4>
+          <p>입법 현황 실시간 분석 시스템 - 라다온 (LawDaon)</p>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ━━ Other ━━ -->
+    <section>
+      <div class="section-title">Other</div>
+      <div class="info-row">
+        <span class="info-label">Education</span>
+        <span class="info-value">순천향대학교 사물인터넷학과 (2020.03 ~ 2026.08)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">GPA</span>
+        <span class="info-value">4.22 / 4.5</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Language</span>
+        <span class="info-value">TOEIC 810 (2025.11)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Military</span>
+        <span class="info-value">육군 병장 만기 전역 (2022.05 ~ 2023.11) MW 통신병</span>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ━━ Contact ━━ -->
+    <section id="contact">
+      <div class="section-title">Contact</div>
+      <div class="contact-cards">
+        <a class="contact-card" href="mailto:woojin2296@gmail.com">
+          <div class="cc-label">Email</div>
+          <div class="cc-value">woojin2296@gmail.com</div>
+        </a>
+        <a class="contact-card" href="https://github.com/woojin2296">
+          <div class="cc-label">GitHub</div>
+          <div class="cc-value">woojin2296</div>
+        </a>
+        <a class="contact-card" href="https://velog.io/@talking_tomato">
+          <div class="cc-label">Tech Blog</div>
+          <div class="cc-value">velog.io/@talking_tomato</div>
+        </a>
+        <a class="contact-card" href="tel:010-2296-1280">
+          <div class="cc-label">Phone</div>
+          <div class="cc-value">010-2296-1280</div>
+        </a>
+      </div>
+    </section>
+
+    <hr class="thick">
+
+    <footer>
+      <div class="copyright">&copy; 2024 임우진. All rights reserved.</div>
+    </footer>
+
+  </div>
+</body>
+</html>

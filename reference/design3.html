@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>임우진 — Editorial Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cream: #f4f1eb;
+      --ink: #1c1917;
+      --warm: #78716c;
+      --light: #d6d3cd;
+      --rule: #c4c0b8;
+      --highlight: #292524;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Pretendard", "Georgia", serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 0;
+    }
+
+    hr.bold { border-top: 3px solid var(--ink); }
+    hr.v-space { margin: 72px 0; }
+
+    /* ── Masthead ── */
+    .masthead {
+      text-align: center;
+      padding: 32px 40px;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .masthead .dateline {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--warm);
+      margin-bottom: 12px;
+    }
+
+    .masthead h1 {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .masthead .tagline {
+      font-size: 14px;
+      color: var(--warm);
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* ── Nav Strip ── */
+    .nav-strip {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-strip a {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-strip a:hover { border-bottom: 1.5px solid var(--ink); }
+
+    /* ── Headline Block ── */
+    .headline-block {
+      padding: 80px 0 64px;
+      text-align: center;
+    }
+
+    .headline-block .kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--warm);
+      margin-bottom: 20px;
+    }
+
+    .headline-block h2 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      max-width: 720px;
+      margin: 0 auto 24px;
+    }
+
+    .headline-block .deck {
+      font-size: 18px;
+      color: var(--warm);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Three Column ── */
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    }
+
+    .three-col .col-divider { background: var(--rule); }
+
+    .three-col .col { padding: 32px 28px; }
+
+    .three-col .col h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .three-col .col p {
+      font-size: 14px;
+      color: var(--warm);
+      line-height: 1.9;
+    }
+
+    .three-col .col .col-tag {
+      display: inline-block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+      border: 1px solid var(--rule);
+      padding: 2px 8px;
+      margin-bottom: 12px;
+    }
+
+    /* ── Two Column Split ── */
+    .two-split {
+      display: grid;
+      grid-template-columns: 340px 1px 1fr;
+    }
+
+    .two-split .split-divider { background: var(--rule); }
+
+    .two-split .split-left {
+      padding: 40px 32px 40px 0;
+    }
+
+    .two-split .split-right {
+      padding: 40px 0 40px 32px;
+    }
+
+    .two-split .split-left h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--warm);
+      font-weight: 600;
+    }
+
+    /* ── Pull Quote ── */
+    .pull-quote {
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .pull-quote .quote-mark {
+      font-size: 64px;
+      line-height: 1;
+      color: var(--light);
+      font-family: Georgia, serif;
+    }
+
+    .pull-quote blockquote {
+      font-size: 26px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto 16px;
+      color: var(--highlight);
+    }
+
+    .pull-quote cite {
+      font-size: 12px;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+    }
+
+    /* ── Article List ── */
+    .article-list-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 100px;
+      gap: 24px;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .article-list-item:first-child { border-top: 1px solid var(--light); }
+
+    .article-list-item .art-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--light);
+      line-height: 1;
+    }
+
+    .article-list-item h4 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .article-list-item .art-desc {
+      font-size: 14px;
+      color: var(--warm);
+    }
+
+    .article-list-item .art-cat {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+      text-align: right;
+    }
+
+    /* ── Horizontal Timeline ── */
+    .h-timeline {
+      display: flex;
+      overflow-x: auto;
+      padding: 32px 0;
+      scrollbar-width: none;
+    }
+
+    .h-timeline::-webkit-scrollbar { display: none; }
+
+    .h-timeline-item {
+      min-width: 220px;
+      padding: 24px 24px 24px 0;
+      border-left: 2px solid var(--ink);
+      padding-left: 20px;
+      flex-shrink: 0;
+    }
+
+    .h-timeline-item .ht-year {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .h-timeline-item .ht-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .h-timeline-item .ht-sub {
+      font-size: 13px;
+      color: var(--warm);
+    }
+
+    /* ── Sidebar Layout ── */
+    .sidebar-layout {
+      display: grid;
+      grid-template-columns: 1fr 1px 280px;
+    }
+
+    .sidebar-layout .sb-divider { background: var(--rule); }
+
+    .sidebar-layout .main-content { padding: 40px 32px 40px 0; }
+    .sidebar-layout .sidebar { padding: 40px 0 40px 32px; }
+
+    .sidebar .sb-section { margin-bottom: 32px; }
+    .sidebar .sb-section:last-child { margin-bottom: 0; }
+
+    .sidebar .sb-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--warm);
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .sidebar .sb-item {
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--light);
+      color: var(--ink);
+    }
+
+    .sidebar .sb-item span {
+      color: var(--warm);
+      font-size: 12px;
+      display: block;
+    }
+
+    /* ── Dropcap ── */
+    .dropcap-text::first-letter {
+      float: left;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 0.8;
+      padding-right: 12px;
+      padding-top: 4px;
+      color: var(--ink);
+    }
+
+    .dropcap-text {
+      font-size: 16px;
+      color: #44403c;
+      line-height: 1.9;
+    }
+
+    /* ── Dot Meter ── */
+    .dot-meter {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .dot-meter .dm-label {
+      font-size: 14px;
+      font-weight: 600;
+      width: 180px;
+      flex-shrink: 0;
+    }
+
+    .dot-meter .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot-meter .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid var(--ink);
+    }
+
+    .dot-meter .dot.filled { background: var(--ink); }
+
+    .dot-meter .dm-text {
+      font-size: 12px;
+      color: var(--warm);
+      margin-left: auto;
+    }
+
+    /* ── Key-Value Grid ── */
+    .kv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .kv-pair {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .kv-pair:nth-child(odd) { padding-right: 20px; }
+
+    .kv-pair:nth-child(even) {
+      padding-left: 20px;
+      border-left: 1px solid var(--light);
+    }
+
+    .kv-pair .kv-key {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+      margin-bottom: 4px;
+    }
+
+    .kv-pair .kv-val {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .kv-pair .kv-val a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .kv-pair .kv-val a:hover { border-bottom-color: var(--ink); }
+
+    /* ── Award Grid ── */
+    .award-grid-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .award-grid-item:first-child { border-top: 1px solid var(--light); }
+
+    .award-grid-item .ag-badge {
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .award-grid-item .ag-badge.gold { color: #92400e; }
+
+    .award-grid-item .ag-date {
+      font-size: 11px;
+      color: var(--warm);
+      text-align: center;
+    }
+
+    .award-grid-item h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .award-grid-item p {
+      font-size: 13px;
+      color: var(--warm);
+    }
+
+    /* ── Footnotes ── */
+    .footnotes { padding: 32px 0; }
+
+    .footnotes .fn {
+      font-size: 12px;
+      color: var(--warm);
+      padding: 6px 0;
+      display: flex;
+      gap: 12px;
+    }
+
+    .footnotes .fn .fn-num {
+      font-weight: 700;
+      color: var(--ink);
+      flex-shrink: 0;
+    }
+
+    /* ── CTA Box ── */
+    .cta-box {
+      border: 2px solid var(--ink);
+      padding: 48px;
+      text-align: center;
+      margin: 48px 0;
+    }
+
+    .cta-box h3 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      font-size: 15px;
+      color: var(--warm);
+      margin-bottom: 28px;
+    }
+
+    .cta-box .btn {
+      display: inline-block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      padding: 14px 44px;
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .cta-box .btn:hover {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    /* ── Footer ── */
+    .end-footer {
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    .end-footer .end-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 16px;
+    }
+
+    .end-footer .end-links a {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+      text-decoration: none;
+    }
+
+    .end-footer .end-links a:hover { color: var(--ink); }
+
+    .end-footer .end-copy {
+      font-size: 11px;
+      color: var(--rule);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      .masthead { padding: 24px; }
+      .masthead h1 { font-size: 32px; }
+      .nav-strip { gap: 20px; padding: 12px 24px; flex-wrap: wrap; justify-content: center; }
+
+      .three-col { grid-template-columns: 1fr; }
+      .three-col .col-divider { height: 1px; width: 100%; }
+      .three-col .col { padding: 24px 0; }
+
+      .two-split { grid-template-columns: 1fr; }
+      .two-split .split-divider { height: 1px; width: 100%; }
+      .two-split .split-left { padding: 32px 0 0; }
+      .two-split .split-right { padding: 0 0 32px; }
+
+      .sidebar-layout { grid-template-columns: 1fr; }
+      .sidebar-layout .sb-divider { height: 1px; width: 100%; }
+      .sidebar-layout .main-content { padding: 32px 0; }
+      .sidebar-layout .sidebar { padding: 0 0 32px; }
+
+      .article-list-item { grid-template-columns: 48px 1fr; }
+      .article-list-item .art-cat { display: none; }
+
+      .kv-grid { grid-template-columns: 1fr; }
+      .kv-pair:nth-child(even) { padding-left: 0; border-left: none; }
+      .kv-pair:nth-child(odd) { padding-right: 0; }
+
+      .h-timeline-item { min-width: 180px; }
+      .cta-box { padding: 32px 24px; }
+
+      .dot-meter .dm-label { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ━━ Masthead ━━ -->
+  <header class="masthead">
+    <div class="dateline">Portfolio &mdash; Seoul, 2024</div>
+    <h1>임우진 (WOOJIN LIM)</h1>
+    <div class="tagline">DevOps Engineer &mdash; "서비스 전체를 이해하고 유연한 구조를 설계하다"</div>
+  </header>
+
+  <!-- ━━ Nav ━━ -->
+  <nav class="nav-strip">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#career">Career</a>
+    <a href="#skills">Skills</a>
+    <a href="#awards">Awards</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- ━━ Headline ━━ -->
+  <div class="container">
+    <div class="headline-block">
+      <div class="kicker">DevOps Engineer &middot; 만25세</div>
+      <h2>복잡한 시스템을<br>단순하게 설계하다</h2>
+      <p class="deck">
+        기술 스택에 얽매이기보다 문제와 개념을 먼저 이해하고,
+        해결에 가장 적절한 기술을 빠르게 학습하고 적용하는 엔지니어입니다.
+      </p>
+    </div>
+  </div>
+
+  <div class="container"><hr class="bold"></div>
+
+  <!-- ━━ Three Column ━━ -->
+  <div class="container" id="about">
+    <div class="three-col">
+      <div class="col">
+        <span class="col-tag">Cloud / Infra</span>
+        <h3>견고한 인프라 위에</h3>
+        <p>AWS, Terraform, Docker를 활용한 클라우드 인프라 설계 및 구축. VPC, EC2, RDS, S3 등을 조합하여 보안과 확장성을 갖춘 아키텍처를 구현합니다.</p>
+      </div>
+      <div class="col-divider"></div>
+      <div class="col">
+        <span class="col-tag">CI/CD</span>
+        <h3>끊김 없는 배포를 위해</h3>
+        <p>GitHub Actions 기반 CI/CD 파이프라인 구축. OIDC + SSM을 활용한 보안 배포, self-hosted runner를 통한 On-prem 환경 지원까지 경험했습니다.</p>
+      </div>
+      <div class="col-divider"></div>
+      <div class="col">
+        <span class="col-tag">Full-Stack</span>
+        <h3>서비스 전체를 이해하며</h3>
+        <p>Next.js, Spring Boot를 활용한 풀스택 개발 경험. FE/BE부터 네트워크, 시스템, ML/DL까지 다양한 영역을 아우르는 시야를 갖추고 있습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><hr></div>
+
+  <!-- ━━ Pull Quote ━━ -->
+  <div class="container">
+    <div class="pull-quote">
+      <div class="quote-mark">&ldquo;</div>
+      <blockquote>
+        기술은 결국 사람의 문제를 해결하기 위한 도구이다.
+        팀원들과 적극적으로 소통하며 협업을 통해 문제를 해결한다.
+      </blockquote>
+      <cite>임우진 &mdash; 개인 신조</cite>
+    </div>
+  </div>
+
+  <div class="container"><hr></div>
+
+  <!-- ━━ Key Projects ━━ -->
+  <div class="container" id="projects">
+    <div class="two-split">
+      <div class="split-left">
+        <h3>Key Projects</h3>
+      </div>
+      <div class="split-divider"></div>
+      <div class="split-right">
+
+        <div class="article-list-item">
+          <span class="art-num">01</span>
+          <div>
+            <h4>도봉라이프 (Dobong Life)</h4>
+            <p class="art-desc">서울시 도봉구 지역상권 활성화 앱의 AWS 인프라 구축 및 운영. Terraform IaC, SSM+OIDC 기반 CI/CD, CloudWatch 모니터링.</p>
+          </div>
+          <span class="art-cat">DevOps</span>
+        </div>
+
+        <div class="article-list-item">
+          <span class="art-num">02</span>
+          <div>
+            <h4>판옵티콘 (Panopticon)</h4>
+            <p class="art-desc">연구실 AI 데이터 수집 파이프라인 관제 및 이상 알림 시스템. Next.js + Spring Boot 풀스택, Slack 실시간 알림, 1년 6개월 운영 중.</p>
+          </div>
+          <span class="art-cat">Full-Stack</span>
+        </div>
+
+        <div class="article-list-item">
+          <span class="art-num">03</span>
+          <div>
+            <h4>SCH MiniProject Submission System</h4>
+            <p class="art-desc">학과 ML/DL 강의용 과제 제출 및 랭킹 관리 시스템. 월 40명 이용, 세션 인증/권한 구조, 감사 로그 시스템.</p>
+          </div>
+          <span class="art-cat">Personal</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><hr class="v-space"></div>
+
+  <!-- ━━ Horizontal Timeline ━━ -->
+  <div class="container" id="career">
+    <div class="two-split">
+      <div class="split-left">
+        <h3>Career</h3>
+      </div>
+      <div class="split-divider"></div>
+      <div class="split-right">
+        <div class="h-timeline">
+          <div class="h-timeline-item">
+            <div class="ht-year">2025</div>
+            <div class="ht-title">인턴 사원</div>
+            <div class="ht-sub">(주)유머스트알엔디 / 도봉라이프 인프라</div>
+          </div>
+          <div class="h-timeline-item">
+            <div class="ht-year">2024</div>
+            <div class="ht-title">학부연구생 (랩장)</div>
+            <div class="ht-sub">UBICOMP LAB / 판옵티콘 개발</div>
+          </div>
+          <div class="h-timeline-item">
+            <div class="ht-year">2023</div>
+            <div class="ht-title">육군 병장 만기 전역</div>
+            <div class="ht-sub">MW 통신병 (2022.05 ~ 2023.11)</div>
+          </div>
+          <div class="h-timeline-item">
+            <div class="ht-year">2020</div>
+            <div class="ht-title">순천향대학교 입학</div>
+            <div class="ht-sub">사물인터넷학과 (GPA 4.22/4.5)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><hr></div>
+
+  <!-- ━━ Sidebar Layout: Skills ━━ -->
+  <div class="container" id="skills">
+    <div class="sidebar-layout">
+      <div class="main-content">
+        <p class="dropcap-text">
+          서비스 전체를 이해하고 유연한 구조를 설계하는 것을 목표로 합니다. FE와 BE를 포함해 네트워크, 시스템, 하드웨어, ML/DL 등 다양한 영역의 프로젝트 경험을 바탕으로, 문제에 적합한 기술을 선택하고 빠르게 적용할 수 있습니다. 연구실과 여러 프로젝트에서 랩장과 팀장을 맡아 팀의 소통과 협업을 이끌어왔습니다.
+        </p>
+
+        <div style="height: 32px"></div>
+
+        <div class="dot-meter">
+          <span class="dm-label">Cloud / Infra</span>
+          <div class="dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+          </div>
+          <span class="dm-text">AWS, Terraform, Docker, Linux</span>
+        </div>
+        <div class="dot-meter">
+          <span class="dm-label">Platform / CI</span>
+          <div class="dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="dm-text">Git, GitHub Actions</span>
+        </div>
+        <div class="dot-meter">
+          <span class="dm-label">Backend</span>
+          <div class="dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="dm-text">Spring Boot, Java, MySQL</span>
+        </div>
+        <div class="dot-meter">
+          <span class="dm-label">Frontend</span>
+          <div class="dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="dm-text">Next.js, TypeScript, JavaScript</span>
+        </div>
+      </div>
+
+      <div class="sb-divider"></div>
+
+      <div class="sidebar">
+        <div class="sb-section">
+          <div class="sb-title">Education</div>
+          <div class="sb-item">
+            순천향대학교 사물인터넷학과
+            <span>졸업예정 &middot; 2020.03 — 2026.08</span>
+          </div>
+          <div class="sb-item">
+            평점 4.22 / 4.5
+          </div>
+        </div>
+
+        <div class="sb-section">
+          <div class="sb-title">Publication</div>
+          <div class="sb-item">
+            KCC2025 학부생 논문 게재
+            <span>한국컴퓨터종합학술대회</span>
+          </div>
+        </div>
+
+        <div class="sb-section">
+          <div class="sb-title">Language</div>
+          <div class="sb-item">TOEIC 810<span>2025.11 취득</span></div>
+        </div>
+
+        <div class="sb-section">
+          <div class="sb-title">Military</div>
+          <div class="sb-item">육군 병장 만기 전역<span>MW 통신병 &middot; 2022.05 — 2023.11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><hr></div>
+
+  <!-- ━━ Contact Info ━━ -->
+  <div class="container">
+    <div style="padding: 40px 0">
+      <div class="kv-grid">
+        <div class="kv-pair">
+          <div class="kv-key">Phone</div>
+          <div class="kv-val">010-2296-1280</div>
+        </div>
+        <div class="kv-pair">
+          <div class="kv-key">Email</div>
+          <div class="kv-val"><a href="mailto:woojin2296@gmail.com">woojin2296@gmail.com</a></div>
+        </div>
+        <div class="kv-pair">
+          <div class="kv-key">GitHub</div>
+          <div class="kv-val"><a href="https://github.com/woojin2296">github.com/woojin2296</a></div>
+        </div>
+        <div class="kv-pair">
+          <div class="kv-key">Tech Blog</div>
+          <div class="kv-val"><a href="https://velog.io/@talking_tomato">velog.io/@talking_tomato</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><hr></div>
+
+  <!-- ━━ Awards ━━ -->
+  <div class="container" id="awards">
+    <div class="two-split">
+      <div class="split-left">
+        <h3>Awards</h3>
+      </div>
+      <div class="split-divider"></div>
+      <div class="split-right">
+
+        <div class="award-grid-item">
+          <div>
+            <div class="ag-badge gold">최우수상</div>
+            <div class="ag-date">2024.11</div>
+          </div>
+          <div>
+            <h4>SW융합대학 학술제 (E-Sports 개발)</h4>
+            <p>캐주얼 리듬게임 - 탭 스페이스 (Tab Space)</p>
+          </div>
+        </div>
+
+        <div class="award-grid-item">
+          <div>
+            <div class="ag-badge">장려상</div>
+            <div class="ag-date">2025.11</div>
+          </div>
+          <div>
+            <h4>2025 SCHU AI SW Festival</h4>
+            <p>AI 기반 발표 연습 보조 서비스 - 플라보 (PLAVO)</p>
+          </div>
+        </div>
+
+        <div class="award-grid-item">
+          <div>
+            <div class="ag-badge">장려상</div>
+            <div class="ag-date">2025.11</div>
+          </div>
+          <div>
+            <h4>2025 캡스톤 디자인 및 AI 해커톤</h4>
+            <p>장소에 맞는 음악 생성 서비스 - 카라멜 (Caramel)</p>
+          </div>
+        </div>
+
+        <div class="award-grid-item">
+          <div>
+            <div class="ag-badge">장려상</div>
+            <div class="ag-date">2025.08</div>
+          </div>
+          <div>
+            <h4>2025 글로벌 캡스톤디자인 경진대회</h4>
+            <p>AI 기반 발표 연습 보조 서비스 - 플라보 (PLAVO)</p>
+          </div>
+        </div>
+
+        <div class="award-grid-item">
+          <div>
+            <div class="ag-badge">장려상</div>
+            <div class="ag-date">2024.10</div>
+          </div>
+          <div>
+            <h4>2024 캡스톤디자인 및 AI 해커톤</h4>
+            <p>입법 현황 실시간 분석 시스템 - 라다온 (LawDaon)</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><hr></div>
+
+  <!-- ━━ Footnotes ━━ -->
+  <div class="container">
+    <div class="footnotes">
+      <div class="fn"><span class="fn-num">*</span> 이 포트폴리오는 텍스트와 구분선만으로 디자인되었습니다.</div>
+      <div class="fn"><span class="fn-num">**</span> 모든 프로젝트는 실제 운영 경험을 바탕으로 작성되었습니다.</div>
+    </div>
+  </div>
+
+  <div class="container"><hr class="bold"></div>
+
+  <!-- ━━ CTA ━━ -->
+  <div class="container" id="contact">
+    <div class="cta-box">
+      <h3>함께 일해요</h3>
+      <p>새로운 프로젝트, 협업, 또는 커피챗까지 편하게 연락 주세요.</p>
+      <a href="mailto:woojin2296@gmail.com" class="btn">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- ━━ Footer ━━ -->
+  <div class="container">
+    <hr>
+    <div class="end-footer">
+      <div class="end-links">
+        <a href="mailto:woojin2296@gmail.com">Email</a>
+        <a href="https://github.com/woojin2296">GitHub</a>
+        <a href="https://velog.io/@talking_tomato">Blog</a>
+      </div>
+      <div class="end-copy">&copy; 2024 임우진 (Woojin Lim) &mdash; All rights reserved.</div>
+    </div>
+  </div>
+
+</body>
+</html>

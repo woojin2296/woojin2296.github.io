@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Components — Editorial Style</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f4f1eb;
+      --ink: #1c1917;
+      --warm: #78716c;
+      --light: #d6d3cd;
+      --rule: #c4c0b8;
+      --highlight: #292524;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+
+    hr { border: none; border-top: 1px solid var(--rule); margin: 0; }
+    hr.bold { border-top: 3px solid var(--ink); }
+
+    /* ── Page Header ── */
+    .page-header {
+      text-align: center;
+      padding: 48px 40px;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .page-header h1 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: var(--warm);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      font-size: 13px;
+      color: var(--rule);
+    }
+
+    /* ── Component Label ── */
+    .comp-label {
+      text-align: center;
+      padding: 56px 0 16px;
+    }
+
+    .comp-label h2 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--warm);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .comp-label p {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    /* ════════════════════════════════════════
+       COMPONENT 1 — Vertical Newspaper Timeline
+       ════════════════════════════════════════ */
+    .news-timeline {
+      position: relative;
+    }
+
+    .news-timeline::before {
+      content: "";
+      position: absolute;
+      left: 120px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--rule);
+    }
+
+    .news-tl-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      min-height: 0;
+    }
+
+    .news-tl-left {
+      text-align: right;
+      padding: 32px 28px 32px 0;
+      position: relative;
+    }
+
+    .news-tl-left::after {
+      content: "";
+      position: absolute;
+      right: -5px;
+      top: 38px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+      background: var(--cream);
+    }
+
+    .news-tl-left .tl-year {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .news-tl-left .tl-period {
+      font-size: 11px;
+      color: var(--warm);
+    }
+
+    .news-tl-right {
+      padding: 32px 0 32px 28px;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .news-tl-item:last-child .news-tl-right {
+      border-bottom: none;
+    }
+
+    .news-tl-right h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      letter-spacing: -0.3px;
+    }
+
+    .news-tl-right .tl-org {
+      font-size: 14px;
+      color: var(--warm);
+      margin-bottom: 12px;
+    }
+
+    .news-tl-right .tl-desc {
+      font-size: 14px;
+      color: #57534e;
+      line-height: 1.8;
+    }
+
+    .news-tl-right .tl-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .news-tl-right .tl-tags span {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 2px 8px;
+      border: 1px solid var(--rule);
+      color: var(--warm);
+    }
+
+    /* ════════════════════════════════════════
+       COMPONENT 2 — Accordion Career
+       ════════════════════════════════════════ */
+    .acc-career details {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .acc-career details:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .acc-career summary {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: baseline;
+      padding: 24px 0;
+      cursor: pointer;
+      list-style: none;
+      gap: 24px;
+    }
+
+    .acc-career summary::-webkit-details-marker { display: none; }
+
+    .acc-career summary .acc-year {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .acc-career summary .acc-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .acc-career summary .acc-org {
+      font-size: 13px;
+      color: var(--warm);
+      display: block;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .acc-career summary .acc-toggle {
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--rule);
+      transition: transform 0.2s;
+    }
+
+    .acc-career details[open] summary .acc-toggle {
+      transform: rotate(45deg);
+    }
+
+    .acc-career .acc-body {
+      padding: 0 0 28px 114px;
+    }
+
+    .acc-career .acc-body p {
+      font-size: 15px;
+      color: #57534e;
+      line-height: 1.9;
+      margin-bottom: 12px;
+    }
+
+    .acc-career .acc-body .acc-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .acc-career .acc-body .acc-hl {
+      padding: 16px;
+      border: 1px solid var(--light);
+    }
+
+    .acc-career .acc-body .acc-hl .hl-num {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .acc-career .acc-body .acc-hl .hl-text {
+      font-size: 12px;
+      color: var(--warm);
+    }
+
+    /* ════════════════════════════════════════
+       COMPONENT 3 — Magazine Spread
+       ════════════════════════════════════════ */
+    .mag-spread {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+    }
+
+    .mag-spread .mag-divider { background: var(--rule); }
+
+    .mag-spread .mag-col {
+      padding: 40px 32px;
+    }
+
+    .mag-entry {
+      margin-bottom: 36px;
+    }
+
+    .mag-entry:last-child { margin-bottom: 0; }
+
+    .mag-entry .mag-date {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--warm);
+      margin-bottom: 8px;
+    }
+
+    .mag-entry h3 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .mag-entry .mag-org {
+      font-size: 14px;
+      color: var(--warm);
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .mag-entry p {
+      font-size: 14px;
+      color: #57534e;
+      line-height: 1.9;
+    }
+
+    .mag-entry .mag-rule {
+      height: 1px;
+      background: var(--light);
+      margin-top: 20px;
+    }
+
+    .mag-sidebar-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--warm);
+      font-weight: 700;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .mag-sidebar-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .mag-sidebar-item h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .mag-sidebar-item p {
+      font-size: 12px;
+      color: var(--warm);
+    }
+
+    /* ════════════════════════════════════════
+       COMPONENT 4 — Stacked Cards
+       ════════════════════════════════════════ */
+    .stack-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stack-card {
+      border: 1px solid var(--rule);
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 32px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .stack-card:hover {
+      border-color: var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .stack-card .sc-left {
+      text-align: center;
+      border-right: 1px solid var(--light);
+      padding-right: 24px;
+    }
+
+    .stack-card .sc-year {
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stack-card .sc-duration {
+      font-size: 11px;
+      color: var(--warm);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stack-card .sc-right h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .stack-card .sc-org {
+      font-size: 14px;
+      color: var(--warm);
+      margin-bottom: 12px;
+    }
+
+    .stack-card .sc-desc {
+      font-size: 14px;
+      color: #57534e;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .stack-card .sc-skills {
+      font-size: 12px;
+      color: var(--warm);
+      border-top: 1px solid var(--light);
+      padding-top: 12px;
+    }
+
+    .stack-card .sc-skills strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ════════════════════════════════════════
+       COMPONENT 5 — Chapter-Style
+       ════════════════════════════════════════ */
+    .chapter {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .chapter:last-child { border-bottom: none; }
+
+    .chapter-num {
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .chapter-head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+
+    .chapter-head h3 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .chapter-head .ch-badge {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 3px 10px;
+      border: 1.5px solid var(--ink);
+      font-weight: 700;
+    }
+
+    .chapter-meta {
+      font-size: 13px;
+      color: var(--warm);
+      margin-bottom: 20px;
+    }
+
+    .chapter-body {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    .chapter-body .ch-text {
+      font-size: 16px;
+      color: #44403c;
+      line-height: 1.9;
+    }
+
+    .chapter-body .ch-text::first-letter {
+      float: left;
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 0.8;
+      padding-right: 10px;
+      padding-top: 4px;
+      color: var(--ink);
+    }
+
+    .chapter-body .ch-aside {
+      border-left: 1px solid var(--rule);
+      padding-left: 24px;
+    }
+
+    .ch-aside-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .ch-aside-item {
+      font-size: 13px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--light);
+      color: #57534e;
+    }
+
+    .ch-aside-item:last-child { border-bottom: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      .page-header { padding: 32px 24px; }
+
+      .news-timeline::before { left: 0; display: none; }
+      .news-tl-item { grid-template-columns: 1fr; }
+      .news-tl-left { text-align: left; padding: 16px 0 0; }
+      .news-tl-left::after { display: none; }
+      .news-tl-right { padding: 8px 0 24px; }
+
+      .acc-career summary { grid-template-columns: 60px 1fr auto; gap: 12px; }
+      .acc-career .acc-body { padding-left: 72px; }
+      .acc-career .acc-body .acc-highlights { grid-template-columns: 1fr; }
+
+      .mag-spread { grid-template-columns: 1fr; }
+      .mag-spread .mag-divider { height: 1px; width: 100%; }
+      .mag-spread .mag-col { padding: 24px 0; }
+
+      .stack-card { grid-template-columns: 1fr; gap: 16px; }
+      .stack-card .sc-left { text-align: left; border-right: none; border-bottom: 1px solid var(--light); padding-right: 0; padding-bottom: 12px; }
+
+      .chapter-body { grid-template-columns: 1fr; gap: 24px; }
+      .chapter-body .ch-aside { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 24px; }
+
+      .chapter-head { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ━━ Page Header ━━ -->
+  <header class="page-header">
+    <h1>Career Components</h1>
+    <p>design3 에디토리얼 스타일 — 5가지 Career 레이아웃 변형</p>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       1. Vertical Newspaper Timeline
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 01</h2>
+      <p>Vertical Newspaper Timeline</p>
+    </div>
+    <hr class="bold">
+  </div>
+
+  <div class="container">
+    <div class="news-timeline">
+      <div class="news-tl-item">
+        <div class="news-tl-left">
+          <p class="tl-year">2025</p>
+          <p class="tl-period">09 — 02</p>
+        </div>
+        <div class="news-tl-right">
+          <h3>인턴 사원 (DevOps Engineer)</h3>
+          <p class="tl-org">(주)유머스트알엔디</p>
+          <p class="tl-desc">
+            도봉라이프 애플리케이션의 AWS 인프라 구축 및 운영.
+            리눅스 기반 Qt로 저선량 X-ray 관절염 치료기기(AMUST) GUI 개발.
+          </p>
+          <div class="tl-tags">
+            <span>AWS</span>
+            <span>Terraform</span>
+            <span>Docker</span>
+            <span>GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-tl-item">
+        <div class="news-tl-left">
+          <p class="tl-year">2024</p>
+          <p class="tl-period">01 — 26.02</p>
+        </div>
+        <div class="news-tl-right">
+          <h3>학부연구생 (랩장)</h3>
+          <p class="tl-org">순천향대학교 UBICOMP LAB</p>
+          <p class="tl-desc">
+            연구실 데이터 수집장치 관제 시스템 판옵티콘(Panopticon) 개발.
+            ROS 기반 Lidar 및 Depth Camera의 PCD 수집 파이프라인 개발.
+            KCC2025 학부생 논문 게재.
+          </p>
+          <div class="tl-tags">
+            <span>Next.js</span>
+            <span>Spring Boot</span>
+            <span>MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-tl-item">
+        <div class="news-tl-left">
+          <p class="tl-year">2022</p>
+          <p class="tl-period">05 — 23.11</p>
+        </div>
+        <div class="news-tl-right">
+          <h3>육군 병장 만기 전역</h3>
+          <p class="tl-org">MW 통신병</p>
+          <p class="tl-desc">
+            군 복무 기간 중 통신 장비 운용 및 유지보수 경험.
+          </p>
+        </div>
+      </div>
+
+      <div class="news-tl-item">
+        <div class="news-tl-left">
+          <p class="tl-year">2020</p>
+          <p class="tl-period">03 — 26.08</p>
+        </div>
+        <div class="news-tl-right">
+          <h3>순천향대학교 사물인터넷학과</h3>
+          <p class="tl-org">졸업예정 · GPA 4.22/4.5</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:48px;padding-bottom:48px;"><hr></div>
+
+  <!-- ══════════════════════════════════════════
+       2. Accordion Career
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 02</h2>
+      <p>Accordion Career</p>
+    </div>
+    <hr class="bold">
+  </div>
+
+  <div class="container" style="padding-top:32px;">
+    <div class="acc-career">
+      <details open>
+        <summary>
+          <span class="acc-year">2025</span>
+          <div>
+            <span class="acc-title">인턴 사원 (DevOps Engineer)</span>
+            <span class="acc-org">(주)유머스트알엔디 · 2025.09 — 2025.02</span>
+          </div>
+          <span class="acc-toggle">+</span>
+        </summary>
+        <div class="acc-body">
+          <p>
+            도봉라이프 애플리케이션의 AWS 인프라를 설계, 구축, 운영하였습니다.
+            Terraform을 도입하여 인프라 코드화를 진행하고,
+            SSM + GitHub Actions(OIDC) 기반 CI/CD를 구축하여 SSH 없는 보안 배포를 구현했습니다.
+          </p>
+          <div class="acc-highlights">
+            <div class="acc-hl">
+              <p class="hl-num">V2</p>
+              <p class="hl-text">인프라 버전 고도화</p>
+            </div>
+            <div class="acc-hl">
+              <p class="hl-num">0</p>
+              <p class="hl-text">SSH Key 사용 (SSM 전환)</p>
+            </div>
+            <div class="acc-hl">
+              <p class="hl-num">IaC</p>
+              <p class="hl-text">Terraform 인프라 코드화</p>
+            </div>
+            <div class="acc-hl">
+              <p class="hl-num">24/7</p>
+              <p class="hl-text">CloudWatch 모니터링</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-year">2024</span>
+          <div>
+            <span class="acc-title">학부연구생 (랩장)</span>
+            <span class="acc-org">UBICOMP LAB · 2024.01 — 2026.02</span>
+          </div>
+          <span class="acc-toggle">+</span>
+        </summary>
+        <div class="acc-body">
+          <p>
+            판옵티콘 관제 시스템을 설계·개발하고 1년 6개월 이상 운영하였습니다.
+            데이터 파이프라인의 이상 감지 및 Slack 알림 자동화, 리포트 생성 기능을 구현했습니다.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-year">2022</span>
+          <div>
+            <span class="acc-title">육군 병장 만기 전역</span>
+            <span class="acc-org">MW 통신병 · 2022.05 — 2023.11</span>
+          </div>
+          <span class="acc-toggle">+</span>
+        </summary>
+        <div class="acc-body">
+          <p>군 복무 기간 중 통신 장비 운용 및 유지보수를 담당했습니다.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-year">2020</span>
+          <div>
+            <span class="acc-title">순천향대학교 사물인터넷학과</span>
+            <span class="acc-org">졸업예정 · 평점 4.22/4.5</span>
+          </div>
+          <span class="acc-toggle">+</span>
+        </summary>
+        <div class="acc-body">
+          <p>사물인터넷학과에서 임베디드 시스템, 네트워크, ML/DL 등 다양한 영역을 학습하였습니다.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:48px;padding-bottom:48px;"><hr></div>
+
+  <!-- ══════════════════════════════════════════
+       3. Magazine Spread
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 03</h2>
+      <p>Magazine Spread</p>
+    </div>
+    <hr class="bold">
+  </div>
+
+  <div class="container">
+    <div class="mag-spread">
+      <div class="mag-col">
+        <div class="mag-entry">
+          <p class="mag-date">2025.09 — 2025.02</p>
+          <h3>인턴 사원</h3>
+          <p class="mag-org">(주)유머스트알엔디 — DevOps Engineer</p>
+          <p>
+            도봉라이프 서비스의 AWS 클라우드 인프라를 설계부터 운영까지 담당했습니다.
+            단일 EC2 구조에서 역할 기반 다중 서버 아키텍처로 전환하고,
+            Terraform을 통한 인프라 코드화, SSM 기반 보안 접근 체계를 구축했습니다.
+            CloudWatch로 실시간 로그 수집 및 모니터링 환경을 마련했습니다.
+          </p>
+          <div class="mag-rule"></div>
+        </div>
+        <div class="mag-entry">
+          <p class="mag-date">2024.01 — 2026.02</p>
+          <h3>학부연구생 (랩장)</h3>
+          <p class="mag-org">순천향대학교 UBICOMP LAB</p>
+          <p>
+            연구실 AI 훈련 데이터 수집 파이프라인의 관제 시스템을 개발하고,
+            1년 6개월 이상 실제 연구 과제에 적용하여 운영하고 있습니다.
+            수집 지연/중단 감지, Slack 알림, 리포트 자동화를 구현했습니다.
+            KCC2025 학부생 논문을 게재했습니다.
+          </p>
+        </div>
+      </div>
+      <div class="mag-divider"></div>
+      <div class="mag-col">
+        <p class="mag-sidebar-title">Education</p>
+        <div class="mag-sidebar-item">
+          <h4>순천향대학교</h4>
+          <p>사물인터넷학과 · 졸업예정 · 2020.03 — 2026.08</p>
+          <p>GPA 4.22 / 4.5</p>
+        </div>
+
+        <p class="mag-sidebar-title" style="margin-top:32px;">Military</p>
+        <div class="mag-sidebar-item">
+          <h4>육군 병장 만기 전역</h4>
+          <p>MW 통신병 · 2022.05 — 2023.11</p>
+        </div>
+
+        <p class="mag-sidebar-title" style="margin-top:32px;">Publication</p>
+        <div class="mag-sidebar-item">
+          <h4>KCC2025 논문 게재</h4>
+          <p>한국컴퓨터종합학술대회 · 학부생</p>
+        </div>
+
+        <p class="mag-sidebar-title" style="margin-top:32px;">Language</p>
+        <div class="mag-sidebar-item">
+          <h4>TOEIC 810</h4>
+          <p>2025.11 취득</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:48px;padding-bottom:48px;"><hr></div>
+
+  <!-- ══════════════════════════════════════════
+       4. Stacked Cards
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 04</h2>
+      <p>Stacked Cards</p>
+    </div>
+    <hr class="bold">
+  </div>
+
+  <div class="container" style="padding-top:32px; padding-bottom:16px;">
+    <div class="stack-cards">
+      <div class="stack-card">
+        <div class="sc-left">
+          <p class="sc-year">2025</p>
+          <p class="sc-duration">6 months</p>
+        </div>
+        <div class="sc-right">
+          <h3>인턴 사원 (DevOps Engineer)</h3>
+          <p class="sc-org">(주)유머스트알엔디 · 2025.09 — 2025.02</p>
+          <p class="sc-desc">
+            도봉라이프 AWS 인프라 구축 및 운영. V1에서 V2로 아키텍처 고도화.
+            Terraform IaC, OIDC 기반 CI/CD, CloudWatch 모니터링 구축.
+            리눅스 기반 Qt 의료기기 GUI 개발.
+          </p>
+          <p class="sc-skills"><strong>Skills:</strong> AWS · Terraform · Docker · GitHub Actions · CloudWatch · Qt</p>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <div class="sc-left">
+          <p class="sc-year">2024</p>
+          <p class="sc-duration">1y 7m</p>
+        </div>
+        <div class="sc-right">
+          <h3>학부연구생 (랩장)</h3>
+          <p class="sc-org">UBICOMP LAB · 2024.01 — 2026.02</p>
+          <p class="sc-desc">
+            판옵티콘 관제 시스템 개발 및 운영. ROS 기반 PCD 수집 파이프라인 구축.
+            self-hosted runner 기반 On-prem CI/CD. KCC2025 논문 게재.
+          </p>
+          <p class="sc-skills"><strong>Skills:</strong> Next.js · Spring Boot · MySQL · Docker · GitHub Actions</p>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <div class="sc-left">
+          <p class="sc-year">2022</p>
+          <p class="sc-duration">1y 6m</p>
+        </div>
+        <div class="sc-right">
+          <h3>육군 병장 만기 전역</h3>
+          <p class="sc-org">MW 통신병 · 2022.05 — 2023.11</p>
+          <p class="sc-desc">
+            군 복무 기간 중 통신 장비 운용 및 유지보수를 담당하였습니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <div class="sc-left">
+          <p class="sc-year">2020</p>
+          <p class="sc-duration">6y 5m</p>
+        </div>
+        <div class="sc-right">
+          <h3>순천향대학교 사물인터넷학과</h3>
+          <p class="sc-org">졸업예정 · 2020.03 — 2026.08</p>
+          <p class="sc-desc">
+            평점 4.22 / 4.5. 임베디드 시스템, 네트워크, ML/DL 등 다양한 영역 학습.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:48px;padding-bottom:48px;"><hr></div>
+
+  <!-- ══════════════════════════════════════════
+       5. Chapter-Style
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 05</h2>
+      <p>Chapter-Style Narrative</p>
+    </div>
+    <hr class="bold">
+  </div>
+
+  <div class="container">
+    <div class="chapter">
+      <p class="chapter-num">01</p>
+      <div class="chapter-head">
+        <h3>인턴 사원</h3>
+        <span class="ch-badge">DevOps</span>
+      </div>
+      <p class="chapter-meta">(주)유머스트알엔디 · 2025.09 — 2025.02</p>
+      <div class="chapter-body">
+        <p class="ch-text">
+          도봉라이프의 초기 인프라를 설계하고 단일 EC2 기반 아키텍처에서 역할 기반 다중 서버 구조로 전환하였습니다. Terraform을 도입하여 VPC, EC2, RDS, IAM 등 모든 리소스를 코드로 관리하고, GitHub Actions + OIDC 인증을 통해 SSH 없는 보안 배포 파이프라인을 구축했습니다. CloudWatch를 활용한 로그 수집과 모니터링 환경을 마련하여 운영 가시성을 확보했습니다.
+        </p>
+        <div class="ch-aside">
+          <p class="ch-aside-title">Key Achievements</p>
+          <div class="ch-aside-item">AWS 인프라 V1 → V2 고도화</div>
+          <div class="ch-aside-item">Terraform IaC 도입</div>
+          <div class="ch-aside-item">SSH 제거, SSM 전환</div>
+          <div class="ch-aside-item">CloudWatch 모니터링</div>
+          <div class="ch-aside-item">X-ray 치료기기 GUI 개발</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <p class="chapter-num">02</p>
+      <div class="chapter-head">
+        <h3>학부연구생 (랩장)</h3>
+        <span class="ch-badge">Full-Stack</span>
+      </div>
+      <p class="chapter-meta">UBICOMP LAB · 2024.01 — 2026.02</p>
+      <div class="chapter-body">
+        <p class="ch-text">
+          연구실 AI 훈련 데이터 수집 파이프라인의 관제 시스템 판옵티콘을 설계하고 개발하였습니다. Next.js와 Spring Boot 기반 풀스택으로 구현하고, self-hosted runner를 활용한 On-prem CI/CD를 구축했습니다. 수집 지연 및 중단을 자동으로 감지하고 Slack으로 실시간 알림을 보내는 시스템을 통해 1년 6개월 이상 안정적으로 운영하고 있습니다.
+        </p>
+        <div class="ch-aside">
+          <p class="ch-aside-title">Key Achievements</p>
+          <div class="ch-aside-item">판옵티콘 시스템 설계·개발</div>
+          <div class="ch-aside-item">On-prem CI/CD 구축</div>
+          <div class="ch-aside-item">Slack 실시간 알림</div>
+          <div class="ch-aside-item">KCC2025 논문 게재</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <p class="chapter-num">03</p>
+      <div class="chapter-head">
+        <h3>육군 병장 만기 전역</h3>
+        <span class="ch-badge">Military</span>
+      </div>
+      <p class="chapter-meta">MW 통신병 · 2022.05 — 2023.11</p>
+      <div class="chapter-body">
+        <p class="ch-text">
+          군 복무 기간 중 통신 장비의 운용과 유지보수를 담당하며 체계적인 문제 해결 방식과 팀 단위 협업 경험을 쌓았습니다. 정해진 절차를 따르면서도 상황에 맞게 유연하게 대응하는 태도를 기르는 시간이었습니다.
+        </p>
+        <div class="ch-aside">
+          <p class="ch-aside-title">Info</p>
+          <div class="ch-aside-item">대한민국 육군</div>
+          <div class="ch-aside-item">1년 6개월 복무</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <p class="chapter-num">04</p>
+      <div class="chapter-head">
+        <h3>순천향대학교</h3>
+        <span class="ch-badge">Education</span>
+      </div>
+      <p class="chapter-meta">사물인터넷학과 · 2020.03 — 2026.08 · GPA 4.22/4.5</p>
+      <div class="chapter-body">
+        <p class="ch-text">
+          사물인터넷학과에서 임베디드 시스템, 네트워크 프로토콜, 데이터베이스, 머신러닝 등 폭넓은 컴퓨터 공학 기초를 학습하였습니다. 다양한 팀 프로젝트와 경진대회 참여를 통해 실무 역량을 키웠으며, 5개의 수상 경력과 KCC2025 논문 게재라는 성과를 달성했습니다.
+        </p>
+        <div class="ch-aside">
+          <p class="ch-aside-title">Highlights</p>
+          <div class="ch-aside-item">GPA 4.22 / 4.5</div>
+          <div class="ch-aside-item">수상 5회</div>
+          <div class="ch-aside-item">KCC2025 논문</div>
+          <div class="ch-aside-item">TOEIC 810</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:32px;">
+    <hr class="bold">
+  </div>
+
+  <!-- ━━ Footer ━━ -->
+  <div class="container">
+    <div style="padding: 24px 0; text-align: center;">
+      <p style="font-size: 11px; color: var(--rule);">&copy; 2024 임우진 (Woojin Lim) &mdash; Career Components Reference</p>
+    </div>
+  </div>
+
+</body>
+</html>

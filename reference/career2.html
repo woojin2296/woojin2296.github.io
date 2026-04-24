@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Components Vol.2 — Editorial Style</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f4f1eb;
+      --ink: #1c1917;
+      --warm: #78716c;
+      --light: #d6d3cd;
+      --rule: #c4c0b8;
+    }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+    hr { border: none; border-top: 1px solid var(--rule); margin: 0; }
+    hr.bold { border-top: 3px solid var(--ink); }
+
+    .page-header {
+      text-align: center;
+      padding: 48px 40px;
+      border-bottom: 3px solid var(--ink);
+    }
+    .page-header h1 { font-size: 14px; text-transform: uppercase; letter-spacing: 6px; color: var(--warm); font-weight: 600; margin-bottom: 8px; }
+    .page-header p { font-size: 13px; color: var(--rule); }
+
+    .comp-label { text-align: center; padding: 56px 0 16px; }
+    .comp-label h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: var(--warm); font-weight: 700; margin-bottom: 4px; }
+    .comp-label p { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+
+    .spacer { height: 48px; }
+
+    /* ════════════════════════════════════════
+       06. Minimal Table
+       ════════════════════════════════════════ */
+    .career-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .career-table thead th {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+      font-weight: 700;
+      text-align: left;
+      padding: 12px 0;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .career-table tbody td {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--light);
+      vertical-align: top;
+      font-size: 15px;
+    }
+
+    .career-table .col-period {
+      width: 140px;
+      font-size: 13px;
+      color: var(--warm);
+      font-family: monospace;
+    }
+
+    .career-table .col-role {
+      font-weight: 700;
+    }
+
+    .career-table .col-role span {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--warm);
+      margin-top: 2px;
+    }
+
+    .career-table .col-org {
+      width: 200px;
+      font-size: 14px;
+      color: var(--warm);
+    }
+
+    .career-table .col-tag {
+      width: 80px;
+      text-align: right;
+    }
+
+    .career-table .col-tag span {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 2px 8px;
+      border: 1px solid var(--rule);
+      color: var(--warm);
+    }
+
+    /* ════════════════════════════════════════
+       07. Progress Lane
+       ════════════════════════════════════════ */
+    .progress-lane {
+      position: relative;
+      padding-left: 48px;
+    }
+
+    .progress-lane::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--ink) 0%, var(--light) 100%);
+    }
+
+    .pl-item {
+      position: relative;
+      padding: 24px 0;
+    }
+
+    .pl-item::before {
+      content: "";
+      position: absolute;
+      left: -38px;
+      top: 32px;
+      width: 13px;
+      height: 13px;
+      border: 3px solid var(--ink);
+      background: var(--cream);
+      border-radius: 50%;
+    }
+
+    .pl-item.current::before {
+      background: var(--ink);
+    }
+
+    .pl-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .pl-top h3 {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .pl-top .pl-period {
+      font-size: 12px;
+      color: var(--warm);
+      font-family: monospace;
+    }
+
+    .pl-org {
+      font-size: 14px;
+      color: var(--warm);
+      margin-bottom: 8px;
+    }
+
+    .pl-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .pl-bar-label {
+      font-size: 11px;
+      color: var(--warm);
+      width: 60px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .pl-bar-track {
+      flex: 1;
+      height: 3px;
+      background: var(--light);
+    }
+
+    .pl-bar-fill {
+      height: 100%;
+      background: var(--ink);
+    }
+
+    /* ════════════════════════════════════════
+       08. Grid Mosaic
+       ════════════════════════════════════════ */
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .mosaic-item {
+      background: var(--cream);
+      padding: 32px 24px;
+    }
+
+    .mosaic-item.span-2 {
+      grid-column: span 2;
+    }
+
+    .mosaic-item .mi-year {
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 12px;
+      color: var(--light);
+    }
+
+    .mosaic-item.primary .mi-year {
+      color: var(--ink);
+    }
+
+    .mosaic-item h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .mosaic-item .mi-org {
+      font-size: 13px;
+      color: var(--warm);
+      margin-bottom: 8px;
+    }
+
+    .mosaic-item p {
+      font-size: 13px;
+      color: #57534e;
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════
+       09. Index List
+       ════════════════════════════════════════ */
+    .idx-list-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .idx-list-item:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .idx-num {
+      font-size: 11px;
+      font-family: monospace;
+      color: var(--rule);
+      padding: 20px 0;
+      text-align: center;
+      border-right: 1px solid var(--rule);
+    }
+
+    .idx-content {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      padding: 20px 0 20px 20px;
+      gap: 24px;
+    }
+
+    .idx-content h3 {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .idx-content h3 span {
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--warm);
+      margin-left: 8px;
+    }
+
+    .idx-content .idx-meta {
+      font-size: 12px;
+      color: var(--warm);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .idx-content .idx-desc {
+      grid-column: 1 / -1;
+      font-size: 14px;
+      color: #57534e;
+      padding-top: 4px;
+    }
+
+    /* ════════════════════════════════════════
+       10. Horizontal Scroll Cards
+       ════════════════════════════════════════ */
+    .h-scroll-wrap {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 32px 0;
+    }
+
+    .h-scroll-wrap::-webkit-scrollbar { display: none; }
+
+    .h-scroll-track {
+      display: flex;
+      gap: 20px;
+      min-width: max-content;
+    }
+
+    .h-card {
+      width: 320px;
+      flex-shrink: 0;
+      border: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .h-card-top {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .h-card-top .hc-eyebrow {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--warm);
+      margin-bottom: 8px;
+    }
+
+    .h-card-top h3 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .h-card-top .hc-org {
+      font-size: 14px;
+      color: var(--warm);
+    }
+
+    .h-card-body {
+      padding: 20px 24px;
+      flex: 1;
+    }
+
+    .h-card-body p {
+      font-size: 14px;
+      color: #57534e;
+      line-height: 1.8;
+    }
+
+    .h-card-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .h-card-footer .hcf-period {
+      font-size: 12px;
+      color: var(--warm);
+      font-family: monospace;
+    }
+
+    .h-card-footer .hcf-tag {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 2px 10px;
+      border: 1px solid var(--ink);
+      font-weight: 700;
+    }
+
+    .h-scroll-hint {
+      font-size: 11px;
+      color: var(--rule);
+      text-align: right;
+      padding-top: 8px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      .page-header { padding: 32px 24px; }
+
+      .career-table .col-org { display: none; }
+      .career-table .col-tag { display: none; }
+      .career-table .col-period { width: 100px; font-size: 11px; }
+
+      .progress-lane { padding-left: 36px; }
+      .progress-lane::before { left: 10px; }
+      .pl-item::before { left: -32px; }
+      .pl-top { flex-direction: column; gap: 2px; }
+      .pl-bar-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .pl-bar-label { text-align: left; width: auto; }
+
+      .mosaic { grid-template-columns: 1fr 1fr; }
+      .mosaic-item.span-2 { grid-column: span 2; }
+
+      .idx-content { grid-template-columns: 1fr; gap: 4px; }
+      .idx-content .idx-meta { text-align: left; }
+
+      .h-card { width: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>Career Components Vol.2</h1>
+    <p>design3 에디토리얼 스타일 — 5가지 추가 레이아웃</p>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       06. Minimal Table
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 06</h2>
+      <p>Minimal Table</p>
+    </div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <table class="career-table">
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th>Role</th>
+          <th>Organization</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-period">2025.09 — 02</td>
+          <td class="col-role">
+            인턴 사원
+            <span>도봉라이프 AWS 인프라 구축 및 운영 · X-ray 치료기기 GUI 개발</span>
+          </td>
+          <td class="col-org">(주)유머스트알엔디</td>
+          <td class="col-tag"><span>DevOps</span></td>
+        </tr>
+        <tr>
+          <td class="col-period">2024.01 — 26.02</td>
+          <td class="col-role">
+            학부연구생 (랩장)
+            <span>판옵티콘 개발 · ROS 기반 PCD 수집 · KCC2025 논문 게재</span>
+          </td>
+          <td class="col-org">UBICOMP LAB</td>
+          <td class="col-tag"><span>Full-Stack</span></td>
+        </tr>
+        <tr>
+          <td class="col-period">2022.05 — 23.11</td>
+          <td class="col-role">
+            육군 병장 만기 전역
+            <span>MW 통신병</span>
+          </td>
+          <td class="col-org">대한민국 육군</td>
+          <td class="col-tag"><span>Military</span></td>
+        </tr>
+        <tr>
+          <td class="col-period">2020.03 — 26.08</td>
+          <td class="col-role">
+            순천향대학교 사물인터넷학과
+            <span>졸업예정 · 평점 4.22/4.5</span>
+          </td>
+          <td class="col-org">아산, 충남</td>
+          <td class="col-tag"><span>Education</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="spacer"></div>
+    <hr>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       07. Progress Lane
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 07</h2>
+      <p>Progress Lane</p>
+    </div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="progress-lane">
+      <div class="pl-item current">
+        <div class="pl-top">
+          <h3>인턴 사원 (DevOps Engineer)</h3>
+          <span class="pl-period">2025.09 — 2025.02</span>
+        </div>
+        <p class="pl-org">(주)유머스트알엔디</p>
+        <div class="pl-bar-row">
+          <span class="pl-bar-label">Infra</span>
+          <div class="pl-bar-track"><div class="pl-bar-fill" style="width:95%"></div></div>
+        </div>
+        <div class="pl-bar-row">
+          <span class="pl-bar-label">CI/CD</span>
+          <div class="pl-bar-track"><div class="pl-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="pl-bar-row">
+          <span class="pl-bar-label">IaC</span>
+          <div class="pl-bar-track"><div class="pl-bar-fill" style="width:85%"></div></div>
+        </div>
+      </div>
+
+      <div class="pl-item">
+        <div class="pl-top">
+          <h3>학부연구생 (랩장)</h3>
+          <span class="pl-period">2024.01 — 2026.02</span>
+        </div>
+        <p class="pl-org">UBICOMP LAB</p>
+        <div class="pl-bar-row">
+          <span class="pl-bar-label">Front</span>
+          <div class="pl-bar-track"><div class="pl-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="pl-bar-row">
+          <span class="pl-bar-label">Back</span>
+          <div class="pl-bar-track"><div class="pl-bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="pl-bar-row">
+          <span class="pl-bar-label">DevOps</span>
+          <div class="pl-bar-track"><div class="pl-bar-fill" style="width:70%"></div></div>
+        </div>
+      </div>
+
+      <div class="pl-item">
+        <div class="pl-top">
+          <h3>육군 병장 만기 전역</h3>
+          <span class="pl-period">2022.05 — 2023.11</span>
+        </div>
+        <p class="pl-org">MW 통신병</p>
+      </div>
+
+      <div class="pl-item">
+        <div class="pl-top">
+          <h3>순천향대학교 사물인터넷학과</h3>
+          <span class="pl-period">2020.03 — 2026.08</span>
+        </div>
+        <p class="pl-org">졸업예정 · GPA 4.22/4.5</p>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <hr>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       08. Grid Mosaic
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 08</h2>
+      <p>Grid Mosaic</p>
+    </div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="mosaic">
+      <div class="mosaic-item span-2 primary">
+        <p class="mi-year">2025</p>
+        <h3>인턴 사원 (DevOps Engineer)</h3>
+        <p class="mi-org">(주)유머스트알엔디 · 2025.09 — 2025.02</p>
+        <p>도봉라이프 AWS 인프라 설계·구축·운영. Terraform IaC 도입, SSM+OIDC 기반 CI/CD, CloudWatch 모니터링. 리눅스 기반 X-ray 치료기기 GUI 개발.</p>
+      </div>
+      <div class="mosaic-item span-2 primary">
+        <p class="mi-year">2024</p>
+        <h3>학부연구생 (랩장)</h3>
+        <p class="mi-org">UBICOMP LAB · 2024.01 — 2026.02</p>
+        <p>판옵티콘 관제 시스템 설계·개발. On-prem CI/CD 구축. Slack 실시간 알림. KCC2025 논문 게재.</p>
+      </div>
+      <div class="mosaic-item">
+        <p class="mi-year">2022</p>
+        <h3>군 복무</h3>
+        <p class="mi-org">MW 통신병</p>
+        <p>육군 병장 만기 전역</p>
+      </div>
+      <div class="mosaic-item">
+        <p class="mi-year">2020</p>
+        <h3>대학 입학</h3>
+        <p class="mi-org">순천향대학교</p>
+        <p>사물인터넷학과 · 4.22/4.5</p>
+      </div>
+      <div class="mosaic-item">
+        <p class="mi-year">810</p>
+        <h3>TOEIC</h3>
+        <p class="mi-org">2025.11 취득</p>
+      </div>
+      <div class="mosaic-item">
+        <p class="mi-year">5</p>
+        <h3>수상</h3>
+        <p class="mi-org">경진대회</p>
+        <p>최우수상 1 · 장려상 4</p>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <hr>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       09. Index List
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 09</h2>
+      <p>Index List</p>
+    </div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="idx-list-item">
+      <div class="idx-num">01</div>
+      <div class="idx-content">
+        <h3>인턴 사원<span>(주)유머스트알엔디</span></h3>
+        <span class="idx-meta">2025.09 — 02 · DevOps</span>
+        <p class="idx-desc">도봉라이프 AWS 인프라 구축 및 운영. Terraform IaC, SSM+OIDC CI/CD, CloudWatch 모니터링. X-ray 치료기기 GUI 개발.</p>
+      </div>
+    </div>
+
+    <div class="idx-list-item">
+      <div class="idx-num">02</div>
+      <div class="idx-content">
+        <h3>학부연구생 (랩장)<span>UBICOMP LAB</span></h3>
+        <span class="idx-meta">2024.01 — 26.02 · Full-Stack</span>
+        <p class="idx-desc">판옵티콘 관제 시스템 개발. On-prem CI/CD. Slack 실시간 알림. KCC2025 논문 게재.</p>
+      </div>
+    </div>
+
+    <div class="idx-list-item">
+      <div class="idx-num">03</div>
+      <div class="idx-content">
+        <h3>육군 병장 만기 전역<span>MW 통신병</span></h3>
+        <span class="idx-meta">2022.05 — 23.11</span>
+      </div>
+    </div>
+
+    <div class="idx-list-item">
+      <div class="idx-num">04</div>
+      <div class="idx-content">
+        <h3>순천향대학교<span>사물인터넷학과</span></h3>
+        <span class="idx-meta">2020.03 — 26.08 · GPA 4.22</span>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <hr>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       10. Horizontal Scroll Cards
+       ══════════════════════════════════════════ -->
+  <div class="container">
+    <div class="comp-label">
+      <h2>Component 10</h2>
+      <p>Horizontal Scroll Cards</p>
+    </div>
+    <hr class="bold">
+  </div>
+
+  <div class="container">
+    <div class="h-scroll-wrap">
+      <div class="h-scroll-track">
+
+        <div class="h-card">
+          <div class="h-card-top">
+            <p class="hc-eyebrow">Latest</p>
+            <h3>인턴 사원</h3>
+            <p class="hc-org">(주)유머스트알엔디</p>
+          </div>
+          <div class="h-card-body">
+            <p>도봉라이프 AWS 인프라 설계·구축·운영. 단일 서버에서 역할 기반 아키텍처로 전환. Terraform IaC, SSM+OIDC CI/CD, CloudWatch 모니터링 구축.</p>
+          </div>
+          <div class="h-card-footer">
+            <span class="hcf-period">2025.09 — 02</span>
+            <span class="hcf-tag">DevOps</span>
+          </div>
+        </div>
+
+        <div class="h-card">
+          <div class="h-card-top">
+            <p class="hc-eyebrow">Research</p>
+            <h3>학부연구생 (랩장)</h3>
+            <p class="hc-org">UBICOMP LAB</p>
+          </div>
+          <div class="h-card-body">
+            <p>판옵티콘 관제 시스템 설계·개발 및 1년 6개월 운영. self-hosted runner CI/CD, Slack 실시간 알림, 리포트 자동화. KCC2025 논문 게재.</p>
+          </div>
+          <div class="h-card-footer">
+            <span class="hcf-period">2024.01 — 26.02</span>
+            <span class="hcf-tag">Full-Stack</span>
+          </div>
+        </div>
+
+        <div class="h-card">
+          <div class="h-card-top">
+            <p class="hc-eyebrow">Service</p>
+            <h3>육군 병장 만기 전역</h3>
+            <p class="hc-org">MW 통신병</p>
+          </div>
+          <div class="h-card-body">
+            <p>군 복무 기간 중 통신 장비 운용 및 유지보수를 담당하였습니다.</p>
+          </div>
+          <div class="h-card-footer">
+            <span class="hcf-period">2022.05 — 23.11</span>
+            <span class="hcf-tag">Military</span>
+          </div>
+        </div>
+
+        <div class="h-card">
+          <div class="h-card-top">
+            <p class="hc-eyebrow">Education</p>
+            <h3>순천향대학교</h3>
+            <p class="hc-org">사물인터넷학과</p>
+          </div>
+          <div class="h-card-body">
+            <p>졸업예정. 평점 4.22/4.5. 임베디드, 네트워크, ML/DL 등 폭넓은 영역 학습. 수상 5회, KCC2025 논문 게재.</p>
+          </div>
+          <div class="h-card-footer">
+            <span class="hcf-period">2020.03 — 26.08</span>
+            <span class="hcf-tag">B.S.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="h-scroll-hint">Scroll &rarr;</p>
+  </div>
+
+  <div class="container">
+    <div class="spacer"></div>
+    <hr class="bold">
+    <div style="padding: 24px 0; text-align: center;">
+      <p style="font-size: 11px; color: var(--rule);">&copy; 2024 임우진 — Career Components Vol.2</p>
+    </div>
+  </div>
+
+</body>
+</html>

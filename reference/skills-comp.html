@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills Components — Editorial Style</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f4f1eb;
+      --ink: #1c1917;
+      --warm: #78716c;
+      --light: #d6d3cd;
+      --rule: #c4c0b8;
+    }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+    hr { border: none; border-top: 1px solid var(--rule); margin: 0; }
+    hr.bold { border-top: 3px solid var(--ink); }
+    .spacer { height: 48px; }
+
+    .page-header { text-align: center; padding: 48px 40px; border-bottom: 3px solid var(--ink); }
+    .page-header h1 { font-size: 14px; text-transform: uppercase; letter-spacing: 6px; color: var(--warm); font-weight: 600; margin-bottom: 8px; }
+    .page-header p { font-size: 13px; color: var(--rule); }
+
+    .comp-label { text-align: center; padding: 56px 0 16px; }
+    .comp-label h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: var(--warm); font-weight: 700; margin-bottom: 4px; }
+    .comp-label p { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+
+    /* ════════════════════════════════════════
+       01. Tag Cloud
+       ════════════════════════════════════════ */
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag-cloud span {
+      font-size: 13px; padding: 6px 16px;
+      border: 1px solid var(--rule); color: var(--ink);
+      transition: all 0.15s;
+    }
+    .tag-cloud span:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .tag-cloud span.primary { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+    /* ════════════════════════════════════════
+       02. Category Table
+       ════════════════════════════════════════ */
+    .sk-table { width: 100%; border-collapse: collapse; }
+    .sk-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--warm); font-weight: 700; text-align: left; padding: 12px 0; border-bottom: 2px solid var(--ink); }
+    .sk-table td { padding: 16px 0; border-bottom: 1px solid var(--light); vertical-align: top; font-size: 15px; }
+    .sk-table td:first-child { font-weight: 700; width: 180px; color: var(--ink); }
+    .sk-table td:last-child { color: #57534e; }
+
+    /* ════════════════════════════════════════
+       03. Dot Meter
+       ════════════════════════════════════════ */
+    .dot-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; }
+    .dot-label { font-size: 14px; font-weight: 600; width: 180px; flex-shrink: 0; }
+    .dots { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink); }
+    .dot.filled { background: var(--ink); }
+    .dot-techs { font-size: 12px; color: var(--warm); margin-left: auto; }
+
+    /* ════════════════════════════════════════
+       04. Bar Gauge
+       ════════════════════════════════════════ */
+    .bar-item { margin-bottom: 20px; }
+    .bar-item:last-child { margin-bottom: 0; }
+    .bar-top { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .bar-top .bar-name { font-size: 14px; font-weight: 600; }
+    .bar-top .bar-val { font-size: 12px; color: var(--warm); }
+    .bar-track { height: 4px; background: var(--light); }
+    .bar-fill { height: 100%; background: var(--ink); }
+
+    /* ════════════════════════════════════════
+       05. Grid Mosaic
+       ════════════════════════════════════════ */
+    .sk-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .sk-tile { background: var(--cream); padding: 24px 20px; text-align: center; }
+    .sk-tile.span-2 { grid-column: span 2; }
+    .sk-tile .tile-name { font-size: 15px; font-weight: 800; margin-bottom: 2px; }
+    .sk-tile .tile-cat { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--warm); }
+
+    /* ════════════════════════════════════════
+       06. Stacked Rows
+       ════════════════════════════════════════ */
+    .sk-stk { border-bottom: 1px solid var(--rule); }
+    .sk-stk:first-child { border-top: 1px solid var(--rule); }
+    .sk-stk-inner { display: grid; grid-template-columns: 48px 1fr auto; align-items: baseline; padding: 24px 0; gap: 24px; }
+    .sk-stk .sk-idx { font-size: 12px; font-family: monospace; color: var(--rule); }
+    .sk-stk h3 { font-size: 22px; font-weight: 700; transition: color 0.15s; }
+    .sk-stk:hover h3 { color: var(--warm); }
+    .sk-stk .sk-techs { font-size: 13px; color: var(--warm); }
+
+    /* ════════════════════════════════════════
+       07. Two-Split
+       ════════════════════════════════════════ */
+    .sk-split { display: grid; grid-template-columns: 200px 1px 1fr; }
+    .sk-split .sp-div { background: var(--rule); }
+    .sk-split .sp-left { padding: 40px 24px 40px 0; }
+    .sk-split .sp-left h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--warm); font-weight: 600; }
+    .sk-split .sp-right { padding: 40px 0 40px 24px; }
+
+    /* ════════════════════════════════════════
+       08. Horizontal Scroll Tags
+       ════════════════════════════════════════ */
+    .h-sk-scroll { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 24px 0; }
+    .h-sk-scroll::-webkit-scrollbar { display: none; }
+    .h-sk-track { display: flex; gap: 12px; min-width: max-content; }
+    .h-sk-chip {
+      flex-shrink: 0; padding: 16px 28px;
+      border: 1px solid var(--rule); text-align: center;
+      transition: border-color 0.15s;
+    }
+    .h-sk-chip:hover { border-color: var(--ink); }
+    .h-sk-chip .chip-name { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    .h-sk-chip .chip-cat { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--warm); }
+
+    /* ════════════════════════════════════════
+       09. Grouped Columns
+       ════════════════════════════════════════ */
+    .sk-cols { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr; }
+    .sk-cols .col-div { background: var(--rule); }
+    .sk-col { padding: 28px 20px; }
+    .sk-col-title { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--warm); font-weight: 700; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+    .sk-col-item { font-size: 14px; padding: 6px 0; border-bottom: 1px solid var(--light); }
+    .sk-col-item:last-child { border-bottom: none; }
+
+    /* ════════════════════════════════════════
+       10. Inline List
+       ════════════════════════════════════════ */
+    .sk-inline-group { margin-bottom: 20px; }
+    .sk-inline-group:last-child { margin-bottom: 0; }
+    .sk-inline-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--warm); font-weight: 700; margin-bottom: 8px; }
+    .sk-inline-list { display: flex; flex-wrap: wrap; gap: 0; }
+    .sk-inline-list span { font-size: 15px; color: var(--ink); }
+    .sk-inline-list span:not(:last-child)::after { content: " · "; color: var(--rule); margin: 0 8px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      .page-header { padding: 32px 24px; }
+      .sk-mosaic { grid-template-columns: repeat(2, 1fr); }
+      .sk-tile.span-2 { grid-column: span 2; }
+      .sk-split { grid-template-columns: 1fr; }
+      .sk-split .sp-div { height: 1px; width: 100%; }
+      .sk-split .sp-left { padding: 24px 0 0; }
+      .sk-split .sp-right { padding: 0 0 24px; }
+      .sk-cols { grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+      .sk-cols .col-div { display: none; }
+      .sk-col { background: var(--cream); }
+      .dot-label { width: 120px; }
+      .h-sk-chip { padding: 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>Skills Components</h1>
+    <p>design3 에디토리얼 스타일 — 10가지 Skills 레이아웃</p>
+  </header>
+
+  <!-- ═══ 01. Tag Cloud ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 01</h2><p>Tag Cloud</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <div class="tag-cloud">
+      <span class="primary">AWS</span>
+      <span class="primary">Terraform</span>
+      <span class="primary">Docker</span>
+      <span>Linux</span>
+      <span>Git</span>
+      <span>GitHub Actions</span>
+      <span>Spring Boot</span>
+      <span>Java</span>
+      <span>MySQL</span>
+      <span>Next.js</span>
+      <span>TypeScript</span>
+      <span>JavaScript</span>
+      <span>Python</span>
+    </div>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 02. Category Table ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 02</h2><p>Category Table</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <table class="sk-table">
+      <thead><tr><th>Category</th><th>Technologies</th></tr></thead>
+      <tbody>
+        <tr><td>Cloud / Infra</td><td>AWS, Terraform, Docker, Linux</td></tr>
+        <tr><td>Platform / CI</td><td>Git, GitHub Actions</td></tr>
+        <tr><td>Backend</td><td>Spring Boot, Java, MySQL</td></tr>
+        <tr><td>Frontend</td><td>Next.js, TypeScript, JavaScript, Python</td></tr>
+      </tbody>
+    </table>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 03. Dot Meter ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 03</h2><p>Dot Meter</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <div class="dot-row">
+      <span class="dot-label">Cloud / Infra</span>
+      <div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></div>
+      <span class="dot-techs">AWS, Terraform, Docker, Linux</span>
+    </div>
+    <div class="dot-row">
+      <span class="dot-label">Platform / CI</span>
+      <div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div>
+      <span class="dot-techs">Git, GitHub Actions</span>
+    </div>
+    <div class="dot-row">
+      <span class="dot-label">Backend</span>
+      <div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div>
+      <span class="dot-techs">Spring Boot, Java, MySQL</span>
+    </div>
+    <div class="dot-row">
+      <span class="dot-label">Frontend</span>
+      <div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div>
+      <span class="dot-techs">Next.js, TypeScript, JavaScript</span>
+    </div>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 04. Bar Gauge ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 04</h2><p>Bar Gauge</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <div class="bar-item">
+      <div class="bar-top"><span class="bar-name">Cloud / Infra</span><span class="bar-val">AWS, Terraform, Docker, Linux</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:95%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-top"><span class="bar-name">Platform / CI</span><span class="bar-val">Git, GitHub Actions</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-top"><span class="bar-name">Backend</span><span class="bar-val">Spring Boot, Java, MySQL</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-top"><span class="bar-name">Frontend</span><span class="bar-val">Next.js, TypeScript, JavaScript</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+    </div>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 05. Grid Mosaic ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 05</h2><p>Grid Mosaic</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <div class="sk-mosaic">
+      <div class="sk-tile"><p class="tile-name">AWS</p><p class="tile-cat">Cloud</p></div>
+      <div class="sk-tile"><p class="tile-name">Terraform</p><p class="tile-cat">IaC</p></div>
+      <div class="sk-tile"><p class="tile-name">Docker</p><p class="tile-cat">Container</p></div>
+      <div class="sk-tile"><p class="tile-name">Linux</p><p class="tile-cat">OS</p></div>
+      <div class="sk-tile"><p class="tile-name">GitHub Actions</p><p class="tile-cat">CI/CD</p></div>
+      <div class="sk-tile"><p class="tile-name">Spring Boot</p><p class="tile-cat">Backend</p></div>
+      <div class="sk-tile"><p class="tile-name">Java</p><p class="tile-cat">Backend</p></div>
+      <div class="sk-tile"><p class="tile-name">MySQL</p><p class="tile-cat">Database</p></div>
+      <div class="sk-tile"><p class="tile-name">Next.js</p><p class="tile-cat">Frontend</p></div>
+      <div class="sk-tile"><p class="tile-name">TypeScript</p><p class="tile-cat">Frontend</p></div>
+      <div class="sk-tile"><p class="tile-name">JavaScript</p><p class="tile-cat">Frontend</p></div>
+      <div class="sk-tile"><p class="tile-name">Python</p><p class="tile-cat">Scripting</p></div>
+    </div>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 06. Stacked Rows ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 06</h2><p>Stacked Rows</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <div class="sk-stk"><div class="sk-stk-inner"><span class="sk-idx">01</span><h3>Cloud / Infrastructure</h3><span class="sk-techs">AWS, Terraform, Docker, Linux</span></div></div>
+    <div class="sk-stk"><div class="sk-stk-inner"><span class="sk-idx">02</span><h3>Platform / CI</h3><span class="sk-techs">Git, GitHub Actions</span></div></div>
+    <div class="sk-stk"><div class="sk-stk-inner"><span class="sk-idx">03</span><h3>Backend</h3><span class="sk-techs">Spring Boot, Java, MySQL</span></div></div>
+    <div class="sk-stk"><div class="sk-stk-inner"><span class="sk-idx">04</span><h3>Frontend</h3><span class="sk-techs">Next.js, TypeScript, JavaScript, Python</span></div></div>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 07. Two-Split ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 07</h2><p>Two-Split</p></div>
+    <hr class="bold">
+    <div class="sk-split">
+      <div class="sp-left"><h3>Skills</h3></div>
+      <div class="sp-div"></div>
+      <div class="sp-right">
+        <div class="tag-cloud">
+          <span>AWS</span><span>Terraform</span><span>Docker</span><span>Linux</span>
+          <span>Git</span><span>GitHub Actions</span>
+          <span>Spring Boot</span><span>Java</span><span>MySQL</span>
+          <span>Next.js</span><span>TypeScript</span><span>JavaScript</span><span>Python</span>
+        </div>
+      </div>
+    </div>
+    <hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 08. Horizontal Scroll Tags ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 08</h2><p>Horizontal Scroll Chips</p></div>
+    <hr class="bold">
+    <div class="h-sk-scroll">
+      <div class="h-sk-track">
+        <div class="h-sk-chip"><p class="chip-name">AWS</p><p class="chip-cat">Cloud</p></div>
+        <div class="h-sk-chip"><p class="chip-name">Terraform</p><p class="chip-cat">IaC</p></div>
+        <div class="h-sk-chip"><p class="chip-name">Docker</p><p class="chip-cat">Container</p></div>
+        <div class="h-sk-chip"><p class="chip-name">Linux</p><p class="chip-cat">OS</p></div>
+        <div class="h-sk-chip"><p class="chip-name">GitHub Actions</p><p class="chip-cat">CI/CD</p></div>
+        <div class="h-sk-chip"><p class="chip-name">Spring Boot</p><p class="chip-cat">Backend</p></div>
+        <div class="h-sk-chip"><p class="chip-name">Java</p><p class="chip-cat">Backend</p></div>
+        <div class="h-sk-chip"><p class="chip-name">MySQL</p><p class="chip-cat">Database</p></div>
+        <div class="h-sk-chip"><p class="chip-name">Next.js</p><p class="chip-cat">Frontend</p></div>
+        <div class="h-sk-chip"><p class="chip-name">TypeScript</p><p class="chip-cat">Frontend</p></div>
+        <div class="h-sk-chip"><p class="chip-name">Python</p><p class="chip-cat">Scripting</p></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--rule);text-align:right;">Scroll &rarr;</p>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 09. Grouped Columns ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 09</h2><p>Grouped Columns</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <div class="sk-cols">
+      <div class="sk-col">
+        <p class="sk-col-title">Cloud / Infra</p>
+        <div class="sk-col-item">AWS</div>
+        <div class="sk-col-item">Terraform</div>
+        <div class="sk-col-item">Docker</div>
+        <div class="sk-col-item">Linux</div>
+      </div>
+      <div class="col-div"></div>
+      <div class="sk-col">
+        <p class="sk-col-title">Platform / CI</p>
+        <div class="sk-col-item">Git</div>
+        <div class="sk-col-item">GitHub Actions</div>
+      </div>
+      <div class="col-div"></div>
+      <div class="sk-col">
+        <p class="sk-col-title">Backend</p>
+        <div class="sk-col-item">Spring Boot</div>
+        <div class="sk-col-item">Java</div>
+        <div class="sk-col-item">MySQL</div>
+      </div>
+      <div class="col-div"></div>
+      <div class="sk-col">
+        <p class="sk-col-title">Frontend</p>
+        <div class="sk-col-item">Next.js</div>
+        <div class="sk-col-item">TypeScript</div>
+        <div class="sk-col-item">JavaScript</div>
+        <div class="sk-col-item">Python</div>
+      </div>
+    </div>
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 10. Inline List ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 10</h2><p>Inline List</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+    <div class="sk-inline-group">
+      <p class="sk-inline-label">Cloud / Infrastructure</p>
+      <div class="sk-inline-list"><span>AWS</span><span>Terraform</span><span>Docker</span><span>Linux</span></div>
+    </div>
+    <div class="sk-inline-group">
+      <p class="sk-inline-label">Platform / CI</p>
+      <div class="sk-inline-list"><span>Git</span><span>GitHub Actions</span></div>
+    </div>
+    <div class="sk-inline-group">
+      <p class="sk-inline-label">Backend</p>
+      <div class="sk-inline-list"><span>Spring Boot</span><span>Java</span><span>MySQL</span></div>
+    </div>
+    <div class="sk-inline-group">
+      <p class="sk-inline-label">Frontend</p>
+      <div class="sk-inline-list"><span>Next.js</span><span>TypeScript</span><span>JavaScript</span><span>Python</span></div>
+    </div>
+    <div class="spacer"></div>
+    <hr class="bold">
+    <div style="padding:24px 0;text-align:center;">
+      <p style="font-size:11px;color:var(--rule);">&copy; 2024 임우진 — Skills Components Reference</p>
+    </div>
+  </div>
+
+</body>
+</html>

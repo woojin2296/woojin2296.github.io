@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Components — Editorial Style</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f4f1eb;
+      --ink: #1c1917;
+      --warm: #78716c;
+      --light: #d6d3cd;
+      --rule: #c4c0b8;
+      --highlight: #292524;
+    }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+    hr { border: none; border-top: 1px solid var(--rule); margin: 0; }
+    hr.bold { border-top: 3px solid var(--ink); }
+    .spacer { height: 48px; }
+
+    .page-header { text-align: center; padding: 48px 40px; border-bottom: 3px solid var(--ink); }
+    .page-header h1 { font-size: 14px; text-transform: uppercase; letter-spacing: 6px; color: var(--warm); font-weight: 600; margin-bottom: 8px; }
+    .page-header p { font-size: 13px; color: var(--rule); }
+
+    .comp-label { text-align: center; padding: 56px 0 16px; }
+    .comp-label h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: var(--warm); font-weight: 700; margin-bottom: 4px; }
+    .comp-label p { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+
+    /* ════════════════════════════════════════
+       01. Numbered Article List
+       ════════════════════════════════════════ */
+    .art-item {
+      display: grid;
+      grid-template-columns: 64px 1fr 100px;
+      gap: 20px;
+      align-items: baseline;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--light);
+    }
+    .art-item:first-child { border-top: 1px solid var(--light); }
+    .art-num { font-size: 36px; font-weight: 900; color: var(--light); line-height: 1; }
+    .art-item h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .art-item .art-meta { font-size: 12px; color: var(--warm); margin-bottom: 6px; }
+    .art-item .art-desc { font-size: 14px; color: #57534e; }
+    .art-item .art-cat { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--warm); text-align: right; }
+
+    /* ════════════════════════════════════════
+       02. Expand Cards
+       ════════════════════════════════════════ */
+    .exp-card { border-bottom: 1px solid var(--rule); }
+    .exp-card:first-child { border-top: 1px solid var(--rule); }
+    .exp-card summary {
+      display: grid; grid-template-columns: 1fr auto; align-items: center;
+      padding: 24px 0; cursor: pointer; list-style: none; gap: 16px;
+    }
+    .exp-card summary::-webkit-details-marker { display: none; }
+    .exp-card summary h3 { font-size: 20px; font-weight: 800; }
+    .exp-card summary h3 span { font-size: 13px; font-weight: 400; color: var(--warm); margin-left: 12px; }
+    .exp-card summary .ec-toggle { font-size: 24px; font-weight: 300; color: var(--rule); transition: transform 0.2s; }
+    .exp-card[open] summary .ec-toggle { transform: rotate(45deg); }
+    .exp-card .ec-body { padding: 0 0 28px; }
+    .exp-card .ec-body p { font-size: 15px; color: #57534e; line-height: 1.9; margin-bottom: 12px; }
+    .ec-bullets { list-style: none; padding: 0; }
+    .ec-bullets li { font-size: 14px; color: var(--warm); padding: 4px 0 4px 16px; position: relative; }
+    .ec-bullets li::before { content: "—"; position: absolute; left: 0; color: var(--rule); }
+    .ec-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+    .ec-tags span { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; padding: 3px 10px; border: 1px solid var(--rule); color: var(--warm); }
+    .ec-tags span.filled { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+    /* ════════════════════════════════════════
+       03. Two-Split Layout
+       ════════════════════════════════════════ */
+    .two-split { display: grid; grid-template-columns: 280px 1px 1fr; }
+    .two-split .sp-div { background: var(--rule); }
+    .two-split .sp-left { padding: 40px 24px 40px 0; }
+    .two-split .sp-left h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--warm); font-weight: 600; }
+    .two-split .sp-right { padding: 40px 0 40px 24px; }
+
+    /* ════════════════════════════════════════
+       04. Feature Grid
+       ════════════════════════════════════════ */
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .feat-cell { background: var(--cream); padding: 32px 24px; }
+    .feat-cell .fc-num { font-size: 11px; font-family: monospace; color: var(--rule); margin-bottom: 12px; }
+    .feat-cell h3 { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+    .feat-cell .fc-org { font-size: 12px; color: var(--warm); margin-bottom: 10px; }
+    .feat-cell p { font-size: 13px; color: #57534e; line-height: 1.7; }
+    .feat-cell .fc-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 4px; }
+    .feat-cell .fc-tags span { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; padding: 2px 6px; border: 1px solid var(--light); color: var(--warm); }
+
+    /* ════════════════════════════════════════
+       05. Horizontal Scroll
+       ════════════════════════════════════════ */
+    .h-proj-scroll { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 32px 0; }
+    .h-proj-scroll::-webkit-scrollbar { display: none; }
+    .h-proj-track { display: flex; gap: 20px; min-width: max-content; }
+    .h-proj-card { width: 360px; flex-shrink: 0; border: 1px solid var(--rule); transition: border-color 0.2s; }
+    .h-proj-card:hover { border-color: var(--ink); }
+    .h-proj-top { padding: 28px 24px; border-bottom: 1px solid var(--light); }
+    .h-proj-top .hp-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--warm); margin-bottom: 8px; }
+    .h-proj-top h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .h-proj-top .hp-sub { font-size: 14px; color: var(--warm); }
+    .h-proj-body { padding: 20px 24px; }
+    .h-proj-body p { font-size: 14px; color: #57534e; line-height: 1.8; }
+    .h-proj-foot { padding: 16px 24px; border-top: 1px solid var(--light); display: flex; justify-content: space-between; align-items: center; }
+    .h-proj-foot .hpf-period { font-size: 12px; color: var(--warm); font-family: monospace; }
+    .h-proj-foot .hpf-badge { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; padding: 2px 10px; border: 1px solid var(--ink); font-weight: 700; }
+    .h-proj-foot .hpf-badge.live { color: #16a34a; border-color: #16a34a; }
+
+    /* ════════════════════════════════════════
+       06. Stacked Rows
+       ════════════════════════════════════════ */
+    .stk-row { display: grid; grid-template-columns: 48px 1fr auto; align-items: baseline; padding: 28px 0; border-bottom: 1px solid var(--rule); gap: 24px; }
+    .stk-row:first-child { border-top: 1px solid var(--rule); }
+    .stk-row .stk-idx { font-size: 12px; font-family: monospace; color: var(--rule); }
+    .stk-row h3 { font-size: 22px; font-weight: 700; transition: color 0.2s; }
+    .stk-row:hover h3 { color: var(--highlight); }
+    .stk-row .stk-arrow { font-size: 18px; color: var(--light); transition: color 0.2s, transform 0.2s; }
+    .stk-row:hover .stk-arrow { color: var(--ink); transform: translateX(4px); }
+
+    /* ════════════════════════════════════════
+       07. Table Minimal
+       ════════════════════════════════════════ */
+    .proj-table { width: 100%; border-collapse: collapse; }
+    .proj-table thead th { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--warm); font-weight: 700; text-align: left; padding: 12px 0; border-bottom: 2px solid var(--ink); }
+    .proj-table tbody td { padding: 18px 0; border-bottom: 1px solid var(--light); vertical-align: top; font-size: 15px; }
+    .proj-table .pt-name { font-weight: 700; }
+    .proj-table .pt-name span { display: block; font-size: 13px; font-weight: 400; color: var(--warm); margin-top: 2px; }
+    .proj-table .pt-org { font-size: 13px; color: var(--warm); }
+    .proj-table .pt-period { font-size: 12px; color: var(--warm); font-family: monospace; white-space: nowrap; }
+    .proj-table .pt-tag span { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; padding: 2px 8px; border: 1px solid var(--rule); color: var(--warm); }
+
+    /* ════════════════════════════════════════
+       08. Version Timeline
+       ════════════════════════════════════════ */
+    .ver-tl { position: relative; padding-left: 48px; }
+    .ver-tl::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--light); }
+    .ver-tl-item { position: relative; padding: 28px 0; border-bottom: 1px solid var(--light); }
+    .ver-tl-item:last-child { border-bottom: none; }
+    .ver-tl-item::before { content: ""; position: absolute; left: -38px; top: 36px; width: 11px; height: 11px; border: 2.5px solid var(--ink); background: var(--cream); border-radius: 50%; }
+    .ver-tl-item.major::before { background: var(--ink); }
+    .ver-tl-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+    .ver-tl-head .vt-badge { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 1px 8px; border: 1.5px solid var(--ink); }
+    .ver-tl-head h3 { font-size: 18px; font-weight: 800; }
+    .ver-tl-item .vt-meta { font-size: 13px; color: var(--warm); margin-bottom: 8px; }
+    .ver-tl-item .vt-desc { font-size: 14px; color: #57534e; line-height: 1.8; }
+
+    /* ════════════════════════════════════════
+       09. Masonry Two-Col
+       ════════════════════════════════════════ */
+    .masonry { columns: 2; column-gap: 20px; }
+    .mas-card { break-inside: avoid; border: 1px solid var(--rule); padding: 28px 24px; margin-bottom: 20px; transition: box-shadow 0.2s; }
+    .mas-card:hover { box-shadow: 3px 3px 0 var(--ink); }
+    .mas-card .mc-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--warm); margin-bottom: 8px; }
+    .mas-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .mas-card .mc-sub { font-size: 13px; color: var(--warm); margin-bottom: 10px; }
+    .mas-card p { font-size: 14px; color: #57534e; line-height: 1.8; }
+    .mas-card .mc-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .mas-card .mc-tags span { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; padding: 2px 7px; border: 1px solid var(--light); color: var(--warm); }
+
+    /* ════════════════════════════════════════
+       10. Full-Width Feature
+       ════════════════════════════════════════ */
+    .fw-feature { border: 2px solid var(--ink); padding: 48px; margin: 8px 0; }
+    .fw-feature .fw-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: var(--warm); margin-bottom: 12px; }
+    .fw-feature h3 { font-size: 32px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .fw-feature .fw-sub { font-size: 16px; color: var(--warm); margin-bottom: 20px; }
+    .fw-feature .fw-body { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .fw-feature .fw-body p { font-size: 15px; color: #44403c; line-height: 1.9; }
+    .fw-feature .fw-stats { display: flex; gap: 32px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--light); }
+    .fw-stat .fs-num { font-size: 32px; font-weight: 900; line-height: 1; margin-bottom: 2px; }
+    .fw-stat .fs-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--warm); }
+    .fw-sep { margin: 32px 0; }
+    .fw-sep + .fw-feature { border-top: none; margin-top: -2px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      .page-header { padding: 32px 24px; }
+      .art-item { grid-template-columns: 40px 1fr; }
+      .art-item .art-cat { display: none; }
+      .two-split { grid-template-columns: 1fr; }
+      .two-split .sp-div { height: 1px; width: 100%; }
+      .two-split .sp-left { padding: 24px 0 0; }
+      .two-split .sp-right { padding: 0 0 24px; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .h-proj-card { width: 280px; }
+      .stk-row { grid-template-columns: 32px 1fr auto; }
+      .proj-table .pt-org, .proj-table .pt-tag { display: none; }
+      .ver-tl { padding-left: 36px; }
+      .ver-tl::before { left: 10px; }
+      .ver-tl-item::before { left: -32px; }
+      .masonry { columns: 1; }
+      .fw-feature { padding: 28px 20px; }
+      .fw-feature .fw-body { grid-template-columns: 1fr; }
+      .fw-feature h3 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>Project Components</h1>
+    <p>design3 에디토리얼 스타일 — 10가지 프로젝트 레이아웃</p>
+  </header>
+
+  <!-- ═══ 01. Numbered Article List ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 01</h2><p>Numbered Article List</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="art-item">
+      <span class="art-num">01</span>
+      <div>
+        <h3>도봉라이프 (Dobong Life)</h3>
+        <p class="art-meta">(주)유머스트알엔디 · 인턴사원 · 2025.12 — 2026.02</p>
+        <p class="art-desc">서울시 도봉구 지역상권 활성화 앱의 AWS 인프라 구축 및 운영. Terraform IaC, SSM+OIDC 기반 CI/CD, CloudWatch 모니터링.</p>
+      </div>
+      <span class="art-cat">DevOps</span>
+    </div>
+    <div class="art-item">
+      <span class="art-num">02</span>
+      <div>
+        <h3>판옵티콘 (Panopticon)</h3>
+        <p class="art-meta">UBICOMP LAB · 학부연구생 · 2024.07 — 2026.02</p>
+        <p class="art-desc">연구실 AI 데이터 수집 파이프라인 관제 및 이상 알림 시스템. Next.js + Spring Boot, Slack 실시간 알림.</p>
+      </div>
+      <span class="art-cat">Full-Stack</span>
+    </div>
+    <div class="art-item">
+      <span class="art-num">03</span>
+      <div>
+        <h3>SCH MiniProject Submission System</h3>
+        <p class="art-meta">개인 프로젝트 · 2025.06 — 2026.02</p>
+        <p class="art-desc">학과 ML/DL 강의용 과제 제출 및 랭킹 관리 시스템. 월 40명 이용.</p>
+      </div>
+      <span class="art-cat">Personal</span>
+    </div>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 02. Expand Cards ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 02</h2><p>Expand Cards</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <details class="exp-card" open>
+      <summary>
+        <h3>도봉라이프<span>AWS 인프라 구축 및 운영</span></h3>
+        <span class="ec-toggle">+</span>
+      </summary>
+      <div class="ec-body">
+        <p>(주)유머스트알엔디 · 인턴사원 · 2025.12 — 2026.02 (3m)<br>서울시 도봉구 지역상권 활성화 애플리케이션의 AWS 인프라를 구축 및 운영.</p>
+        <ul class="ec-bullets">
+          <li>AWS(VPC, EC2, RDS, S3) 기반 서비스 인프라 설계 및 구축</li>
+          <li>Terraform을 활용한 IaC로 인프라 재현성 확보</li>
+          <li>SSM + GitHub Actions(OIDC) 기반 CI/CD 파이프라인 구축</li>
+          <li>CloudWatch 기반 로그 수집/모니터링 환경 구축</li>
+        </ul>
+        <div class="ec-tags">
+          <span class="filled">AWS</span><span class="filled">Terraform</span>
+          <span>Docker Compose</span><span>GitHub Actions</span><span>CloudWatch</span>
+        </div>
+      </div>
+    </details>
+    <details class="exp-card">
+      <summary>
+        <h3>판옵티콘<span>장애 감지 및 관제 시스템</span></h3>
+        <span class="ec-toggle">+</span>
+      </summary>
+      <div class="ec-body">
+        <p>UBICOMP LAB · 학부연구생 · 2024.07 — 2026.02 (1y 7m)<br>연구실 AI 훈련용 데이터 수집 파이프라인의 관제 및 이상 알림 시스템.</p>
+        <ul class="ec-bullets">
+          <li>Next.js + Spring Boot 기반 풀스택 개발 및 Docker Compose 배포</li>
+          <li>GitHub Actions(self-hosted runner) 기반 On-prem CI/CD 구축</li>
+          <li>수집 지연/중단 자동 감지 및 Slack 기반 실시간 알림</li>
+        </ul>
+        <div class="ec-tags">
+          <span class="filled">Next.js</span><span class="filled">Spring Boot</span>
+          <span>MySQL</span><span>Docker Compose</span>
+        </div>
+      </div>
+    </details>
+    <details class="exp-card">
+      <summary>
+        <h3>과제 제출 시스템<span>ML/DL 랭킹 관리</span></h3>
+        <span class="ec-toggle">+</span>
+      </summary>
+      <div class="ec-body">
+        <p>개인 프로젝트 · 2025.06 — 2026.02 (9m)<br>학과 ML/DL 강의에서 사용하는 과제 제출 및 랭킹 관리 시스템. 월 평균 40명 이용.</p>
+        <ul class="ec-bullets">
+          <li>과제 제출, 평가, 랭킹 관리를 통합한 웹 서비스 설계 및 개발</li>
+          <li>세션 기반 인증 및 계층형 권한 구조 구현</li>
+          <li>Docker Compose 기반 배포 및 감사 로그 시스템 구축</li>
+        </ul>
+        <div class="ec-tags">
+          <span class="filled">Next.js</span><span>SQLite</span><span>Docker Compose</span>
+        </div>
+      </div>
+    </details>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 03. Two-Split Layout ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 03</h2><p>Two-Split Layout</p></div>
+    <hr class="bold">
+
+    <div class="two-split">
+      <div class="sp-left"><h3>Key Projects</h3></div>
+      <div class="sp-div"></div>
+      <div class="sp-right">
+        <div class="art-item" style="border-top:1px solid var(--light)">
+          <span class="art-num">01</span>
+          <div>
+            <h3>도봉라이프</h3>
+            <p class="art-desc">AWS 인프라 구축 및 운영. Terraform IaC, SSM+OIDC CI/CD, CloudWatch 모니터링.</p>
+          </div>
+          <span class="art-cat">DevOps</span>
+        </div>
+        <div class="art-item">
+          <span class="art-num">02</span>
+          <div>
+            <h3>판옵티콘</h3>
+            <p class="art-desc">AI 데이터 수집 파이프라인 관제. Next.js + Spring Boot. Slack 실시간 알림.</p>
+          </div>
+          <span class="art-cat">Full-Stack</span>
+        </div>
+        <div class="art-item">
+          <span class="art-num">03</span>
+          <div>
+            <h3>과제 제출 시스템</h3>
+            <p class="art-desc">ML/DL 강의용 과제 제출 및 랭킹 관리. 월 40명 이용.</p>
+          </div>
+          <span class="art-cat">Personal</span>
+        </div>
+      </div>
+    </div>
+
+    <hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 04. Feature Grid ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 04</h2><p>Feature Grid</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="feat-grid">
+      <div class="feat-cell">
+        <p class="fc-num">01</p>
+        <h3>도봉라이프</h3>
+        <p class="fc-org">(주)유머스트알엔디 · 3m</p>
+        <p>도봉구 지역상권 앱의 AWS 인프라 설계·구축·운영. V1→V2 아키텍처 고도화.</p>
+        <div class="fc-tags"><span>AWS</span><span>Terraform</span><span>Docker</span></div>
+      </div>
+      <div class="feat-cell">
+        <p class="fc-num">02</p>
+        <h3>판옵티콘</h3>
+        <p class="fc-org">UBICOMP LAB · 1y 7m</p>
+        <p>AI 데이터 수집 파이프라인 관제. On-prem CI/CD. Slack 알림. 1년 6개월 운영.</p>
+        <div class="fc-tags"><span>Next.js</span><span>Spring Boot</span><span>MySQL</span></div>
+      </div>
+      <div class="feat-cell">
+        <p class="fc-num">03</p>
+        <h3>과제 제출 시스템</h3>
+        <p class="fc-org">개인 프로젝트 · 9m</p>
+        <p>ML/DL 강의용 과제 제출 및 랭킹 관리. 세션 인증, 감사 로그. 월 40명 이용.</p>
+        <div class="fc-tags"><span>Next.js</span><span>SQLite</span><span>Docker</span></div>
+      </div>
+    </div>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 05. Horizontal Scroll ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 05</h2><p>Horizontal Scroll Cards</p></div>
+    <hr class="bold">
+
+    <div class="h-proj-scroll">
+      <div class="h-proj-track">
+        <div class="h-proj-card">
+          <div class="h-proj-top">
+            <p class="hp-eyebrow">Infra</p>
+            <h3>도봉라이프</h3>
+            <p class="hp-sub">AWS 인프라 구축 및 운영</p>
+          </div>
+          <div class="h-proj-body"><p>VPC, EC2, RDS, S3 기반 인프라 설계. Terraform IaC 도입. SSM+OIDC CI/CD 구축. CloudWatch 모니터링.</p></div>
+          <div class="h-proj-foot"><span class="hpf-period">2025.12 —</span><span class="hpf-badge live">Live</span></div>
+        </div>
+        <div class="h-proj-card">
+          <div class="h-proj-top">
+            <p class="hp-eyebrow">System</p>
+            <h3>판옵티콘</h3>
+            <p class="hp-sub">장애 감지 및 관제 시스템</p>
+          </div>
+          <div class="h-proj-body"><p>Next.js + Spring Boot 풀스택. self-hosted runner CI/CD. 수집 지연 자동 감지. Slack 실시간 알림.</p></div>
+          <div class="h-proj-foot"><span class="hpf-period">2024.07 —</span><span class="hpf-badge">Active</span></div>
+        </div>
+        <div class="h-proj-card">
+          <div class="h-proj-top">
+            <p class="hp-eyebrow">Education</p>
+            <h3>과제 제출 시스템</h3>
+            <p class="hp-sub">ML/DL 랭킹 관리</p>
+          </div>
+          <div class="h-proj-body"><p>과제 제출, 평가, 랭킹 통합 서비스. 세션 인증, 계층형 권한. 감사 로그. 월 40명 이용.</p></div>
+          <div class="h-proj-foot"><span class="hpf-period">2025.06 —</span><span class="hpf-badge">Active</span></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--rule);text-align:right;">Scroll &rarr;</p>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 06. Stacked Rows ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 06</h2><p>Stacked Rows</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="stk-row"><span class="stk-idx">01</span><h3>도봉라이프 — AWS 인프라 구축 및 운영</h3><span class="stk-arrow">&rarr;</span></div>
+    <div class="stk-row"><span class="stk-idx">02</span><h3>판옵티콘 — 장애 감지 및 관제 시스템</h3><span class="stk-arrow">&rarr;</span></div>
+    <div class="stk-row"><span class="stk-idx">03</span><h3>과제 제출 시스템 — ML/DL 랭킹 관리</h3><span class="stk-arrow">&rarr;</span></div>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 07. Table Minimal ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 07</h2><p>Table Minimal</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <table class="proj-table">
+      <thead><tr><th>Project</th><th>Organization</th><th>Period</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="pt-name">도봉라이프<span>AWS 인프라 구축 및 운영</span></td>
+          <td class="pt-org">(주)유머스트알엔디</td>
+          <td class="pt-period">2025.12 —</td>
+          <td class="pt-tag"><span>DevOps</span></td>
+        </tr>
+        <tr>
+          <td class="pt-name">판옵티콘<span>장애 감지 및 관제 시스템</span></td>
+          <td class="pt-org">UBICOMP LAB</td>
+          <td class="pt-period">2024.07 —</td>
+          <td class="pt-tag"><span>Full-Stack</span></td>
+        </tr>
+        <tr>
+          <td class="pt-name">과제 제출 시스템<span>ML/DL 랭킹 관리</span></td>
+          <td class="pt-org">개인 프로젝트</td>
+          <td class="pt-period">2025.06 —</td>
+          <td class="pt-tag"><span>Personal</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 08. Version Timeline ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 08</h2><p>Version Timeline</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="ver-tl">
+      <div class="ver-tl-item major">
+        <div class="ver-tl-head"><span class="vt-badge">V2</span><h3>도봉라이프 — 인프라 고도화</h3></div>
+        <p class="vt-meta">(주)유머스트알엔디 · 2026</p>
+        <p class="vt-desc">역할 기반 아키텍처 전환. Terraform IaC. SSM+OIDC CI/CD. ElastiCache 이전. CloudWatch 모니터링.</p>
+      </div>
+      <div class="ver-tl-item">
+        <div class="ver-tl-head"><span class="vt-badge">V1</span><h3>도봉라이프 — 초기 인프라</h3></div>
+        <p class="vt-meta">(주)유머스트알엔디 · 2025</p>
+        <p class="vt-desc">단일 EC2 + RDS 구조. Docker Compose 통합 배포. SSH 기반 CI/CD.</p>
+      </div>
+      <div class="ver-tl-item major">
+        <div class="ver-tl-head"><span class="vt-badge">1.0</span><h3>판옵티콘 — 관제 시스템</h3></div>
+        <p class="vt-meta">UBICOMP LAB · 2024 — 현재</p>
+        <p class="vt-desc">Next.js + Spring Boot 풀스택. self-hosted runner CI/CD. Slack 알림. 1년 6개월 운영.</p>
+      </div>
+      <div class="ver-tl-item">
+        <div class="ver-tl-head"><span class="vt-badge">1.0</span><h3>과제 제출 시스템</h3></div>
+        <p class="vt-meta">개인 프로젝트 · 2025 — 현재</p>
+        <p class="vt-desc">ML/DL 강의용 과제 제출 및 랭킹. 세션 인증, 감사 로그. 월 40명.</p>
+      </div>
+    </div>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 09. Masonry Two-Col ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 09</h2><p>Masonry Cards</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="masonry">
+      <div class="mas-card">
+        <p class="mc-eyebrow">Project No.1</p>
+        <h3>도봉라이프 (Dobong Life)</h3>
+        <p class="mc-sub">(주)유머스트알엔디 · 인턴사원 · 2025.12 — 2026.02</p>
+        <p>서울시 도봉구 지역상권 활성화 앱의 AWS 인프라 구축 및 운영. 단일 EC2에서 역할 기반 아키텍처로 전환. Terraform IaC, SSM+OIDC CI/CD, CloudWatch 모니터링.</p>
+        <div class="mc-tags"><span>AWS</span><span>Terraform</span><span>Docker</span><span>GitHub Actions</span><span>CloudWatch</span></div>
+      </div>
+      <div class="mas-card">
+        <p class="mc-eyebrow">Project No.2</p>
+        <h3>판옵티콘 (Panopticon)</h3>
+        <p class="mc-sub">UBICOMP LAB · 학부연구생 · 2024.07 — 2026.02</p>
+        <p>연구실 AI 데이터 수집 파이프라인 관제 시스템. Next.js + Spring Boot 풀스택. Slack 실시간 알림. 1년 6개월 운영.</p>
+        <div class="mc-tags"><span>Next.js</span><span>Spring Boot</span><span>MySQL</span><span>Docker</span></div>
+      </div>
+      <div class="mas-card">
+        <p class="mc-eyebrow">Project No.3</p>
+        <h3>과제 제출 시스템</h3>
+        <p class="mc-sub">개인 프로젝트 · 2025.06 — 2026.02</p>
+        <p>ML/DL 강의용 과제 제출 및 랭킹 관리. 세션 인증, 계층형 권한. 월 40명.</p>
+        <div class="mc-tags"><span>Next.js</span><span>SQLite</span><span>Docker</span></div>
+      </div>
+    </div>
+
+    <div class="spacer"></div><hr><div class="spacer"></div>
+  </div>
+
+  <!-- ═══ 10. Full-Width Feature ═══ -->
+  <div class="container">
+    <div class="comp-label"><h2>Component 10</h2><p>Full-Width Feature</p></div>
+    <hr class="bold">
+    <div class="spacer"></div>
+
+    <div class="fw-feature">
+      <p class="fw-eyebrow">Featured Project</p>
+      <h3>도봉라이프 (Dobong Life)</h3>
+      <p class="fw-sub">AWS 인프라 구축 및 운영 · (주)유머스트알엔디</p>
+      <div class="fw-body">
+        <p>서울시 도봉구 지역상권 활성화 앱의 클라우드 인프라를 처음부터 설계하고 구축했습니다. 초기 단일 EC2 구조에서 역할 기반 다중 서버 아키텍처로 전환하고, Terraform을 통한 인프라 코드화를 완료했습니다.</p>
+        <p>GitHub Actions + OIDC 인증으로 SSH 없는 보안 배포 파이프라인을 구축하고, CloudWatch로 실시간 로그 수집 환경을 마련했습니다. 현재 플레이스토어와 앱스토어에 출시되어 서비스 운영 중입니다.</p>
+      </div>
+      <div class="fw-stats">
+        <div class="fw-stat"><p class="fs-num">V2</p><p class="fs-label">Architecture</p></div>
+        <div class="fw-stat"><p class="fs-num">0</p><p class="fs-label">SSH Keys</p></div>
+        <div class="fw-stat"><p class="fs-num">IaC</p><p class="fs-label">Terraform</p></div>
+        <div class="fw-stat"><p class="fs-num">24/7</p><p class="fs-label">Monitoring</p></div>
+      </div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <div class="fw-feature">
+      <p class="fw-eyebrow">Featured Project</p>
+      <h3>판옵티콘 (Panopticon)</h3>
+      <p class="fw-sub">장애 감지 및 관제 시스템 · UBICOMP LAB</p>
+      <div class="fw-body">
+        <p>연구실 AI 훈련 데이터 수집 파이프라인의 관제 시스템을 설계하고 개발했습니다. Next.js와 Spring Boot 기반 풀스택으로 구현하고, self-hosted runner를 활용한 On-prem CI/CD를 구축했습니다.</p>
+        <p>수집 지연 및 중단을 자동으로 감지하고 Slack으로 실시간 알림을 보내는 시스템을 통해 1년 6개월 이상 안정적으로 운영하고 있습니다. 리포트 자동화로 장애 대응 속도를 개선했습니다.</p>
+      </div>
+      <div class="fw-stats">
+        <div class="fw-stat"><p class="fs-num">18</p><p class="fs-label">Months Live</p></div>
+        <div class="fw-stat"><p class="fs-num">1</p><p class="fs-label">KCC Paper</p></div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <hr class="bold">
+    <div style="padding:24px 0;text-align:center;">
+      <p style="font-size:11px;color:var(--rule);">&copy; 2024 임우진 — Project Components Reference</p>
+    </div>
+  </div>
+
+</body>
+</html>
