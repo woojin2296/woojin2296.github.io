@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy:github": "npm run build && npx gh-pages -d out",
+    "deploy:github": "npm run build && npx gh-pages -d out --dotfiles",
     "lint": "eslint"
   },
   "dependencies": {
