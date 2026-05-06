@@ -187,7 +187,7 @@ function ExperienceItem({
 
 export default function Home() {
   return (
-    <div>
+    <div className="min-h-screen bg-[#f5f5f5]">
       <nav className="flex justify-center gap-6 sm:gap-10 py-4 px-6 sm:px-10 border-b border-b-[#c4c0b8] border-t-[3px] border-t-[#111418] flex-wrap">
         {[
           "About",
