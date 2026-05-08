@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Horizontal Image Layout References</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f5f5f5;
+      --ink: #0c0c0c;
+      --muted: #5a6775;
+      --rule: #c4c0b8;
+      --soft-rule: #dedbd3;
+      --paper: #eeece6;
+      --accent: #7c6f5f;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      display: block;
+      border: 0;
+      background: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 48px 40px 96px;
+    }
+
+    .topbar {
+      border-top: 3px solid var(--ink);
+      border-bottom: 1px solid var(--rule);
+      padding: 22px 0 24px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin-top: 14px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 28px 0 64px;
+    }
+
+    .index a {
+      border: 1px solid var(--rule);
+      padding: 8px 11px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      transition: color 160ms ease, border-color 160ms ease;
+    }
+
+    .index a:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .layout {
+      margin-top: 64px;
+      border-top: 2px solid var(--ink);
+    }
+
+    .layout-head {
+      display: grid;
+      grid-template-columns: 90px 1fr minmax(160px, 240px);
+      gap: 24px;
+      align-items: start;
+      padding: 22px 0 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .layout-no {
+      color: var(--rule);
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 0.95;
+    }
+
+    .layout-title {
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .layout-desc {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .note::after {
+      content: "";
+      width: 34px;
+      border-top: 1px solid var(--muted);
+    }
+
+    .strip {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .strip img {
+      flex: 0 0 auto;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      object-position: top left;
+    }
+
+    .image-meta {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .edge {
+      position: relative;
+    }
+
+    .edge::after {
+      content: "";
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: 84px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(245, 245, 245, 0), var(--bg) 72%);
+    }
+
+    .arrow-cue {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      z-index: 2;
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid var(--rule);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 20px;
+      transform: translateY(-50%);
+    }
+
+    .ruler {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 8px;
+      padding-top: 12px;
+    }
+
+    .ruler span {
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding-top: 5px;
+      text-transform: uppercase;
+    }
+
+    .caption-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 16px;
+      border-top: 1px solid var(--rule);
+      padding-top: 12px;
+    }
+
+    .caption-row p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* 01 */
+    .l01-shell {
+      position: relative;
+      padding: 20px 0 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l01 {
+      gap: 16px;
+      height: 292px;
+      padding-right: 96px;
+      scroll-snap-type: x proximity;
+    }
+
+    .l01 img {
+      height: 292px;
+      scroll-snap-align: start;
+    }
+
+    /* 02 */
+    .l02-wrap {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l02-side {
+      border-right: 1px solid var(--rule);
+      padding-right: 20px;
+    }
+
+    .l02-side strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .l02-side span {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .l02 {
+      gap: 12px;
+      height: 250px;
+      padding-right: 84px;
+    }
+
+    .l02 img {
+      height: 250px;
+    }
+
+    /* 03 */
+    .l03-wrap {
+      padding: 20px 0 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l03 {
+      align-items: flex-start;
+      gap: 10px;
+      height: 270px;
+      padding-right: 80px;
+    }
+
+    .l03 .plate {
+      flex: 0 0 auto;
+      height: 270px;
+      padding: 0 14px 0 0;
+      border-right: 1px solid var(--rule);
+    }
+
+    .l03 img {
+      height: 270px;
+    }
+
+    /* 04 */
+    .l04-wrap {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l04 {
+      gap: 22px;
+      height: 320px;
+      padding-right: 120px;
+    }
+
+    .l04-card {
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .l04-card img {
+      height: 320px;
+    }
+
+    .l04-num {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 4px 8px 5px;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    /* 05 */
+    .l05-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 62px;
+      gap: 16px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l05 {
+      gap: 14px;
+      height: 278px;
+    }
+
+    .l05 img {
+      height: 278px;
+    }
+
+    .rail-word {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    /* 06 */
+    .l06-wrap {
+      padding: 22px 0 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l06 {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      grid-template-rows: repeat(2, 134px);
+      gap: 12px 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-right: 96px;
+    }
+
+    .l06::-webkit-scrollbar {
+      display: none;
+    }
+
+    .l06 img {
+      width: auto;
+      height: 134px;
+      max-width: none;
+      object-fit: contain;
+      object-position: top left;
+    }
+
+    /* 07 */
+    .l07-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 210px;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l07 {
+      gap: 16px;
+      height: 304px;
+      padding-right: 80px;
+    }
+
+    .l07 img {
+      height: 304px;
+    }
+
+    .l07-copy {
+      align-self: stretch;
+      border-left: 1px solid var(--rule);
+      padding-left: 20px;
+    }
+
+    .l07-copy strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .l07-copy p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .l07-copy .step {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 26px;
+      border-top: 1px solid var(--rule);
+      padding-top: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    /* 08 */
+    .l08-wrap {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l08 {
+      align-items: flex-start;
+      gap: 18px;
+      height: 286px;
+      padding-right: 92px;
+    }
+
+    .l08 figure {
+      flex: 0 0 auto;
+    }
+
+    .l08 img {
+      height: 252px;
+    }
+
+    .l08 figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    /* 09 */
+    .l09-wrap {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l09 {
+      gap: 0;
+      height: 288px;
+      padding-right: 80px;
+    }
+
+    .l09 .slice {
+      position: relative;
+      flex: 0 0 auto;
+      padding-right: 18px;
+      margin-right: 18px;
+    }
+
+    .l09 .slice::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-right: 1px solid var(--soft-rule);
+    }
+
+    .l09 img {
+      height: 288px;
+    }
+
+    /* 10 */
+    .l10-wrap {
+      padding: 24px 0 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .l10-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .l10 {
+      gap: 16px;
+      height: 276px;
+      padding-right: 100px;
+    }
+
+    .l10 img {
+      height: 276px;
+    }
+
+    .track {
+      position: relative;
+      height: 24px;
+      margin-top: 14px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .track::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -2px;
+      width: 31%;
+      border-top: 3px solid var(--ink);
+    }
+
+    .track::after {
+      content: "scroll";
+      position: absolute;
+      right: 0;
+      top: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 32px 20px 72px;
+      }
+
+      .layout-head {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .layout-no {
+        font-size: 34px;
+      }
+
+      .l02-wrap,
+      .l05-wrap,
+      .l07-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .l02-side,
+      .l07-copy,
+      .rail-word {
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--rule);
+        padding: 0 0 14px;
+        writing-mode: horizontal-tb;
+      }
+
+      .caption-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <p class="eyebrow">Reference / Horizontal Image Layouts</p>
+      <h1>가로 이미지 배치 레이아웃 10안</h1>
+      <p class="lead">
+        메인 포트폴리오의 선, 여백, 회색 톤을 유지하면서 아키텍처 이미지를 가로로 배치하는 방식만 다르게 정리한 레퍼런스입니다.
+        모든 안은 이미지 자체 테두리를 제거하고, 스크롤 가능성을 다른 단서로 표현합니다.
+      </p>
+    </header>
+
+    <nav class="index" aria-label="layout index">
+      <a href="#layout-01">01 Peek Rail</a>
+      <a href="#layout-02">02 Side Label</a>
+      <a href="#layout-03">03 Plate Shelf</a>
+      <a href="#layout-04">04 Numbered</a>
+      <a href="#layout-05">05 End Rail</a>
+      <a href="#layout-06">06 Two Rows</a>
+      <a href="#layout-07">07 Annotation</a>
+      <a href="#layout-08">08 Captioned</a>
+      <a href="#layout-09">09 Separated</a>
+      <a href="#layout-10">10 Progress</a>
+    </nav>
+
+    <section class="layout" id="layout-01">
+      <div class="layout-head">
+        <p class="layout-no">01</p>
+        <div>
+          <h2 class="layout-title">Peek Rail</h2>
+          <p class="layout-desc">현재 방향과 가장 가깝지만, 우측 이미지를 일부 남겨 스크롤 가능성을 더 직접적으로 보여주는 안.</p>
+        </div>
+        <p class="note">drag right</p>
+      </div>
+      <div class="l01-shell edge">
+        <span class="arrow-cue" aria-hidden="true">→</span>
+        <div class="strip l01">
+          <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+          <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+          <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+          <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+        </div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-02">
+      <div class="layout-head">
+        <p class="layout-no">02</p>
+        <div>
+          <h2 class="layout-title">Side Label Shelf</h2>
+          <p class="layout-desc">좌측 라벨을 고정하고 이미지만 움직이는 느낌. 본문 섹션과 연결성이 높고 과하게 장식적이지 않음.</p>
+        </div>
+        <p class="note">horizontal</p>
+      </div>
+      <div class="l02-wrap">
+        <aside class="l02-side">
+          <strong>Architecture Flow</strong>
+          <span>이미지 높이를 맞추고, 긴 이미지는 자연스럽게 다음 영역으로 넘어갑니다.</span>
+        </aside>
+        <div class="edge">
+          <div class="strip l02">
+            <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+            <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+            <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+            <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-03">
+      <div class="layout-head">
+        <p class="layout-no">03</p>
+        <div>
+          <h2 class="layout-title">Plate Shelf</h2>
+          <p class="layout-desc">이미지를 카드처럼 감싸지 않고, 각 이미지 사이에 얇은 세로선을 둬 문서형 레이아웃에 가깝게 정리.</p>
+        </div>
+        <p class="note">slide</p>
+      </div>
+      <div class="l03-wrap edge">
+        <div class="strip l03">
+          <div class="plate"><img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure"></div>
+          <div class="plate"><img src="../public/panopticon-arch.webp" alt="Panopticon architecture"></div>
+          <div class="plate"><img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture"></div>
+          <div class="plate"><img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture"></div>
+        </div>
+        <div class="ruler" aria-hidden="true">
+          <span>start</span><span></span><span></span><span></span><span></span><span></span><span></span><span>end</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-04">
+      <div class="layout-head">
+        <p class="layout-no">04</p>
+        <div>
+          <h2 class="layout-title">Numbered Filmstrip</h2>
+          <p class="layout-desc">이미지마다 작은 번호를 붙여 순서감을 만들고, 우측 여백을 크게 남겨 계속 이어지는 느낌을 줌.</p>
+        </div>
+        <p class="note">01 / 04</p>
+      </div>
+      <div class="l04-wrap edge">
+        <div class="strip l04">
+          <figure class="l04-card">
+            <span class="l04-num">01</span>
+            <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+          </figure>
+          <figure class="l04-card">
+            <span class="l04-num">02</span>
+            <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+          </figure>
+          <figure class="l04-card">
+            <span class="l04-num">03</span>
+            <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+          </figure>
+          <figure class="l04-card">
+            <span class="l04-num">04</span>
+            <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-05">
+      <div class="layout-head">
+        <p class="layout-no">05</p>
+        <div>
+          <h2 class="layout-title">End Rail Cue</h2>
+          <p class="layout-desc">스크롤바 대신 우측에 세로 레일을 두는 안. 메인 페이지의 선 기반 디자인과 가장 잘 붙습니다.</p>
+        </div>
+        <p class="note">scroll</p>
+      </div>
+      <div class="l05-wrap">
+        <div class="strip l05">
+          <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+          <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+          <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+          <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+        </div>
+        <div class="rail-word" aria-hidden="true">scroll</div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-06">
+      <div class="layout-head">
+        <p class="layout-no">06</p>
+        <div>
+          <h2 class="layout-title">Two Row Conveyor</h2>
+          <p class="layout-desc">이미지가 많아질 때 유리한 2단 가로 배치. 한 줄보다 높이는 조금 늘지만 화면에 보이는 정보량이 큽니다.</p>
+        </div>
+        <p class="note">more items</p>
+      </div>
+      <div class="l06-wrap edge">
+        <div class="l06">
+          <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+          <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+          <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+          <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+          <img src="../public/panopticon-arch.webp" alt="Panopticon architecture duplicate">
+          <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure duplicate">
+          <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture duplicate">
+          <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture duplicate">
+          <img src="../public/panopticon-arch.webp" alt="Panopticon architecture alternate duplicate">
+          <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure alternate duplicate">
+        </div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-07">
+      <div class="layout-head">
+        <p class="layout-no">07</p>
+        <div>
+          <h2 class="layout-title">Annotation Rail</h2>
+          <p class="layout-desc">이미지 스트립 우측에 설명 칼럼을 붙이는 안. 스크롤은 이미지 영역에만 걸리고 텍스트는 고정됩니다.</p>
+        </div>
+        <p class="note">fixed text</p>
+      </div>
+      <div class="l07-wrap">
+        <div class="edge">
+          <div class="strip l07">
+            <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+            <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+            <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+            <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+          </div>
+        </div>
+        <aside class="l07-copy">
+          <strong>이미지 중심, 설명은 고정</strong>
+          <p>본문 설명이 길지 않은 메인 페이지에서 안정적입니다. 우측 칼럼이 스크롤 가능 영역과 구분선 역할을 같이 합니다.</p>
+          <div class="step"><span>view</span><span>drag →</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-08">
+      <div class="layout-head">
+        <p class="layout-no">08</p>
+        <div>
+          <h2 class="layout-title">Captioned Shelf</h2>
+          <p class="layout-desc">이미지 아래 짧은 캡션을 두는 안. 프로젝트별 이미지가 섞일 때 각 이미지의 출처를 바로 알 수 있습니다.</p>
+        </div>
+        <p class="note">captions</p>
+      </div>
+      <div class="l08-wrap edge">
+        <div class="strip l08">
+          <figure>
+            <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+            <figcaption>Dobong Life / AWS</figcaption>
+          </figure>
+          <figure>
+            <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+            <figcaption>Panopticon / System</figcaption>
+          </figure>
+          <figure>
+            <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+            <figcaption>Dobong Life / V1</figcaption>
+          </figure>
+          <figure>
+            <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+            <figcaption>Dobong Life / CI/CD</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-09">
+      <div class="layout-head">
+        <p class="layout-no">09</p>
+        <div>
+          <h2 class="layout-title">Separated Image Run</h2>
+          <p class="layout-desc">이미지 사이에만 선을 넣어 문서의 표처럼 보이게 하는 안. 이미지에는 테두리를 주지 않아 답답함이 적습니다.</p>
+        </div>
+        <p class="note">runway</p>
+      </div>
+      <div class="l09-wrap edge">
+        <div class="strip l09">
+          <div class="slice"><img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure"></div>
+          <div class="slice"><img src="../public/panopticon-arch.webp" alt="Panopticon architecture"></div>
+          <div class="slice"><img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture"></div>
+          <div class="slice"><img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout" id="layout-10">
+      <div class="layout-head">
+        <p class="layout-no">10</p>
+        <div>
+          <h2 class="layout-title">Progress Track</h2>
+          <p class="layout-desc">숨긴 스크롤바 대신 하단 진행 트랙을 쓰는 안. 실제 구현 시 드래그에 맞춰 진행률을 움직일 수 있습니다.</p>
+        </div>
+        <p class="note">track</p>
+      </div>
+      <div class="l10-wrap">
+        <div class="l10-top">
+          <span>Architecture Images</span>
+          <span>Drag Horizontally</span>
+        </div>
+        <div class="edge">
+          <div class="strip l10">
+            <img src="../public/dobonglife-aws-infra-v2.webp" alt="Dobong Life AWS infrastructure">
+            <img src="../public/panopticon-arch.webp" alt="Panopticon architecture">
+            <img src="../public/dobonglife-arch-v1.webp" alt="Dobong Life V1 architecture">
+            <img src="../public/dobonglife-cicd-arch-v1.webp" alt="Dobong Life CI/CD architecture">
+          </div>
+        </div>
+        <div class="track" aria-hidden="true"></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
