@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { ExpandableImage } from "@/app/_components/expandable-image";
 
 export const metadata = {
   title: "Dobong Life | Lim Woojin Portfolio",
@@ -90,13 +91,14 @@ function DiagramFigure({
   return (
     <figure className="border-b border-[#c4c0b8]">
       <div className="bg-[#f5f5f5] px-4 py-6 sm:px-8">
-        <Image
+        <ExpandableImage
           src={src}
           alt={alt}
           width={width}
           height={height}
           unoptimized
-          className="mx-auto h-auto w-full max-w-[860px] object-contain"
+          wrapperClassName="mx-auto block w-full max-w-[860px]"
+          className="h-auto w-full object-contain"
         />
       </div>
       <figcaption className="border-t border-[#c4c0b8] px-7 py-4 text-sm text-[#5a6775]">
