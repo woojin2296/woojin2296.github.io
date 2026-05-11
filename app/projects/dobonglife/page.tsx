@@ -1,63 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { ExpandableImage } from "@/app/_components/expandable-image";
+import { SkillIcon } from "@/app/_components/skill-icon";
 
 export const metadata = {
   title: "Dobong Life | Lim Woojin Portfolio",
   description: "도봉라이프 AWS 인프라 구축 및 운영 프로젝트",
 };
-
-const projectMeta = [
-  ["Period", "2025.12 — 2026.02"],
-  ["Role", "(주)유머스트알엔디 / 인턴 사원"],
-  ["Scope", "AWS 인프라 설계 · Terraform IaC · CI/CD · 로그 모니터링"],
-];
-
-const rolePhases = [
-  {
-    label: "V1",
-    title: "초기 인프라 설계 및 배포 기반 구축",
-    items: [
-      "단일 EC2 기반으로 Nginx, Spring Boot, Redis를 Docker Compose로 통합 배포",
-      "VPC, Public Subnet, Private Subnet, RDS를 구성해 외부 접근과 데이터 계층을 분리",
-      "GitHub Actions, Docker Hub, SSH를 활용한 초기 CI/CD 파이프라인 구축",
-    ],
-  },
-  {
-    label: "V2",
-    title: "운영 안정성 개선 및 보안 배포 구조 고도화",
-    items: [
-      "Nginx, Backend, Frontend 서버를 역할별 EC2로 분리하고 내부 서비스 영역을 Private Subnet에 배치",
-      "Terraform으로 VPC, Subnet, EC2, RDS, IAM 리소스를 코드화해 인프라 재현성 확보",
-      "GitHub Actions OIDC, SSM, Parameter Store를 활용해 SSH Key 없이 배포와 환경 변수 관리를 수행",
-      "CloudWatch로 EC2 및 애플리케이션 로그를 수집해 운영 상태를 확인할 수 있는 기반 마련",
-    ],
-  },
-];
-
-const skillGroups = [
-  {
-    label: "Cloud / Infra",
-    items: ["AWS VPC", "EC2", "RDS", "S3", "NAT Gateway", "Security Group"],
-  },
-  {
-    label: "IaC",
-    items: ["Terraform"],
-  },
-  {
-    label: "Delivery",
-    items: ["GitHub Actions", "OIDC", "SSM", "Docker Compose"],
-  },
-  {
-    label: "Observability",
-    items: ["CloudWatch"],
-  },
-  {
-    label: "Network",
-    items: ["Public / Private Subnet", "Route Table", "Security Group"],
-  },
-];
 
 function SectionHeading({
   children,
@@ -68,7 +17,7 @@ function SectionHeading({
 }) {
   return (
     <div className={`border-b-[2px] border-[#111418] pb-4 ${className}`}>
-      <h2 className="text-lg font-bold uppercase leading-none tracking-[2.5px] text-[#111418]">
+      <h2 className="text-lg font-semibold uppercase leading-none tracking-[2.5px] text-[#111418]">
         {children}
       </h2>
     </div>
@@ -111,7 +60,7 @@ function DiagramFigure({
 export default function DobongLifePage() {
   return (
     <div className="min-h-screen bg-[#f5f5f5]">
-      <main className="mx-auto max-w-[1080px] px-6 pt-10 pb-28 sm:px-10">
+      <main className="mx-auto max-w-[1080px] px-6 pt-10 pb-28 sm:px-10 lg:px-24">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#5a6775] transition-colors hover:text-[#111418]"
@@ -120,53 +69,49 @@ export default function DobongLifePage() {
           돌아가기
         </Link>
 
-        <header className="mt-14 border-t-[3px] border-[#111418] pt-10">
-          <div className="grid gap-7 md:grid-cols-[112px_1fr] md:items-center">
-            <div className="flex h-24 w-24 items-center justify-center border border-[#c4c0b8] bg-[#f5f5f5] p-3">
-              <Image
-                src="/dobonglife-logo.png"
-                alt="도봉라이프 로고"
-                width={502}
-                height={501}
-                unoptimized
-                className="h-full w-full object-contain"
-                priority
-              />
+        <header className="flex flex-col gap-8 mt-14 pt-10">
+          <div className="flex flex-col gap-4">
+            <p className="text-xs uppercase tracking-[0.35em] text-[#5a6775]">
+              Project No.1
+            </p>
+            <h1 className="text-5xl font-black leading-tight text-[#111418]">
+              도봉라이프 AWS 인프라 구축 및 운영
+            </h1>
+            <p className="text-lg leading-relaxed text-[#5a6775]">
+              클라우드 인프라 구축 및 운영
+            </p>
+          </div>
+          <section className="flex gap-8">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                Period
+              </p>
+              <p className="text-[15px] font-medium text-[#111418]">
+                2025.12 ~ current
+              </p>
             </div>
             <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-[#5a6775]">
-                Project No.1
+              <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                Position
               </p>
-              <h1 className="mt-4 text-[clamp(38px,6vw,64px)] font-bold leading-tight text-[#111418]">
-                도봉라이프 (Dobong Life)
-              </h1>
-              <p className="mt-4 max-w-[720px] text-xl leading-relaxed text-[#5a6775]">
-                서울시 도봉구 지역상권 활성화 애플리케이션의 AWS 인프라를 설계,
-                구축하고 운영 안정성을 개선한 프로젝트입니다.
+              <p className="text-[15px] font-medium text-[#111418]">
+                (주)유머스트알엔디 / 인턴 사원
               </p>
             </div>
-          </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                Role
+              </p>
+              <p className="text-[15px] font-medium text-[#111418]">
+                DevOps Engineer & Backend Developer
+              </p>
+            </div>
+          </section>
         </header>
 
-        <section className="mt-12 grid border-y border-[#c4c0b8]">
-          {projectMeta.map(([label, value], i) => (
-            <div
-              key={label}
-              className={`grid gap-2 px-7 py-5 md:grid-cols-[160px_1fr] md:items-baseline ${
-                i > 0 ? "border-t border-[#c4c0b8]" : ""
-              }`}
-            >
-              <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
-                {label}
-              </p>
-              <p className="text-[15px] font-medium text-[#111418]">{value}</p>
-            </div>
-          ))}
-        </section>
-
-        <section className="py-16">
-          <SectionHeading>Overview</SectionHeading>
-          <p className="mt-6 max-w-[860px] text-[17px] leading-relaxed text-[#111418]">
+        <section className="pt-24">
+          <SectionHeading>프로젝트 개요</SectionHeading>
+          <p className="mt-6 text-[17px] leading-relaxed text-[#111418]">
             도봉라이프는 서울특별시 도봉구의 지역상권 활성화를 위한 관광 정보
             안내 서비스입니다. 스토리텔링 기반 여행 코스, 맛집 정보, 지역
             소상공인 연계 할인 쿠폰 발행 및 사용 기능을 제공하며, 현재
@@ -174,38 +119,73 @@ export default function DobongLifePage() {
           </p>
         </section>
 
-        <section className="py-16">
-          <SectionHeading>Role</SectionHeading>
+        <section className="pt-24">
+          <SectionHeading>역할</SectionHeading>
           <div className="border-b border-[#c4c0b8]">
-            {rolePhases.map((phase, i) => (
-              <div
-                key={phase.label}
-                className={`grid gap-5 px-7 py-6 md:grid-cols-[160px_1fr] md:gap-8 ${
-                  i > 0 ? "border-t border-[#c4c0b8]" : ""
-                }`}
-              >
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[2.5px] text-[#5a6775]">
-                    {phase.label}
-                  </p>
-                </div>
-                <div className="md:border-l md:border-[#c4c0b8] md:pl-7">
-                  <h3 className="text-[17px] font-semibold text-[#111418]">
-                    {phase.title}
-                  </h3>
-                  <ul className="mt-4 grid gap-2">
-                    {phase.items.map((item) => (
-                      <li
-                        key={item}
-                        className="text-sm leading-relaxed text-[#5a6775]"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+            <div className="gap-5 py-6  md:gap-8">
+              <h3 className="text-[17px] font-semibold text-[#111418]">
+                V1 - 초기 인프라 설계 및 배포 기반 구축
+              </h3>
+              <ul className="mt-4 grid gap-2">
+                <li className="text-sm leading-relaxed text-[#5a6775]">
+                  단일 EC2 기반으로 Nginx, Spring Boot, Redis를 Docker Compose로
+                  통합 배포
+                </li>
+                <li className="text-sm leading-relaxed text-[#5a6775]">
+                  VPC, Public Subnet, Private Subnet, RDS를 구성해 외부 접근과
+                  데이터 계층을 분리
+                </li>
+                <li className="text-sm leading-relaxed text-[#5a6775]">
+                  GitHub Actions, Docker Hub, SSH를 활용한 초기 CI/CD 파이프라인
+                  구축
+                </li>
+              </ul>
+            </div>
+            <div className="gap-5 border-t border-[#c4c0b8] py-6 ">
+              <h3 className="text-[17px] font-semibold text-[#111418]">
+                V2 - 운영 안정성 개선 및 보안 배포 구조 고도화
+              </h3>
+              <ul className="mt-4 grid gap-2">
+                <li className="text-sm leading-relaxed text-[#5a6775]">
+                  Nginx, Backend, Frontend 서버를 역할별 EC2로 분리하고 내부
+                  서비스 영역을 Private Subnet에 배치
+                </li>
+                <li className="text-sm leading-relaxed text-[#5a6775]">
+                  Terraform으로 VPC, Subnet, EC2, RDS, IAM 리소스를 코드화해
+                  인프라 재현성 확보
+                </li>
+                <li className="text-sm leading-relaxed text-[#5a6775]">
+                  GitHub Actions OIDC, SSM, Parameter Store를 활용해 SSH Key
+                  없이 배포와 환경 변수 관리를 수행
+                </li>
+                <li className="text-sm leading-relaxed text-[#5a6775]">
+                  CloudWatch로 EC2 및 애플리케이션 로그를 수집해 운영 상태를
+                  확인할 수 있는 기반 마련
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24">
+          <SectionHeading>기술 스택</SectionHeading>
+          <div className="flex flex-wrap gap-2 py-5">
+            <SkillIcon isBlack>AWS</SkillIcon>
+            <SkillIcon isBlack>Terraform</SkillIcon>
+            <SkillIcon isBlack>GitHub Actions</SkillIcon>
+            <SkillIcon isBlack>Docker Compose</SkillIcon>
+            <SkillIcon isBlack>CloudWatch</SkillIcon>
+            <SkillIcon>VPC</SkillIcon>
+            <SkillIcon>EC2</SkillIcon>
+            <SkillIcon>RDS</SkillIcon>
+            <SkillIcon>S3</SkillIcon>
+            <SkillIcon>OIDC</SkillIcon>
+            <SkillIcon>SSM</SkillIcon>
+            <SkillIcon>Parameter Store</SkillIcon>
+            <SkillIcon>IAM</SkillIcon>
+            <SkillIcon>Nginx</SkillIcon>
+            <SkillIcon>Spring Boot</SkillIcon>
+            <SkillIcon>Redis</SkillIcon>
           </div>
         </section>
 
@@ -229,36 +209,7 @@ export default function DobongLifePage() {
           </div>
         </section>
 
-        <section className="py-16">
-          <SectionHeading>Skills</SectionHeading>
-          <div className="border-b border-[#c4c0b8]">
-            {skillGroups.map((group, i) => (
-              <div
-                key={group.label}
-                className={`grid gap-3 px-7 py-5 md:grid-cols-[170px_1fr] md:items-baseline md:gap-8 ${
-                  i > 0 ? "border-t border-[#c4c0b8]" : ""
-                }`}
-              >
-                <p className="text-[11px] font-semibold uppercase tracking-[2.5px] text-[#5a6775]">
-                  {group.label}
-                </p>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                  {group.items.map((skill, skillIndex) => (
-                    <span
-                      key={skill}
-                      className="flex items-center gap-x-3 text-[15px] font-medium text-[#111418]"
-                    >
-                      {skillIndex > 0 ? (
-                        <span className="text-[#c4c0b8]">/</span>
-                      ) : null}
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        
       </main>
     </div>
   );

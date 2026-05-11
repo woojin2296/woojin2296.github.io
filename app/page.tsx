@@ -4,8 +4,8 @@ import { ExpandableImage } from "@/app/_components/expandable-image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#f5f5f5]">
-      <nav className="flex justify-center gap-6 sm:gap-10 py-4 px-6 sm:px-10 border-b border-b-[#c4c0b8] border-t-[3px] border-t-[#0c0c0c] flex-wrap">
+    <div className="min-h-screen bg-[#fafaf8]">
+      <nav className="flex justify-center gap-6 py-4 px-6 sm:px-10 border-b border-b-[#c4c0b8] border-t-[3px] border-t-[#0c0c0c] flex-wrap">
         <a
           href="#about"
           className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
@@ -50,8 +50,8 @@ export default function Home() {
         </a>
       </nav>
 
-      <main className="max-w-[1080px] mx-auto pt-20 px-6 sm:px-10">
-        <header className="flex flex-col gap-4 py-20 items-left px-6 sm:px-10">
+      <main className="max-w-[1080px] mx-auto px-6 sm:px-10 lg:px-24">
+        <header className="flex flex-col gap-4 pt-32 items-left">
           <p className="text-sm uppercase tracking-[0.35em] text-[#5a6775]">
             Portfolio &mdash; 2026
           </p>
@@ -63,8 +63,8 @@ export default function Home() {
           </p>
         </header>
 
-        <section id="about" className="flex flex-col items-left px-6 sm:px-10">
-          <section className="flex flex-col py-20 gap-4">
+        <section id="about" className="flex flex-col items-left pt-32 gap-16">
+          <section className="flex flex-col gap-4">
             <h2 className="text-3xl font-black tracking-tight text-[#0c0c0c]">
               네트워크를 좋아하는 DevOps Engineer 임우진 입니다.
             </h2>
@@ -76,72 +76,163 @@ export default function Home() {
               이를 위해 프로젝트에서 아키텍처를 정립하고 인터페이스와 데이터
               흐름을 고려하는 것을 우선시합니다. <br />
             </p>
-            <div className="relative mt-10 border-y border-[#c4c0b8] py-4">
-              <div className="flex h-72 gap-4 overflow-x-auto overflow-y-hidden pr-20 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
-                <ExpandableImage
-                  src="/dobonglife-aws-infra-v2.webp"
-                  alt="도봉라이프 AWS 인프라 아키텍처 다이어그램"
-                  width={3258}
-                  height={1746}
-                  unoptimized
-                  wrapperClassName="block h-full shrink-0"
-                  className="h-full w-auto max-w-none object-contain object-top"
-                />
-                <ExpandableImage
-                  src="/panopticon-arch.webp"
-                  alt="판옵티콘 아키텍처 다이어그램"
-                  width={1153}
-                  height={867}
-                  unoptimized
-                  wrapperClassName="block h-full shrink-0"
-                  className="h-full w-auto max-w-none object-contain object-top"
-                />
-                <ExpandableImage
-                  src="/dobonglife-arch-v1.webp"
-                  alt="도봉라이프 V1 아키텍처 다이어그램"
-                  width={962}
-                  height={1062}
-                  unoptimized
-                  wrapperClassName="block h-full shrink-0"
-                  className="h-full w-auto max-w-none object-contain object-top"
-                />
-                <ExpandableImage
-                  src="/dobonglife-cicd-arch-v1.webp"
-                  alt="도봉라이프 V1 CI/CD 아키텍처 다이어그램"
-                  width={2163}
-                  height={1266}
-                  unoptimized
-                  wrapperClassName="block h-full shrink-0"
-                  className="h-full w-auto max-w-none object-contain object-top"
-                />
+            <div className="relative">
+              <div className="flex gap-4 overflow-x-auto overflow-y-hidden pr-20 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
+                <figure className="shrink-0">
+                  <ExpandableImage
+                    src="/dobonglife-aws-infra-v2.webp"
+                    alt="도봉라이프 AWS 인프라 아키텍처 다이어그램"
+                    width={2163}
+                    height={1266}
+                    unoptimized
+                    wrapperClassName="block h-48"
+                    className="h-full w-auto max-w-none object-contain object-top"
+                  />
+                  <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
+                    도봉라이프 인프라 아키텍처 - V2
+                  </figcaption>
+                </figure>
+                <figure className="shrink-0">
+                  <ExpandableImage
+                    src="/panopticon-arch.webp"
+                    alt="판옵티콘 아키텍처 다이어그램"
+                    width={1153}
+                    height={867}
+                    unoptimized
+                    wrapperClassName="block h-48"
+                    className="h-full w-auto max-w-none object-contain object-top"
+                  />
+                  <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
+                    판옵티콘 아키텍처
+                  </figcaption>
+                </figure>
+                <figure className="shrink-0">
+                  <ExpandableImage
+                    src="/dobonglife-arch-v1.webp"
+                    alt="도봉라이프 V1 아키텍처 다이어그램"
+                    width={962}
+                    height={1062}
+                    unoptimized
+                    wrapperClassName="block h-48"
+                    className="h-full w-auto max-w-none object-contain object-top"
+                  />
+                  <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
+                    도봉라이프 인프라 아키텍처 - V1
+                  </figcaption>
+                </figure>
+                <figure className="shrink-0">
+                  <ExpandableImage
+                    src="/dobonglife-cicd-arch-v1.webp"
+                    alt="도봉라이프 V1 CI/CD 아키텍처 다이어그램"
+                    width={2163}
+                    height={1266}
+                    unoptimized
+                    wrapperClassName="block h-48"
+                    className="h-full w-auto max-w-none object-contain object-top"
+                  />
+                  <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
+                    GitHub Actions 기반 CI/CD 흐름
+                  </figcaption>
+                </figure>
               </div>
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute bottom-4 right-0 top-4 w-20 bg-gradient-to-l from-[#f5f5f5] via-[#f5f5f5]/90 to-transparent"
+                className="pointer-events-none absolute bottom-0 right-0 top-0 w-20 bg-gradient-to-l from-[#f5f5f5] via-[#f5f5f5]/90 to-transparent"
               />
             </div>
           </section>
 
-          <h2 className="text-3xl font-black leading-[1.5] tracking-tight my-8 text-[#0c0c0c]">
-            개발의 전체 흐름을 보고 설계하는 것을 좋아합니다.
-          </h2>
-          <p className="text-lg text-[#5a6775] leading-relaxed">
-            프론트엔드, 백엔드, 인프라, 네트워크, 보안, 임베디드, AI, 운영체제
-            등 다양한 분야를 공부하고 프로젝트를 진행해왔습니다. <br />
-            하나의 기술만 사용하는 개발자가 아니라, 전체 구조를 이해하고
-            적재적소에 사용할 수 있는 개발자를 지향합니다. <br />
-            다양한 계층의 흐름을 이해하고 있기 때문에, 장애 발생 시 원인을
-            빠르게 추적하고 해결하는 과정에도 강점을 가지고 있습니다.
-          </p>
+          <section className="flex flex-col gap-4">
+            <h2 className="text-3xl font-black leading-[1.5] tracking-tight text-[#0c0c0c]">
+              다양한 기술 계층을 이해하고 연결하는 개발자를 지향합니다.
+            </h2>
+            <p className="text-lg text-[#5a6775] leading-relaxed">
+              프론트엔드, 백엔드, 인프라, 네트워크, 보안, 임베디드, AI, 운영체제
+              등 다양한 분야를 공부하고 프로젝트를 진행해왔습니다. <br />
+              하나의 기술만 사용하는 개발자가 아니라, 전체 구조를 이해하고
+              적재적소에 사용할 수 있는 개발자를 지향합니다. <br />
+              다양한 계층의 흐름을 이해하고 있기 때문에, 장애 발생 시 원인을
+              빠르게 추적하고 해결하는 과정에도 강점을 가지고 있습니다.
+            </p>
+            <div className="mt-5 grid grid-cols-2 border-y border-[#c4c0b8] md:grid-cols-6">
+              <div className="border-r border-[#c4c0b8] px-4 py-4 first:pl-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                  Cloud / Infra
+                </p>
+                <p className="mt-2 flex items-baseline gap-1 text-[#0c0c0c]">
+                  <span className="text-2xl font-black leading-none">1</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#5a6775]">
+                    project
+                  </span>
+                </p>
+              </div>
+              <div className="border-[#c4c0b8] px-4 py-4 md:border-r">
+                <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                  CI/CD
+                </p>
+                <p className="mt-2 flex items-baseline gap-1 text-[#0c0c0c]">
+                  <span className="text-2xl font-black leading-none">3</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#5a6775]">
+                    pipelines
+                  </span>
+                </p>
+              </div>
+              <div className="border-r border-t border-[#c4c0b8] px-4 py-4 md:border-t-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                  Full-stack
+                </p>
+                <p className="mt-2 flex items-baseline gap-1 text-[#0c0c0c]">
+                  <span className="text-2xl font-black leading-none">2</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#5a6775]">
+                    services
+                  </span>
+                </p>
+              </div>
+              <div className="border-t border-[#c4c0b8] px-4 py-4 md:border-r md:border-t-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                  Data / IoT
+                </p>
+                <p className="mt-2 flex items-baseline gap-1 text-[#0c0c0c]">
+                  <span className="text-2xl font-black leading-none">1</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#5a6775]">
+                    pipeline
+                  </span>
+                </p>
+              </div>
+              <div className="border-r border-t border-[#c4c0b8] px-4 py-4 md:border-t-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                  Embedded
+                </p>
+                <p className="mt-2 flex items-baseline gap-1 text-[#0c0c0c]">
+                  <span className="text-2xl font-black leading-none">1</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#5a6775]">
+                    project
+                  </span>
+                </p>
+              </div>
+              <div className="border-t border-[#c4c0b8] px-4 py-4 pr-0 md:border-t-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[2px] text-[#5a6775]">
+                  AI / Hackathon
+                </p>
+                <p className="mt-2 flex items-baseline gap-1 text-[#0c0c0c]">
+                  <span className="text-2xl font-black leading-none">3</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#5a6775]">
+                    builds
+                  </span>
+                </p>
+              </div>
+            </div>
+          </section>
 
-          <h2 className="text-3xl font-black leading-[1.5] tracking-tight my-8 text-[#0c0c0c]">
-            불편함을 해결하고 자동화하기 위해 개발합니다.
-          </h2>
-          <p className="text-lg text-[#5a6775] leading-relaxed">
-            업무나 일상 속의 다양한 불편함을 개발로 풀어나가려 합니다. <br />
-            직접 만들고 개선하며, 복잡한 워크플로우를 단순화하려 노력합니다.{" "}
-            <br />
-          </p>
+          <section className="flex flex-col gap-4">
+            <h2 className="text-3xl font-black leading-[1.5] tracking-tight text-[#0c0c0c]">
+              불편함을 해결하고 자동화하기 위해 개발합니다.
+            </h2>
+            <p className="text-lg text-[#5a6775] leading-relaxed">
+              업무나 일상 속의 다양한 불편함을 개발로 풀어나가려 합니다. <br />
+            직접 만들고 개선하며, 복잡한 워크플로우를 단순화하려 노력합니다.
+            </p>
+          </section>
         </section>
 
         <section id="projects" className="py-16">
@@ -156,18 +247,8 @@ export default function Home() {
               <Link
                 href="/projects/dobonglife/"
                 aria-label="도봉라이프 프로젝트 상세 보기"
-                className="group grid cursor-pointer gap-6 p-7 transition-colors hover:bg-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0c0c0c] md:grid-cols-[minmax(220px,0.38fr)_1fr] md:items-start"
+                className="group block cursor-pointer p-7 transition-colors hover:bg-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0c0c0c]"
               >
-                <div
-                  aria-hidden="true"
-                  className="relative aspect-video w-full overflow-hidden border border-[#c4c0b8] bg-[#eef1f4]"
-                >
-                  <div className="absolute inset-x-5 top-5 h-3 bg-white/70" />
-                  <div className="absolute left-5 top-10 h-3 w-2/3 bg-white/55" />
-                  <div className="absolute bottom-5 left-5 h-16 w-16 bg-[#d8dde7]" />
-                  <div className="absolute bottom-5 left-24 right-5 h-3 bg-white/55" />
-                  <div className="absolute bottom-10 left-24 right-16 h-3 bg-white/45" />
-                </div>
                 <div>
                   <div className="mb-1 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                     <h3 className="text-lg font-semibold underline-offset-4 group-hover:underline">
@@ -224,18 +305,8 @@ export default function Home() {
               <Link
                 href="/projects/panopticon/"
                 aria-label="판옵티콘 프로젝트 상세 보기"
-                className="group grid cursor-pointer gap-6 border-y-[1px] border-y-[#c4c0b8] p-7 transition-colors hover:bg-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0c0c0c] md:grid-cols-[minmax(220px,0.38fr)_1fr] md:items-start"
+                className="group block cursor-pointer border-y-[1px] border-y-[#c4c0b8] p-7 transition-colors hover:bg-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0c0c0c]"
               >
-                <div
-                  aria-hidden="true"
-                  className="relative aspect-video w-full overflow-hidden border border-[#c4c0b8] bg-[#eef1f4]"
-                >
-                  <div className="absolute inset-x-5 top-5 h-3 bg-white/70" />
-                  <div className="absolute left-5 top-10 h-3 w-2/3 bg-white/55" />
-                  <div className="absolute bottom-5 left-5 h-16 w-16 bg-[#d8dde7]" />
-                  <div className="absolute bottom-5 left-24 right-5 h-3 bg-white/55" />
-                  <div className="absolute bottom-10 left-24 right-16 h-3 bg-white/45" />
-                </div>
                 <div>
                   <div className="mb-1 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                     <h3 className="text-lg font-semibold underline-offset-4 group-hover:underline">
@@ -290,18 +361,8 @@ export default function Home() {
               <Link
                 href="/projects/sch-miniproject/"
                 aria-label="SCH MiniProject Submission System 프로젝트 상세 보기"
-                className="group grid cursor-pointer gap-6 p-7 transition-colors hover:bg-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0c0c0c] md:grid-cols-[minmax(220px,0.38fr)_1fr] md:items-start"
+                className="group block cursor-pointer p-7 transition-colors hover:bg-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0c0c0c]"
               >
-                <div
-                  aria-hidden="true"
-                  className="relative aspect-video w-full overflow-hidden border border-[#c4c0b8] bg-[#eef1f4]"
-                >
-                  <div className="absolute inset-x-5 top-5 h-3 bg-white/70" />
-                  <div className="absolute left-5 top-10 h-3 w-2/3 bg-white/55" />
-                  <div className="absolute bottom-5 left-5 h-16 w-16 bg-[#d8dde7]" />
-                  <div className="absolute bottom-5 left-24 right-5 h-3 bg-white/55" />
-                  <div className="absolute bottom-10 left-24 right-16 h-3 bg-white/45" />
-                </div>
                 <div>
                   <div className="mb-1 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                     <h3 className="text-lg font-semibold underline-offset-4 group-hover:underline">
@@ -359,7 +420,7 @@ export default function Home() {
           </div>
 
           <div className="border-b border-[#c4c0b8]">
-            <div className="grid gap-5 px-7 py-6 md:grid-cols-[200px_1fr] md:gap-8">
+            <div className="grid gap-5 px-7 py-6 md:grid-cols-[180px_1fr] md:gap-8">
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <p className="text-[15px] font-semibold leading-tight text-[#5a6775]">
                   2025.09 — 2026.02
@@ -376,12 +437,12 @@ export default function Home() {
                   </p>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-[#5a6775]">
-                  도봉라이프 AWS 인프라 구축 및 운영 · X-ray 치료기기 GUI 개발
+                  도봉라이프 AWS 인프라 구축 및 운영 · 회사 ERP 시스템 벡엔드 개발 및 운영 · X-ray 치료기기 GUI 개발
                 </p>
               </div>
             </div>
 
-            <div className="grid gap-5 border-t border-[#c4c0b8] px-7 py-6 md:grid-cols-[200px_1fr] md:gap-8">
+            <div className="grid gap-5 border-t border-[#c4c0b8] px-7 py-6 md:grid-cols-[180px_1fr] md:gap-8">
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <p className="text-[15px] font-semibold leading-tight text-[#5a6775]">
                   2024.01 — 2026.02
@@ -410,7 +471,7 @@ export default function Home() {
                 <ChevronDown className="h-4 w-4 text-[#7a8490] transition-transform group-open:rotate-180" />
               </summary>
               <div className="border-t border-[#c4c0b8]">
-                <div className="grid gap-5 px-7 py-6 md:grid-cols-[200px_1fr] md:gap-8">
+                <div className="grid gap-5 px-7 py-6 md:grid-cols-[180px_1fr] md:gap-8">
                   <div className="flex items-center gap-2 whitespace-nowrap">
                     <p className="text-[15px] font-semibold leading-tight text-[#5a6775]">
                       2024.01 — 2025.12
@@ -432,7 +493,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="grid gap-5 border-t border-[#c4c0b8] px-7 py-6 md:grid-cols-[200px_1fr] md:gap-8">
+                <div className="grid gap-5 border-t border-[#c4c0b8] px-7 py-6 md:grid-cols-[180px_1fr] md:gap-8">
                   <div className="flex items-center gap-2 whitespace-nowrap">
                     <p className="text-[15px] font-semibold leading-tight text-[#5a6775]">
                       2024.01 — 2025.12
@@ -454,7 +515,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="grid gap-5 border-t border-[#c4c0b8] px-7 py-6 md:grid-cols-[200px_1fr] md:gap-8">
+                <div className="grid gap-5 border-t border-[#c4c0b8] px-7 py-6 md:grid-cols-[180px_1fr] md:gap-8">
                   <div className="flex items-center gap-2 whitespace-nowrap">
                     <p className="text-[15px] font-semibold leading-tight text-[#5a6775]">
                       2024.01 — 2025.12
@@ -802,7 +863,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="max-w-[1080px] mx-auto px-6 sm:px-10">
+      <footer className="max-w-[1080px] mx-auto px-6 sm:px-10 lg:px-24">
         <div className="border-t border-[#c4c0b8] py-8 text-center">
           <div className="flex justify-center gap-8 mb-4">
             <a

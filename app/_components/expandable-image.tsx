@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { X, ZoomIn } from "lucide-react";
+import { X } from "lucide-react";
 
 type ExpandableImageProps = {
   src: string;
@@ -66,12 +66,6 @@ export function ExpandableImage({
           priority={priority}
           className={className}
         />
-        <span
-          aria-hidden="true"
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center border border-[#c4c0b8] bg-[#f5f5f5]/90 text-[#0c0c0c] opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-        >
-          <ZoomIn className="h-4 w-4" />
-        </span>
       </button>
 
       {isOpen ? (
