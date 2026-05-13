@@ -1,54 +1,12 @@
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { ExpandableImage } from "@/app/_components/expandable-image";
+import { SectionNavigation } from "@/app/_components/section-navigation";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#fafaf8]">
-      <nav className="flex justify-center gap-6 py-4 px-6 sm:px-10 border-b border-b-[#c4c0b8] border-t-[3px] border-t-[#0c0c0c] flex-wrap">
-        <a
-          href="#about"
-          className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
-        >
-          About
-        </a>
-        <a
-          href="#projects"
-          className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
-        >
-          Projects
-        </a>
-        <a
-          href="#experience"
-          className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
-        >
-          Experience
-        </a>
-        <a
-          href="#awards"
-          className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
-        >
-          Awards
-        </a>
-        <a
-          href="#skills"
-          className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
-        >
-          Skills
-        </a>
-        <a
-          href="#profile"
-          className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
-        >
-          Profile
-        </a>
-        <a
-          href="#contact"
-          className="border-b-[1.5px] border-transparent text-[11px] uppercase tracking-[3px] text-[#0c0c0c] font-semibold hover:border-[#0c0c0c]"
-        >
-          Contact
-        </a>
-      </nav>
+      <SectionNavigation />
 
       <main className="max-w-[1080px] mx-auto px-6 sm:px-10 lg:px-24">
         <header className="flex flex-col gap-4 pt-32 items-left">
@@ -85,7 +43,7 @@ export default function Home() {
                     width={2163}
                     height={1266}
                     unoptimized
-                    wrapperClassName="block h-48"
+                    wrapperClassName="block h-40"
                     className="h-full w-auto max-w-none object-contain object-top"
                   />
                   <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
@@ -99,7 +57,7 @@ export default function Home() {
                     width={1153}
                     height={867}
                     unoptimized
-                    wrapperClassName="block h-48"
+                    wrapperClassName="block h-40"
                     className="h-full w-auto max-w-none object-contain object-top"
                   />
                   <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
@@ -113,7 +71,7 @@ export default function Home() {
                     width={962}
                     height={1062}
                     unoptimized
-                    wrapperClassName="block h-48"
+                    wrapperClassName="block h-40"
                     className="h-full w-auto max-w-none object-contain object-top"
                   />
                   <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
@@ -127,7 +85,7 @@ export default function Home() {
                     width={2163}
                     height={1266}
                     unoptimized
-                    wrapperClassName="block h-48"
+                    wrapperClassName="block h-40"
                     className="h-full w-auto max-w-none object-contain object-top"
                   />
                   <figcaption className="mt-2 text-xs font-medium leading-relaxed text-[#5a6775]">
