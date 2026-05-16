@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 type SkillIconProps = {
   children: ReactNode;
+  emphasized?: boolean;
   isBlack?: boolean;
   is_black?: boolean;
 };
@@ -12,6 +13,7 @@ function cn(...classNames: Array<string | false | undefined>) {
 
 export function SkillIcon({
   children,
+  emphasized,
   isBlack,
   is_black,
 }: SkillIconProps) {
@@ -20,10 +22,12 @@ export function SkillIcon({
   return (
     <span
       className={cn(
-        "border px-3 py-1.5 text-xs",
+        "inline-flex h-8 items-center whitespace-nowrap rounded-full px-3 text-sm font-medium leading-none tracking-normal",
         highlighted
-          ? "border-[#111418] bg-[#111418] font-semibold text-[#f5f5f5]"
-          : "border-[#c4c0b8] font-medium text-[#5a6775]",
+          ? "bg-[#171717] text-white"
+          : emphasized
+            ? "bg-[#eeeeee] text-black"
+            : "bg-[#fafafa] text-black",
       )}
     >
       {children}
