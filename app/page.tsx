@@ -21,26 +21,43 @@ export default function Home() {
       src: "/projects/dobonglife/Architecture - DobongLife AWS Infra - V1.jpg",
       alt: "도봉라이프 V1 AWS 인프라 아키텍처 다이어그램",
       caption: "도봉라이프 인프라 아키텍처 - V1",
+      width: 5800,
+      height: 2758,
     },
     {
       src: "/projects/dobonglife/Architecture - DobongLife CICD - V1.jpg",
       alt: "도봉라이프 V1 CI/CD 아키텍처 다이어그램",
       caption: "GitHub Actions 기반 CI/CD 흐름 - V1",
+      width: 4598,
+      height: 3479,
     },
     {
       src: "/projects/dobonglife/Architecture - DobongLife AWS Infra - V2.jpg",
       alt: "도봉라이프 V2 AWS 인프라 아키텍처 다이어그램",
       caption: "도봉라이프 인프라 아키텍처 - V2",
+      width: 5333,
+      height: 2999,
     },
     {
       src: "/projects/dobonglife/Architecture - DobongLife CICD - V2.jpg",
       alt: "도봉라이프 V2 CI/CD 아키텍처 다이어그램",
       caption: "GitHub Actions + SSM OIDC 기반 CI/CD 흐름 - V2",
+      width: 5756,
+      height: 2779,
     },
     {
-      src: "/projects/panopticon/panopticon-arch.webp",
-      alt: "판옵티콘 아키텍처 다이어그램",
-      caption: "판옵티콘 아키텍처",
+      src: "/projects/panopticon/Architecture - Panopticon Architecture.jpg",
+      alt: "판옵티콘 전체 아키텍처 다이어그램",
+      caption: "판옵티콘 전체 아키텍처",
+      width: 4879,
+      height: 3279,
+    },
+    {
+      src: "/projects/panopticon/Architecture - Panopticon CICD.jpg",
+      alt: "판옵티콘 self-hosted runner CI/CD 시퀀스 다이어그램",
+      caption: "판옵티콘 self-hosted runner CI/CD 흐름",
+      width: 4765,
+      height: 3357,
     },
   ];
 
@@ -106,8 +123,8 @@ export default function Home() {
                     <ExpandableImage
                       src={diagram.src}
                       alt={diagram.alt}
-                      width={2163}
-                      height={1266}
+                      width={diagram.width}
+                      height={diagram.height}
                       unoptimized
                       wrapperClassName="block h-40"
                       className="h-full w-auto max-w-none object-contain object-top"
