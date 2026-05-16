@@ -99,18 +99,18 @@ export function SectionNavigation() {
     <nav
       ref={navRef}
       aria-label="Section navigation"
-      className="fixed right-8 top-1/4 z-20 hidden w-28 -translate-y-1/2 flex-col items-end gap-3 pr-4 xl:flex"
+      className="fixed left-[calc(50%_+_25rem)] top-1/4 z-20 hidden w-32 -translate-y-1/2 flex-col items-start gap-3 pl-4 xl:flex"
     >
       <span
         aria-hidden="true"
-        className="absolute right-0 top-0 h-full w-px translate-x-1/2 bg-[#c4c0b8]"
+        className="absolute left-0 top-0 h-full w-px -translate-x-1/2 bg-[#c4c0b8]"
       />
       <span
         aria-hidden="true"
-        className="absolute right-0 top-0 w-[3px] bg-[#0c0c0c] transition-[height,transform] duration-300 ease-out"
+        className="absolute left-0 top-0 w-[3px] bg-[#0c0c0c] transition-[height,transform] duration-300 ease-out"
         style={{
           height: barStyle.height,
-          transform: `translate(50%, ${barStyle.top}px)`,
+          transform: `translate(-50%, ${barStyle.top}px)`,
         }}
       />
       {sectionLinks.map((link) => {
@@ -125,7 +125,7 @@ export function SectionNavigation() {
             href={`#${link.id}`}
             aria-current={isActive ? "location" : undefined}
             className={cn(
-              "pr-3 text-right text-[11px] uppercase tracking-[3px] transition-colors",
+              "w-full overflow-hidden whitespace-nowrap pl-3 text-left text-[11px] uppercase tracking-[3px] transition-colors [-webkit-mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)] [mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)]",
               isActive
                 ? "font-black text-[#0c0c0c]"
                 : "font-semibold text-[#5a6775] hover:text-[#0c0c0c]",

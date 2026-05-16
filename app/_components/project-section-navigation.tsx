@@ -100,18 +100,18 @@ export function ProjectSectionNavigation({
   return (
     <nav
       aria-label="Project section navigation"
-      className="fixed right-8 top-1/2 z-20 hidden w-36 -translate-y-1/2 flex-col items-end gap-2.5 pr-4 xl:flex"
+      className="fixed left-[calc(50%_+_25rem)] top-1/2 z-20 hidden w-52 -translate-y-1/2 flex-col items-start gap-2.5 pl-4 xl:flex"
     >
       <span
         aria-hidden="true"
-        className="absolute right-0 top-0 h-full w-px translate-x-1/2 bg-[#e5e5e5]"
+        className="absolute left-0 top-0 h-full w-px -translate-x-1/2 bg-[#e5e5e5]"
       />
       <span
         aria-hidden="true"
-        className="absolute right-0 top-0 w-[3px] bg-black transition-[height,transform] duration-300 ease-out"
+        className="absolute left-0 top-0 w-[3px] bg-black transition-[height,transform] duration-300 ease-out"
         style={{
           height: barStyle.height,
-          transform: `translate(50%, ${barStyle.top}px)`,
+          transform: `translate(-50%, ${barStyle.top}px)`,
         }}
       />
       {links.map((link) => {
@@ -126,7 +126,7 @@ export function ProjectSectionNavigation({
             href={`#${link.id}`}
             aria-current={isActive ? "location" : undefined}
             className={cn(
-              "pr-3 text-right text-sm leading-relaxed tracking-normal transition-colors",
+              "w-full overflow-hidden whitespace-nowrap pl-3 text-left text-sm leading-relaxed tracking-normal transition-colors [-webkit-mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)] [mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)]",
               isActive
                 ? "font-medium text-black"
                 : "font-normal text-[#737373] hover:text-black",
