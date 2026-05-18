@@ -100,15 +100,15 @@ export function ProjectSectionNavigation({
   return (
     <nav
       aria-label="Project section navigation"
-      className="fixed left-[calc(50%_+_25rem)] top-1/2 z-20 hidden w-52 -translate-y-1/2 flex-col items-start gap-2.5 pl-4 xl:flex"
+      className="fixed left-[calc(50%_+_25rem)] top-1/4 z-20 hidden w-52 -translate-y-1/2 flex-col items-start gap-2.5 pl-4 xl:flex"
     >
       <span
         aria-hidden="true"
-        className="absolute left-0 top-0 h-full w-px -translate-x-1/2 bg-[#e5e5e5]"
+        className="absolute left-0 top-0 h-full w-px -translate-x-1/2 bg-[#c4c0b8]"
       />
       <span
         aria-hidden="true"
-        className="absolute left-0 top-0 w-[3px] bg-black transition-[height,transform] duration-300 ease-out"
+        className="absolute left-0 top-0 w-[3px] bg-[#0c0c0c] transition-[height,transform] duration-300 ease-out"
         style={{
           height: barStyle.height,
           transform: `translate(-50%, ${barStyle.top}px)`,
@@ -126,7 +126,7 @@ export function ProjectSectionNavigation({
             href={`#${link.id}`}
             aria-current={isActive ? "location" : undefined}
             className={cn(
-              "w-full overflow-hidden whitespace-nowrap pl-3 text-left text-sm leading-relaxed tracking-normal transition-colors [-webkit-mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)] [mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)]",
+              "w-full overflow-hidden whitespace-nowrap pl-3 text-left text-xs leading-[1.33] tracking-normal transition-colors [-webkit-mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)] [mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)]",
               isActive
                 ? "font-medium text-black"
                 : "font-normal text-[#737373] hover:text-black",

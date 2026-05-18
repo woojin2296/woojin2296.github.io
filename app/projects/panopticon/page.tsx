@@ -21,10 +21,10 @@ export const projectInfo = {
   description:
     "연구실 AI 훈련용 실험 데이터 수집 파이프라인의 실시간 관제 및 이상 알림 시스템",
   summary: [
-    "데이터 수집 중단을 뒤늦게 인지하던 문제를 해결하기 위한 실시간 관제 시스템 설계",
-    "서버 ping, 데이터베이스 헬스체크, 1분 수집 주기 기준의 감지 정책 정의",
-    "Watchdog 감지 결과를 Spring Boot 백엔드와 Next.js 대시보드로 연결",
-    "감지 대상과 알림 채널을 모듈 단위로 분리하고 내부망 배포 자동화 구성",
+    "확장성을 고려한 Pluggable Architecture 설계",
+    "Event-driven 상태 전파 구조로 Watchdog 감지 결과를 백엔드와 대시보드에 연결",
+    "실시간 및 기간별 데이터 조회 기능으로 수집 상태 확인과 CSV 출력 흐름 구현",
+    "Self-hosted Runner 기반 내부망 배포 자동화로 제한된 환경의 배포 흐름 구성",
   ],
   techStack: [
     { name: "Next.js", primary: true, summary: true },

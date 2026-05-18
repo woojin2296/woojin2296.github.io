@@ -27,7 +27,7 @@ export default function Home() {
     {
       src: "/projects/dobonglife/Architecture - DobongLife CICD - V1.jpg",
       alt: "도봉라이프 V1 CI/CD 아키텍처 다이어그램",
-      caption: "GitHub Actions 기반 CI/CD 흐름 - V1",
+      caption: "도봉라이프 CI/CD 파이프라인 - V1",
       width: 4598,
       height: 3479,
     },
@@ -41,7 +41,7 @@ export default function Home() {
     {
       src: "/projects/dobonglife/Architecture - DobongLife CICD - V2.jpg",
       alt: "도봉라이프 V2 CI/CD 아키텍처 다이어그램",
-      caption: "GitHub Actions + SSM OIDC 기반 CI/CD 흐름 - V2",
+      caption: "도봉라이프 CI/CD 파이프라인 - V2",
       width: 5756,
       height: 2779,
     },
@@ -55,7 +55,7 @@ export default function Home() {
     {
       src: "/projects/panopticon/Architecture - Panopticon CICD.jpg",
       alt: "판옵티콘 self-hosted runner CI/CD 시퀀스 다이어그램",
-      caption: "판옵티콘 self-hosted runner CI/CD 흐름",
+      caption: "판옵티콘 CI/CD 파이프라인",
       width: 4765,
       height: 3357,
     },
@@ -95,7 +95,7 @@ export default function Home() {
           <p className="text-xs uppercase tracking-[0.22em] text-[#737373]">
             Portfolio 2026
           </p>
-          <h1 className="font-display text-4xl font-medium leading-[1.12] tracking-normal text-black">
+          <h1 className="font-display text-[48px] font-semibold leading-[1.04] tracking-normal text-black sm:text-[56px]">
             임우진 · Lim Woojin
           </h1>
           <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
@@ -117,7 +117,7 @@ export default function Home() {
               흐름을 고려하는 것을 우선시합니다.
             </p>
             <div className="relative">
-              <div className="flex gap-4 overflow-x-auto overflow-y-hidden pr-8 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
+              <div className="flex gap-4 overflow-x-auto overflow-y-hidden pr-8 [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [-webkit-overflow-scrolling:touch] [mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [&::-webkit-scrollbar]:hidden">
                 {architecturalDiagrams.map((diagram, index) => (
                   <figure key={index} className="shrink-0">
                     <ExpandableImage
@@ -126,10 +126,10 @@ export default function Home() {
                       width={diagram.width}
                       height={diagram.height}
                       unoptimized
-                      wrapperClassName="block h-40"
+                      wrapperClassName="block h-32"
                       className="h-full w-auto max-w-none object-contain object-top"
                     />
-                    <figcaption className="mt-2 text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
+                    <figcaption className="mt-2 text-xs font-normal leading-[1.33] tracking-normal text-[#737373]">
                       {diagram.caption}
                     </figcaption>
                   </figure>
@@ -225,29 +225,38 @@ export default function Home() {
               불편함을 해결하고 자동화하기 위해 개발합니다.
             </h2>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              업무나 일상 속의 다양한 불편함을 개발로 풀어나가려 합니다.{" "}
-              직접 만들고 개선하며, 복잡한 워크플로우를 단순화하려 노력합니다.
+              DevOps는 개발과 운영 사이에서 반복되는 배포, 검증, 모니터링
+              흐름을 정리하고 자동화해 서비스가 안정적으로 전달되도록 만드는
+              역할이라고 생각합니다. 기존의 복잡한 워크플로우를 단순화하고
+              자동화하며, 사람이 직접 확인하던 작업을 재현 가능한 시스템 흐름으로
+              바꾸는 데 관심이 있습니다.
             </p>
           </section>
         </section>
 
-        <section id="projects" className="py-16">
-          <SectionHeading>Key Projects</SectionHeading>
-          <div className="mt-6 border-b border-[#e5e5e5]">
+        <section id="projects" className="py-[88px]">
+          <SectionHeading>Projects</SectionHeading>
+
+          <div className="mt-6 divide-y divide-[#e5e5e5] border-y border-[#e5e5e5]">
             {keyProjects.map((project, index) => (
               <Link
                 key={index}
                 href={project.link}
                 aria-label={`${project.title} 프로젝트 상세 보기`}
-                className="group block cursor-pointer border-t border-[#e5e5e5] py-6 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+                className="group block cursor-pointer py-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
               >
-                <div>
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-                    <h3 className="text-[18px] font-medium leading-relaxed tracking-normal text-black underline-offset-4 group-hover:underline">
-                      {project.title}
-                    </h3>
+                <div className="grid gap-4">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-xs font-normal uppercase leading-[1.33] tracking-[0.18em] text-[#a3a3a3]">
+                        Project {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <h3 className="mt-2 text-[20px] font-medium leading-[1.4] tracking-normal text-black underline-offset-4 group-hover:underline">
+                        {project.title}
+                      </h3>
+                    </div>
                     <div className="flex shrink-0 items-center">
-                      <span className="inline-flex items-center gap-1 text-sm font-medium leading-relaxed text-black">
+                      <span className="inline-flex h-9 items-center gap-1 rounded-full border border-[#d4d4d4] bg-white px-4 text-sm font-medium leading-none text-black">
                         상세 보기
                         <ArrowUpRight
                           className="h-3.5 w-3.5"
@@ -256,25 +265,25 @@ export default function Home() {
                       </span>
                     </div>
                   </div>
-                  <p className="mt-1 text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
+                  <p className="text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
                     {project.affiliation} | {project.position} |{" "}
                     {project.period}
                   </p>
-                  <p className="mt-4 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+                  <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
                     {project.description}
                   </p>
-                  <ul className="mt-3 grid gap-1 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
+                  <ul className="grid gap-1.5 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#525252] marker:text-[#a3a3a3]">
                     {project.summary.map((text, index) => (
                       <li key={index}>{text}</li>
                     ))}
                   </ul>
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {project.techStack
                       .filter((skill) => skill.summary)
                       .map((skill, index) => (
                         <span
                           key={index}
-                          className={`inline-flex h-8 items-center border px-3 text-sm leading-none tracking-normal ${skill.primary ? "border-[#171717] bg-[#171717] font-medium text-white" : "border-[#d4d4d4] bg-white font-normal text-black"}`}
+                          className={`inline-flex h-8 items-center rounded-full px-3 text-sm leading-none tracking-normal ${skill.primary ? "bg-[#171717] font-medium text-white" : "bg-[#fafafa] font-normal text-black"}`}
                         >
                           {skill.name}
                         </span>
@@ -283,7 +292,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-            <div className="flex items-center justify-center gap-2 border-t border-[#e5e5e5] py-4 text-sm font-medium text-[#737373]">
+            <div className="flex items-center justify-center gap-2 py-4 text-sm font-medium text-[#737373]">
               <span>그 외 프로젝트 더보기</span>
               <ChevronDown className="h-4 w-4 text-current" aria-hidden="true" />
             </div>

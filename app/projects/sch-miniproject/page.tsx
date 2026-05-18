@@ -7,14 +7,14 @@ import { SkillIcon } from "@/app/_components/skill-icon";
 import { Check } from "lucide-react";
 
 export const metadata = {
-  title: "SCH MiniProject Submission System | Lim Woojin Portfolio",
+  title: "SCH MiniProject PMS | Lim Woojin Portfolio",
   description: "ML/DL 강의 과제 제출 및 랭킹 관리 시스템",
 };
 
 export const projectInfo = {
   link: "/projects/sch-miniproject/",
-  title: "SCH MiniProject Submission System",
-  titleProject: "SCH MiniProject 제출 및 랭킹 시스템",
+  title: "SCH MiniProject PMS",
+  titleProject: "SCH MiniProject PMS",
   affiliation: "순천향대학교 ML/DL 강의",
   position: "개인 프로젝트",
   period: "2025.06 ~ 2026.02",
@@ -90,11 +90,10 @@ export default function SchMiniProjectPage() {
               Project No.3
             </p>
             <h1 className="font-display text-4xl font-medium leading-[1.12] text-balance">
-              SCH MiniProject
+              SCH MiniProject PMS
             </h1>
             <p className="text-base leading-relaxed text-[#737373]">
-              교수님 요청으로 시작해 익명 점수 랭킹과 성적 데이터 관리를 구현한
-              강의 운영 시스템
+              학과 ML/DL 강의에서 사용하는 과제 제출 및 랭킹 관리 시스템
             </p>
           </div>
 
@@ -120,7 +119,7 @@ export default function SchMiniProjectPage() {
                 Role
               </p>
               <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                Solo <br /> Full-stack Developer
+                Full-stack Developer
               </p>
             </div>
           </section>
@@ -158,9 +157,8 @@ export default function SchMiniProjectPage() {
                 aria-hidden="true"
               />
               <span>
-                교수님 요청을 바탕으로 요구사항을 정리하고,{" "}
-                <strong className="font-medium text-black">1인 개발</strong>로
-                기능 범위 정의와 UI/UX 설계 수행
+                강의 운영에 필요한 요구사항을 정리하고, 제출/랭킹/관리 기능의
+                범위와 화면 흐름 설계
               </span>
             </li>
             <li className="flex gap-3 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
@@ -169,8 +167,10 @@ export default function SchMiniProjectPage() {
                 aria-hidden="true"
               />
               <span>
-                학생용 제출/랭킹 화면과 관리자용 사용자, 점수, 공지, 로그 관리
-                화면 구현
+                학생용 제출/랭킹 화면과 관리자용 관리 화면의{" "}
+                <strong className="font-medium text-black">
+                  프론트엔드 UI/UX 설계 및 구현
+                </strong>
               </span>
             </li>
             <li className="flex gap-3 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
@@ -179,8 +179,10 @@ export default function SchMiniProjectPage() {
                 aria-hidden="true"
               />
               <span>
-                SSR 기반 데이터 처리, 세션 인증, 권한 분리, 점수 검증, 파일
-                업로드 검증, 감사 로그를 포함한 백엔드 기능 개발
+                세션 인증, 권한 분리, 점수 검증, 파일 업로드 검증, 감사 로그 등{" "}
+                <strong className="font-medium text-black">
+                  백엔드 기능 개발
+                </strong>
               </span>
             </li>
             <li className="flex gap-3 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
