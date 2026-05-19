@@ -1,0 +1,67 @@
+<svg width="1672" height="941" viewBox="0 0 1672 941" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">앱 로그인 장애 진단 흐름</title>
+  <desc id="desc">앱 로그인 실패 제보부터 서버와 Nginx 로그 확인, 네트워크 계층 의심, TLS 인증서 만료 확인까지 이어진 장애 진단 흐름</desc>
+  <rect width="1672" height="941" fill="#ffffff"/>
+  <text x="112" y="116" fill="#000000" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="44" font-weight="600">앱 로그인 장애 진단 흐름</text>
+  <text x="112" y="158" fill="#737373" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="22">여러 인증 기능이 동시에 실패했고, HTTP 로그에 요청이 남지 않아 TLS 계층까지 내려가 확인했다.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L12 7L2 12" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .label { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #000000; font-size: 24px; font-weight: 600; }
+      .body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #737373; font-size: 18px; font-weight: 400; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; fill: #525252; font-size: 17px; font-weight: 400; }
+      .caption { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #a3a3a3; font-size: 16px; font-weight: 400; }
+    </style>
+  </defs>
+
+  <rect x="112" y="244" width="216" height="168" rx="12" fill="#fafafa" stroke="#e5e5e5" stroke-width="2"/>
+  <text class="label" x="140" y="294">1. 제보</text>
+  <text class="body" x="140" y="334">일반 로그인 실패</text>
+  <text class="body" x="140" y="366">카카오 로그인 실패</text>
+  <text class="body" x="140" y="398">비밀번호 찾기 실패</text>
+
+  <path d="M344 328H414" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="432" y="244" width="248" height="168" rx="12" fill="#fafafa" stroke="#e5e5e5" stroke-width="2"/>
+  <text class="label" x="460" y="294">2. 앱 증상</text>
+  <text class="body" x="460" y="336">네트워크 연결 상태가</text>
+  <text class="body" x="460" y="368">원활하지 않습니다</text>
+  <text class="caption" x="460" y="400">앱 공통 네트워크 오류</text>
+
+  <path d="M696 328H766" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="784" y="244" width="216" height="168" rx="12" fill="#fafafa" stroke="#e5e5e5" stroke-width="2"/>
+  <text class="label" x="812" y="294">3. 서버 확인</text>
+  <text class="body" x="812" y="338">프로세스 정상</text>
+  <text class="body" x="812" y="370">서버는 살아 있음</text>
+
+  <path d="M1016 328H1086" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="1104" y="244" width="248" height="168" rx="12" fill="#fafafa" stroke="#e5e5e5" stroke-width="2"/>
+  <text class="label" x="1132" y="294">4. 로그 확인</text>
+  <text class="body" x="1132" y="336">서버 로그 없음</text>
+  <text class="body" x="1132" y="368">Nginx 로그 없음</text>
+  <text class="caption" x="1132" y="400">요청이 앱까지 도달하지 않음</text>
+
+  <path d="M1352 328H1422" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="1440" y="244" width="120" height="168" rx="12" fill="#171717"/>
+  <text x="1472" y="306" fill="#ffffff" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="600">TLS</text>
+  <text x="1462" y="348" fill="rgba(255,255,255,0.76)" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="18">인증서</text>
+  <text x="1462" y="378" fill="rgba(255,255,255,0.76)" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="18">만료</text>
+
+  <path d="M1500 412V498" stroke="#000000" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="216" y="524" width="1240" height="184" rx="12" fill="#ffffff" stroke="#000000" stroke-width="2.4"/>
+  <text x="264" y="586" fill="#000000" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="30" font-weight="600">결론: TLS 핸드셰이크 단계에서 클라이언트가 연결을 거부</text>
+  <text x="264" y="638" fill="#737373" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="22">인증서 만료 때문에 앱이 HTTPS 연결을 신뢰하지 못했고, HTTP 요청이 생성되기 전에 실패했다.</text>
+  <text x="264" y="676" fill="#737373" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="22">그래서 로그인, 카카오 로그인, 비밀번호 찾기, 이메일 인증처럼 API를 호출하는 기능이 한꺼번에 실패했다.</text>
+
+  <rect x="264" y="760" width="520" height="72" rx="36" fill="#fafafa" stroke="#e5e5e5" stroke-width="2"/>
+  <text class="mono" x="296" y="805">verify error:num=10:certificate has expired</text>
+  <rect x="840" y="760" width="568" height="72" rx="36" fill="#fafafa" stroke="#e5e5e5" stroke-width="2"/>
+  <text class="mono" x="872" y="805">notAfter=May 13 23:55:25 2026 GMT</text>
+</svg>
