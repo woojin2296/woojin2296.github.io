@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { BlogDiagram } from "../_components/blog-diagram";
 
 export const metadata = {
   title: "인증서 만료로 앱 로그인 전체가 막힌 장애 분석 | Blog",
@@ -112,11 +112,12 @@ export default function TlsCertificateExpiryBlogPostPage() {
                 아니라 “요청이 서버의 HTTP 처리 단계까지 오지 못했다”에 가까워졌습니다.
               </p>
             </div>
-            <DiagramFigure
-              src="/blog/dobonglife-cert-incident-flow.svg"
+            <BlogDiagram
+              src="/blog/dobonglife-cert-incident-flow.png"
               alt="앱 로그인 장애 진단 흐름"
-              caption="여러 인증 기능이 동시에 실패했고, 서버와 Nginx 로그가 비어 있어 DNS와 TLS 같은 네트워크 계층으로 조사 범위를 옮겼습니다."
+              width={1672}
               height={941}
+              caption="여러 인증 기능이 동시에 실패했고, 서버와 Nginx 로그가 비어 있어 DNS와 TLS 같은 네트워크 계층으로 조사 범위를 옮겼습니다."
             />
           </section>
 
@@ -147,6 +148,13 @@ export default function TlsCertificateExpiryBlogPostPage() {
                 있습니다.
               </p>
             </div>
+            <BlogDiagram
+              src="/blog/ssl-tls-flow.png"
+              alt="클라이언트가 DNS 해석 후 TCP 연결과 TLS 인증서 검증을 통과해야 HTTP 요청이 Nginx와 API 서버에 도달하는 흐름"
+              width={1672}
+              height={941}
+              caption="HTTP 요청은 TLS 핸드셰이크와 인증서 검증이 끝난 뒤 전송됩니다. 인증서가 만료되면 클라이언트가 연결을 중단하므로 Nginx access log와 백엔드 로그가 비어 보일 수 있습니다."
+            />
           </section>
 
           <section className="pt-[88px]">
@@ -365,11 +373,12 @@ notAfter=Aug 12 04:08:03 2026 GMT`}
                 안전합니다.
               </p>
             </div>
-            <DiagramFigure
-              src="/blog/dobonglife-cert-renewal-flow.svg"
+            <BlogDiagram
+              src="/blog/dobonglife-cert-renewal-flow.png"
               alt="Certbot standalone 방식과 webroot 방식 비교"
-              caption="standalone은 80번 포트를 직접 점유해야 하므로 Nginx와 충돌했습니다. webroot 방식은 Nginx가 계속 요청을 받고 Certbot은 검증 파일만 배치합니다."
+              width={1672}
               height={941}
+              caption="standalone은 80번 포트를 직접 점유해야 하므로 Nginx와 충돌했습니다. webroot 방식은 Nginx가 계속 요청을 받고 Certbot은 검증 파일만 배치합니다."
             />
           </section>
 
@@ -544,38 +553,6 @@ grep -R "certbot renew" /etc/cron.* /etc/crontab 2>/dev/null`}
         </article>
       </main>
     </div>
-  );
-}
-
-function DiagramFigure({
-  src,
-  alt,
-  caption,
-  width = 1672,
-  height,
-}: {
-  src: string;
-  alt: string;
-  caption: string;
-  width?: number;
-  height: number;
-}) {
-  return (
-    <figure className="mt-8 grid gap-3">
-      <div className="overflow-hidden rounded-xl border border-[#e5e5e5] bg-white">
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          className="h-auto w-full"
-          unoptimized
-        />
-      </div>
-      <figcaption className="text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-        {caption}
-      </figcaption>
-    </figure>
   );
 }
 

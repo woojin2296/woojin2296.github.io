@@ -17,6 +17,15 @@ type BlogPost = {
 
 const blogPosts: BlogPost[] = [
   {
+    title: "SSL/TLS 플로우와 패킷 구조 이해하기",
+    description:
+      "TLS 1.3 handshake, certificate validation, record layer, packet fragmentation/coalescing, 운영 장애 분석 관점을 정리했습니다.",
+    date: "2026.05",
+    category: "Network / TLS",
+    tags: ["TLS", "HTTPS", "Packet"],
+    href: "/blog/ssl-tls/",
+  },
+  {
     title: "인증서 만료로 앱 로그인 전체가 막힌 장애 분석",
     description:
       "도봉라이프 API 도메인의 TLS 인증서 만료로 앱 인증 기능이 동시에 실패한 장애를 진단하고, Certbot 갱신 방식을 webroot로 정리한 기록입니다.",
@@ -97,9 +106,9 @@ export default function BlogPage() {
             </p>
           </div>
 
-          <div>
+          <div className="grid gap-12">
             {blogPosts.map((post) => (
-              <article key={post.title} className="border-b border-[#e5e5e5] py-6">
+              <article key={post.title}>
                 <div className="grid gap-4 sm:grid-cols-[144px_1fr] sm:gap-8">
                   <div className="grid content-start gap-2">
                     <p className="text-xs font-normal uppercase leading-[1.33] tracking-normal text-[#a3a3a3]">
