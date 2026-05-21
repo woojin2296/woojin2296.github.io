@@ -8,7 +8,8 @@ import { Check } from "lucide-react";
 
 export const metadata = {
   title: "SCH MiniProject PMS | Lim Woojin Portfolio",
-  description: "ML/DL 강의 과제 제출 및 랭킹 관리 시스템",
+  description:
+    "순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제 관리 시스템",
 };
 
 export const projectInfo = {
@@ -20,7 +21,7 @@ export const projectInfo = {
   period: "2025.06 ~ 2026.02",
   role: "Solo Full-stack Developer",
   description:
-    "교수님 요청으로 시작해 익명 점수 랭킹과 성적 데이터 관리를 구현한 강의 운영 시스템",
+    "순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제 관리 시스템",
   summary: [
     "교수님 요청을 바탕으로 실제 강의 운영에 필요한 제출 및 랭킹 시스템 개발",
     "익명 점수 랭킹으로 학생들이 프로젝트 결과를 비교할 수 있는 구조 설계",
@@ -38,8 +39,26 @@ const projectSectionLinks = [
   { id: "overview", label: "프로젝트 개요" },
   { id: "role", label: "역할" },
   { id: "skills", label: "기술 스택" },
-  { id: "screens", label: "실제 화면" },
-  { id: "achievements", label: "주요 성과" },
+  {
+    id: "ranking-structure",
+    label: "점수만 비교할 수 있는 익명 랭킹 구조 설계",
+  },
+  {
+    id: "score-validation",
+    label: "실제 성적에 반영되는 점수를 서버에서 검증",
+  },
+  {
+    id: "audit-logging",
+    label: "요청 로그를 남겨 점수와 제출 이력을 추적",
+  },
+  {
+    id: "upload-validation",
+    label: "제출 파일과 결과 데이터의 비정상 입력 차단",
+  },
+  {
+    id: "deployment-environment",
+    label: "Docker Compose로 강의 운영 환경을 고정",
+  },
   { id: "troubleshooting", label: "트러블슈팅" },
   { id: "improvements", label: "개선 결과" },
   { id: "tech-decisions", label: "기술 선택 이유" },
@@ -93,7 +112,8 @@ export default function SchMiniProjectPage() {
               SCH MiniProject PMS
             </h1>
             <p className="text-base leading-relaxed text-[#737373]">
-              학과 ML/DL 강의에서 사용하는 과제 제출 및 랭킹 관리 시스템
+              순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제
+              관리 시스템
             </p>
           </div>
 
@@ -106,7 +126,15 @@ export default function SchMiniProjectPage() {
                 2025.06 ~ 2026.02 <br /> 약 10개월 운영
               </p>
             </div>
-            <div className="grid grid-rows-[auto_1fr] border-x border-[#e5e5e5]">
+            <div className="relative grid grid-rows-[auto_1fr]">
+              <span
+                className="absolute bottom-4 left-0 top-4 w-px bg-[#e5e5e5]"
+                aria-hidden="true"
+              />
+              <span
+                className="absolute bottom-4 right-0 top-4 w-px bg-[#e5e5e5]"
+                aria-hidden="true"
+              />
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#737373]">
                 Position
               </p>
@@ -128,23 +156,35 @@ export default function SchMiniProjectPage() {
         <section id="overview" className="scroll-mt-12 pt-32">
           <SectionHeading>프로젝트 개요</SectionHeading>
           <p className="mt-6 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-            교수님 요청으로 시작한 프로젝트입니다. 기존 과제 사이트에서는
-            학생들이 서로의 프로젝트 점수를 비교할 수 없어, 자신의 결과가 어느
-            정도 수준인지 확인하기 어려웠습니다. 이 문제를 해결하기 위해 학과
-            ML/DL 강의에서 사용하는{" "}
+            순천향대학교 사물인터넷학과 머신러닝·딥러닝 강의에서 사용하는{" "}
             <strong className="font-medium text-black">
-              익명 점수 기반 프로젝트 과제 제출 및 랭킹 관리 시스템
+              익명 점수 기반 프로젝트 과제 관리 시스템
             </strong>
-            을 설계하고 개발했습니다. 학생은 프로젝트 코드와 결과 점수를 제출한
-            뒤, 다른 학생의 이름이 아니라 점수와 익명 식별자만 보고 자신의
-            위치를 확인할 수 있습니다. 실제 수업 성적에 반영되는 데이터를
-            다루기 때문에 점수 위변조 방지, 세션 기반 사용자 관리, 감사 로그,
-            파일 업로드 검증을 함께 설계했습니다. 이 시스템은{" "}
+            입니다. 기존 과제 제출 방식에서는 학생들이 서로의 프로젝트 결과를
+            비교할 수 없어 자신의 결과가 어느 정도 수준인지 확인하기
+            어려웠습니다. 이를 해결하기 위해 학생이 프로젝트 코드와 결과 점수를
+            제출한 뒤, 다른 학생들의 점수를{" "}
+            <strong className="font-medium text-black">익명으로 비교</strong>
+            하고 자신의 순위를 확인할 수 있는 구조를 설계했습니다. 또한 실제
+            강의 성적에 반영되는 데이터를 다루기 때문에{" "}
             <strong className="font-medium text-black">
-              약 10개월간 실제 강의 운영에 사용
+              점수 위변조 방지
             </strong>
-            되었고, 월 평균 약 40명의 학생이 과제 제출과 랭킹 조회 기능을
-            이용했습니다.
+            ,{" "}
+            <strong className="font-medium text-black">
+              세션 기반 사용자 관리
+            </strong>
+            , <strong className="font-medium text-black">감사 로그</strong>,{" "}
+            <strong className="font-medium text-black">
+              파일 업로드 검증 흐름
+            </strong>
+            을 함께 구현했습니다. 이 시스템은{" "}
+            <strong className="font-medium text-black">
+              약 10개월
+            </strong>
+            간 실제 강의 운영 환경에서 사용되었으며, 월 평균 약{" "}
+            <strong className="font-medium text-black">40명</strong>의 학생이
+            과제 제출과 랭킹 조회 기능을 이용했습니다.
           </p>
         </section>
 
@@ -157,8 +197,7 @@ export default function SchMiniProjectPage() {
                 aria-hidden="true"
               />
               <span>
-                강의 운영에 필요한 요구사항을 정리하고, 제출/랭킹/관리 기능의
-                범위와 화면 흐름 설계
+                요구사항 정리, 기능 범위 정의, 전체 시스템 아키텍처 설계
               </span>
             </li>
             <li className="flex gap-3 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
@@ -201,205 +240,165 @@ export default function SchMiniProjectPage() {
         <section id="skills" className="scroll-mt-12 pt-24">
           <SectionHeading>기술 스택</SectionHeading>
           <div className="flex flex-wrap gap-2.5">
-            <SkillIcon isBlack>Next.js</SkillIcon>
-            <SkillIcon isBlack>SQLite</SkillIcon>
+            <SkillIcon emphasized>Next.js</SkillIcon>
+            <SkillIcon emphasized>SQLite</SkillIcon>
             <SkillIcon>Docker Compose</SkillIcon>
-            <SkillIcon>Server Session</SkillIcon>
-            <SkillIcon>HttpOnly Cookie</SkillIcon>
-            <SkillIcon>SSR</SkillIcon>
-            <SkillIcon>Score Validation</SkillIcon>
-            <SkillIcon>File Upload Validation</SkillIcon>
           </div>
         </section>
 
-        <section id="screens" className="scroll-mt-12 pt-24">
-          <SectionHeading>실제 화면</SectionHeading>
-          <p className="mt-6 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-            학생이 자신의 프로젝트 순위를 확인하는 익명 랭킹 화면과, 교수자가
-            요청 로그를 확인하는 관리자 화면입니다. 학생에게는 비교에 필요한
-            점수와 순위만 제공하고, 강의 운영자는 점수, 공지, 요청 이력을 한
-            시스템에서 관리할 수 있도록 구성했습니다.
-          </p>
-          <div className="mt-6">
+        <section id="ranking-structure" className="scroll-mt-12 pt-24">
+          <SectionHeading>
+            점수만 비교할 수 있는 익명 랭킹 구조 설계
+          </SectionHeading>
+          <div className="mt-6 grid gap-5">
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              교수님 요청의 핵심은 단순한 제출 사이트가 아니라, 학생들이
+              서로의 프로젝트 결과 점수를 비교할 수 있는 환경을 만드는
+              것이었습니다. 이름을 공개하지 않고 점수와 익명 식별자만 보여주어,
+              특정 사람에게 비결을 묻는 구조가 아니라 점수 자체로 자극을 받고
+              선의의 경쟁을 할 수 있도록 설계했습니다.
+            </p>
+            <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
+              <li>
+                학생이 자신의 프로젝트 결과를 제출하면 같은 화면 흐름 안에서
+                점수, 순위, 다른 제출 결과와의 차이를 확인할 수 있게
+                구성했습니다.
+              </li>
+              <li>
+                실명 대신 익명 식별자와 점수 중심으로 랭킹을 표시해 비교 경험은
+                제공하면서도 불필요한 개인 노출은 줄였습니다.
+              </li>
+            </ul>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              학생이 자신의 프로젝트 순위를 확인하는 익명 랭킹 화면과, 교수자가
+              요청 로그를 확인하는 관리자 화면입니다. 학생에게는 비교에 필요한
+              점수와 순위만 제공하고, 강의 운영자는 점수, 공지, 요청 이력을 한
+              시스템에서 관리할 수 있도록 구성했습니다.
+            </p>
             <DiagramFigure
-              src="/projects/sch-iot-rankingboard/sch-iot-ranking-board.png"
-              alt="SCH MiniProject 랭킹 화면과 관리자 요청 로그 화면"
-              width={1920}
-              height={1080}
-              caption="학생용 익명 랭킹 화면과 관리자 요청 로그 화면입니다. 점수 비교 경험과 운영 추적이 같은 시스템 안에서 이어지도록 구성했습니다."
+              src="/projects/sch-iot-rankingboard/sch-submission-flow.svg"
+              alt="SCH MiniProject 과제 제출 및 랭킹 관리 흐름"
+              caption="제출 결과를 익명 점수 랭킹으로 연결해 학생이 자신의 위치를 바로 확인할 수 있도록 구성했습니다."
             />
           </div>
         </section>
 
-        <section id="achievements" className="scroll-mt-12 pt-24">
-          <SectionHeading>주요 성과</SectionHeading>
-          <div className="mt-8 grid gap-16">
-            <article className="grid gap-5">
-              <div className="grid gap-3">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a3a3a3]">
-                  01 / 익명 랭킹
-                </p>
-                <h3 className="text-[20px] font-medium leading-[1.4] tracking-normal text-black">
-                  점수만 비교할 수 있는 익명 랭킹 구조 설계
-                </h3>
-                <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-                  교수님 요청의 핵심은 단순한 제출 사이트가 아니라, 학생들이
-                  서로의 프로젝트 결과 점수를 비교할 수 있는 환경을 만드는
-                  것이었습니다. 이름을 공개하지 않고 점수와 익명 식별자만
-                  보여주어, 특정 사람에게 비결을 묻는 구조가 아니라 점수 자체로
-                  자극을 받고 선의의 경쟁을 할 수 있도록 설계했습니다.
-                </p>
-                <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
-                  <li>
-                    학생이 자신의 프로젝트 결과를 제출하면 같은 화면 흐름 안에서
-                    점수, 순위, 다른 제출 결과와의 차이를 확인할 수 있게
-                    구성했습니다.
-                  </li>
-                  <li>
-                    실명 대신 익명 식별자와 점수 중심으로 랭킹을 표시해 비교
-                    경험은 제공하면서도 불필요한 개인 노출은 줄였습니다.
-                  </li>
-                </ul>
-              </div>
-              <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-submission-flow.svg"
-                alt="SCH MiniProject 과제 제출 및 랭킹 관리 흐름"
-                caption="제출 결과를 익명 점수 랭킹으로 연결해 학생이 자신의 위치를 바로 확인할 수 있도록 구성했습니다."
-              />
-            </article>
+        <section id="score-validation" className="scroll-mt-12 pt-24">
+          <SectionHeading>
+            실제 성적에 반영되는 점수를 서버에서 검증
+          </SectionHeading>
+          <div className="mt-6 grid gap-5">
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              과제 점수는 실제 수업 성적에 반영되기 때문에 단순한 랭킹
+              서비스처럼 만들 수 없었습니다. 클라이언트가 보낸 값을 그대로
+              신뢰하지 않고, 세션, 권한, 제출 대상, 점수 처리 흐름을 서버에서
+              여러 단계로 확인하도록 구성했습니다.
+            </p>
+            <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
+              <li>
+                서버 세션과 HttpOnly 쿠키를 사용해 인증 상태를 서버에서 관리하고,
+                사용자를 엄격하게 식별하도록 했습니다.
+              </li>
+              <li>
+                사용자 페이지, 관리자 페이지, 점수 관리 API에 역할 기반 접근
+                검사를 적용해 학생이 관리자 기능에 접근할 수 없도록 분리했습니다.
+              </li>
+              <li>
+                SSR과 서버 측 검증을 통해 랭킹, 점수, 관리자 데이터처럼 민감한
+                정보를 가능한 한 서버에서 처리하도록 설계했습니다.
+              </li>
+            </ul>
+            <DiagramFigure
+              src="/projects/sch-iot-rankingboard/sch-auth-flow.svg"
+              alt="SCH MiniProject 세션 인증 및 권한 분리 흐름"
+              caption="서버 세션, 권한 검사, 서버 측 점수 검증을 기준으로 실제 성적 데이터의 접근 범위를 제한했습니다."
+            />
+          </div>
+        </section>
 
-            <article className="grid gap-5">
-              <div className="grid gap-3">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a3a3a3]">
-                  02 / 성적 데이터 보호
-                </p>
-                <h3 className="text-[20px] font-medium leading-[1.4] tracking-normal text-black">
-                  실제 성적에 반영되는 점수를 서버에서 검증
-                </h3>
-                <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-                  과제 점수는 실제 수업 성적에 반영되기 때문에 단순한 랭킹
-                  서비스처럼 만들 수 없었습니다. 클라이언트가 보낸 값을 그대로
-                  신뢰하지 않고, 세션, 권한, 제출 대상, 점수 처리 흐름을 서버에서
-                  여러 단계로 확인하도록 구성했습니다.
-                </p>
-                <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
-                  <li>
-                    서버 세션과 HttpOnly 쿠키를 사용해 인증 상태를 서버에서
-                    관리하고, 사용자를 엄격하게 식별하도록 했습니다.
-                  </li>
-                  <li>
-                    사용자 페이지, 관리자 페이지, 점수 관리 API에 역할 기반 접근
-                    검사를 적용해 학생이 관리자 기능에 접근할 수 없도록
-                    분리했습니다.
-                  </li>
-                  <li>
-                    SSR과 서버 측 검증을 통해 랭킹, 점수, 관리자 데이터처럼
-                    민감한 정보를 가능한 한 서버에서 처리하도록 설계했습니다.
-                  </li>
-                </ul>
-              </div>
-              <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-auth-flow.svg"
-                alt="SCH MiniProject 세션 인증 및 권한 분리 흐름"
-                caption="서버 세션, 권한 검사, 서버 측 점수 검증을 기준으로 실제 성적 데이터의 접근 범위를 제한했습니다."
-              />
-            </article>
+        <section id="audit-logging" className="scroll-mt-12 pt-24">
+          <SectionHeading>
+            요청 로그를 남겨 점수와 제출 이력을 추적
+          </SectionHeading>
+          <div className="mt-6 grid gap-5">
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              성적에 반영되는 시스템에서는 “누가 언제 어떤 요청을 했는지”를
+              나중에 확인할 수 있어야 했습니다. 제출 실패, 로그인 실패, 점수
+              관리, 관리자 작업처럼 문제가 될 수 있는 주요 요청을 기록하고
+              관리자 페이지에서 조회할 수 있게 했습니다.
+            </p>
+            <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
+              <li>
+                요청자, 경로, 메서드, 상태 코드, IP, 요청 메타데이터를 기록해
+                점수 처리와 제출 과정에서 발생한 문제를 추적할 수 있게 했습니다.
+              </li>
+              <li>
+                관리자 페이지에서 요청 로그를 조회할 수 있도록 구성해 강의 운영
+                중 발생한 실패 요청을 확인할 수 있게 했습니다.
+              </li>
+            </ul>
+            <DiagramFigure
+              src="/projects/sch-iot-rankingboard/sch-audit-flow.svg"
+              alt="SCH MiniProject 감사 로그 및 운영 추적 흐름"
+              caption="주요 요청을 감사 로그로 남기고 관리자 페이지에서 조회할 수 있도록 구성했습니다."
+            />
+          </div>
+        </section>
 
-            <article className="grid gap-5">
-              <div className="grid gap-3">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a3a3a3]">
-                  03 / 운영 추적
-                </p>
-                <h3 className="text-[20px] font-medium leading-[1.4] tracking-normal text-black">
-                  요청 로그를 남겨 점수와 제출 이력을 추적
-                </h3>
-                <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-                  성적에 반영되는 시스템에서는 “누가 언제 어떤 요청을 했는지”를
-                  나중에 확인할 수 있어야 했습니다. 제출 실패, 로그인 실패, 점수
-                  관리, 관리자 작업처럼 문제가 될 수 있는 주요 요청을 기록하고
-                  관리자 페이지에서 조회할 수 있게 했습니다.
-                </p>
-                <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
-                  <li>
-                    요청자, 경로, 메서드, 상태 코드, IP, 요청 메타데이터를 기록해
-                    점수 처리와 제출 과정에서 발생한 문제를 추적할 수 있게
-                    했습니다.
-                  </li>
-                  <li>
-                    관리자 페이지에서 요청 로그를 조회할 수 있도록 구성해 강의 운영
-                    중 발생한 실패 요청을 확인할 수 있게 했습니다.
-                  </li>
-                </ul>
-              </div>
-              <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-audit-flow.svg"
-                alt="SCH MiniProject 감사 로그 및 운영 추적 흐름"
-                caption="주요 요청을 감사 로그로 남기고 관리자 페이지에서 조회할 수 있도록 구성했습니다."
-              />
-            </article>
+        <section id="upload-validation" className="scroll-mt-12 pt-24">
+          <SectionHeading>
+            제출 파일과 결과 데이터의 비정상 입력 차단
+          </SectionHeading>
+          <div className="mt-6 grid gap-5">
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              학생이 직접 파일과 결과 데이터를 제출하는 구조라 업로드 보안도
+              중요했습니다. 파일을 저장하기 전에 확장자, JSON 구조, null-byte,
+              경로 정규화를 확인해 비정상 업로드와 Path Traversal 위험을 줄이고,
+              의도하지 않은 점수 데이터 입력 가능성을 낮췄습니다.
+            </p>
+            <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
+              <li>
+                허용된 확장자와 JSON 구조를 먼저 확인해 과제 제출 형식이 맞지
+                않거나 결과 데이터가 비정상적인 요청을 차단했습니다.
+              </li>
+              <li>
+                null-byte 포함 여부와 경로 정규화 결과를 확인해 저장 경로를
+                벗어나는 입력을 완화했습니다.
+              </li>
+            </ul>
+            <DiagramFigure
+              src="/projects/sch-iot-rankingboard/sch-upload-validation-flow.svg"
+              alt="SCH MiniProject 파일 업로드 검증 흐름"
+              caption="파일을 저장하기 전에 형식, 구조, 경로를 나눠 검증해 비정상 업로드 위험을 줄였습니다."
+            />
+          </div>
+        </section>
 
-            <article className="grid gap-5">
-              <div className="grid gap-3">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a3a3a3]">
-                  04 / 업로드 보안
-                </p>
-                <h3 className="text-[20px] font-medium leading-[1.4] tracking-normal text-black">
-                  제출 파일과 결과 데이터의 비정상 입력 차단
-                </h3>
-                <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-                  학생이 직접 파일과 결과 데이터를 제출하는 구조라 업로드 보안도
-                  중요했습니다. 파일을 저장하기 전에 확장자, JSON 구조, null-byte,
-                  경로 정규화를 확인해 비정상 업로드와 Path Traversal 위험을
-                  줄이고, 의도하지 않은 점수 데이터 입력 가능성을 낮췄습니다.
-                </p>
-                <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
-                  <li>
-                    허용된 확장자와 JSON 구조를 먼저 확인해 과제 제출 형식이
-                    맞지 않거나 결과 데이터가 비정상적인 요청을 차단했습니다.
-                  </li>
-                  <li>
-                    null-byte 포함 여부와 경로 정규화 결과를 확인해 저장 경로를
-                    벗어나는 입력을 완화했습니다.
-                  </li>
-                </ul>
-              </div>
-              <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-upload-validation-flow.svg"
-                alt="SCH MiniProject 파일 업로드 검증 흐름"
-                caption="파일을 저장하기 전에 형식, 구조, 경로를 나눠 검증해 비정상 업로드 위험을 줄였습니다."
-              />
-            </article>
-
-            <article className="grid gap-5">
-              <div className="grid gap-3">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a3a3a3]">
-                  05 / 배포
-                </p>
-                <h3 className="text-[20px] font-medium leading-[1.4] tracking-normal text-black">
-                  Docker Compose로 강의 운영 환경을 고정
-                </h3>
-                <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-                  강의 기간 동안 같은 환경에서 안정적으로 실행되는 것이 중요했기
-                  때문에 Docker Compose로 실행 환경을 고정했습니다. 복잡한
-                  인프라보다 재현 가능한 배포와 간단한 재시작 흐름을 우선했습니다.
-                </p>
-                <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
-                  <li>
-                    Next.js 애플리케이션과 데이터 저장 환경을 Docker Compose로
-                    실행해 개발/운영 환경 차이를 줄였습니다.
-                  </li>
-                  <li>
-                    on-premise 환경에서도 명령 기반으로 실행과 재시작을 관리할 수
-                    있도록 구성했습니다.
-                  </li>
-                </ul>
-              </div>
-              <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-deploy-flow.svg"
-                alt="SCH MiniProject Docker Compose 배포 흐름"
-                caption="소규모 강의 운영에 맞춰 복잡한 인프라보다 재현 가능한 실행 환경을 우선했습니다."
-              />
-            </article>
+        <section id="deployment-environment" className="scroll-mt-12 pt-24">
+          <SectionHeading>
+            Docker Compose로 강의 운영 환경을 고정
+          </SectionHeading>
+          <div className="mt-6 grid gap-5">
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              강의 기간 동안 같은 환경에서 안정적으로 실행되는 것이 중요했기
+              때문에 Docker Compose로 실행 환경을 고정했습니다. 복잡한
+              인프라보다 재현 가능한 배포와 간단한 재시작 흐름을 우선했습니다.
+            </p>
+            <ul className="grid gap-2 pl-4 text-sm font-normal leading-relaxed tracking-normal text-[#737373] marker:text-[#a3a3a3]">
+              <li>
+                Next.js 애플리케이션과 데이터 저장 환경을 Docker Compose로
+                실행해 개발/운영 환경 차이를 줄였습니다.
+              </li>
+              <li>
+                on-premise 환경에서도 명령 기반으로 실행과 재시작을 관리할 수
+                있도록 구성했습니다.
+              </li>
+            </ul>
+            <DiagramFigure
+              src="/projects/sch-iot-rankingboard/sch-deploy-flow.svg"
+              alt="SCH MiniProject Docker Compose 배포 흐름"
+              caption="소규모 강의 운영에 맞춰 복잡한 인프라보다 재현 가능한 실행 환경을 우선했습니다."
+            />
           </div>
         </section>
 

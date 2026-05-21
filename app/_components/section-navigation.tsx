@@ -99,7 +99,7 @@ export function SectionNavigation() {
     <nav
       ref={navRef}
       aria-label="Section navigation"
-      className="fixed left-[calc(50%_+_25rem)] top-1/4 z-20 hidden w-32 -translate-y-1/2 flex-col items-start gap-3 pl-4 xl:flex"
+      className="fixed left-[calc(50%_+_26rem)] top-1/4 z-20 hidden w-32 -translate-y-1/2 flex-col items-start gap-3 pl-4 xl:flex"
     >
       <span
         aria-hidden="true"

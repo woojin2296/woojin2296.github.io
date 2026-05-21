@@ -527,19 +527,22 @@ export default function Home() {
                 Publication
               </p>
               <div>
+                <p className="text-[15px] font-medium text-black">
+                  한국컴퓨터종합학술대회(KCC2025) 학부생 논문 제출
+                </p>
                 <a
                   href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12318703"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="DBpia에서 한국컴퓨터종합학술대회 KCC2025 학부생 논문 보기"
-                  className="inline-flex items-center gap-1 text-[15px] font-medium leading-relaxed text-black underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+                  aria-label="DBpia에서 논문 모바일 로봇 양방향 제어를 위한 Unity-기반 실시간 SLAM 시각화 보기"
+                  className="mt-1 inline-flex items-center gap-1 text-xs leading-relaxed text-[#737373] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
                 >
-                  한국컴퓨터종합학술대회(KCC2025) 학부생 논문 제출
-                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                </a>
-                <p className="mt-1 text-xs leading-relaxed text-[#737373]">
                   모바일 로봇 양방향 제어를 위한 Unity-기반 실시간 SLAM 시각화
-                </p>
+                  <ArrowUpRight
+                    className="h-3 w-3 shrink-0 text-current"
+                    aria-hidden="true"
+                  />
+                </a>
               </div>
             </div>
 

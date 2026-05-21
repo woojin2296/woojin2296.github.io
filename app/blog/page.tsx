@@ -17,6 +17,96 @@ type BlogPost = {
 
 const blogPosts: BlogPost[] = [
   {
+    title: "JWT는 모두가 열어볼 수 있는데 왜 안전할까?",
+    description:
+      "JWT가 Base64URL로 열어볼 수 있는데도 인증에 쓰이는 이유를 JWS 서명, 변조 탐지, claim 검증, JWE와의 차이, 운영 보안 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Auth / JWT",
+    tags: ["JWT", "JWS", "Security"],
+    href: "/blog/jwt-readable-but-safe/",
+  },
+  {
+    title: "CORS는 서버 에러가 아니라 브라우저의 차단이다",
+    description:
+      "Origin, Access-Control-Allow-Origin, Preflight, Credentials, WebView, 모바일 앱, 실제 API 보안과 CORS의 경계를 정리했습니다.",
+    date: "2026.05",
+    category: "Web Security / Browser",
+    tags: ["CORS", "Browser", "Security"],
+    href: "/blog/cors-browser-policy/",
+  },
+  {
+    title: "협업을 위한 최소한의 네트워크 지식",
+    description:
+      "인바운드 포트, 로컬과 서버 차이, 내부망과 외부망, DNS, IP, Port, NAT, DHCP, VPN, Proxy를 협업 관점에서 연결해 정리했습니다.",
+    date: "2026.05",
+    category: "Network / Collaboration",
+    tags: ["Network", "DNS", "Troubleshooting"],
+    href: "/blog/network-collaboration-basics/",
+  },
+  {
+    title: "synchronized가 있는데도 쿠폰이 초과 발급되는 이유",
+    description:
+      "서버를 두 대로 늘린 뒤 쿠폰이 초과 발급되는 원인을 JVM local lock, Redis distributed lock, TTL, UUID token, watchdog, DB unique constraint 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Concurrency / Redis",
+    tags: ["Redis", "Distributed Lock", "Java"],
+    href: "/blog/redis-distributed-lock-coupon/",
+  },
+  {
+    title: "무중단 배포인데 결제 정합성이 깨지는 이유",
+    description:
+      "Spring Boot graceful shutdown, Kubernetes preStop, terminationGracePeriodSeconds, 결제 멱등키를 함께 설계해야 배포 중 결제 정합성을 지킬 수 있다는 내용을 정리했습니다.",
+    date: "2026.05",
+    category: "Deployment / Reliability",
+    tags: ["Graceful Shutdown", "Kubernetes", "Idempotency"],
+    href: "/blog/graceful-shutdown-idempotency/",
+  },
+  {
+    title: "X-Forwarded-For를 믿고 IP 화이트리스트를 만들면 뚫리는 이유",
+    description:
+      "관리자 페이지 IP 화이트리스트가 X-Forwarded-For 헤더 spoofing으로 우회될 수 있는 이유와 Spring/Tomcat의 신뢰 프록시 설정을 정리했습니다.",
+    date: "2026.05",
+    category: "Security / Network",
+    tags: ["X-Forwarded-For", "Proxy", "Spring"],
+    href: "/blog/xff-ip-whitelist/",
+  },
+  {
+    title: "DNS TTL이 지났는데도 Java 서버가 옛날 IP를 보는 이유",
+    description:
+      "DNS 레코드와 TTL은 정상인데 특정 Java 서버만 옛날 IP로 요청하던 원인을 InetAddress DNS 캐시와 JVM 프로세스 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Network / Java",
+    tags: ["DNS", "Java", "TTL"],
+    href: "/blog/java-dns-cache/",
+  },
+  {
+    title: "인덱스가 있는데도 MySQL 쿼리가 느린 이유",
+    description:
+      "회원 검색 API가 500만 건 테이블에서 풀 스캔을 타던 원인을 LIKE, 암묵적 타입 변환, 컬럼 함수, EXPLAIN type 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Database / MySQL",
+    tags: ["MySQL", "Index", "EXPLAIN"],
+    href: "/blog/mysql-index-explain/",
+  },
+  {
+    title: "네트워크 계층별 라우터와 라우팅 개념 이해하기",
+    description:
+      "L2 switching, L3 IP routing, L4/L7 traffic routing을 분리하고 route table, next hop, forwarding, NAT/LB까지 운영 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Network / Routing",
+    tags: ["Routing", "Router", "Network"],
+    href: "/blog/network-routing-layers/",
+  },
+  {
+    title: "Prometheus, Grafana, Loki, Alloy로 관측성 스택 이해하기",
+    description:
+      "Prometheus, Grafana, Loki, Grafana Alloy가 metrics와 logs를 수집, 저장, 시각화하는 역할을 운영 관점에서 분리해 정리했습니다.",
+    date: "2026.05",
+    category: "Observability",
+    tags: ["Prometheus", "Grafana", "Loki", "Alloy"],
+    href: "/blog/observability-stack/",
+  },
+  {
     title: "SSL/TLS 플로우와 패킷 구조 이해하기",
     description:
       "TLS 1.3 handshake, certificate validation, record layer, packet fragmentation/coalescing, 운영 장애 분석 관점을 정리했습니다.",

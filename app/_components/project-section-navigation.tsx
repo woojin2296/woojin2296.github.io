@@ -100,7 +100,7 @@ export function ProjectSectionNavigation({
   return (
     <nav
       aria-label="Project section navigation"
-      className="fixed left-[calc(50%_+_25rem)] top-1/4 z-20 hidden w-52 -translate-y-1/2 flex-col items-start gap-2.5 pl-4 xl:flex"
+      className="fixed left-[calc(50%_+_26rem)] top-1/4 z-20 hidden w-52 -translate-y-1/2 flex-col items-start gap-2.5 pl-4 xl:flex"
     >
       <span
         aria-hidden="true"
