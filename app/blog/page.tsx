@@ -17,6 +17,24 @@ type BlogPost = {
 
 const blogPosts: BlogPost[] = [
   {
+    title: "UX Hierarchy는 사용자의 시선과 행동 흐름을 설계하는 구조다",
+    description:
+      "Visual Hierarchy와 Structural Hierarchy, 크기/색상/대비/여백/위치, CTA 우선순위와 모바일 화면에서의 계층 구조 설계를 정리했습니다.",
+    date: "2026.05",
+    category: "UX / UI",
+    tags: ["UX", "Hierarchy", "UI"],
+    href: "/blog/ux-hierarchy/",
+  },
+  {
+    title: "CTA는 단순 버튼이 아니라 사용자의 행동을 설계하는 장치다",
+    description:
+      "Call To Action의 의미, 전환에서의 역할, 문구와 혜택 중심 설계, 위치 전략, Primary/Secondary CTA, 흔한 실수와 UX 관점의 체크리스트를 정리했습니다.",
+    date: "2026.05",
+    category: "UX / Conversion",
+    tags: ["CTA", "UX", "Conversion"],
+    href: "/blog/cta-call-to-action/",
+  },
+  {
     title: "JWT는 모두가 열어볼 수 있는데 왜 안전할까?",
     description:
       "JWT가 Base64URL로 열어볼 수 있는데도 인증에 쓰이는 이유를 JWS 서명, 변조 탐지, claim 검증, JWE와의 차이, 운영 보안 관점에서 정리했습니다.",
