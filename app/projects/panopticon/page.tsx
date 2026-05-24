@@ -83,7 +83,7 @@ export default function PanopticonPage() {
               </p>
               <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
                 2024.07 ~ 2026.02 <br />
-                (1년 8개월)
+                (1년 8개월 - 개발 및 운영)
               </p>
             </div>
             <div className="relative grid grid-rows-[auto_1fr]">
@@ -131,11 +131,15 @@ export default function PanopticonPage() {
               <strong className="font-medium text-black">
                 {"장애 여부를 자동 감지"}
               </strong>
-              {"하도록 했습니다. 감지된 상태는 통합 대시보드와 실시간 알림을 통해 확인할 수 있도록 구성했습니다. 개발 이후 "}
+              {"하도록 했습니다. 감지된 상태는 통합 대시보드와 실시간 알림을 통해 확인할 수 있도록 구성했습니다. 개발 이후 졸업 전까지 "}
               <strong className="font-medium text-black">
                 {"약 1년 8개월간 연구 과제 환경에서 실제 운영"}
               </strong>
-              {"했습니다."}
+              {"했으며, "}
+              <strong className="font-medium text-black">
+                {"현재도 연구실 실험 데이터 수집 환경에서 계속 운영"}
+              </strong>
+              {"되고 있습니다."}
             </p>
           </div>
         </section>
@@ -165,7 +169,10 @@ export default function PanopticonPage() {
                 <strong className="font-medium text-black">
                   {"관제 UI 설계"}
                 </strong>
-                {" 및 Next.js 프론트엔드 구현"}
+                {" 및 "}
+                <strong className="font-medium text-black">
+                  {"Next.js 프론트엔드 구현"}
+                </strong>
               </li>
               <li>
                 <strong className="font-medium text-black">

@@ -15,7 +15,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("mb-6", className)}>
-      <h2 className="font-heading text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
+      <h2 className="font-heading text-[24px] font-medium leading-[1.33] tracking-normal text-black">
         {children}
       </h2>
     </div>
