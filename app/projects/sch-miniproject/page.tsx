@@ -38,11 +38,12 @@ const projectSectionLinks = [
   { id: "overview", label: "프로젝트 개요" },
   { id: "role", label: "역할" },
   { id: "skills", label: "기술 스택" },
-  { id: "pms-workflow", label: "과제 제출·점수·랭킹 통합 관리 시스템 개발" },
-  { id: "data-model", label: "성적 데이터를 다루기 위한 데이터 구조와 랭킹 기준" },
-  { id: "security-validation", label: "성적 데이터 보호를 위한 인증·인가·이중 검증" },
-  { id: "audit-logging", label: "운영 중 문제 추적을 위한 감사 로그 관리" },
-  { id: "deployment-environment", label: "강의 서버 운영을 위한 Docker Compose 배포와 데이터 영속성" },
+  { id: "pms-workflow", label: "과제 제출·랭킹 관리 시스템 구현" },
+  { id: "data-model", label: "운영 아키텍처와 데이터 구조" },
+  { id: "auth-authorization", label: "세션 기반 인증과 API 경로 기반 인가" },
+  { id: "security-validation", label: "파일 업로드 보안과 서버 검증 구현" },
+  { id: "audit-logging", label: "모니터링을 위한 요청 로그 관리 구현" },
+  { id: "deployment-environment", label: "내부망 DNS 문제로 인한 서비스 배포 실패 해결" },
   { id: "retrospective", label: "회고 및 개선 방향" },
 ];
 
@@ -227,12 +228,12 @@ export default function SchMiniProjectPage() {
         </section>
 
         <section id="pms-workflow" className="scroll-mt-12 pt-24">
-          <SectionHeading>과제 제출·점수·랭킹 통합 관리 시스템 개발</SectionHeading>
+          <SectionHeading>과제 제출·랭킹 관리 시스템 구현</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"사용자는 프로젝트 결과와 점수를 웹으로 제출하고 "}
               <strong className="font-medium text-black">
-                {"실시간으로 자신의 랭킹을 확인"}
+                {"제출 후 바로 자신의 랭킹을 확인"}
               </strong>
               {"할 수 있도록 구성했습니다. 교수자는 관리자 페이지에서 사용자 관리와 "}
               <strong className="font-medium text-black">
@@ -245,251 +246,225 @@ export default function SchMiniProjectPage() {
               {"해 성적 정리 과정에 바로 활용할 수 있도록 구성했습니다."}
             </p>
             <div
-              className="-mx-5 overflow-x-auto overflow-y-hidden px-5 pb-1 [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [-webkit-overflow-scrolling:touch] [mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] sm:-mx-6 sm:px-6 [&::-webkit-scrollbar]:hidden"
+              className="grid grid-cols-2 gap-5"
               aria-label="SCH MiniProject 주요 화면"
             >
-              <div className="flex snap-x snap-mandatory gap-5">
-                <div className="w-[82vw] max-w-[381px] flex-none snap-start sm:w-[74vw] md:w-[381px]">
-                  <DiagramFigure
-                    src="/projects/sch-iot-rankingboard/sch-miniproject-page-3-admin-rankings.png"
-                    alt="프로젝트별 랭킹과 점수를 집계하는 관리자 화면"
-                    width={1920}
-                    height={1080}
-                    caption="프로젝트별 랭킹과 점수를 집계하는 관리자 화면"
-                  />
-                </div>
-                <div className="w-[82vw] max-w-[381px] flex-none snap-start sm:w-[74vw] md:w-[381px]">
-                  <DiagramFigure
-                    src="/projects/sch-iot-rankingboard/sch-miniproject-page-1-ranking.png"
-                    alt="전체 프로젝트 랭킹을 확인하는 학생 화면"
-                    width={1920}
-                    height={1080}
-                    caption="전체 프로젝트 랭킹을 확인하는 학생 화면"
-                  />
-                </div>
-                <div className="w-[82vw] max-w-[381px] flex-none snap-start sm:w-[74vw] md:w-[381px]">
-                  <DiagramFigure
-                    src="/projects/sch-iot-rankingboard/sch-miniproject-page-2-my-results.png"
-                    alt="내 제출 결과와 프로젝트별 최고 점수를 확인하는 학생 화면"
-                    width={1920}
-                    height={1080}
-                    caption="내 제출 결과와 프로젝트별 최고 점수를 확인하는 학생 화면"
-                  />
-                </div>
-              </div>
+              <DiagramFigure
+                src="/projects/sch-iot-rankingboard/sch-miniproject-page-1-ranking.png"
+                alt="전체 프로젝트 랭킹을 확인하는 학생 화면"
+                width={1920}
+                height={1080}
+                caption="전체 프로젝트 랭킹을 확인하는 학생 화면"
+              />
+              <DiagramFigure
+                src="/projects/sch-iot-rankingboard/sch-miniproject-page-3-admin-rankings.png"
+                alt="프로젝트별 랭킹과 점수를 집계하는 관리자 화면"
+                width={1920}
+                height={1080}
+                caption="프로젝트별 랭킹과 점수를 집계하는 관리자 화면"
+              />
             </div>
           </div>
         </section>
 
         <section id="data-model" className="scroll-mt-12 pt-24">
-          <SectionHeading>성적 데이터를 다루기 위한 데이터 구조와 랭킹 기준</SectionHeading>
+          <SectionHeading>운영 아키텍처와 데이터 구조</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"성적과 제출 파일을 함께 다루기 때문에 사용자, 세션, 점수, 공지, 요청 로그 데이터를 분리했습니다. 월 평균 약 "}
+              {"강의 서버에서는 Next.js 애플리케이션, SQLite DB, 제출 파일 저장 영역을 Docker Compose 환경에서 함께 운영했습니다. 월 평균 약 "}
               <strong className="font-medium text-black">
                 {"40명"}
               </strong>
-              {"의 학생이 사용하는 강의 운영 시스템이라 별도 DB 서버를 두기보다 "}
+              {" 규모의 강의 운영 시스템이라 별도 DB 서버를 두기보다 "}
               <strong className="font-medium text-black">
                 {"SQLite"}
               </strong>
-              {"로 관리 비용을 낮추고, Docker 볼륨으로 DB와 업로드 파일의 영속성을 확보했습니다."}
+              {"로 관리 비용을 낮췄고, DB 파일과 제출 파일은 각각 별도 볼륨으로 분리해 컨테이너 재시작 이후에도 데이터가 유지되도록 했습니다."}
             </p>
-            <DiagramFigure
-              src="/projects/sch-iot-rankingboard/sch-data-model-erd.svg"
-              alt="SCH MiniProject PMS 데이터 구조 ERD"
-              width={1600}
-              height={900}
-              caption="실제 schema.sql 기준으로 사용자, 세션, 점수, 공지, 요청 로그 테이블과 FK 관계를 정리한 ERD"
-            />
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                <code className="text-[0.95em] font-medium text-black">
-                  {"scores"}
-                </code>
-                {"와 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"users"}
-                </code>
-                {" 데이터를 기준으로 랭킹을 계산하고, 사용자별 최고 기록 1건만 순위에 반영했습니다."}
-              </li>
-              <li>
-                {"프로젝트 1·2는 높은 점수 순, 프로젝트 3·4는 낮은 점수 순으로 정렬하고, 동점이면 먼저 제출한 기록을 우선하도록 기준을 정했습니다."}
-              </li>
-              <li>
-                <code className="text-[0.95em] font-medium text-black">
-                  {"request_logs"}
-                </code>
-                {"를 점수 제출, 로그인, 관리자 작업과 연결해 문제가 생겼을 때 요청 흐름을 추적할 수 있게 했습니다."}
-              </li>
-            </ul>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <DiagramFigure
+                src="/projects/sch-iot-rankingboard/sch-system-architecture.png"
+                alt="SCH MiniProject PMS 운영 아키텍처 다이어그램"
+                width={1672}
+                height={941}
+                caption="운영 아키텍처 구성도"
+              />
+              <DiagramFigure
+                src="/projects/sch-iot-rankingboard/sch-data-model-erd.png"
+                alt="SCH MiniProject PMS 데이터 구조 ERD"
+                width={1320}
+                height={562}
+                caption="데이터 구조 ERD"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section id="auth-authorization" className="scroll-mt-12 pt-24">
+          <SectionHeading>세션 기반 인증과 API 경로 기반 인가</SectionHeading>
+          <div className="grid gap-5">
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"강의 운영 시스템은 외부 서비스 연동보다 학생·관리자 권한을 서버에서 확실하게 통제하는 것이 중요했습니다. 그래서 토큰을 클라이언트에서 직접 다루는 방식보다 서버가 로그인 상태와 권한을 관리하는 세션 기반 인증을 선택했습니다. 인증은 학번 기반 로그인과 "}
+              <code className="text-[0.95em] font-medium text-black">
+                {"session_token"}
+              </code>
+              {" 쿠키, 서버 세션을 기준으로 처리했습니다."}
+            </p>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"보호 경로에서는 세션을 먼저 확인하고, 학생용 API와 관리자용 API를 경로 기준으로 분리해 역할에 맞는 요청만 처리되도록 했습니다. 학생은 본인의 제출 결과와 랭킹 조회 기능에 접근하고, 관리자는 사용자 관리, 점수 집계, 제출 파일 확인 같은 운영 기능에 접근할 수 있도록 인가 범위를 나눴습니다."}
+            </p>
+            <div className="grid gap-6 px-4 sm:px-8">
+              <DiagramFigure
+                src="/projects/sch-iot-rankingboard/sch-session-auth-flow.jpg"
+                alt="SCH MiniProject 로그인 및 세션 발급 흐름"
+                width={6923}
+                height={2310}
+                caption="로그인 및 세션 발급 흐름"
+              />
+              <DiagramFigure
+                src="/projects/sch-iot-rankingboard/sch-session-api-flow.jpg"
+                alt="SCH MiniProject 보호된 API 접근 및 경로 기반 인가 흐름"
+                width={5598}
+                height={2857}
+                caption="보호된 API 접근 및 경로 기반 인가 흐름"
+              />
+            </div>
           </div>
         </section>
 
         <section id="security-validation" className="scroll-mt-12 pt-24">
-          <SectionHeading>성적 데이터 보호를 위한 인증·인가·이중 검증</SectionHeading>
+          <SectionHeading>파일 업로드 보안과 서버 검증 구현</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"과제 점수는 실제 수업 성적에 반영되기 때문에 화면에서 보낸 값을 그대로 사용할 수 없었습니다. "}
-              <strong className="font-medium text-black">
-                {"학번 기반 로그인"}
-              </strong>
-              {", "}
-              <code className="text-[0.95em] font-medium text-black">
-                {"session_token"}
-              </code>
-              {" 쿠키, 서버 세션을 기준으로 사용자를 식별하고, 학생 화면과 교수자 화면의 접근 범위를 분리했습니다."}
+              {"제출 파일은 성적 처리의 근거가 되기 때문에 단순 첨부 파일이 아니라 검증 대상 데이터로 다뤘습니다. 입력 단계, 저장 단계, 다운로드 단계에서 필요한 확인을 나눠 적용했습니다."}
             </p>
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                {"서버 세션과 HttpOnly 쿠키로 인증 상태를 서버에서 관리하고, 보호 경로는 세션 쿠키를 기준으로 접근을 제어했습니다."}
-              </li>
-              <li>
-                {"학생 화면, 관리자 화면, 점수 관리 API에 역할 기반 접근 검사를 적용했습니다."}
-              </li>
-              <li>
-                {"프론트엔드에서는 프로젝트 번호, 점수 형식, 파일 확장자와 크기를 먼저 제한하고, 서버에서는 세션 사용자, 권한, 프로젝트 번호, 점수 형식, 파일 내용, 저장 경로를 다시 확인했습니다."}
-              </li>
-              <li>
-                {"제출 파일은 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {".ipynb"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {".py"}
-                </code>
-                {"만 허용하고, 다운로드 시 소유자 또는 관리자만 접근할 수 있도록 확인했습니다."}
-              </li>
-            </ul>
-            <DiagramFigure
-              src="/projects/sch-iot-rankingboard/sch-auth-flow.svg"
-              alt="SCH MiniProject 세션 인증 및 권한 분리 흐름"
-              width={1600}
-              height={900}
-              caption="서버 세션, 권한 검사, 서버 측 점수 검증을 기준으로 실제 성적 데이터의 접근 범위를 제한했습니다."
-            />
-            <DiagramFigure
-              src="/projects/sch-iot-rankingboard/sch-upload-validation-flow.svg"
-              alt="SCH MiniProject 파일 업로드 검증 흐름"
-              width={1600}
-              height={900}
-              caption="프론트엔드 입력 제한과 서버 검증을 나눠 제출 파일과 점수 데이터의 비정상 입력 가능성을 낮췄습니다."
-            />
+            <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
+              {"프론트엔드 검증"}
+            </h3>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"프론트엔드에서는 "}
+              <strong className="font-medium text-black">
+                {"빈 파일을 먼저 차단"}
+              </strong>
+              {"하고, "}
+              <strong className="font-medium text-black">
+                {"확장자 제한"}
+              </strong>
+              {"을 적용해 .ipynb, .py 파일만 선택할 수 있게 했습니다. 이를 통해 서버 요청 전에 사용자 입력 오류를 줄였습니다."}
+            </p>
+            <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
+              {"서버 검증"}
+            </h3>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              <strong className="font-medium text-black">
+                {"인증된 세션"}
+              </strong>
+              {"이 있는 사용자만 제출할 수 있게 하고, 빈 파일과 "}
+              <strong className="font-medium text-black">
+                {"10MB 초과"}
+              </strong>
+              {" 파일을 서버에서 차단했습니다. 업로드 확장자는 .ipynb, .py만 허용하고, 파일명 특수문자를 정리한 뒤 randomUUID를 붙여 저장 파일명 충돌을 방지했습니다. 파일은 사용자 ID별 디렉터리에 저장했고, 저장 전 업로드 루트와 저장 대상 경로를 각각 절대 경로로 변환한 뒤, 최종 경로가 "}
+              <strong className="font-medium text-black">
+                {"업로드 루트 내부"}
+              </strong>
+              {"에서 시작하는지 확인했습니다. .ipynb는 JSON 파싱 후 cells 배열 존재 여부를 확인하고, .py는 null byte 포함 여부를 검사했습니다."}
+            </p>
+            <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
+              {"다운로드 보안"}
+            </h3>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"다운로드도 인증된 사용자만 가능하며, 제출 "}
+              <strong className="font-medium text-black">
+                {"소유자 또는 관리자"}
+              </strong>
+              {"만 파일을 받을 수 있도록 확인했습니다. 저장된 파일 경로도 다시 검사해 업로드 루트 밖 파일이 응답되지 않도록 했습니다."}
+            </p>
           </div>
         </section>
 
         <section id="audit-logging" className="scroll-mt-12 pt-24">
-          <SectionHeading>운영 중 문제 추적을 위한 감사 로그 관리</SectionHeading>
+          <SectionHeading>모니터링을 위한 요청 로그 관리 구현</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"성적에 반영되는 시스템에서는 문제가 생겼을 때 누가 어떤 요청을 했는지 확인할 수 있어야 했습니다. 제출 실패, 로그인 실패, 점수 관리, 관리자 작업처럼 나중에 확인이 필요한 요청을 "}
+              {"성적 반영에는 점수뿐 아니라 제출 시간 등도 중요하기 때문에, 문제가 생겼을 때 누가 어떤 요청을 했는지 확인할 수 있어야 했습니다. 제출 실패, 로그인 실패, 점수 관리, 관리자 작업처럼 나중에 확인이 필요한 요청을 "}
               <code className="text-[0.95em] font-medium text-black">
                 {"request_logs"}
               </code>
               {" 테이블에 기록하고 관리자 페이지에서 조회할 수 있게 했습니다."}
             </p>
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                {"요청자, 경로, 메서드, 상태 코드, IP, 요청 메타데이터를 기록해 점수 처리와 제출 과정에서 발생한 문제를 추적할 수 있게 했습니다."}
-              </li>
-              <li>
-                {"로그인 사용자는 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"user:{id}"}
-                </code>
-                {", 비로그인 요청은 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"ip:{address}"}
-                </code>
-                {" 형태로 요청 출처를 남기도록 구성했습니다."}
-              </li>
-              <li>
-                {"관리자 페이지에서 요청 경로, method, status, IP, metadata 기준으로 로그를 검색하고 페이지네이션으로 조회할 수 있게 했습니다."}
-              </li>
-            </ul>
-            <DiagramFigure
-              src="/projects/sch-iot-rankingboard/sch-audit-flow.svg"
-              alt="SCH MiniProject 감사 로그 및 운영 추적 흐름"
-              width={1600}
-              height={900}
-              caption="API 요청 결과를 감사 로그로 남기고, 운영 중 발생한 실패 요청을 관리자 화면에서 추적할 수 있도록 구성했습니다."
-            />
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"요청자, 경로, 메서드, 상태 코드, IP, 요청 메타데이터를 기록해 점수 처리와 제출 과정에서 발생한 문제를 추적할 수 있게 했습니다. 로그인 사용자는 "}
+              <code className="text-[0.95em] font-medium text-black">
+                {"user:{id}"}
+              </code>
+              {", 비로그인 요청은 "}
+              <code className="text-[0.95em] font-medium text-black">
+                {"ip:{address}"}
+              </code>
+              {" 형태로 요청 출처를 남겼고, 관리자 페이지에서 요청 경로, method, status, IP, metadata 기준으로 검색하고 페이지네이션으로 조회할 수 있게 했습니다."}
+            </p>
+            <div className="px-4 sm:px-8">
+              <DiagramFigure
+                src="/projects/sch-iot-rankingboard/sch-miniproject-page-5-request-logs.png"
+                alt="요청 로그를 확인하는 관리자 화면"
+                width={1920}
+                height={1080}
+                caption="요청 로그를 확인하는 관리자 화면"
+              />
+            </div>
           </div>
         </section>
 
         <section id="deployment-environment" className="scroll-mt-12 pt-24">
-          <SectionHeading>강의 서버 운영을 위한 Docker Compose 배포와 데이터 영속성</SectionHeading>
+          <SectionHeading>내부망 DNS 문제로 인한 서비스 배포 실패 해결</SectionHeading>
           <div className="grid gap-5">
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"학과 내부망의 on-premise 강의 서버에서 같은 방식으로 실행하고 재시작할 수 있는 환경이 필요했습니다. 복잡한 배포 자동화보다 "}
-              <strong className="font-medium text-black">
-                {"Docker Compose 기반 실행 환경"}
-              </strong>
-              {"과 "}
-              <strong className="font-medium text-black">
-                {"DB·업로드 파일을 유지하는 볼륨 구조"}
-              </strong>
-              {"를 우선했습니다."}
-            </p>
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                {"Next.js 애플리케이션은 Docker Runtime에서 2025 포트로 실행되도록 구성했습니다."}
-              </li>
-              <li>
-                {"SQLite DB는 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"/app/db"}
-                </code>
-                {", 제출 파일은 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"/app/uploads/evaluation-scores"}
-                </code>
-                {" 볼륨에 저장해 컨테이너 재시작 이후에도 데이터가 유지되도록 했습니다."}
-              </li>
-              <li>
-                <code className="text-[0.95em] font-medium text-black">
-                  {"UPLOAD_ROOT"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"COOKIE_SECURE"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"PORT"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"NEXT_PUBLIC_APP_URL"}
-                </code>
-                {" 같은 환경 변수로 운영 환경을 조정할 수 있도록 구성했습니다."}
-              </li>
-            </ul>
-            <DiagramFigure
-              src="/projects/sch-iot-rankingboard/sch-deploy-flow.svg"
-              alt="SCH MiniProject Docker Compose 배포 흐름"
-              width={1600}
-              height={900}
-              caption="소규모 강의 운영에 맞춰 복잡한 인프라보다 재현 가능한 실행 환경과 데이터 영속성을 우선했습니다."
-            />
             <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
-              {"내부망 DNS 문제로 Docker pull이 실패한 배포 트러블슈팅"}
+              {"문제"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"배포 과정에서 "}
               <strong className="font-medium text-black">
-                {"Docker image pull이 계속 실패"}
+                {"Docker Compose가 필요한 이미지를 pull하는 단계에서 실패하는 문제"}
               </strong>
-              {"했습니다. 서버 네트워크를 확인한 결과 IP 주소로는 ping이 나가지만 도메인 주소로는 실패했고, 이를 통해 단순 네트워크 단절이 아니라 "}
+              {"가 있었습니다. 로그 확인 결과 IP 주소 대상 ping은 성공했지만 "}
               <strong className="font-medium text-black">
-                {"DNS 해석 문제"}
+                {"도메인 이름으로는 ping이 실패"}
               </strong>
-              {"로 원인을 좁혔습니다. 학과 서버가 내부망에 있어 외부 DNS가 아니라 학교 네트워크의 DNS 서버를 사용해야 했고, 유실되어 있던 "}
+              {"해 DNS가 원인이라고 판단했습니다."}
+            </p>
+            <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
+              {"해결"}
+            </h3>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"처음에는 DNS 서버 IP 설정 문제라고 보고, 서버의 "}
+              {"netplan 설정에서 "}
+              <code className="text-[0.95em] font-medium text-black">
+                {"nameservers.addresses"}
+              </code>
+              {" 값을 Cloudflare DNS("}
               <strong className="font-medium text-black">
-                {"학교 DNS 서버 IP를 복구"}
+                {"1.1.1.1"}
               </strong>
-              {"해 Docker pull이 정상 동작하도록 해결했습니다."}
+              {")와 Google DNS("}
+              <strong className="font-medium text-black">
+                {"8.8.8.8"}
+              </strong>
+              {")로 지정해 공개 DNS로 변경해 확인했습니다. 하지만 도메인 이름으로는 ping이 계속 실패했습니다."}
+            </p>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"이후 원인을 다시 확인하면서, 학교 내부망에서는 외부 공개 DNS로 직접 질의하지 못하고 "}
+              <strong className="font-medium text-black">
+                {"학교 로컬 DNS 서버"}
+              </strong>
+              {"를 통해 도메인을 해석해야 하는 구조일 가능성이 높다고 판단했습니다. 유실되어 있던 "}
+              <strong className="font-medium text-black">
+                {"학교 DNS 서버 IP"}
+              </strong>
+              {"를 서버 DNS 설정에 반영했고, 도메인 해석과 "}
+              <strong className="font-medium text-black">
+                {"Docker Compose 배포가 정상 진행"}
+              </strong>
+              {"되는 것을 확인했습니다."}
             </p>
           </div>
         </section>
@@ -498,19 +473,19 @@ export default function SchMiniProjectPage() {
           <SectionHeading>회고 및 개선 방향</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"이 프로젝트를 진행하면서 실제 강의 운영에 쓰이는 시스템은 기능 수보다 점수 데이터가 잘못 처리되지 않는 구조가 더 중요하다는 점을 배웠습니다. 랭킹 기능은 학생들에게 비교와 동기부여를 제공하는 기능이었지만, 실제 성적에 연결되는 순간 인증, 권한, 랭킹 계산 규칙, 로그, 업로드 검증, 실행 환경까지 함께 설계해야 하는 운영 시스템이 되었습니다."}
+              {"UI 디자인을 AI를 활용하여 진행했는데, 생각보다 원하는 분위기에 가깝게 나와 제작 과정이 즐거웠던 프로젝트였습니다. "}
+              {"성적에 반영되는 프로젝트이다 보니 "}
+              <strong className="font-medium text-black">{"보안"}</strong>
+              {"을 최대한 신경 쓰려고 노력했지만 추후 검토 과정에서 놓친 부분들이 많았다는 것을 알게 되었습니다. 특히 "}
+              <strong className="font-medium text-black">
+                {"파일 업로드 보안"}
+              </strong>
+              {"에서 단순한 확장자 검증과 구조 검증뿐만 아니라 "}
+              <strong className="font-medium text-black">
+                {"MIME type, 파일 signature"}
+              </strong>
+              {"까지 확인해야 한다는 것을 알게 되어 후임자에게 해당 내용을 공유하고, 향후 시스템을 새로 구축할 때는 이러한 부분들을 보완해서 시스템을 설계해야겠다고 생각했습니다."}
             </p>
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                {"사용자가 늘어나거나 여러 강의에서 동시에 사용한다면 SQLite에서 별도 DB 서버로 분리하는 개선이 필요합니다."}
-              </li>
-              <li>
-                {"제출 파일 검증 외에도 저장소 격리, 악성 파일 탐지, Object Storage 이전 같은 보안·운영 개선을 검토할 수 있습니다."}
-              </li>
-              <li>
-                {"요청 로그를 메트릭이나 알림 시스템과 연결해 운영 중 문제를 더 빠르게 확인할 수 있도록 확장할 수 있습니다."}
-              </li>
-            </ul>
           </div>
         </section>
 

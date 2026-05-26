@@ -15,7 +15,7 @@ const projectSectionLinks = [
   { id: "role", label: "역할" },
   { id: "skills", label: "기술 스택" },
   { id: "monitoring-system", label: "데이터 수집 파이프라인 관제 시스템 개발" },
-  { id: "monitoring-architecture", label: "확장성을 고려한 모듈 구조 아키텍처 설계" },
+  { id: "monitoring-architecture", label: "확장성을 고려한 모듈 아키텍처 설계" },
   { id: "realtime-delivery", label: "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조" },
   { id: "deployment-automation", label: "Self-hosted Runner 기반 내부망 배포 자동화" },
   { id: "retrospective", label: "회고 및 개선 방향" },
@@ -253,7 +253,7 @@ export default function PanopticonPage() {
         </section>
 
         <section id="monitoring-architecture" className="scroll-mt-12 pt-24">
-          <SectionHeading>확장성을 고려한 모듈 구조 아키텍처 설계</SectionHeading>
+          <SectionHeading>확장성을 고려한 모듈 아키텍처 설계</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"Watchdog의 "}
@@ -272,7 +272,7 @@ export default function PanopticonPage() {
               <strong className="font-medium text-black">
                 {"notifier 모듈"}
               </strong>
-              {"을 추가하는 구조로 설계했습니다. Backend는 Watchdog이 보낸 감지 결과를 저장하고, Frontend는 저장된 상태 이벤트를 조회하거나 WebSocket으로 전달받아 화면을 갱신합니다."}
+              {"을 추가하는 구조로 설계했습니다. 백엔드는 Watchdog이 보낸 감지 결과를 저장하고, 프론트엔드는 저장된 상태 이벤트를 조회하거나 WebSocket으로 전달받아 화면을 갱신합니다."}
             </p>
             <DiagramFigure
               src="/projects/panopticon/Architecture - Panopticon Architecture.jpg"
@@ -297,7 +297,7 @@ export default function PanopticonPage() {
               <strong className="font-medium text-black">
                 {"WebSocket"}
               </strong>
-              {" 이벤트로 변환해 Next.js 프론트엔드에 전달합니다. Slackbot도 같은 상태 이벤트를 기준으로 알림을 전송하도록 연동했습니다."}
+              {" 이벤트로 변환해 Next.js 프론트엔드에 전달합니다. Slack 알림도 같은 상태 이벤트를 기준으로 전송되도록 연동했습니다."}
             </p>
             <DiagramFigure
               src="/projects/panopticon/Architecture - Panopticon Event Architecture.jpg"
@@ -323,7 +323,7 @@ export default function PanopticonPage() {
               <strong className="font-medium text-black">
                 {"1분 이상 새 데이터가 들어오지 않으면"}
               </strong>
-              {" 수집 지연으로 판단했습니다. 이렇게 세 가지 정보를 함께 확인해 단일 응답 실패와 실제 장애를 구분하고, 같은 장애에 대해 중복 알림이 가지 않도록 구성했습니다."}
+              {" 수집 지연으로 판단했습니다. 이렇게 세 가지 정보를 함께 확인해 단일 응답 실패와 실제 장애를 구분하고, 같은 장애에 대해 중복 알림이 전송되지 않도록 구성했습니다."}
             </p>
           </div>
         </section>
@@ -365,9 +365,9 @@ export default function PanopticonPage() {
           <SectionHeading>회고 및 개선 방향</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"시스템 구축 이후 사용률이 높아 보람찼던 프로젝트였습니다. 특히 실시간 데이터 그래프와 알림 시스템이 연구실 운영 과정에서 유용하게 사용되었습니다. 운영하면서 감지 대상과 알림 채널을 분리해 둔 점도 유지보수에 도움이 됐습니다. 새 서버를 감시하거나 Slack 외의 알림 방식을 붙일 때 Watchdog 전체를 고치지 않고 모듈을 추가하는 방식으로 대응할 수 있었습니다. 반대로 Watchdog과 백엔드 사이를 "}
+              {"시스템 구축 이후 사용률이 높아 보람찼던 프로젝트였습니다. 특히 실시간 데이터 그래프와 알림 시스템이 연구실 운영 과정에서 유용하게 사용되었습니다. 운영하면서 감지 대상과 알림 채널을 분리해 둔 점도 유지보수에 도움이 됐습니다. 새 서버를 감시하거나 Slack 외의 알림 방식을 붙일 때 Watchdog 전체를 수정하지 않고 모듈을 추가하는 방식으로 대응할 수 있었습니다. 반대로 Watchdog과 백엔드 사이를 "}
               <strong className="font-medium text-black">
-                {"TCP socket"}
+                {"TCP Socket"}
               </strong>
               {"으로 직접 연결한 구조는 네트워크 하위 계층을 직접 다루는 방식이라 신경 써야 할 부분이 많았습니다. 기존에 만들어진 코드가 있어 그대로 사용했지만, 다시 설계한다면 Watchdog의 감지 결과 전달은 "}
               <strong className="font-medium text-black">
