@@ -16,8 +16,8 @@ const projectSectionLinks = [
   { id: "skills", label: "기술 스택" },
   { id: "monitoring-system", label: "데이터 수집 파이프라인 관제 시스템 개발" },
   { id: "monitoring-architecture", label: "확장성을 고려한 모듈 아키텍처 설계" },
-  { id: "realtime-delivery", label: "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조" },
-  { id: "deployment-automation", label: "Self-hosted Runner 기반 내부망 배포 자동화" },
+  { id: "realtime-delivery", label: "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현" },
+  { id: "deployment-automation", label: "Self-hosted Runner 기반 내부망 배포 자동화 구축" },
   { id: "retrospective", label: "회고 및 개선 방향" },
 ];
 
@@ -286,7 +286,7 @@ export default function PanopticonPage() {
         </section>
 
         <section id="realtime-delivery" className="scroll-mt-12 pt-24">
-          <SectionHeading>TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조</SectionHeading>
+          <SectionHeading>TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"Watchdog은 각 감지 대상에 맞는 checker 전략을 실행하고 이상 상태를 판단합니다. 이상 상태가 확인되면 Watchdog은 감지 결과를 "}
@@ -329,7 +329,7 @@ export default function PanopticonPage() {
         </section>
 
         <section id="deployment-automation" className="scroll-mt-12 pt-24">
-          <SectionHeading>Self-hosted Runner 기반 내부망 배포 자동화</SectionHeading>
+          <SectionHeading>Self-hosted Runner 기반 내부망 배포 자동화 구축</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"서버가 "}

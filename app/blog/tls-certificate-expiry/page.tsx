@@ -74,6 +74,10 @@ export default function TlsCertificateExpiryBlogPostPage() {
                 body="서버 프로세스는 정상적으로 떠 있었지만 새 요청을 보냈을 때 애플리케이션 로그에 아무것도 찍히지 않았습니다. Nginx access log에서도 요청이 감지되지 않아 애플리케이션 내부 오류보다는 요청이 서버 계층에 도달하기 전 단계의 문제를 의심했습니다."
               />
               <NoteRow
+                title="판단 포인트"
+                body="특정 API의 비즈니스 로직 오류가 아니라 API 도메인, DNS, TCP 연결, TLS 인증서처럼 모든 인증 기능이 공유하는 네트워크 경로를 먼저 의심했습니다. 서버가 살아 있다는 사실과 사용자 요청이 HTTP 처리 단계까지 도달한다는 사실은 분리해서 봐야 합니다."
+              />
+              <NoteRow
                 title="직접 원인"
                 body="api.dobonglife.co.kr의 Let's Encrypt 인증서가 2026년 5월 13일 23:55:25 UTC에 만료되어 있었습니다. 한국 시간으로는 2026년 5월 14일 08:55:25 KST이며, 장애가 확인된 날짜와 일치했습니다."
               />
@@ -119,6 +123,34 @@ export default function TlsCertificateExpiryBlogPostPage() {
               height={941}
               caption="여러 인증 기능이 동시에 실패했고, 서버와 Nginx 로그가 비어 있어 DNS와 TLS 같은 네트워크 계층으로 조사 범위를 옮겼습니다."
             />
+          </section>
+
+          <section className="pt-[88px]">
+            <h2 className="text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
+              원인 분석 흐름을 순서로 보면
+            </h2>
+            <div className="mt-6">
+              <NoteRow
+                title="1. 공통 기능 동시 실패"
+                body="일반 로그인, 카카오 로그인, 비밀번호 찾기, 이메일 인증은 서로 다른 기능처럼 보이지만 모두 API 서버와 HTTPS로 통신합니다. 그래서 네 기능이 동시에 실패하면 개별 API 코드보다 API 도메인의 공통 연결 경로를 먼저 확인해야 합니다."
+              />
+              <NoteRow
+                title="2. access log 부재 해석"
+                body="Nginx access log와 백엔드 application log가 모두 비어 있으면 HTTP 요청이 애플리케이션까지 도달하지 않은 상태일 수 있습니다. TLS 인증서 검증 실패처럼 HTTP 이전 단계에서 연결이 끊기면 path, method, header, body가 서버에 전달되지 않습니다."
+              />
+              <NoteRow
+                title="3. 서버 시간 확인"
+                body="서버 시간이 크게 틀어져 있으면 정상 인증서도 만료되었거나 아직 유효하지 않은 것처럼 보일 수 있습니다. 그래서 인증서 자체를 보기 전에 date, timedatectl, NTP 동기화 상태를 먼저 확인했습니다."
+              />
+              <NoteRow
+                title="4. SNI를 포함한 외부 인증서 확인"
+                body="openssl s_client에 -servername api.dobonglife.co.kr을 지정해 실제 앱이 보는 인증서를 확인했습니다. SNI를 빼면 Nginx가 기본 인증서를 반환할 수 있어 장애 원인을 잘못 판단할 수 있습니다."
+              />
+              <NoteRow
+                title="5. 로컬 Certbot 상태 확인"
+                body="외부 443 포트에서 보이는 인증서와 /etc/letsencrypt/live/...에 있는 로컬 인증서 상태를 둘 다 확인했습니다. certbot certificates의 INVALID: EXPIRED는 로컬 갱신 상태도 실제 장애와 같은 만료일을 가리킨다는 근거였습니다."
+              />
+            </div>
           </section>
 
           <section className="pt-[88px]">
@@ -335,8 +367,9 @@ notAfter=Aug 12 04:08:03 2026 GMT`}
               이 확인은 두 가지 의미가 있습니다. 첫째,{" "}
               <InlineCode>/etc/letsencrypt/live/...</InlineCode>의 인증서 파일이
               실제로 갱신되었습니다. 둘째, 443 포트에서 Nginx가 제공하는 인증서도
-              새 인증서로 바뀌었습니다. 이후 앱에서 API 호출이 다시 성공하면
-              사용자 영향 복구까지 확인할 수 있습니다.
+              새 인증서로 바뀌었습니다. 마지막으로 앱에서 일반 로그인, 카카오 로그인,
+              비밀번호 찾기, 이메일 인증처럼 사용자에게 영향을 주던 API 호출이 다시
+              성공하는지 확인해야 사용자 영향 복구까지 판단할 수 있습니다.
             </p>
           </section>
 
@@ -477,6 +510,10 @@ grep -R "certbot renew" /etc/cron.* /etc/crontab 2>/dev/null`}
   -servername api.dobonglife.co.kr 2>/dev/null | \\
   openssl x509 -noout -dates`}
               />
+              <NoteRow
+                title="6. 만료 알림 단계화"
+                body="Let's Encrypt 인증서는 유효기간이 짧기 때문에 만료 직전에만 알림을 받으면 대응 시간이 부족할 수 있습니다. 만료 30일, 14일, 7일, 3일 전처럼 여러 단계로 알림을 두고, 알림에는 도메인, 현재 notAfter, 갱신 실패 로그 위치를 함께 남기는 편이 안전합니다."
+              />
             </div>
           </section>
 
@@ -504,6 +541,30 @@ grep -R "certbot renew" /etc/cron.* /etc/crontab 2>/dev/null`}
               <NoteRow
                 title="만료일은 알림으로 관리한다"
                 body="Let's Encrypt 인증서는 유효기간이 짧기 때문에 자동 갱신 실패를 사람이 만료 당일 발견하는 구조는 위험합니다. 만료 30일, 14일, 7일, 3일 전처럼 여러 단계로 알림을 두는 편이 안전합니다."
+              />
+            </div>
+          </section>
+
+          <section className="pt-[88px]">
+            <h2 className="text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
+              포트폴리오에서 강조할 기술 포인트
+            </h2>
+            <div className="mt-6">
+              <NoteRow
+                title="로그가 없다는 신호를 계층 문제로 해석"
+                body="Spring Boot 로그와 Nginx access log가 모두 비어 있는 상황을 애플리케이션 예외가 아니라 DNS, TCP, TLS handshake, SNI, certificate validation 같은 HTTP 이전 계층의 문제로 좁혔다는 점을 강조할 수 있습니다."
+              />
+              <NoteRow
+                title="Host와 SNI를 유지한 검증"
+                body="DNS와 서버 문제를 분리할 때 단순 IP 접속은 인증서 hostname 검증을 깨뜨릴 수 있습니다. curl --resolve와 openssl s_client -servername을 사용해 Host, SNI, 실제 인증서 체인을 유지한 채 확인한 점이 중요합니다."
+              />
+              <NoteRow
+                title="긴급 복구와 재발 방지 분리"
+                body="장애 중에는 Certbot으로 인증서를 갱신해 빠르게 복구했고, 이후에는 standalone 방식의 80번 포트 충돌을 webroot, certbot renew --dry-run, Nginx reload hook, 외부 만료일 모니터링으로 이어지는 운영 개선으로 분리했습니다."
+              />
+              <NoteRow
+                title="운영 기술 키워드"
+                body="Nginx SSL termination, Let's Encrypt, Certbot standalone/webroot authenticator, HTTP-01 challenge, OpenSSL, systemd timer, cron, deploy hook, TLS expiration monitoring을 함께 언급하면 단순 장애 회고가 아니라 운영 자동화 개선 사례로 보입니다."
               />
             </div>
           </section>

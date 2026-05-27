@@ -17,6 +17,78 @@ type BlogPost = {
 
 const blogPosts: BlogPost[] = [
   {
+    title: "리눅스 파일시스템과 디렉터리 구조 이해하기",
+    description:
+      "리눅스의 단일 루트 트리, mount point, inode와 path resolution, /etc, /usr, /var, /proc, /sys 같은 디렉터리 역할과 운영 실수를 정리했습니다.",
+    date: "2026.05",
+    category: "Linux / Filesystem",
+    tags: ["Linux", "Filesystem", "Directory"],
+    href: "/blog/linux-filesystem-directory-structure/",
+  },
+  {
+    title: "자주 보이는 네트워크 포트 정리",
+    description:
+      "DevOps, Infra, Security 관점에서 HTTP, HTTPS, SSH, FTP, SMTP, SMB, Kerberos, LDAP, DB, Redis, MongoDB, SNMP, Syslog, NTP 포트와 노출 범위, 보안 포인트를 정리했습니다.",
+    date: "2026.05",
+    category: "Network / Security",
+    tags: ["Port", "Security", "Infra"],
+    href: "/blog/network-common-ports/",
+  },
+  {
+    title: "DHCP는 네트워크 설정을 자동으로 임대해주는 프로토콜이다",
+    description:
+      "DHCP가 IP 주소, subnet mask, default gateway, DNS server를 자동으로 내려주는 방식과 DORA, lease, renewal, relay, 운영 장애 포인트를 정리했습니다.",
+    date: "2026.05",
+    category: "Network / DHCP",
+    tags: ["DHCP", "Network", "IP"],
+    href: "/blog/dhcp-network-basics/",
+  },
+  {
+    title: "네트워크 계층별 프로토콜 정리",
+    description:
+      "OSI 7계층과 TCP/IP 관점에서 Ethernet, ARP, IP, ICMP, TCP, UDP, TLS, HTTP, DNS 같은 프로토콜이 어느 계층에서 어떤 역할을 하는지 정리했습니다.",
+    date: "2026.05",
+    category: "Network / Protocol",
+    tags: ["Network", "Protocol", "OSI"],
+    href: "/blog/network-protocol-layers/",
+  },
+  {
+    title: "포트와 소켓은 같은 게 아니다",
+    description:
+      "Port가 TCP/UDP header의 번호이고 socket은 커널의 통신 endpoint라는 차이, listener socket과 established socket, 4-tuple로 하나의 포트에 여러 사용자가 붙는 원리를 정리했습니다.",
+    date: "2026.05",
+    category: "Network / TCP",
+    tags: ["Port", "Socket", "TCP"],
+    href: "/blog/network-port-socket/",
+  },
+  {
+    title: "네트워크 계층별 스위치와 라우터 정리",
+    description:
+      "L1 hub/repeater, L2 switch, L3 router/L3 switch, L4 switch/load balancer, L7 reverse proxy를 각 계층의 판단 기준과 데이터 전달 흐름으로 정리했습니다.",
+    date: "2026.05",
+    category: "Network / Infrastructure",
+    tags: ["Switch", "Router", "Network"],
+    href: "/blog/network-switch-router-layers/",
+  },
+  {
+    title: "VLAN과 Subnet은 네트워크를 나누는 계층이 다르다",
+    description:
+      "VLAN은 L2 broadcast domain을 나누고 Subnet은 L3 IP 주소 범위를 나눈다는 차이를 access/trunk, CIDR, gateway, inter-VLAN routing 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Network / LAN",
+    tags: ["VLAN", "Subnet", "Routing"],
+    href: "/blog/vlan-subnet/",
+  },
+  {
+    title: "Docker Compose는 여러 컨테이너를 하나의 애플리케이션으로 다루는 도구다",
+    description:
+      "compose.yaml이 서비스, 네트워크, 볼륨을 하나의 프로젝트 모델로 해석되고 Docker Engine 리소스로 적용되는 내부 흐름을 정리했습니다.",
+    date: "2026.05",
+    category: "Docker / Container",
+    tags: ["Docker", "Compose", "Container"],
+    href: "/blog/docker-compose-internals/",
+  },
+  {
     title: "UX Hierarchy는 사용자의 시선과 행동 흐름을 설계하는 구조다",
     description:
       "Visual Hierarchy와 Structural Hierarchy, 크기/색상/대비/여백/위치, CTA 우선순위와 모바일 화면에서의 계층 구조 설계를 정리했습니다.",

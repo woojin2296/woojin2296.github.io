@@ -71,10 +71,11 @@ export default function Home() {
         height: 2999,
       },
       summary: [
-        "AWS 기반 서비스 인프라 설계 및 구축",
-        "Terraform을 활용한 IaC 구현으로 인프라 재현성 확보",
-        "AWS SSM + GitHub Actions(OIDC) 기반 CI/CD 파이프라인 구축",
-        "CloudWatch로 운영 로그 수집 및 모니터링 환경 구축",
+        "AWS 인프라 및 CI/CD 방식 개선 (V1, V2, V3)",
+        "Terraform과 GitOps 전체 구조",
+        "Secret 및 Variables 관리 경계",
+        "모니터링 구성",
+        "운영 장애 트러블슈팅: TLS 인증서 만료",
       ],
       techStack: [
         { name: "AWS", primary: true },
@@ -97,10 +98,10 @@ export default function Home() {
         height: 3279,
       },
       summary: [
-        "확장성을 고려한 Pluggable Architecture 설계",
-        "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조",
-        "실시간 및 기간별 데이터 조회 기능으로 DB 접속 없는 조회 흐름 구현",
-        "Self-hosted Runner 기반 내부망 배포 자동화",
+        "데이터 수집 파이프라인 관제 시스템 개발",
+        "확장성을 고려한 모듈 아키텍처 설계",
+        "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현",
+        "Self-hosted Runner 기반 내부망 배포 자동화 구축",
       ],
       techStack: [
         { name: "Next.js", primary: true },
@@ -124,10 +125,12 @@ export default function Home() {
         height: 2594,
       },
       summary: [
-        "교수자 요구사항을 바탕으로 과제 제출, 점수 비교, 익명 랭킹, 관리자 기능 범위 정의",
-        "학생용 과제 제출/랭킹 화면과 교수자용 관리 화면의 UI/UX 설계 및 구현",
-        "서버 세션 인증, 역할 기반 접근 제어, 서버 측 점수 검증, 파일 업로드 검증, 감사 로그 개발",
-        "Docker Compose 기반 실행 환경 구성과 졸업 전까지 배포 및 운영 대응",
+        "과제 제출·랭킹 관리 시스템 구현",
+        "아키텍처 및 데이터 구조 설계",
+        "세션 기반 인증과 API 경로 기반 인가",
+        "파일 업로드 보안과 서버 검증 구현",
+        "모니터링을 위한 요청 로그 관리 구현",
+        "배포 실패 문제 해결",
       ],
       techStack: [
         { name: "Next.js", primary: true },

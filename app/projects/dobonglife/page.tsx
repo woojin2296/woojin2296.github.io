@@ -258,7 +258,7 @@ export default function DobongLifePage() {
               className="px-8"
             />
             <h3 className="pt-4 text-[19px] font-semibold leading-[1.4] tracking-normal text-black">
-              {"GitHub Actions, OIDC, SSM을 활용한 CI/CD 파이프라인 구축"}
+              {"GitHub Actions, OIDC, SSM을 활용한 CI/CD 파이프라인 구축 (V2)"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"서버에 직접 SSH로 접속해 배포하고 환경 변수를 관리하던 방식을 줄이고, 기존 SSH 22번 포트 기반 접근을 제거했습니다. AWS Systems Manager로 인스턴스 접근 방식을 전환하고, GitHub Actions와 OIDC 기반 권한 위임을 사용해 CD 파이프라인을 재구성했습니다."}
@@ -278,10 +278,10 @@ export default function DobongLifePage() {
               {"마이크로 서비스 전환을 위한 EKS 환경 구축 (V3)"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"백엔드 서비스의 MSA 아키텍처 전환과 트래픽 증가에 대비해 기존 서버 배포 방식을 AWS EKS 기반 구조로 확장했습니다. 각 애플리케이션의 Kubernetes 리소스는 Helm Charts로 템플릿화해 중복 설정을 줄였고, GitHub Actions가 이미지를 빌드해 Amazon ECR에 업로드하면 Argo CD가 GitOps 저장소 변경을 감지해 클러스터로 배포하도록 구성했습니다."}
+              {"백엔드 서비스의 MSA 아키텍처 전환과 트래픽 증가에 대비해 기존 서버 배포 방식을 AWS EKS 기반 구조로 확장했습니다. GitHub Actions가 이미지를 빌드해 Amazon ECR에 업로드하면 Argo CD가 GitOps 저장소 변경을 감지해 클러스터로 배포하도록 구성했습니다."}
             </p>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"Public Subnet은 ALB 진입점, App Private Subnet은 application node, Data Private Subnet은 RDS/Redis 계층으로 나누어 트래픽 흐름과 데이터 계층을 분리했습니다. AWS Load Balancer Controller는 Kubernetes Ingress를 ALB로 연결하고, ExternalDNS는 Route 53 record를 관리하며, EBS CSI Driver와 Cluster Autoscaler로 스토리지와 노드 확장 기반을 구성했습니다."}
+              {"Public Subnet은 ALB 진입점, App Private Subnet은 application node, Data Private Subnet은 RDS/Redis 계층으로 나누어 트래픽 흐름과 데이터 계층을 분리했습니다. 각 애플리케이션의 Kubernetes 리소스는 Helm Charts로 템플릿화해 중복 설정을 줄였고, AWS Load Balancer Controller는 Kubernetes Ingress를 ALB로 연결하고, ExternalDNS는 Route 53 record를 관리하며, EBS CSI Driver와 Cluster Autoscaler로 스토리지와 노드 확장 기반을 구성했습니다."}
             </p>
             <DiagramFigure
               src="/projects/dobonglife/Architecture - DobongLife EKS Platform - V3.png"
@@ -295,7 +295,7 @@ export default function DobongLifePage() {
               id="eks-cicd"
               className="scroll-mt-12 pt-4 text-[19px] font-semibold leading-[1.4] tracking-normal text-black"
             >
-              {"EKS 환경에서의 CI/CD 파이프라인 구축"}
+              {"Argo CD와 GitOps 기반 EKS 배포 파이프라인 구축 (V3)"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"EKS 환경에서는 애플리케이션 이미지 빌드와 클러스터 배포 책임을 분리했습니다. 기존 Docker Hub/SSM 성격의 배포 흐름은 ECR push-only GitHub Actions로 정리했고, GitHub Actions가 서비스 소스 변경을 기준으로 Docker 이미지를 빌드해 Amazon ECR에 push한 뒤 GitOps 저장소의 Helm values 이미지 태그를 갱신하도록 구성했습니다."}
@@ -313,33 +313,22 @@ export default function DobongLifePage() {
               {"Terraform과 GitOps 전체 구조"}
             </h2>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"CI/CD 파이프라인이 애플리케이션 이미지와 Helm values 변경을 다루는 동안, Terraform은 EKS 클러스터가 동작하는 기반 인프라를 관리하도록 분리했습니다. 인프라 변경은 Terraform 스택으로, 애플리케이션 배포 변경은 GitOps 저장소와 Argo CD로 관리하는 구조입니다."}
+              {"Terraform은 VPC, EKS, ECR, RDS, Redis처럼 클러스터가 동작하기 위한 기반 인프라를 관리하고, Argo CD와 GitOps 저장소는 애플리케이션 배포 상태를 관리하도록 책임을 분리했습니다. 인프라 변경과 애플리케이션 배포 변경이 같은 파이프라인에 섞이지 않도록 나눈 구조입니다."}
             </p>
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                {"단일 Terraform root에 모든 리소스를 몰아넣지 않고 remote-state, foundation, container-registry, datastore, cluster-addons 단위로 분리해 변경 범위와 장애 영향을 줄였습니다."}
-              </li>
-              <li>
-                {"dev 환경 기준으로 AWS EKS 기반 MSA 플랫폼의 주요 블록을 Terraform stack 단위로 분리했습니다."}
-              </li>
-              <li>
-                {"dev, staging, prod 환경은 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"envs/<env>"}
-                </code>
-                {" 아래의 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"tfvars"}
-                </code>
-                {"와 backend 설정으로 나누고, 각 stack은 S3 remote state output만 참조하도록 구성했습니다."}
-              </li>
-              <li>
-                {"remote state bucket은 일반 dev teardown 대상에서 제외해 Terraform source of truth를 보존하는 방향으로 정리했습니다."}
-              </li>
-              <li>
-                {"주요 기술: Terraform, S3 Remote State, AWS Provider, VPC, Subnet, NAT Gateway, VPC Endpoint, EKS, Managed Node Group, Route 53, ACM, IAM, IRSA"}
-              </li>
-            </ul>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"Terraform은 단일 root에 모든 리소스를 넣지 않고, remote-state, foundation, container-registry, datastore, cluster-addons 단위로 나누었습니다. remote-state는 S3 기반 state 저장소를 담당하고, foundation은 VPC, subnet, NAT, VPC endpoint, EKS, node group, Route 53, ACM 같은 공통 기반을 담당하도록 했습니다. container-registry는 ECR, datastore는 RDS MySQL과 ElastiCache Redis, cluster-addons는 Argo CD와 EKS add-on을 관리하도록 분리했습니다."}
+            </p>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"환경은 dev, staging, prod를 기준으로 "}
+              <code className="text-[0.95em] font-medium text-black">
+                {"envs/<env>"}
+              </code>
+              {" 아래의 "}
+              <code className="text-[0.95em] font-medium text-black">
+                {"tfvars"}
+              </code>
+              {"와 backend 설정으로 나누었습니다. 각 stack은 필요한 값만 S3 remote state output으로 참조하도록 구성했고, remote state bucket은 일반 dev teardown 대상에서 제외해 Terraform source of truth가 함께 삭제되지 않도록 정리했습니다."}
+            </p>
             <pre className="overflow-x-auto bg-[#f5f5f5] p-4 text-sm leading-relaxed text-black">
               <code>{`Terraform
   bootstrap/remote-state

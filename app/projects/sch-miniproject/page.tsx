@@ -39,11 +39,11 @@ const projectSectionLinks = [
   { id: "role", label: "역할" },
   { id: "skills", label: "기술 스택" },
   { id: "pms-workflow", label: "과제 제출·랭킹 관리 시스템 구현" },
-  { id: "data-model", label: "운영 아키텍처와 데이터 구조" },
+  { id: "data-model", label: "아키텍처 및 데이터 구조 설계" },
   { id: "auth-authorization", label: "세션 기반 인증과 API 경로 기반 인가" },
   { id: "security-validation", label: "파일 업로드 보안과 서버 검증 구현" },
   { id: "audit-logging", label: "모니터링을 위한 요청 로그 관리 구현" },
-  { id: "deployment-environment", label: "내부망 DNS 문제로 인한 서비스 배포 실패 해결" },
+  { id: "deployment-environment", label: "배포 실패 문제 해결" },
   { id: "retrospective", label: "회고 및 개선 방향" },
 ];
 
@@ -268,7 +268,7 @@ export default function SchMiniProjectPage() {
         </section>
 
         <section id="data-model" className="scroll-mt-12 pt-24">
-          <SectionHeading>운영 아키텍처와 데이터 구조</SectionHeading>
+          <SectionHeading>아키텍처 및 데이터 구조 설계</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"강의 서버에서는 Next.js 애플리케이션, SQLite DB, 제출 파일 저장 영역을 Docker Compose 환경에서 함께 운영했습니다. 월 평균 약 "}
@@ -416,7 +416,7 @@ export default function SchMiniProjectPage() {
         </section>
 
         <section id="deployment-environment" className="scroll-mt-12 pt-24">
-          <SectionHeading>내부망 DNS 문제로 인한 서비스 배포 실패 해결</SectionHeading>
+          <SectionHeading>배포 실패 문제 해결</SectionHeading>
           <div className="grid gap-5">
             <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
               {"문제"}
