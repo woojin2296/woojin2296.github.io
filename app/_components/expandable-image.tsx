@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type ExpandableImageProps = {
   src: string;
@@ -15,10 +16,6 @@ type ExpandableImageProps = {
   unoptimized?: boolean;
   priority?: boolean;
 };
-
-function cn(...classNames: Array<string | undefined>) {
-  return classNames.filter(Boolean).join(" ");
-}
 
 export function ExpandableImage({
   src,

@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type BackToProjectsLinkProps = {
   className?: string;
 };
-
-function cn(...classNames: Array<string | undefined>) {
-  return classNames.filter(Boolean).join(" ");
-}
 
 export function BackToProjectsLink({ className }: BackToProjectsLinkProps) {
   return (

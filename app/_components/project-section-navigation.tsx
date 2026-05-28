@@ -1,15 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export type ProjectSectionLink = {
   id: string;
   label: string;
 };
-
-function cn(...classNames: Array<string | false | undefined>) {
-  return classNames.filter(Boolean).join(" ");
-}
 
 export function ProjectSectionNavigation({
   links,

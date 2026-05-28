@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const sectionLinks = [
   { id: "about", label: "About" },
@@ -11,10 +12,6 @@ const sectionLinks = [
   { id: "profile", label: "Profile" },
   { id: "contact", label: "Contact" },
 ];
-
-function cn(...classNames: Array<string | false | undefined>) {
-  return classNames.filter(Boolean).join(" ");
-}
 
 export function SectionNavigation() {
   const [activeId, setActiveId] = useState(sectionLinks[0].id);

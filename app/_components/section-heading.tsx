@@ -1,13 +1,10 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
   children: ReactNode;
   className?: string;
 };
-
-function cn(...classNames: Array<string | undefined>) {
-  return classNames.filter(Boolean).join(" ");
-}
 
 export function SectionHeading({
   children,
