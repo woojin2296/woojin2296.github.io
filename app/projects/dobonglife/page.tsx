@@ -10,50 +10,17 @@ export const metadata = {
   description: "도봉라이프 AWS 인프라 구축 및 운영 프로젝트",
 };
 
-export const projectInfo = {
-  link: "/projects/dobonglife/",
-  title: "도봉라이프(DobongLife) - AWS 인프라 구축 및 운영",
-  titleProject: "도봉라이프 AWS 인프라 구축 및 운영",
-  affiliation: "(주)유머스트알엔디",
-  position: "인턴 사원",
-  period: "2025.12 ~ current",
-  description:
-    "서울시 도봉구 지역상권 활성화 애플리케이션의 AWS 인프라를 구축하고 운영한 프로젝트",
-  summary: [
-    "AWS 기반 서비스 인프라 설계 및 구축",
-    "Terraform을 활용한 IaC 구현으로 인프라 재현성 확보",
-    "AWS SSM + GitHub Actions(OIDC) 기반 CI/CD 파이프라인 구축",
-    "CloudWatch로 운영 로그 수집 및 모니터링 환경 구축",
-  ],
-  techStack: [
-    { name: "AWS", primary: true, summary: true },
-    { name: "Terraform", primary: true, summary: true },
-    { name: "GitHub Actions", primary: false, summary: true },
-    { name: "Docker Compose", primary: false, summary: true },
-    { name: "CloudWatch", primary: false, summary: true },
-    { name: "VPC", primary: false, summary: false },
-    { name: "EC2", primary: false, summary: false },
-    { name: "RDS", primary: false, summary: false },
-    { name: "ElastiCache", primary: false, summary: false },
-    { name: "S3", primary: false, summary: false },
-    { name: "Route 53", primary: false, summary: false },
-    { name: "IAM", primary: false, summary: false },
-    { name: "SSM", primary: false, summary: false },
-    { name: "Parameter Store", primary: false, summary: false },
-    { name: "OIDC", primary: false, summary: false },
-    { name: "Nginx", primary: false, summary: false },
-    { name: "Spring Boot", primary: false, summary: false },
-  ],
-};
-
 const projectSectionLinks = [
   { id: "overview", label: "프로젝트 개요" },
   { id: "role", label: "역할" },
   { id: "skills", label: "기술 스택" },
   { id: "legacy-upgrade", label: "AWS 인프라 및 CI/CD 방식 개선 (V1, V2, V3)" },
   { id: "terraform-gitops", label: "Terraform과 GitOps 전체 구조" },
-  { id: "secret-variables", label: "Secret 및 Variables 관리 경계" },
+  { id: "secret-variables", label: "Secret 관리 경계와 주입 흐름" },
   { id: "monitoring", label: "모니터링 구성" },
+  { id: "availability-scaling", label: "가용성 및 자동 확장 구성" },
+  { id: "rds-connection-troubleshooting", label: "RDS connection exhaustion 트러블슈팅" },
+  { id: "node-capacity-troubleshooting", label: "Node capacity/IP/memory 부족 트러블슈팅" },
   { id: "tls-troubleshooting", label: "TLS 인증서 장애 트러블슈팅" },
   { id: "retrospective", label: "프로젝트 회고" },
 ];
@@ -121,7 +88,7 @@ export default function DobongLifePage() {
                 Period
               </p>
               <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                2025.12 ~ current
+                2026.04 ~ current
               </p>
             </div>
             <div className="relative grid grid-rows-[auto_1fr]">
@@ -278,13 +245,10 @@ export default function DobongLifePage() {
               {"마이크로 서비스 전환을 위한 EKS 환경 구축 (V3)"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"백엔드 서비스의 MSA 아키텍처 전환과 트래픽 증가에 대비해 기존 서버 배포 방식을 AWS EKS 기반 구조로 확장했습니다. GitHub Actions가 이미지를 빌드해 Amazon ECR에 업로드하면 Argo CD가 GitOps 저장소 변경을 감지해 클러스터로 배포하도록 구성했습니다."}
-            </p>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"Public Subnet은 ALB 진입점, App Private Subnet은 application node, Data Private Subnet은 RDS/Redis 계층으로 나누어 트래픽 흐름과 데이터 계층을 분리했습니다. 각 애플리케이션의 Kubernetes 리소스는 Helm Charts로 템플릿화해 중복 설정을 줄였고, AWS Load Balancer Controller는 Kubernetes Ingress를 ALB로 연결하고, ExternalDNS는 Route 53 record를 관리하며, EBS CSI Driver와 Cluster Autoscaler로 스토리지와 노드 확장 기반을 구성했습니다."}
+              {"백엔드 서비스의 MSA 아키텍처 전환과 트래픽 증가에 대비해 기존 서버 배포 방식을 AWS EKS 기반 구조로 확장했습니다. 전체 구조는 외부 진입, 애플리케이션 실행, 데이터 저장 계층을 분리하는 방식으로 설계했습니다. Public Subnet은 ALB를 통한 외부 요청 진입점으로 두고, Private Subnet 내부에는 EKS 애플리케이션 노드와 RDS/Redis 데이터 계층을 나누어 배치해 서비스 트래픽과 데이터 접근 경계를 분리했습니다."}
             </p>
             <DiagramFigure
-              src="/projects/dobonglife/Architecture - DobongLife EKS Platform - V3.png"
+              src="/projects/dobonglife/Architecture - DobongLife AWS Infra - V3.png"
               alt="도봉라이프 V3 EKS 플랫폼 아키텍처 다이어그램"
               width={1536}
               height={1024}
@@ -298,14 +262,16 @@ export default function DobongLifePage() {
               {"Argo CD와 GitOps 기반 EKS 배포 파이프라인 구축 (V3)"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"EKS 환경에서는 애플리케이션 이미지 빌드와 클러스터 배포 책임을 분리했습니다. 기존 Docker Hub/SSM 성격의 배포 흐름은 ECR push-only GitHub Actions로 정리했고, GitHub Actions가 서비스 소스 변경을 기준으로 Docker 이미지를 빌드해 Amazon ECR에 push한 뒤 GitOps 저장소의 Helm values 이미지 태그를 갱신하도록 구성했습니다."}
+              {"V3 배포 파이프라인은 이미지 빌드와 클러스터 배포 책임을 분리하는 방식으로 구성했습니다. GitHub Actions는 서비스 소스 변경 시 Docker 이미지를 빌드해 Amazon ECR에 업로드하고, GitOps 저장소의 Helm values 이미지 태그만 갱신하도록 했습니다. 이미지 태그는 full commit SHA를 사용해 배포된 코드와 이미지를 추적 가능하게 했습니다. Argo CD에서 frontend, backend, monitoring 관련 배포 단위를 분리해 관리하고, GitOps 저장소 변경을 기준으로 EKS에 동기화하도록 구성했습니다."}
             </p>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"이미지 태그는 mutable latest 대신 full commit SHA를 사용해 어떤 코드가 어떤 이미지로 배포되었는지 추적 가능하게 했습니다. Argo CD는 GitOps 저장소 변경을 감지해 각 서비스의 Helm Chart를 EKS 클러스터에 동기화하고, App of Apps 구조로 frontend, backend, monitoring, loki, alloy, observability application을 관리하도록 했습니다."}
-            </p>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"그 결과 frontend는 GitOps 기반으로 public HTTPS endpoint까지 연결했고, backend 11개 microservice image를 ECR에 push한 뒤 GitOps image tag 갱신 흐름으로 배포할 수 있게 했습니다."}
-            </p>
+            <DiagramFigure
+              src="/projects/dobonglife/Architecture - DobongLife CICD - V3.png"
+              alt="도봉라이프 V3 GitOps 기반 CI/CD 파이프라인 다이어그램"
+              width={1689}
+              height={931}
+              caption="Argo CD와 GitOps 기반 V3 배포 파이프라인"
+              className="px-8"
+            />
             <h2
               id="terraform-gitops"
               className="scroll-mt-12 pt-8 font-heading text-[24px] font-medium leading-[1.33] tracking-normal text-black"
@@ -313,10 +279,13 @@ export default function DobongLifePage() {
               {"Terraform과 GitOps 전체 구조"}
             </h2>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"Terraform은 VPC, EKS, ECR, RDS, Redis처럼 클러스터가 동작하기 위한 기반 인프라를 관리하고, Argo CD와 GitOps 저장소는 애플리케이션 배포 상태를 관리하도록 책임을 분리했습니다. 인프라 변경과 애플리케이션 배포 변경이 같은 파이프라인에 섞이지 않도록 나눈 구조입니다."}
+              <strong className="font-medium text-black">
+                {"Terraform, GitOps 저장소, Argo CD의 책임을 분리"}
+              </strong>
+              {"했습니다. Terraform은 AWS 기반 인프라를 생성하고 변경하는 역할로 두고, GitOps 저장소는 Kubernetes 애플리케이션의 목표 배포 상태를 관리하도록 했습니다. Argo CD는 GitOps 저장소 변경을 감지해 EKS 클러스터에 동기화하는 실행 계층으로 분리했습니다."}
             </p>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"Terraform은 단일 root에 모든 리소스를 넣지 않고, remote-state, foundation, container-registry, datastore, cluster-addons 단위로 나누었습니다. remote-state는 S3 기반 state 저장소를 담당하고, foundation은 VPC, subnet, NAT, VPC endpoint, EKS, node group, Route 53, ACM 같은 공통 기반을 담당하도록 했습니다. container-registry는 ECR, datastore는 RDS MySQL과 ElastiCache Redis, cluster-addons는 Argo CD와 EKS add-on을 관리하도록 분리했습니다."}
+              {"Terraform은 단일 root에 모든 리소스를 넣지 않고, 리소스 성격과 변경 주기에 따라 인프라 기반, 이미지 저장소, 데이터 계층, 클러스터 add-on을 별도 stack으로 분리했습니다. remote-state는 S3 backend를 먼저 만들고 유지하는 bootstrap 영역으로 두어, 이후 stack들이 같은 state 저장소를 기준으로 동작하도록 구성했습니다."}
             </p>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"환경은 dev, staging, prod를 기준으로 "}
@@ -327,7 +296,7 @@ export default function DobongLifePage() {
               <code className="text-[0.95em] font-medium text-black">
                 {"tfvars"}
               </code>
-              {"와 backend 설정으로 나누었습니다. 각 stack은 필요한 값만 S3 remote state output으로 참조하도록 구성했고, remote state bucket은 일반 dev teardown 대상에서 제외해 Terraform source of truth가 함께 삭제되지 않도록 정리했습니다."}
+              {"와 backend 설정으로 나누었습니다. 같은 stack 구조를 환경별로 재사용하되 입력값과 state는 분리했고, stack 간 연결은 필요한 output만 S3 remote state에서 참조하도록 구성했습니다."}
             </p>
             <pre className="overflow-x-auto bg-[#f5f5f5] p-4 text-sm leading-relaxed text-black">
               <code>{`Terraform
@@ -362,100 +331,56 @@ GitOps / Argo CD
               id="secret-variables"
               className="scroll-mt-12 pt-8 font-heading text-[24px] font-medium leading-[1.33] tracking-normal text-black"
             >
-              {"Secret 및 Variables 관리 경계"}
+              {"Secret 관리 경계와 주입 흐름"}
             </h2>
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                {"RDS master password는 AWS Secrets Manager에서 관리하고, Terraform은 secret value가 아니라 ARN만 output으로 전달하도록 정리했습니다."}
-              </li>
-              <li>
-                {"GitOps backend chart는 ExternalSecret을 통해 RDS secret의 username/password를 "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"DB_USERNAME"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"DB_PASSWORD"}
-                </code>
-                {"로 주입하도록 구성했습니다."}
-              </li>
-              <li>
-                <code className="text-[0.95em] font-medium text-black">
-                  {"AWS_REGION"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"ECR_IMAGE_URI"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"NEXT_PUBLIC_API_URL"}
-                </code>
-                {" 같은 비민감 설정은 GitHub Variables로, "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"AWS_ROLE_TO_ASSUME"}
-                </code>
-                {", "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"GITOPS_DEPLOY_KEY"}
-                </code>
-                {" 같은 민감 설정은 GitHub Secrets로 관리했습니다."}
-              </li>
-              <li>
-                <code className="text-[0.95em] font-medium text-black">
-                  {"NEXT_PUBLIC_*"}
-                </code>
-                {"는 client bundle에 노출되는 public config이므로 secret과 분리해 다뤘습니다."}
-              </li>
-              <li>
-                {"secret value, public runtime config, client public config, drift 위험 config를 분류해 어떤 값이 어디에서 관리되어야 하는지 inventory로 정리했습니다."}
-              </li>
-              <li>
-                {"AWS Secrets Manager, Kubernetes Secret, GitHub Secrets, public config의 관리 경계를 inventory로 정리했습니다."}
-              </li>
-              <li>
-                {"주요 기술: AWS Secrets Manager, External Secrets Operator, Kubernetes Secret, GitHub Secrets, GitHub Variables, ConfigMap, Helm values, IRSA"}
-              </li>
-            </ul>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"민감값은 GitOps 저장소나 Terraform 코드에 직접 두지 않고, 저장 위치와 참조 경계를 나누어 관리했습니다. 인프라 계층은 secret 값 자체가 아니라 참조 정보만 전달하고, 애플리케이션 계층은 Kubernetes Secret으로 동기화된 값만 환경 변수로 사용하도록 구성했습니다."}
+            </p>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"RDS master password 같은 민감값은 AWS Secrets Manager에 두고, Terraform은 secret value가 아니라 ARN 경계만 전달하도록 정리했습니다. GitOps와 Helm chart는 secret 값을 직접 보관하지 않고, External Secrets Operator가 동기화한 Kubernetes Secret을 애플리케이션 환경 변수로 참조하도록 했습니다."}
+            </p>
+            <DiagramFigure
+              src="/projects/dobonglife/Architecture - DobongLife Secret Management - V3.png"
+              alt="도봉라이프 V3 Secret 관리 경계와 주입 흐름 다이어그램"
+              width={1693}
+              height={929}
+              caption="Secret 관리 경계와 Kubernetes 주입 흐름"
+              className="px-8"
+            />
             <h2
               id="monitoring"
               className="scroll-mt-12 pt-8 font-heading text-[24px] font-medium leading-[1.33] tracking-normal text-black"
             >
               {"모니터링 구성"}
             </h2>
-            <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
-              <li>
-                {"Prometheus, Grafana, Loki, Alloy를 dev cluster에 배포해 클러스터와 워크로드 상태, 로그, 대시보드를 확인할 수 있는 기반을 만들었습니다."}
-              </li>
-              <li>
-                {"Spring Boot "}
-                <code className="text-[0.95em] font-medium text-black">
-                  {"/actuator/prometheus"}
-                </code>
-                {" endpoint는 인증 정책 정리가 필요했기 때문에, 우선 Nginx gateway access log를 Loki로 수집해 API traffic dashboard를 구성했습니다."}
-              </li>
-              <li>
-                {"request count, 5xx count, request rate, method/status/path별 호출량을 LogQL 기반 Grafana dashboard로 확인할 수 있게 했습니다."}
-              </li>
-              <li>
-                {"가용성 측면에서는 Cluster Autoscaler로 Pending Pod 발생 시 Managed Node Group이 확장될 수 있도록 구성하고, HPA로 서비스 부하에 따라 Pod replica 수를 자동 조정하도록 했습니다."}
-              </li>
-              <li>
-                {"Grafana, Prometheus, Loki, Alloy를 구성하고 PVC stale attachment 문제까지 운영 관점에서 해결했습니다."}
-              </li>
-              <li>
-                {"Loki access log 기반 API traffic dashboard를 구성해 요청 수, status code, method, path를 확인할 수 있게 했습니다."}
-              </li>
-              <li>
-                {"주요 기술: kube-prometheus-stack, Prometheus, Grafana, Loki, Grafana Alloy, LogQL, PrometheusRule, Alertmanager, Nginx Gateway Access Log, Cluster Autoscaler, HPA"}
-              </li>
-            </ul>
-            <h4 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
-              {"운영 트러블슈팅"}
-            </h4>
-            <h5 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
-              {"RDS connection exhaustion"}
-            </h5>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"dev cluster에는 kube-prometheus-stack, Prometheus, Grafana, Loki, Grafana Alloy를 배포해 클러스터 상태와 API 트래픽을 확인할 수 있는 관측 기반을 구성했습니다. Prometheus는 Kubernetes 워크로드와 리소스 상태를 수집하고, Grafana는 Pod 상태, 리소스 사용량, HPA 관련 지표를 확인하는 대시보드로 사용했습니다."}
+            </p>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"Spring Boot "}
+              <code className="text-[0.95em] font-medium text-black">
+                {"/actuator/prometheus"}
+              </code>
+              {" endpoint는 인증 정책 정리가 필요했기 때문에, 우선 Nginx Gateway access log를 Grafana Alloy와 Loki로 수집해 API traffic dashboard를 구성했습니다. Grafana에서는 request count, 5xx count, request rate, method/status/path별 호출량을 확인할 수 있도록 했습니다."}
+            </p>
+            <h2
+              id="availability-scaling"
+              className="scroll-mt-12 pt-8 font-heading text-[24px] font-medium leading-[1.33] tracking-normal text-black"
+            >
+              {"가용성 및 자동 확장 구성"}
+            </h2>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"서비스 부하와 Pod 배치 상태에 대응할 수 있도록 HPA와 Cluster Autoscaler를 함께 구성했습니다. HPA는 서비스별 부하에 따라 Pod replica 수를 조정하고, Cluster Autoscaler는 Pending Pod가 발생했을 때 Managed Node Group을 확장할 수 있도록 구성했습니다."}
+            </p>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"운영 중에는 Grafana와 Kubernetes event를 함께 확인해 replica 증가, Pending Pod 발생, nodegroup 확장 가능 여부를 점검했습니다. 이를 통해 단순 배포 실패와 리소스 부족 문제를 구분하고, 서비스별 resource request와 JVM memory 설정을 dev node 용량에 맞게 조정할 수 있었습니다."}
+            </p>
+          </div>
+        </section>
+
+        <section id="rds-connection-troubleshooting" className="scroll-mt-12 pt-24">
+          <SectionHeading>운영 장애 트러블슈팅: RDS connection exhaustion</SectionHeading>
+          <div className="grid gap-5">
             <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
               <li>
                 <strong className="font-medium text-black">{"장애 상황: "}</strong>
@@ -482,9 +407,12 @@ Unable to determine Dialect without JDBC metadata
 $ mysql -h <rds-endpoint> -u <user> -p
 ERROR 1040 (08004): Too many connections`}</code>
             </pre>
-            <h5 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
-              {"Node capacity / IP / memory 부족"}
-            </h5>
+          </div>
+        </section>
+
+        <section id="node-capacity-troubleshooting" className="scroll-mt-12 pt-24">
+          <SectionHeading>운영 장애 트러블슈팅: Node capacity / IP / memory 부족</SectionHeading>
+          <div className="grid gap-5">
             <ul className="grid list-disc gap-2 pl-5 text-base font-normal leading-relaxed tracking-normal text-[#737373] marker:text-black">
               <li>
                 <strong className="font-medium text-black">{"장애 상황: "}</strong>

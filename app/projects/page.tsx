@@ -31,7 +31,7 @@ export default function Home() {
                 도봉라이프(Dobong Life) - AWS 인프라 구축 및 운영
               </p>
               <p className="text-sm text-[#5a6775]">
-                (주)유머스트알엔디 | 인턴사원 | 2025.12 ~ 2026.02 (3m)
+                (주)유머스트알엔디 | 인턴사원 | 2026.04 ~ current
               </p>
               <p className="text-lg font-semibold mt-4">프로젝트 개요</p>
               <p className="mt-2">

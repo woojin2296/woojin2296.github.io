@@ -127,10 +127,10 @@ export default function Home() {
       summary: [
         "과제 제출·랭킹 관리 시스템 구현",
         "아키텍처 및 데이터 구조 설계",
-        "세션 기반 인증과 API 경로 기반 인가",
+        "세션 기반 인증과 API 경로 기반 인가 구현",
         "파일 업로드 보안과 서버 검증 구현",
         "모니터링을 위한 요청 로그 관리 구현",
-        "배포 실패 문제 해결",
+        "내부망 DNS 문제로 인한 서비스 배포 실패 해결",
       ],
       techStack: [
         { name: "Next.js", primary: true },
@@ -141,6 +141,21 @@ export default function Home() {
   ];
 
   const otherProjects = [
+    {
+      title: "Image Denoising Project",
+      subtitle: "이미지 노이즈 제거 필터 비교 분석 모듈",
+      affiliation: "개인 프로젝트",
+      period: "2023.11 ~ 2023.12",
+      link: "https://github.com/woojin2296/Image-Denoising-Project.git",
+      summary:
+        "Salt & Pepper Noise와 Gaussian Noise가 포함된 이미지에 여러 필터링 기법을 적용하고, PSNR 기준으로 결과 품질을 비교한 이미지 처리 프로젝트입니다.",
+      highlights: [
+        "Salt & Pepper, Gaussian Noise 기반 테스트 데이터 생성",
+        "Median Filter, Non-Local Means, Hybrid 필터링 알고리즘 구현",
+        "PSNR 지표 기반 필터별 이미지 품질 비교 및 실험 결과 분석",
+      ],
+      techStack: ["Python", "NumPy", "OpenCV", "Matplotlib"],
+    },
     {
       title: "Mobius Subscription",
       subtitle: "MQTT 구독 처리 파이썬 모듈",
@@ -254,21 +269,6 @@ export default function Home() {
         "Vue.js",
         "Raspberry Pi",
       ],
-    },
-    {
-      title: "Image Denoising Project",
-      subtitle: "이미지 노이즈 제거 필터 비교 분석 모듈",
-      affiliation: "개인 프로젝트",
-      period: "2023.11 ~ 2023.12",
-      link: "https://github.com/woojin2296/Image-Denoising-Project.git",
-      summary:
-        "Salt & Pepper Noise와 Gaussian Noise가 포함된 이미지에 여러 필터링 기법을 적용하고, PSNR 기준으로 결과 품질을 비교한 이미지 처리 프로젝트입니다.",
-      highlights: [
-        "Salt & Pepper, Gaussian Noise 기반 테스트 데이터 생성",
-        "Median Filter, Non-Local Means, Hybrid 필터링 알고리즘 구현",
-        "PSNR 지표 기반 필터별 이미지 품질 비교 및 실험 결과 분석",
-      ],
-      techStack: ["Python", "NumPy", "OpenCV", "Matplotlib"],
     },
     {
       title: "Smart Bus Stop",

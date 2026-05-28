@@ -11,39 +11,16 @@ export const metadata = {
     "순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제 관리 시스템",
 };
 
-export const projectInfo = {
-  link: "/projects/sch-miniproject/",
-  title: "SCH MiniProject PMS",
-  titleProject: "SCH MiniProject PMS",
-  affiliation: "순천향대학교 ML/DL 강의",
-  position: "개인 프로젝트",
-  period: "2025.06 ~ 2026.02",
-  role: "Solo Full-stack Developer",
-  description:
-    "순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제 관리 시스템",
-  summary: [
-    "교수자 요구사항을 바탕으로 과제 제출, 점수 비교, 랭킹, 관리자 기능 요구사항 정리",
-    "학생용 과제 제출/랭킹 화면과 교수자용 관리 화면의 UI/UX 설계 및 프론트엔드 구현",
-    "서버 세션 인증, 역할 기반 접근 제어, 서버 측 점수 검증, 파일 업로드 검증, 감사 로그 개발",
-    "Docker Compose 기반 실행 환경 구성과 졸업 전까지 배포 및 운영 대응",
-  ],
-  techStack: [
-    { name: "Next.js", primary: true, summary: true },
-    { name: "SQLite", primary: true, summary: true },
-    { name: "Docker Compose", primary: false, summary: true },
-  ],
-};
-
 const projectSectionLinks = [
   { id: "overview", label: "프로젝트 개요" },
   { id: "role", label: "역할" },
   { id: "skills", label: "기술 스택" },
   { id: "pms-workflow", label: "과제 제출·랭킹 관리 시스템 구현" },
   { id: "data-model", label: "아키텍처 및 데이터 구조 설계" },
-  { id: "auth-authorization", label: "세션 기반 인증과 API 경로 기반 인가" },
+  { id: "auth-authorization", label: "세션 기반 인증과 API 경로 기반 인가 구현" },
   { id: "security-validation", label: "파일 업로드 보안과 서버 검증 구현" },
   { id: "audit-logging", label: "모니터링을 위한 요청 로그 관리 구현" },
-  { id: "deployment-environment", label: "배포 실패 문제 해결" },
+  { id: "deployment-environment", label: "내부망 DNS 문제로 인한 서비스 배포 실패 해결" },
   { id: "retrospective", label: "회고 및 개선 방향" },
 ];
 
@@ -301,7 +278,7 @@ export default function SchMiniProjectPage() {
         </section>
 
         <section id="auth-authorization" className="scroll-mt-12 pt-24">
-          <SectionHeading>세션 기반 인증과 API 경로 기반 인가</SectionHeading>
+          <SectionHeading>세션 기반 인증과 API 경로 기반 인가 구현</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"강의 운영 시스템은 외부 서비스 연동보다 학생·관리자 권한을 서버에서 확실하게 통제하는 것이 중요했습니다. 그래서 토큰을 클라이언트에서 직접 다루는 방식보다 서버가 로그인 상태와 권한을 관리하는 세션 기반 인증을 선택했습니다. 인증은 학번 기반 로그인과 "}
@@ -416,7 +393,7 @@ export default function SchMiniProjectPage() {
         </section>
 
         <section id="deployment-environment" className="scroll-mt-12 pt-24">
-          <SectionHeading>배포 실패 문제 해결</SectionHeading>
+          <SectionHeading>내부망 DNS 문제로 인한 서비스 배포 실패 해결</SectionHeading>
           <div className="grid gap-5">
             <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
               {"문제"}
