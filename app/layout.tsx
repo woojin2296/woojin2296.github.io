@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
-  title: "Developer Portfolio",
-  description: "개발자 이력서/포트폴리오",
+  title: "Woojin Lim Portfolio",
+  description: "임우진의 포트폴리오",
 };
 
 export default function RootLayout({
