@@ -84,12 +84,18 @@ export default function DobongLifePage() {
           <div className="flex flex-wrap gap-2.5">
             <SkillIcon emphasized>AWS</SkillIcon>
             <SkillIcon emphasized>Terraform</SkillIcon>
-            <SkillIcon emphasized>Kubernetes / EKS</SkillIcon>
-            <SkillIcon emphasized>Argo CD / GitOps</SkillIcon>
+            <SkillIcon emphasized>Kubernetes</SkillIcon>
+            <SkillIcon emphasized>Prometheus</SkillIcon>
+            <SkillIcon emphasized>Grafana</SkillIcon>
+            <SkillIcon>EKS</SkillIcon>
+            <SkillIcon>Argo CD</SkillIcon>
+            <SkillIcon>GitOps</SkillIcon>
             <SkillIcon>GitHub Actions</SkillIcon>
             <SkillIcon>Docker</SkillIcon>
+            <SkillIcon>AWS Secrets Manager</SkillIcon>
+            <SkillIcon>Loki</SkillIcon>
+            <SkillIcon>Alloy</SkillIcon>
             <SkillIcon>Nginx</SkillIcon>
-            <SkillIcon>Grafana / Prometheus / Loki</SkillIcon>
           </div>
         </section>
 

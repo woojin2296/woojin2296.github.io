@@ -94,9 +94,10 @@ export default function Home() {
       techStack: [
         { name: "AWS", primary: true },
         { name: "Terraform", primary: true },
+        { name: "Kubernetes", primary: true },
+        { name: "Prometheus", primary: true },
+        { name: "Grafana", primary: true },
         { name: "GitHub Actions", primary: false },
-        { name: "Docker Compose", primary: false },
-        { name: "CloudWatch", primary: false },
       ],
     },
     {
@@ -304,7 +305,15 @@ export default function Home() {
   const skillGroups = [
     {
       title: "Cloud / Infra",
-      skills: ["AWS", "Terraform", "Docker", "Linux"],
+      skills: ["AWS", "Terraform", "Kubernetes", "EKS", "Docker", "Linux", "Nginx"],
+    },
+    {
+      title: "CI/CD / GitOps",
+      skills: ["GitHub Actions", "Argo CD", "GitOps", "Git"],
+    },
+    {
+      title: "Observability",
+      skills: ["Prometheus", "Grafana", "Loki", "Alloy"],
     },
     {
       title: "Backend",
@@ -316,7 +325,7 @@ export default function Home() {
     },
     {
       title: "Tooling",
-      skills: ["Git", "GitHub Actions", "Python"],
+      skills: ["AWS Secrets Manager", "Python"],
     },
   ];
 
