@@ -19,7 +19,6 @@ const projectSectionLinks = [
   { id: "availability-scaling", label: "가용성 및 자동 확장 구성" },
   { id: "monitoring", label: "모니터링 구성" },
   { id: "tls-troubleshooting", label: "V1 환경 API 서버 운영 장애 대응: TLS 인증서 갱신 실패" },
-  { id: "node-capacity-troubleshooting", label: "Node capacity/IP/memory 부족 트러블슈팅" },
   { id: "retrospective", label: "프로젝트 회고" },
 ];
 
@@ -43,12 +42,7 @@ export default function DobongLifePage() {
             },
             {
               label: "Role",
-              value: (
-                <>
-                  DevOps Engineer <br />
-                  Backend Developer
-                </>
-              ),
+              value: "DevOps Engineer",
             },
           ]}
         />
@@ -57,19 +51,7 @@ export default function DobongLifePage() {
           <SectionHeading>프로젝트 개요</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"서울특별시 도봉구의 "}
-              <strong className="font-medium text-black">
-                {"지역상권 활성화"}
-              </strong>
-              {"를 위한 관광 정보 안내 서비스입니다. 스토리텔링 기반 여행 코스, 맛집 정보, "}
-              <strong className="font-medium text-black">
-                {"지역 소상공인 연계 할인 쿠폰 발행 및 사용 기능"}
-              </strong>
-              {"을 제공하며, 현재 "}
-              <strong className="font-medium text-black">
-                {"플레이스토어와 앱스토어에 출시되어"}
-              </strong>
-              {" 다운로드 가능한 서비스입니다."}
+              {"도봉라이프 애플리케이션의 AWS 인프라 아키텍처를 설계하고 구축했으며, 배포 파이프라인과 모니터링 환경을 구성해 운영하고 있습니다. 도봉라이프는 서울특별시 도봉구의 지역상권 활성화 애플리케이션으로 스토리텔링 기반 여행 코스, 맛집 정보, 지역 소상공인 연계 할인 쿠폰 발행 및 사용 기능을 제공하며, 현재 플레이스토어와 앱스토어에 출시되어 다운로드 가능합니다."}
             </p>
           </div>
         </section>
@@ -158,15 +140,14 @@ export default function DobongLifePage() {
                 {"역할 기반 아키텍처"}
               </strong>
               {"로 분리하고 확장하였습니다. 이에 따라 "}
+              {"Nginx, Backend, Frontend 서버를 역할별 EC2로 분리하고, "}
               <strong className="font-medium text-black">
-                {"Nginx, Backend, Frontend 서버를 역할별 EC2로 분리"}
+                {"외부 접근 영역과 내부 서비스 영역"}
               </strong>
-              {"하고, 외부 접근 영역과 내부 서비스 영역을 "}
-              <strong className="font-medium text-black">
-                {"Public/Private Subnet"}
-              </strong>
+              {"을 "}
+              {"Public/Private Subnet"}
               {"으로 나누었습니다. Redis는 "}
-              <strong className="font-medium text-black">{"ElastiCache"}</strong>
+              {"ElastiCache"}
               {"로 분리해 애플리케이션 서버와 상태 저장 계층의 책임을 나누었고, Amazon CloudWatch를 활용해 EC2 로그 수집 및 애플리케이션 로그 확인 환경을 구축했습니다."}
             </p>
             <DiagramFigure
@@ -204,7 +185,11 @@ export default function DobongLifePage() {
               {"마이크로 서비스 전환을 위한 EKS 환경 구축 (V3)"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"백엔드 서비스의 MSA 아키텍처 전환과 트래픽 증가에 대비해 기존 서버 배포 방식을 AWS EKS 기반 구조로 확장했습니다. 전체 구조는 외부 진입, 애플리케이션 실행, 데이터 저장 계층을 분리하는 방식으로 설계했습니다. Public Subnet은 ALB를 통한 외부 요청 진입점으로 두고, Private Subnet 내부에는 EKS 애플리케이션 노드와 RDS/Redis 데이터 계층을 나누어 배치해 서비스 트래픽과 데이터 접근 경계를 분리했습니다."}
+              {"백엔드 서비스의 MSA 아키텍처 전환과 트래픽 증가에 대비해 기존 서버 배포 방식을 "}
+              <strong className="font-medium text-black">
+                {"AWS EKS 기반 구조로 확장"}
+              </strong>
+              {"했습니다. 전체 구조는 외부 진입, 애플리케이션 실행, 데이터 저장 계층을 분리하는 방식으로 설계했습니다. Public Subnet은 ALB를 통한 외부 요청 진입점으로 두고, Private Subnet 내부에는 EKS 애플리케이션 노드와 RDS/Redis 데이터 계층을 나누어 배치해 서비스 트래픽과 데이터 접근 경계를 분리했습니다."}
             </p>
             <DiagramFigure
               src="/projects/dobonglife/dobonglife-aws-infra-v3.jpg"
@@ -221,7 +206,7 @@ export default function DobongLifePage() {
               {"Argo CD와 GitOps 기반 EKS 배포 파이프라인 구축 (V3)"}
             </h3>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"이미지 빌드와 클러스터 배포 책임을 분리하는 방식으로 구성했습니다. GitHub Actions는 서비스 소스 변경 시 Docker 이미지를 빌드해 Amazon ECR에 업로드하고, GitOps 저장소의 Helm values 이미지 태그만 갱신하도록 했습니다. GitHub webhook은 GitOps 저장소 변경 이벤트를 Argo CD로 전달해 변경 감지 지연을 줄이도록 연결했습니다. Argo CD에서 GitOps 저장소 변경을 기준으로 EKS에 동기화하도록 구성했습니다."}
+              {"Argo CD를 사용해 이미지 빌드와 클러스터 배포 책임을 분리하는 방식으로 구성했습니다. GitHub Actions는 서비스 소스 변경 시 Docker 이미지를 빌드해 Amazon ECR에 업로드하고, GitOps 저장소의 Helm values 이미지 태그만 갱신하도록 했습니다. GitHub webhook은 GitOps 저장소 변경 이벤트를 Argo CD로 전달해 변경 감지 지연을 줄이도록 연결했으며, 이후 Argo CD에서 GitOps 저장소 변경을 기준으로 EKS에 동기화했습니다."}
             </p>
             <DiagramFigure
               src="/projects/dobonglife/dobonglife-ci-cd-v3.jpg"
@@ -238,9 +223,7 @@ export default function DobongLifePage() {
               {"Terraform 기반 IaC와 GitOps 운영 구조 구축"}
             </h2>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              <strong className="font-medium text-black">
-                {"Terraform 기반 IaC로 AWS 인프라를 코드화하여 인프라 재현성과 변경 추적성을 높였습니다."}
-              </strong>
+              {"Terraform 기반 IaC로 AWS 인프라를 코드화하여 인프라 재현성과 변경 추적성을 높였습니다."}
               {" Terraform은 인프라 리소스의 목표 상태를 정의하고 생성·변경을 적용하고, 리소스 성격과 변경 범위에 따라 스택을 분리했습니다. GitOps 저장소는 Kubernetes 애플리케이션의 배포 상태를 관리하고, Argo CD는 해당 변경을 감지해 EKS 클러스터에 동기화하도록 했습니다."}
             </p>
             <DiagramFigure
@@ -325,7 +308,7 @@ export default function DobongLifePage() {
               {"원인 확인"}
             </h4>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"먼저 서버에 접속해 애플리케이션 프로세스와 서버 시간을 확인했습니다. 서버는 실행 중이었고 NTP 동기화도 정상 상태였지만, 새로운 요청을 시도해도 백엔드 로그와 Nginx access log에 신규 접속 로그가 남지 않았습니다. 이를 통해 요청이 애플리케이션까지 도달하지 못한다는 것을 확인하였습니다."}
+              {"먼저 서버에 접속해 애플리케이션 프로세스를 확인했습니다. 새로운 요청을 시도했지만, 백엔드 로그와 Nginx access log에 신규 접속 로그가 남지 않았습니다. 이를 통해 요청이 애플리케이션까지 도달하지 못한다는 것을 확인하였습니다."}
             </p>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"초기에 DNS 문제를 의심하여 도메인 접속과 서버 IP 직접 접속을 비교하려 했지만, 도메인 접속 단계에서 인증서 만료 오류가 확인되었습니다. 이후 "}
@@ -359,47 +342,11 @@ export default function DobongLifePage() {
           </div>
         </section>
 
-        <section id="node-capacity-troubleshooting" className="scroll-mt-12 pt-24">
-          <SectionHeading>운영 장애 트러블슈팅: Node capacity / IP / memory 부족</SectionHeading>
-          <div className="grid gap-5">
-            <h4 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
-              {"장애 상황"}
-            </h4>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"일부 Pod가 Pending 상태에 머물렀고, 처음에는 이미지 배포 실패나 GitOps 동기화 문제처럼 보였습니다."}
-            </p>
-            <h4 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
-              {"원인 확인"}
-            </h4>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"scheduler event를 확인해 노드에 할당 가능한 CPU·memory가 부족한지, AWS VPC CNI가 Pod에 부여할 IP를 확보하지 못했는지, nodegroup max size와 Cluster Autoscaler가 확장 가능한 상태인지 함께 확인했습니다."}
-            </p>
-            <h4 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
-              {"조치 및 재발 방지"}
-            </h4>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"Spring Boot 서비스의 JVM memory request와 resource request를 dev node 용량에 맞게 조정하고, nodegroup 확장 한계를 함께 검토해 Pending 원인을 capacity 문제로 분리했습니다."}
-            </p>
-            <pre className="overflow-x-auto bg-[#f5f5f5] p-4 text-sm leading-relaxed text-black">
-              <code>{`[placeholder] Pending Pod scheduler event 확인 로그
-$ kubectl describe pod <pod-name> -n backend-dev
-Warning  FailedScheduling  0/2 nodes are available: insufficient memory
-Warning  FailedCreatePodSandBox  failed to assign an IP address to container`}</code>
-            </pre>
-          </div>
-        </section>
-
         <section id="retrospective" className="scroll-mt-12 pt-24">
           <SectionHeading>프로젝트 회고</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"사수 없이 인프라 전반을 단독으로 구축하며 부족한 부분과 시행착오도 많았지만, 그만큼 직접 부딪히며 많이 성장할 수 있었던 프로젝트입니다."}
-            </p>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"서비스 전체를 AWS 환경에 직접 올리고 배포하면서, 인프라가 어떻게 연결되고 실제 트래픽이 어떤 흐름으로 처리되는지 이해할 수 있는 프로젝트였습니다. 특히 도메인 요청이 어떤 라우팅을 거쳐 서버까지 도달하는지, 포트 설정에 따라 요청 흐름이 어떻게 달라지는지 직접 확인하는 과정이 가장 재밌었습니다."}
-            </p>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"또한 Terraform을 사용해보면서 기존에 GUI를 통해 설정했을 때에는 알지 못했던 인프라의 전체 구조와 흐름을 더 쉽게 이해할 수 있었습니다. 처음에는 Kubernetes, GitOps, 모니터링, Secret 관리처럼 어떤 구성 요소가 왜 필요한지 이해하는 것부터 막막했습니다."}
+              {"사수 없이 인프라 전반을 단독으로 구축하며 부족한 부분과 시행착오도 많았지만, 그만큼 직접 부딪히며 많이 성장할 수 있었던 프로젝트입니다. 서비스 전체를 AWS 환경에 직접 올리고 배포하면서, 인프라가 어떻게 연결되고 실제 트래픽이 어떤 흐름으로 처리되는지 이해할 수 있었습니다. 특히 도메인 요청이 어떤 라우팅을 거쳐 서버까지 도달하는지, 포트 설정에 따라 요청 흐름이 어떻게 달라지는지 직접 확인하는 과정이 가장 재밌었습니다. 또한 Terraform을 사용해보면서 기존에 GUI를 통해 설정했을 때에는 알지 못했던 인프라의 전체 구조와 흐름을 더 쉽게 이해할 수 있었습니다."}
             </p>
           </div>
         </section>
