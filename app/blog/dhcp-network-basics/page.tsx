@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { BlogDiagram } from "../_components/blog-diagram";
+import { CodeBlock, InlineCode, NoteRow, ReferenceList } from "../_components/blog-elements";
 
 export const metadata = {
   title: "DHCP는 네트워크 설정을 자동으로 임대해주는 프로토콜이다 | Blog",
@@ -119,23 +119,23 @@ export default function DhcpNetworkBasicsBlogPostPage() {
               DHCP가 내려주는 값
             </h2>
             <div className="mt-6">
-              <NoteRow
+              <NoteRow bordered
                 title="IP address"
                 body="장비가 사용할 주소입니다. 같은 subnet 안에서 중복되면 안 됩니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="Subnet mask 또는 prefix length"
                 body="어디까지가 같은 네트워크인지 판단하는 기준입니다. 예를 들어 192.168.10.34/24라면 보통 192.168.10.0부터 192.168.10.255까지를 같은 subnet으로 봅니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="Default gateway"
                 body="목적지가 같은 subnet 밖에 있을 때 packet을 넘길 router 주소입니다. 이 값이 틀리면 내부 장비끼리는 통신되지만 인터넷이나 다른 subnet으로 나가지 못합니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="DNS server"
                 body="example.com 같은 도메인을 IP 주소로 바꿔줄 서버입니다. DNS가 틀리면 IP로 직접 접속은 되는데 도메인 접속만 실패하는 증상이 나옵니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="Lease time"
                 body="이 설정을 얼마 동안 사용해도 되는지 나타냅니다. DHCP client는 lease가 끝나기 전에 갱신을 시도합니다."
               />
@@ -274,23 +274,23 @@ UDP ports
               운영에서 자주 터지는 문제
             </h2>
             <div className="mt-6">
-              <NoteRow
+              <NoteRow bordered
                 title="주소 풀이 고갈됨"
                 body="DHCP scope에 남은 주소가 없으면 새 장비가 IP를 받지 못합니다. 사용자가 많은 무선망이나 임시 행사망에서 자주 발생합니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="잘못된 gateway 또는 DNS를 배포함"
                 body="DHCP는 중앙에서 값을 뿌리기 때문에 잘못된 옵션 하나가 같은 subnet의 모든 client에 영향을 줍니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="Relay 설정이 빠짐"
                 body="DHCP server가 다른 subnet에 있는데 relay가 없으면 Discover가 server까지 가지 못합니다. 장비는 계속 IP를 못 받거나 fallback 주소를 사용합니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="비인가 DHCP server가 응답함"
                 body="잘못 연결된 공유기나 테스트 장비가 DHCP 응답을 하면 client가 엉뚱한 gateway와 DNS를 받을 수 있습니다. 사내망에서는 DHCP snooping 같은 보호 기능을 함께 봅니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="Static IP와 DHCP pool이 겹침"
                 body="수동으로 고정 IP를 넣은 장비가 DHCP pool 안의 주소를 쓰면 나중에 DHCP가 같은 주소를 다른 장비에 줄 수 있습니다. 예약 주소와 제외 범위를 명확히 나눠야 합니다."
               />
@@ -353,57 +353,9 @@ sudo tcpdump -ni any 'port 67 or port 68'`}
             </div>
           </section>
 
-          <footer className="pt-[88px]">
-            <h2 className="text-[18px] font-medium leading-[1.56] tracking-normal text-black">
-              참고 자료
-            </h2>
-            <ul className="mt-4 grid gap-2 text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-              {references.map((reference) => (
-                <li key={reference.href}>
-                  <a
-                    href={reference.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-black underline-offset-4 hover:underline"
-                  >
-                    {reference.label}
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </footer>
+          <ReferenceList references={references} />
         </article>
       </main>
     </div>
-  );
-}
-
-function CodeBlock({ code }: { code: string }) {
-  return (
-    <pre className="mt-6 overflow-x-auto rounded-xl border border-[#e5e5e5] bg-[#fafafa] p-4 text-sm leading-relaxed text-black">
-      <code>{code}</code>
-    </pre>
-  );
-}
-
-function InlineCode({ children }: { children: ReactNode }) {
-  return (
-    <code className="rounded-[6px] bg-[#fafafa] px-1.5 py-0.5 font-mono text-sm text-black">
-      {children}
-    </code>
-  );
-}
-
-function NoteRow({ title, body }: { title: string; body: string }) {
-  return (
-    <section className="border-t border-[#e5e5e5] py-5 first:border-t-0">
-      <h3 className="text-[18px] font-medium leading-[1.56] tracking-normal text-black">
-        {title}
-      </h3>
-      <p className="mt-2 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-        {body}
-      </p>
-    </section>
   );
 }

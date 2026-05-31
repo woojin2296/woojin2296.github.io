@@ -1,9 +1,8 @@
-import { BackToProjectsLink } from "@/app/_components/back-to-projects-link";
-import { ExpandableImage } from "@/app/_components/expandable-image";
-import { ProjectBottomNavigation } from "@/app/_components/project-bottom-navigation";
-import { ProjectSectionNavigation } from "@/app/_components/project-section-navigation";
-import { SectionHeading } from "@/app/_components/section-heading";
-import { SkillIcon } from "@/app/_components/skill-icon";
+import { ProjectFigure as DiagramFigure } from "@/app/_components/project/project-figure";
+import { ProjectHero } from "@/app/_components/project/project-hero";
+import { ProjectPageLayout } from "@/app/_components/project/project-page-layout";
+import { SectionHeading } from "@/app/_components/common/section-heading";
+import { SkillIcon } from "@/app/_components/common/skill-icon";
 
 export const metadata = {
   title: "판옵티콘(Panopticon) - 연구실 실험 데이터 수집 관제 및 이상 알림 시스템",
@@ -21,99 +20,43 @@ const projectSectionLinks = [
   { id: "retrospective", label: "회고 및 개선 방향" },
 ];
 
-function DiagramFigure({
-  src,
-  alt,
-  caption,
-  width,
-  height,
-  figureClassName = "",
-  wrapperClassName = "block w-full",
-}: {
-  src: string;
-  alt: string;
-  caption: string;
-  width: number;
-  height: number;
-  figureClassName?: string;
-  wrapperClassName?: string;
-}) {
-  return (
-    <figure className={["grid gap-3", figureClassName].filter(Boolean).join(" ")}>
-      <ExpandableImage
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        unoptimized
-        wrapperClassName={wrapperClassName}
-        className="h-auto w-full object-contain"
-      />
-      <figcaption className="text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
 export default function PanopticonPage() {
   return (
-    <div className="min-h-screen bg-white text-black">
-      <main className="mx-auto max-w-[760px] px-5 pt-10 pb-28 sm:px-6">
-        <BackToProjectsLink />
-        <ProjectSectionNavigation links={projectSectionLinks} />
-
-        <header className="mt-16 flex flex-col gap-8 pt-10 text-center">
-          <div className="flex flex-col gap-4">
-            <p className="text-xs uppercase tracking-[0.22em] text-[#737373]">
-              Project No.2
-            </p>
-            <h1 className="font-display text-4xl font-medium leading-[1.12] text-balance">
-              판옵티콘(Panopticon)
-            </h1>
-            <p className="text-base leading-relaxed text-[#737373]">
-              연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템 개발
-            </p>
-          </div>
-
-          <section className="mt-8 grid grid-cols-3 items-stretch">
-            <div className="grid grid-rows-[auto_1fr]">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#737373]">
-                Period
-              </p>
-              <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                2024.07 ~ 2026.02 <br />
-                (1년 8개월 - 개발 및 운영)
-              </p>
-            </div>
-            <div className="relative grid grid-rows-[auto_1fr]">
-              <span
-                className="absolute bottom-4 left-0 top-4 w-px bg-[#e5e5e5]"
-                aria-hidden="true"
-              />
-              <span
-                className="absolute bottom-4 right-0 top-4 w-px bg-[#e5e5e5]"
-                aria-hidden="true"
-              />
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#737373]">
-                Position
-              </p>
-              <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                순천향대학교 UBICOMP LAB <br />
-                학부연구생
-              </p>
-            </div>
-            <div className="grid grid-rows-[auto_1fr]">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#737373]">
-                Role
-              </p>
-              <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                Team Lead <br />
-                Full Stack Developer
-              </p>
-            </div>
-          </section>
-        </header>
+    <ProjectPageLayout sectionLinks={projectSectionLinks}>
+        <ProjectHero
+          eyebrow="Project No.2"
+          title="판옵티콘(Panopticon)"
+          description="연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템 개발"
+          meta={[
+            {
+              label: "Period",
+              value: (
+                <>
+                  2024.07 ~ 2026.02 <br />
+                  (1년 8개월 - 개발 및 운영)
+                </>
+              ),
+            },
+            {
+              label: "Position",
+              value: (
+                <>
+                  순천향대학교 UBICOMP LAB <br />
+                  학부연구생
+                </>
+              ),
+            },
+            {
+              label: "Role",
+              value: (
+                <>
+                  Team Lead <br />
+                  Full Stack Developer
+                </>
+              ),
+            },
+          ]}
+        />
 
         <section id="overview" className="scroll-mt-12 pt-32">
           <SectionHeading>프로젝트 개요</SectionHeading>
@@ -275,7 +218,7 @@ export default function PanopticonPage() {
               {"을 추가하는 구조로 설계했습니다. 백엔드는 Watchdog이 보낸 감지 결과를 저장하고, 프론트엔드는 저장된 상태 이벤트를 조회하거나 WebSocket으로 전달받아 화면을 갱신합니다."}
             </p>
             <DiagramFigure
-              src="/projects/panopticon/Architecture - Panopticon Architecture.jpg"
+              src="/projects/panopticon/panopticon-system-architecture.jpg"
               alt="역할별 모듈로 분리한 판옵티콘 전체 아키텍처"
               width={4879}
               height={3279}
@@ -300,7 +243,7 @@ export default function PanopticonPage() {
               {" 이벤트로 변환해 Next.js 프론트엔드에 전달합니다. Slack 알림도 같은 상태 이벤트를 기준으로 전송되도록 연동했습니다."}
             </p>
             <DiagramFigure
-              src="/projects/panopticon/Architecture - Panopticon Event Architecture.jpg"
+              src="/projects/panopticon/panopticon-event-architecture.jpg"
               alt="Watchdog 상태 이벤트 전파 구조"
               width={7339}
               height={2179}
@@ -351,7 +294,7 @@ export default function PanopticonPage() {
               {"를 순서대로 수행하도록 구성했습니다."}
             </p>
             <DiagramFigure
-              src="/projects/panopticon/Architecture - Panopticon CICD.jpg"
+              src="/projects/panopticon/panopticon-ci-cd.jpg"
               alt="self-hosted runner를 사용한 CI/CD 시퀀스 다이어그램"
               width={4765}
               height={3357}
@@ -382,8 +325,6 @@ export default function PanopticonPage() {
           </div>
         </section>
 
-        <ProjectBottomNavigation />
-      </main>
-    </div>
+    </ProjectPageLayout>
   );
 }

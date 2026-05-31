@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { ArrowLeft } from "lucide-react";
 import { BlogDiagram } from "../_components/blog-diagram";
+import { InlineCode } from "../_components/blog-elements";
 
 export const metadata = {
   title: "CTA는 단순 버튼이 아니라 사용자의 행동을 설계하는 장치다 | Blog",
@@ -285,13 +285,6 @@ export default function CtaCallToActionBlogPostPage() {
   );
 }
 
-function InlineCode({ children }: { children: ReactNode }) {
-  return (
-    <code className="rounded-[6px] bg-[#fafafa] px-1.5 py-0.5 font-mono text-sm text-black">
-      {children}
-    </code>
-  );
-}
 
 function StrategyRow({ title, body }: { title: string; body: string }) {
   return (

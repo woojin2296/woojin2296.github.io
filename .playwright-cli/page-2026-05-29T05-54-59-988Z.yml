@@ -1,0 +1,431 @@
+- generic [ref=e4]:
+  - link "Skip to main content" [ref=e5] [cursor=pointer]:
+    - /url: "#pageContent"
+    - generic [ref=e6]: Skip to main content
+  - generic [ref=e7]:
+    - generic [ref=e8]:
+      - generic [ref=e9]:
+        - button "Close menu" [ref=e10] [cursor=pointer]:
+          - img "Grafana" [ref=e12]
+        - generic [ref=e13]: Grafana
+      - button "Undock menu" [ref=e14] [cursor=pointer]:
+        - img [ref=e15]
+    - navigation [ref=e17]:
+      - list "Navigation" [ref=e21]:
+        - listitem [ref=e22]:
+          - link "Home" [ref=e26] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e28]:
+              - img [ref=e29]
+              - paragraph [ref=e31]: Home
+        - listitem [ref=e32]:
+          - generic [ref=e33]:
+            - link "Bookmarks" [ref=e36] [cursor=pointer]:
+              - /url: /bookmarks
+              - generic [ref=e38]:
+                - img [ref=e39]
+                - paragraph [ref=e41]: Bookmarks
+            - 'button "Expand section: Bookmarks" [ref=e43] [cursor=pointer]':
+              - img [ref=e44]
+        - listitem [ref=e46]:
+          - generic [ref=e47]:
+            - link "Starred" [ref=e50] [cursor=pointer]:
+              - /url: /dashboards?starred
+              - generic [ref=e52]:
+                - img [ref=e53]
+                - paragraph [ref=e55]: Starred
+            - 'button "Expand section: Starred" [ref=e57] [cursor=pointer]':
+              - img [ref=e58]
+        - listitem [ref=e60]:
+          - generic [ref=e61]:
+            - link "Dashboards" [ref=e64] [cursor=pointer]:
+              - /url: /dashboards
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - paragraph [ref=e69]: Dashboards
+            - 'button "Expand section: Dashboards" [ref=e71] [cursor=pointer]':
+              - img [ref=e72]
+        - listitem [ref=e74]:
+          - link "Explore" [ref=e78] [cursor=pointer]:
+            - /url: /explore
+            - generic [ref=e80]:
+              - img [ref=e81]
+              - paragraph [ref=e83]: Explore
+        - listitem [ref=e84]:
+          - generic [ref=e85]:
+            - link "Drilldown" [ref=e88] [cursor=pointer]:
+              - /url: /drilldown
+              - generic [ref=e90]:
+                - img [ref=e91]
+                - paragraph [ref=e96]: Drilldown
+            - 'button "Expand section: Drilldown" [ref=e98] [cursor=pointer]':
+              - img [ref=e99]
+        - listitem [ref=e101]:
+          - generic [ref=e102]:
+            - link "Alerting" [ref=e105] [cursor=pointer]:
+              - /url: /alerting
+              - generic [ref=e107]:
+                - img [ref=e108]
+                - paragraph [ref=e110]: Alerting
+            - 'button "Expand section: Alerting" [ref=e112] [cursor=pointer]':
+              - img [ref=e113]
+        - listitem [ref=e115]:
+          - generic [ref=e116]:
+            - link "Connections" [ref=e119] [cursor=pointer]:
+              - /url: /connections
+              - generic [ref=e121]:
+                - img [ref=e122]
+                - paragraph [ref=e124]: Connections
+            - 'button "Expand section: Connections" [ref=e126] [cursor=pointer]':
+              - img [ref=e127]
+        - listitem [ref=e129]:
+          - generic [ref=e130]:
+            - link "Administration" [ref=e133] [cursor=pointer]:
+              - /url: /admin
+              - generic [ref=e135]:
+                - img [ref=e136]
+                - paragraph [ref=e138]: Administration
+            - 'button "Expand section: Administration" [ref=e140] [cursor=pointer]':
+              - img [ref=e141]
+  - banner [ref=e143]:
+    - generic [ref=e144]:
+      - navigation "Breadcrumbs" [ref=e146]:
+        - list [ref=e147]:
+          - listitem [ref=e148]:
+            - link "Home" [ref=e149] [cursor=pointer]:
+              - /url: /
+            - img [ref=e151]
+          - listitem [ref=e153]:
+            - generic "Dashboards" [ref=e154]
+      - generic [ref=e155]:
+        - generic [ref=e157]:
+          - img [ref=e159]
+          - button "Search..." [ref=e161] [cursor=pointer]
+          - generic [ref=e163]: ⌘+k
+        - button "New" [ref=e164] [cursor=pointer]:
+          - img [ref=e165]
+          - img [ref=e167]
+        - button "Help" [ref=e170] [cursor=pointer]:
+          - img [ref=e171]
+        - button "Profile" [ref=e174] [cursor=pointer]:
+          - img "User avatar" [ref=e175]
+  - main [ref=e178]:
+    - generic [ref=e181]:
+      - generic [ref=e182]:
+        - generic [ref=e183]:
+          - heading "Dashboards" [level=1] [ref=e187]
+          - button "New" [ref=e189] [cursor=pointer]:
+            - generic [ref=e190]:
+              - text: New
+              - img [ref=e191]
+        - generic [ref=e193]: Create and manage dashboards to visualize your data
+      - generic [ref=e195]:
+        - generic [ref=e198]:
+          - img [ref=e200]
+          - textbox "Search for dashboards and folders" [ref=e202]
+        - generic [ref=e204]:
+          - generic [ref=e205]:
+            - generic [ref=e207] [cursor=pointer]:
+              - log [ref=e209]
+              - generic [ref=e210]:
+                - img [ref=e212]
+                - generic [ref=e214]:
+                  - generic [ref=e215]: Filter by tag
+                  - combobox "Tag filter" [ref=e217]
+                - img [ref=e219]
+            - generic [ref=e222]:
+              - checkbox "Starred" [ref=e224]
+              - generic [ref=e226] [cursor=pointer]: Starred
+          - generic [ref=e227]:
+            - radiogroup [ref=e228]:
+              - generic [ref=e229]:
+                - radio [checked] [ref=e230] [cursor=pointer]
+                - generic "View by folders" [ref=e231] [cursor=pointer]:
+                  - img [ref=e232]
+              - generic [ref=e234]:
+                - radio [ref=e235] [cursor=pointer]
+                - generic "View as list" [ref=e236] [cursor=pointer]:
+                  - img [ref=e237]
+            - generic [ref=e239] [cursor=pointer]:
+              - log [ref=e241]
+              - generic [ref=e242]:
+                - img [ref=e244]
+                - generic [ref=e246]:
+                  - generic [ref=e247]: Sort
+                  - combobox "Sort" [ref=e249]
+                - img [ref=e251]
+        - generic [ref=e253]:
+          - generic:
+            - table:
+              - row "Select all Name Tags" [ref=e254]:
+                - columnheader "Select all" [ref=e255]:
+                  - checkbox "Select all" [ref=e258]
+                - columnheader "Name" [ref=e260]:
+                  - generic [ref=e261]: Name
+                - columnheader "Tags" [ref=e262]
+              - rowgroup:
+                - generic [ref=e264]:
+                  - row "Alertmanager / Overview" [ref=e265]:
+                    - cell "Select" [ref=e266]:
+                      - checkbox "Select" [ref=e269]
+                    - cell "Alertmanager / Overview" [ref=e271]:
+                      - generic [ref=e272]:
+                        - img [ref=e273]
+                        - link "Alertmanager / Overview" [ref=e276] [cursor=pointer]:
+                          - /url: /d/alertmanager-overview/alertmanager-overview
+                    - cell "Tags" [ref=e277]:
+                      - list "Tags" [ref=e278]:
+                        - listitem [ref=e279]:
+                          - button "alertmanager-mixin" [ref=e280] [cursor=pointer]
+                  - row "CoreDNS" [ref=e281]:
+                    - cell "Select" [ref=e282]:
+                      - checkbox "Select" [ref=e285]
+                    - cell "CoreDNS" [ref=e287]:
+                      - generic [ref=e288]:
+                        - img [ref=e289]
+                        - link "CoreDNS" [ref=e292] [cursor=pointer]:
+                          - /url: /d/vkQ0UHxik/coredns
+                    - cell "Tags" [ref=e293]:
+                      - list "Tags" [ref=e294]:
+                        - listitem [ref=e295]:
+                          - button "coredns" [ref=e296] [cursor=pointer]
+                        - listitem [ref=e297]:
+                          - button "dns" [ref=e298] [cursor=pointer]
+                  - row "etcd" [ref=e299]:
+                    - cell "Select" [ref=e300]:
+                      - checkbox "Select" [ref=e303]
+                    - cell "etcd" [ref=e305]:
+                      - generic [ref=e306]:
+                        - img [ref=e307]
+                        - link "etcd" [ref=e310] [cursor=pointer]:
+                          - /url: /d/c2f4e12cdf69feb95caa41a5a1b423d9/etcd
+                    - cell "Tags" [ref=e311]:
+                      - list "Tags" [ref=e312]:
+                        - listitem [ref=e313]:
+                          - button "etcd-mixin" [ref=e314] [cursor=pointer]
+                  - row "Grafana Overview" [ref=e315]:
+                    - cell "Select" [ref=e316]:
+                      - checkbox "Select" [ref=e319]
+                    - cell "Grafana Overview" [ref=e321]:
+                      - generic [ref=e322]:
+                        - img [ref=e323]
+                        - link "Grafana Overview" [ref=e326] [cursor=pointer]:
+                          - /url: /d/6be0s85Mk/grafana-overview
+                    - cell "Tags" [ref=e327]:
+                      - list "Tags"
+                  - row "Kubernetes / API server" [ref=e328]:
+                    - cell "Select" [ref=e329]:
+                      - checkbox "Select" [ref=e332]
+                    - cell "Kubernetes / API server" [ref=e334]:
+                      - generic [ref=e335]:
+                        - img [ref=e336]
+                        - link "Kubernetes / API server" [ref=e339] [cursor=pointer]:
+                          - /url: /d/09ec8aa1e996d6ffcd6817bbaff4db1b/kubernetes-api-server
+                    - cell "Tags" [ref=e340]:
+                      - list "Tags" [ref=e341]:
+                        - listitem [ref=e342]:
+                          - button "kubernetes-mixin" [ref=e343] [cursor=pointer]
+                  - row "Kubernetes / Compute Resources / Multi-Cluster" [ref=e344]:
+                    - cell "Select" [ref=e345]:
+                      - checkbox "Select" [ref=e348]
+                    - cell "Kubernetes / Compute Resources / Multi-Cluster" [ref=e350]:
+                      - generic [ref=e351]:
+                        - img [ref=e352]
+                        - link "Kubernetes / Compute Resources / Multi-Cluster" [ref=e355] [cursor=pointer]:
+                          - /url: /d/b59e6c9f2fcbe2e16d77fc492374cc4f/kubernetes-compute-resources-multi-cluster
+                    - cell "Tags" [ref=e356]:
+                      - list "Tags" [ref=e357]:
+                        - listitem [ref=e358]:
+                          - button "kubernetes-mixin" [ref=e359] [cursor=pointer]
+                  - row "Kubernetes / Compute Resources / Cluster" [ref=e360]:
+                    - cell "Select" [ref=e361]:
+                      - checkbox "Select" [ref=e364]
+                    - cell "Kubernetes / Compute Resources / Cluster" [ref=e366]:
+                      - generic [ref=e367]:
+                        - img [ref=e368]
+                        - link "Kubernetes / Compute Resources / Cluster" [ref=e371] [cursor=pointer]:
+                          - /url: /d/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster
+                    - cell "Tags" [ref=e372]:
+                      - list "Tags" [ref=e373]:
+                        - listitem [ref=e374]:
+                          - button "kubernetes-mixin" [ref=e375] [cursor=pointer]
+                  - row "Kubernetes / Compute Resources / Namespace (Pods)" [ref=e376]:
+                    - cell "Select" [ref=e377]:
+                      - checkbox "Select" [ref=e380]
+                    - cell "Kubernetes / Compute Resources / Namespace (Pods)" [ref=e382]:
+                      - generic [ref=e383]:
+                        - img [ref=e384]
+                        - link "Kubernetes / Compute Resources / Namespace (Pods)" [ref=e387] [cursor=pointer]:
+                          - /url: /d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods
+                    - cell "Tags" [ref=e388]:
+                      - list "Tags" [ref=e389]:
+                        - listitem [ref=e390]:
+                          - button "kubernetes-mixin" [ref=e391] [cursor=pointer]
+                  - row "Kubernetes / Compute Resources / Namespace (Workloads)" [ref=e392]:
+                    - cell "Select" [ref=e393]:
+                      - checkbox "Select" [ref=e396]
+                    - cell "Kubernetes / Compute Resources / Namespace (Workloads)" [ref=e398]:
+                      - generic [ref=e399]:
+                        - img [ref=e400]
+                        - link "Kubernetes / Compute Resources / Namespace (Workloads)" [ref=e403] [cursor=pointer]:
+                          - /url: /d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads
+                    - cell "Tags" [ref=e404]:
+                      - list "Tags" [ref=e405]:
+                        - listitem [ref=e406]:
+                          - button "kubernetes-mixin" [ref=e407] [cursor=pointer]
+                  - row "Kubernetes / Compute Resources / Node (Pods)" [ref=e408]:
+                    - cell "Select" [ref=e409]:
+                      - checkbox "Select" [ref=e412]
+                    - cell "Kubernetes / Compute Resources / Node (Pods)" [ref=e414]:
+                      - generic [ref=e415]:
+                        - img [ref=e416]
+                        - link "Kubernetes / Compute Resources / Node (Pods)" [ref=e419] [cursor=pointer]:
+                          - /url: /d/200ac8fdbfbb74b39aff88118e4d1c2c/kubernetes-compute-resources-node-pods
+                    - cell "Tags" [ref=e420]:
+                      - list "Tags" [ref=e421]:
+                        - listitem [ref=e422]:
+                          - button "kubernetes-mixin" [ref=e423] [cursor=pointer]
+                  - row "Kubernetes / Compute Resources / Pod" [ref=e424]:
+                    - cell "Select" [ref=e425]:
+                      - checkbox "Select" [ref=e428]
+                    - cell "Kubernetes / Compute Resources / Pod" [ref=e430]:
+                      - generic [ref=e431]:
+                        - img [ref=e432]
+                        - link "Kubernetes / Compute Resources / Pod" [ref=e435] [cursor=pointer]:
+                          - /url: /d/6581e46e4e5c7ba40a07646395ef7b23/kubernetes-compute-resources-pod
+                    - cell "Tags" [ref=e436]:
+                      - list "Tags" [ref=e437]:
+                        - listitem [ref=e438]:
+                          - button "kubernetes-mixin" [ref=e439] [cursor=pointer]
+                  - row "Kubernetes / Compute Resources / Workload" [ref=e440]:
+                    - cell "Select" [ref=e441]:
+                      - checkbox "Select" [ref=e444]
+                    - cell "Kubernetes / Compute Resources / Workload" [ref=e446]:
+                      - generic [ref=e447]:
+                        - img [ref=e448]
+                        - link "Kubernetes / Compute Resources / Workload" [ref=e451] [cursor=pointer]:
+                          - /url: /d/a164a7f0339f99e89cea5cb47e9be617/kubernetes-compute-resources-workload
+                    - cell "Tags" [ref=e452]:
+                      - list "Tags" [ref=e453]:
+                        - listitem [ref=e454]:
+                          - button "kubernetes-mixin" [ref=e455] [cursor=pointer]
+                  - row "Kubernetes / Controller Manager" [ref=e456]:
+                    - cell "Select" [ref=e457]:
+                      - checkbox "Select" [ref=e460]
+                    - cell "Kubernetes / Controller Manager" [ref=e462]:
+                      - generic [ref=e463]:
+                        - img [ref=e464]
+                        - link "Kubernetes / Controller Manager" [ref=e467] [cursor=pointer]:
+                          - /url: /d/72e0e05bef5099e5f049b05fdc429ed4/kubernetes-controller-manager
+                    - cell "Tags" [ref=e468]:
+                      - list "Tags" [ref=e469]:
+                        - listitem [ref=e470]:
+                          - button "kubernetes-mixin" [ref=e471] [cursor=pointer]
+                  - row "Kubernetes / Kubelet" [ref=e472]:
+                    - cell "Select" [ref=e473]:
+                      - checkbox "Select" [ref=e476]
+                    - cell "Kubernetes / Kubelet" [ref=e478]:
+                      - generic [ref=e479]:
+                        - img [ref=e480]
+                        - link "Kubernetes / Kubelet" [ref=e483] [cursor=pointer]:
+                          - /url: /d/3138fa155d5915769fbded898ac09fd9/kubernetes-kubelet
+                    - cell "Tags" [ref=e484]:
+                      - list "Tags" [ref=e485]:
+                        - listitem [ref=e486]:
+                          - button "kubernetes-mixin" [ref=e487] [cursor=pointer]
+                  - row "Kubernetes / Networking / Cluster" [ref=e488]:
+                    - cell "Select" [ref=e489]:
+                      - checkbox "Select" [ref=e492]
+                    - cell "Kubernetes / Networking / Cluster" [ref=e494]:
+                      - generic [ref=e495]:
+                        - img [ref=e496]
+                        - link "Kubernetes / Networking / Cluster" [ref=e499] [cursor=pointer]:
+                          - /url: /d/ff635a025bcfea7bc3dd4f508990a3e9/kubernetes-networking-cluster
+                    - cell "Tags" [ref=e500]:
+                      - list "Tags" [ref=e501]:
+                        - listitem [ref=e502]:
+                          - button "kubernetes-mixin" [ref=e503] [cursor=pointer]
+                  - row "Kubernetes / Networking / Namespace (Pods)" [ref=e504]:
+                    - cell "Select" [ref=e505]:
+                      - checkbox "Select" [ref=e508]
+                    - cell "Kubernetes / Networking / Namespace (Pods)" [ref=e510]:
+                      - generic [ref=e511]:
+                        - img [ref=e512]
+                        - link "Kubernetes / Networking / Namespace (Pods)" [ref=e515] [cursor=pointer]:
+                          - /url: /d/8b7a8b326d7a6f1f04244066368c67af/kubernetes-networking-namespace-pods
+                    - cell "Tags" [ref=e516]:
+                      - list "Tags" [ref=e517]:
+                        - listitem [ref=e518]:
+                          - button "kubernetes-mixin" [ref=e519] [cursor=pointer]
+                  - row "Kubernetes / Networking / Namespace (Workload)" [ref=e520]:
+                    - cell "Select" [ref=e521]:
+                      - checkbox "Select" [ref=e524]
+                    - cell "Kubernetes / Networking / Namespace (Workload)" [ref=e526]:
+                      - generic [ref=e527]:
+                        - img [ref=e528]
+                        - link "Kubernetes / Networking / Namespace (Workload)" [ref=e531] [cursor=pointer]:
+                          - /url: /d/bbb2a765a623ae38130206c7d94a160f/kubernetes-networking-namespace-workload
+                    - cell "Tags" [ref=e532]:
+                      - list "Tags" [ref=e533]:
+                        - listitem [ref=e534]:
+                          - button "kubernetes-mixin" [ref=e535] [cursor=pointer]
+                  - row "Kubernetes / Networking / Pod" [ref=e536]:
+                    - cell "Select" [ref=e537]:
+                      - checkbox "Select" [ref=e540]
+                    - cell "Kubernetes / Networking / Pod" [ref=e542]:
+                      - generic [ref=e543]:
+                        - img [ref=e544]
+                        - link "Kubernetes / Networking / Pod" [ref=e547] [cursor=pointer]:
+                          - /url: /d/7a18067ce943a40ae25454675c19ff5c/kubernetes-networking-pod
+                    - cell "Tags" [ref=e548]:
+                      - list "Tags" [ref=e549]:
+                        - listitem [ref=e550]:
+                          - button "kubernetes-mixin" [ref=e551] [cursor=pointer]
+                  - row "Kubernetes / Networking / Workload" [ref=e552]:
+                    - cell "Select" [ref=e553]:
+                      - checkbox "Select" [ref=e556]
+                    - cell "Kubernetes / Networking / Workload" [ref=e558]:
+                      - generic [ref=e559]:
+                        - img [ref=e560]
+                        - link "Kubernetes / Networking / Workload" [ref=e563] [cursor=pointer]:
+                          - /url: /d/728bf77cc1166d2f3133bf25846876cc/kubernetes-networking-workload
+                    - cell "Tags" [ref=e564]:
+                      - list "Tags" [ref=e565]:
+                        - listitem [ref=e566]:
+                          - button "kubernetes-mixin" [ref=e567] [cursor=pointer]
+                  - row "Kubernetes / Persistent Volumes" [ref=e568]:
+                    - cell "Select" [ref=e569]:
+                      - checkbox "Select" [ref=e572]
+                    - cell "Kubernetes / Persistent Volumes" [ref=e574]:
+                      - generic [ref=e575]:
+                        - img [ref=e576]
+                        - link "Kubernetes / Persistent Volumes" [ref=e579] [cursor=pointer]:
+                          - /url: /d/919b92a8e8041bd567af9edab12c840c/kubernetes-persistent-volumes
+                    - cell "Tags" [ref=e580]:
+                      - list "Tags" [ref=e581]:
+                        - listitem [ref=e582]:
+                          - button "kubernetes-mixin" [ref=e583] [cursor=pointer]
+                  - row "Kubernetes / Proxy" [ref=e584]:
+                    - cell "Select" [ref=e585]:
+                      - checkbox "Select" [ref=e588]
+                    - cell "Kubernetes / Proxy" [ref=e590]:
+                      - generic [ref=e591]:
+                        - img [ref=e592]
+                        - link "Kubernetes / Proxy" [ref=e595] [cursor=pointer]:
+                          - /url: /d/632e265de029684c40b21cb76bca4f94/kubernetes-proxy
+                    - cell "Tags" [ref=e596]:
+                      - list "Tags" [ref=e597]:
+                        - listitem [ref=e598]:
+                          - button "kubernetes-mixin" [ref=e599] [cursor=pointer]
+                  - row "Kubernetes / Scheduler" [ref=e600]:
+                    - cell "Select" [ref=e601]:
+                      - checkbox "Select" [ref=e604]
+                    - cell "Kubernetes / Scheduler" [ref=e606]:
+                      - generic [ref=e607]:
+                        - img [ref=e608]
+                        - link "Kubernetes / Scheduler" [ref=e611] [cursor=pointer]:
+                          - /url: /d/2e6b6a3b4bddf1427b3a55aa1311c656/kubernetes-scheduler
+                    - cell "Tags" [ref=e612]:
+                      - list "Tags" [ref=e613]:
+                        - listitem [ref=e614]:
+                          - button "kubernetes-mixin" [ref=e615] [cursor=pointer]

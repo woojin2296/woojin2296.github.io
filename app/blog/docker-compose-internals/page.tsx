@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { BlogDiagram } from "../_components/blog-diagram";
+import { CodeBlock, InlineCode, ReferenceList } from "../_components/blog-elements";
 
 export const metadata = {
   title:
@@ -70,39 +70,6 @@ export default function DockerComposeInternalsBlogPostPage() {
               Docker Compose는 여러 컨테이너를 하나의 애플리케이션으로 다루는 도구다
             </h1>
           </header>
-
-          <section className="pt-[88px]">
-            <h2 className="text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
-              Docker Compose가 해결하는 문제
-            </h2>
-            <div className="mt-6 grid gap-4 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              <p>
-                실제 서비스는 컨테이너 하나로 끝나지 않는 경우가 많습니다. 웹 서버,
-                API 서버, 데이터베이스, Redis, 메시지 브로커, 로컬 테스트용 mock
-                서버가 함께 떠야 애플리케이션이 동작합니다.
-              </p>
-              <p>
-                이 컨테이너들을 매번 <InlineCode>docker run</InlineCode>으로 실행하면
-                명령이 길어지고, 포트 매핑과 환경 변수와 볼륨과 네트워크를 사람이
-                기억해야 합니다. 컨테이너 하나를 잘 실행하는 문제가 아니라 여러
-                컨테이너를 같은 조건으로 다시 실행하는 문제가 됩니다.
-              </p>
-              <p>
-                Docker Compose는 이 문제를 <InlineCode>compose.yaml</InlineCode>에
-                선언으로 남깁니다. 어떤 서비스가 어떤 이미지로 실행되는지, 어떤
-                네트워크에 붙는지, 어떤 볼륨을 쓰는지, 어떤 환경 변수를 받는지를 한
-                파일에 적고 <InlineCode>docker compose up</InlineCode>으로 전체
-                애플리케이션을 올립니다.
-              </p>
-            </div>
-            <BlogDiagram
-              src="/blog/docker-compose-application-model.png"
-              alt="compose.yaml이 Project model로 해석되고 Docker Engine의 컨테이너, 네트워크, 볼륨 리소스로 적용되는 구조"
-              width={1440}
-              height={900}
-              caption="Compose의 핵심은 여러 Docker 리소스를 하나의 프로젝트 모델로 묶는 것입니다. 서비스, 네트워크, 볼륨은 개별 명령이 아니라 하나의 애플리케이션 선언으로 관리됩니다."
-            />
-          </section>
 
           <section className="pt-[88px]">
             <h2 className="text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
@@ -451,47 +418,14 @@ docker compose config --environment`}
             </div>
           </section>
 
-          <section className="pt-[88px]">
-            <h2 className="text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
-              참고 자료
-            </h2>
-            <ul className="mt-6 grid gap-3">
-              {references.map((reference) => (
-                <li key={reference.href}>
-                  <a
-                    href={reference.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-base font-normal leading-relaxed tracking-normal text-[#737373] underline-offset-4 hover:text-black hover:underline"
-                  >
-                    <span>{reference.label}</span>
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <ReferenceList references={references} />
         </article>
       </main>
     </div>
   );
 }
 
-function InlineCode({ children }: { children: ReactNode }) {
-  return (
-    <code className="rounded-[6px] bg-[#fafafa] px-1.5 py-0.5 font-mono text-sm text-black">
-      {children}
-    </code>
-  );
-}
 
-function CodeBlock({ code }: { code: string }) {
-  return (
-    <pre className="mt-8 overflow-x-auto rounded-xl border border-[#e5e5e5] bg-[#fafafa] p-5 text-sm leading-relaxed text-black">
-      <code>{code}</code>
-    </pre>
-  );
-}
 
 function ConceptRow({ title, body }: { title: string; body: string }) {
   return (

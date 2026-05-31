@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { BlogDiagram } from "../_components/blog-diagram";
+import { CodeBlock } from "../_components/blog-elements";
 
 export const metadata = {
   title: "Deployment Network Issue: Docker pull 실패를 DNS 설정에서 찾기 | Blog",
@@ -326,13 +327,6 @@ docker pull <image-name>:<tag>`}
   );
 }
 
-function CodeBlock({ code }: { code: string }) {
-  return (
-    <pre className="mt-6 overflow-x-auto rounded-xl border border-[#e5e5e5] bg-[#fafafa] p-4 text-sm leading-relaxed text-black">
-      <code>{code}</code>
-    </pre>
-  );
-}
 
 function CheckItem({ title, body }: { title: string; body: string }) {
   return (

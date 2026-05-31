@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { BlogDiagram } from "../_components/blog-diagram";
+import { CodeBlock, NoteRow, ReferenceList } from "../_components/blog-elements";
 
 export const metadata = {
   title: "OIDC는 OAuth 2.0 위에서 인증을 어떻게 완성하는가 | Blog",
@@ -511,49 +512,9 @@ Host: idp.example.com`}
             </div>
           </section>
 
-          <footer className="pt-[88px]">
-            <h2 className="text-[18px] font-medium leading-[1.56] tracking-normal text-black">
-              참고 자료
-            </h2>
-            <ul className="mt-4 grid gap-2 text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-              {references.map((reference) => (
-                <li key={reference.href}>
-                  <a
-                    href={reference.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-black underline-offset-4 hover:underline"
-                  >
-                    {reference.label}
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </footer>
+          <ReferenceList references={references} />
         </article>
       </main>
     </div>
-  );
-}
-
-function CodeBlock({ code }: { code: string }) {
-  return (
-    <pre className="mt-6 overflow-x-auto rounded-xl border border-[#e5e5e5] bg-[#fafafa] p-4 text-sm leading-relaxed text-black">
-      <code>{code}</code>
-    </pre>
-  );
-}
-
-function NoteRow({ title, body }: { title: string; body: string }) {
-  return (
-    <section className="py-5">
-      <h3 className="text-[18px] font-medium leading-[1.56] tracking-normal text-black">
-        {title}
-      </h3>
-      <p className="mt-2 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-        {body}
-      </p>
-    </section>
   );
 }

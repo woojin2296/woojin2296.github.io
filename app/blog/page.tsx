@@ -17,6 +17,24 @@ type BlogPost = {
 
 const blogPosts: BlogPost[] = [
   {
+    title: "Node capacity와 Pod IP 부족으로 Pending이 길어진 장애 분석",
+    description:
+      "Kubernetes Pod Pending 장애를 image pull이나 GitOps 문제가 아니라 scheduler memory, AWS VPC CNI Pod IP, nodegroup scaling boundary 관점에서 분리해 분석했습니다.",
+    date: "2026.05",
+    category: "Incident / Kubernetes",
+    tags: ["Kubernetes", "EKS", "Capacity"],
+    href: "/blog/kubernetes-node-capacity-ip-memory/",
+  },
+  {
+    title: "RDS connection exhaustion으로 readiness가 올라오지 않은 장애 분석",
+    description:
+      "백엔드 서비스 기동 중 datasource 설정 누락처럼 보였던 장애를 Hibernate JDBC metadata 조회 실패, MySQL Too many connections, Hikari pool 설정 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Incident / RDS",
+    tags: ["RDS", "HikariCP", "Spring Boot"],
+    href: "/blog/rds-connection-exhaustion/",
+  },
+  {
     title: "리눅스 파일시스템과 디렉터리 구조 이해하기",
     description:
       "리눅스의 단일 루트 트리, mount point, inode와 path resolution, /etc, /usr, /var, /proc, /sys 같은 디렉터리 역할과 운영 실수를 정리했습니다.",

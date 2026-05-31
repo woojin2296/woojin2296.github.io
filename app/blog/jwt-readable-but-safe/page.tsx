@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { BlogDiagram } from "../_components/blog-diagram";
+import { InlineCode, ReferenceList } from "../_components/blog-elements";
 
 export const metadata = {
   title: "JWT는 모두가 열어볼 수 있는데 왜 안전할까? | Blog",
@@ -301,36 +301,9 @@ export default function JwtReadableButSafeBlogPostPage() {
             </div>
           </section>
 
-          <footer className="pt-[88px]">
-            <h2 className="text-[18px] font-medium leading-[1.56] tracking-normal text-black">
-              참고 자료
-            </h2>
-            <ul className="mt-4 grid gap-2 text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-              {references.map((reference) => (
-                <li key={reference.href}>
-                  <a
-                    href={reference.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-black underline-offset-4 hover:underline"
-                  >
-                    {reference.label}
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </footer>
+          <ReferenceList references={references} />
         </article>
       </main>
     </div>
-  );
-}
-
-function InlineCode({ children }: { children: ReactNode }) {
-  return (
-    <code className="rounded-[6px] bg-[#fafafa] px-1.5 py-0.5 font-mono text-sm text-black">
-      {children}
-    </code>
   );
 }

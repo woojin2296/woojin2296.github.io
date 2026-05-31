@@ -7,49 +7,63 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
-import { ExpandableImage } from "@/app/_components/expandable-image";
-import { SectionHeading } from "@/app/_components/section-heading";
-import { SectionNavigation } from "@/app/_components/section-navigation";
+import { ExpandableImage } from "@/app/_components/common/expandable-image";
+import { SectionHeading } from "@/app/_components/common/section-heading";
+import { SectionNavigation } from "@/app/_components/navigation/section-navigation";
 
 export default function Home() {
   const architecturalDiagrams = [
     {
-      src: "/projects/dobonglife/Architecture - DobongLife AWS Infra - V1.jpg",
+      src: "/projects/dobonglife/dobonglife-aws-infra-v3.jpg",
+      alt: "도봉라이프 V3 AWS 인프라 아키텍처 다이어그램",
+      caption: "도봉라이프 인프라 아키텍처 - V3",
+      width: 4197,
+      height: 3811,
+    },
+    {
+      src: "/projects/dobonglife/dobonglife-ci-cd-v3.jpg",
+      alt: "도봉라이프 V3 CI/CD 아키텍처 다이어그램",
+      caption: "도봉라이프 CI/CD 파이프라인 - V3",
+      width: 4995,
+      height: 3202,
+    },
+    {
+      src: "/projects/dobonglife/dobonglife-aws-infra-v1.jpg",
       alt: "도봉라이프 V1 AWS 인프라 아키텍처 다이어그램",
       caption: "도봉라이프 인프라 아키텍처 - V1",
       width: 5800,
       height: 2758,
     },
     {
-      src: "/projects/dobonglife/Architecture - DobongLife CICD - V1.jpg",
+      src: "/projects/dobonglife/dobonglife-ci-cd-v1.jpg",
       alt: "도봉라이프 V1 CI/CD 아키텍처 다이어그램",
       caption: "도봉라이프 CI/CD 파이프라인 - V1",
       width: 4598,
       height: 3479,
     },
     {
-      src: "/projects/dobonglife/Architecture - DobongLife AWS Infra - V2.jpg",
+      src: "/projects/dobonglife/dobonglife-aws-infra-v2.jpg",
       alt: "도봉라이프 V2 AWS 인프라 아키텍처 다이어그램",
       caption: "도봉라이프 인프라 아키텍처 - V2",
       width: 5333,
       height: 2999,
     },
     {
-      src: "/projects/dobonglife/Architecture - DobongLife CICD - V2.jpg",
+      src: "/projects/dobonglife/dobonglife-ci-cd-v2.jpg",
       alt: "도봉라이프 V2 CI/CD 아키텍처 다이어그램",
       caption: "도봉라이프 CI/CD 파이프라인 - V2",
       width: 5756,
       height: 2779,
     },
     {
-      src: "/projects/panopticon/Architecture - Panopticon Architecture.jpg",
+      src: "/projects/panopticon/panopticon-system-architecture.jpg",
       alt: "판옵티콘 전체 아키텍처 다이어그램",
       caption: "판옵티콘 전체 아키텍처",
       width: 4879,
       height: 3279,
     },
     {
-      src: "/projects/panopticon/Architecture - Panopticon CICD.jpg",
+      src: "/projects/panopticon/panopticon-ci-cd.jpg",
       alt: "판옵티콘 self-hosted runner CI/CD 시퀀스 다이어그램",
       caption: "판옵티콘 CI/CD 파이프라인",
       width: 4765,
@@ -65,7 +79,7 @@ export default function Home() {
       position: "인턴 사원",
       period: "2026.04 ~ current",
       image: {
-        src: "/projects/dobonglife/Architecture - DobongLife AWS Infra - V2.jpg",
+        src: "/projects/dobonglife/dobonglife-aws-infra-v2.jpg",
         alt: "도봉라이프 AWS 인프라 대표 이미지",
         width: 5333,
         height: 2999,
@@ -92,7 +106,7 @@ export default function Home() {
       position: "학부연구생",
       period: "2024.07 ~ 2026.02",
       image: {
-        src: "/projects/panopticon/Architecture - Panopticon Architecture.jpg",
+        src: "/projects/panopticon/panopticon-system-architecture.jpg",
         alt: "판옵티콘 아키텍처 대표 이미지",
         width: 4879,
         height: 3279,
@@ -119,7 +133,7 @@ export default function Home() {
       position: "개인 프로젝트",
       period: "2025.06 ~ 2026.02",
       image: {
-        src: "/projects/sch-iot-rankingboard/sch-system-architecture.png",
+        src: "/projects/sch-iot-rankingboard/sch-miniproject-system-architecture.png",
         alt: "SCH MiniProject PMS 운영 아키텍처 대표 이미지",
         width: 6166,
         height: 2594,
@@ -130,7 +144,7 @@ export default function Home() {
         "세션 기반 인증과 API 경로 기반 인가 구현",
         "파일 업로드 보안과 서버 검증 구현",
         "모니터링을 위한 요청 로그 관리 구현",
-        "내부망 DNS 문제로 인한 서비스 배포 실패 해결",
+        "서버 배포 장애 대응: 내부망 DNS 설정 유실",
       ],
       techStack: [
         { name: "Next.js", primary: true },
@@ -285,17 +299,6 @@ export default function Home() {
       ],
       techStack: ["Arduino", "C", "Embedded System"],
     },
-  ];
-
-  const projectFieldStats = [
-    { title: "Frontend / UI", count: 6 },
-    { title: "Backend / API", count: 6 },
-    { title: "Cloud / DevOps", count: 3 },
-    { title: "IoT / Sensor", count: 5 },
-    { title: "Realtime / Network", count: 4 },
-    { title: "AI / Data", count: 5 },
-    { title: "Embedded / Hardware", count: 3 },
-    { title: "Game / Interactive", count: 1 },
   ];
 
   const skillGroups = [
@@ -475,41 +478,18 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="flex flex-col gap-6">
-            <div className="flex flex-col gap-4">
-              <h2 className="font-heading text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
-                여러 기술 분야를 이해하고 연결하는 개발자를 지향합니다.
-              </h2>
-              <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-                프론트엔드, 백엔드, 인프라, 네트워크, 보안, 임베디드, AI,
-                운영체제 등 다양한 분야를 공부하고 프로젝트를 진행해왔습니다.{" "}
-                하나의 기술만 사용하는 개발자가 아니라, 서비스의 전체 분야를
-                이해하고 필요한 기술을 적재적소에 사용할 수 있는 개발자를
-                지향합니다. 다양한 계층의 흐름을 이해하고 있기 때문에, 장애 발생
-                시 원인을 빠르게 추적하고 해결하는 과정에도 강점을 가지고
-                있습니다.
-              </p>
-            </div>
-            <dl className="grid gap-x-8 md:grid-cols-2">
-              {projectFieldStats.map((field) => (
-                <div
-                  key={field.title}
-                  className="flex items-baseline justify-between gap-4 border-t border-[#e5e5e5] py-3"
-                >
-                  <dt className="text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-                    {field.title}
-                  </dt>
-                  <dd className="flex shrink-0 items-baseline gap-1 text-black">
-                    <span className="text-[22px] font-medium leading-none">
-                      {field.count}
-                    </span>
-                    <span className="text-xs font-normal uppercase tracking-normal text-[#737373]">
-                      {field.count === 1 ? "project" : "projects"}
-                    </span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
+          <section className="flex flex-col gap-4">
+            <h2 className="font-heading text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
+              여러 기술 분야를 이해하고 연결하는 개발자를 지향합니다.
+            </h2>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              프론트엔드, 백엔드, 인프라, 네트워크, 보안, 임베디드, AI, 운영체제
+              등 다양한 분야를 공부하고 프로젝트를 진행해왔습니다. 하나의
+              기술만 사용하는 개발자가 아니라, 서비스의 전체 분야를 이해하고
+              필요한 기술을 적재적소에 사용할 수 있는 개발자를 지향합니다.
+              다양한 계층의 흐름을 이해하고 있기 때문에, 장애 발생 시 원인을
+              빠르게 추적하고 해결하는 과정에도 강점을 가지고 있습니다.
+            </p>
           </section>
 
           <section className="flex flex-col gap-4">

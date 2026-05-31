@@ -1,9 +1,9 @@
-import { BackToProjectsLink } from "@/app/_components/back-to-projects-link";
-import { ExpandableImage } from "@/app/_components/expandable-image";
-import { ProjectBottomNavigation } from "@/app/_components/project-bottom-navigation";
-import { ProjectSectionNavigation } from "@/app/_components/project-section-navigation";
-import { SectionHeading } from "@/app/_components/section-heading";
-import { SkillIcon } from "@/app/_components/skill-icon";
+import { ArrowUpRight } from "lucide-react";
+import { ProjectFigure as DiagramFigure } from "@/app/_components/project/project-figure";
+import { ProjectHero } from "@/app/_components/project/project-hero";
+import { ProjectPageLayout } from "@/app/_components/project/project-page-layout";
+import { SectionHeading } from "@/app/_components/common/section-heading";
+import { SkillIcon } from "@/app/_components/common/skill-icon";
 
 export const metadata = {
   title: "SCH MiniProject PMS | Lim Woojin Portfolio",
@@ -20,98 +20,54 @@ const projectSectionLinks = [
   { id: "auth-authorization", label: "세션 기반 인증과 API 경로 기반 인가 구현" },
   { id: "security-validation", label: "파일 업로드 보안과 서버 검증 구현" },
   { id: "audit-logging", label: "모니터링을 위한 요청 로그 관리 구현" },
-  { id: "deployment-environment", label: "내부망 DNS 문제로 인한 서비스 배포 실패 해결" },
+  { id: "deployment-environment", label: "서버 배포 장애 대응: 내부망 DNS 설정 유실" },
   { id: "retrospective", label: "회고 및 개선 방향" },
 ];
 
-function DiagramFigure({
-  src,
-  alt,
-  caption,
-  width,
-  height,
-}: {
-  src: string;
-  alt: string;
-  caption: string;
-  width: number;
-  height: number;
-}) {
-  return (
-    <figure className="grid gap-3">
-      <ExpandableImage
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        unoptimized
-        wrapperClassName="block w-full"
-        className="h-auto w-full object-contain"
-      />
-      <figcaption className="text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
 export default function SchMiniProjectPage() {
   return (
-    <div className="min-h-screen bg-white text-black">
-      <main className="mx-auto max-w-[760px] px-5 pt-10 pb-28 sm:px-6">
-        <BackToProjectsLink />
-        <ProjectSectionNavigation links={projectSectionLinks} />
-
-        <header className="mt-16 flex flex-col gap-8 pt-10 text-center">
-          <div className="flex flex-col gap-4">
-            <p className="text-xs uppercase tracking-[0.22em] text-[#737373]">
-              Project No.3
-            </p>
-            <h1 className="font-display text-4xl font-medium leading-[1.12] text-balance">
-              SCH MiniProject PMS
-            </h1>
-            <p className="text-base leading-relaxed text-[#737373]">
-              순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제 관리 시스템
-            </p>
-          </div>
-
-          <section className="mt-8 grid grid-cols-3 items-stretch">
-            <div className="grid grid-rows-[auto_1fr]">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#737373]">
-                Period
-              </p>
-              <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                2025.06 ~ 2026.02 <br />
-                (약 10개월 - 개발 및 운영)
-              </p>
-            </div>
-            <div className="relative grid grid-rows-[auto_1fr]">
-              <span
-                className="absolute bottom-4 left-0 top-4 w-px bg-[#e5e5e5]"
-                aria-hidden="true"
-              />
-              <span
-                className="absolute bottom-4 right-0 top-4 w-px bg-[#e5e5e5]"
-                aria-hidden="true"
-              />
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#737373]">
-                Position
-              </p>
-              <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                순천향대학교 ML/DL 강의 <br />
-                개인 프로젝트
-              </p>
-            </div>
-            <div className="grid grid-rows-[auto_1fr]">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#737373]">
-                Role
-              </p>
-              <p className="mt-3 flex min-h-10 items-center justify-center text-sm font-medium text-black">
-                Full-stack Developer
-              </p>
-            </div>
-          </section>
-        </header>
+    <ProjectPageLayout
+      sectionLinks={projectSectionLinks}
+      topAction={
+        <a
+          href="https://github.com/woojin2296/SCH-IoT-ML-Ranking-System"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full border border-[#d4d4d4] bg-white px-3 text-sm font-medium leading-none text-black transition-colors hover:bg-[#f5f5f5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+          aria-label="SCH MiniProject PMS GitHub 저장소 열기"
+        >
+          <GitHubIcon />
+          GitHub
+          <ArrowUpRight className="-ml-0.5 h-3.5 w-3.5" aria-hidden="true" />
+        </a>
+      }
+    >
+        <ProjectHero
+          eyebrow="Project No.3"
+          title="SCH MiniProject PMS"
+          description="순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제 관리 시스템"
+          meta={[
+            {
+              label: "Period",
+              value: (
+                <>
+                  2025.06 ~ 2026.02 <br />
+                  (약 10개월 - 개발 및 운영)
+                </>
+              ),
+            },
+            {
+              label: "Position",
+              value: (
+                <>
+                  순천향대학교 ML/DL 강의 <br />
+                  개인 프로젝트
+                </>
+              ),
+            },
+            { label: "Role", value: "Full-stack Developer" },
+          ]}
+        />
 
         <section id="overview" className="scroll-mt-12 pt-32">
           <SectionHeading>프로젝트 개요</SectionHeading>
@@ -227,14 +183,14 @@ export default function SchMiniProjectPage() {
               aria-label="SCH MiniProject 주요 화면"
             >
               <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-miniproject-page-1-ranking.png"
+                src="/projects/sch-iot-rankingboard/sch-miniproject-ranking-page.png"
                 alt="전체 프로젝트 랭킹을 확인하는 학생 화면"
                 width={1920}
                 height={1080}
                 caption="전체 프로젝트 랭킹을 확인하는 학생 화면"
               />
               <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-miniproject-page-3-admin-rankings.png"
+                src="/projects/sch-iot-rankingboard/sch-miniproject-admin-rankings-page.png"
                 alt="프로젝트별 랭킹과 점수를 집계하는 관리자 화면"
                 width={1920}
                 height={1080}
@@ -260,14 +216,14 @@ export default function SchMiniProjectPage() {
             </p>
             <div className="grid gap-5 sm:grid-cols-2">
               <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-system-architecture.png"
+                src="/projects/sch-iot-rankingboard/sch-miniproject-system-architecture.png"
                 alt="SCH MiniProject PMS 운영 아키텍처 다이어그램"
                 width={1672}
                 height={941}
                 caption="운영 아키텍처 구성도"
               />
               <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-data-model-erd.png"
+                src="/projects/sch-iot-rankingboard/sch-miniproject-data-model-erd.png"
                 alt="SCH MiniProject PMS 데이터 구조 ERD"
                 width={1320}
                 height={562}
@@ -292,14 +248,14 @@ export default function SchMiniProjectPage() {
             </p>
             <div className="grid gap-6 px-4 sm:px-8">
               <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-session-auth-flow.jpg"
+                src="/projects/sch-iot-rankingboard/sch-miniproject-session-auth-flow.jpg"
                 alt="SCH MiniProject 로그인 및 세션 발급 흐름"
                 width={6923}
                 height={2310}
                 caption="로그인 및 세션 발급 흐름"
               />
               <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-session-api-flow.jpg"
+                src="/projects/sch-iot-rankingboard/sch-miniproject-session-api-flow.jpg"
                 alt="SCH MiniProject 보호된 API 접근 및 경로 기반 인가 흐름"
                 width={5598}
                 height={2857}
@@ -363,26 +319,15 @@ export default function SchMiniProjectPage() {
           <SectionHeading>모니터링을 위한 요청 로그 관리 구현</SectionHeading>
           <div className="grid gap-5">
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"성적 반영에는 점수뿐 아니라 제출 시간 등도 중요하기 때문에, 문제가 생겼을 때 누가 어떤 요청을 했는지 확인할 수 있어야 했습니다. 제출 실패, 로그인 실패, 점수 관리, 관리자 작업처럼 나중에 확인이 필요한 요청을 "}
+              {"성적 반영에는 점수뿐 아니라 제출 시간도 중요했기 때문에, 제출 실패, 로그인 실패, 점수 관리, 관리자 작업처럼 사후 확인이 필요한 요청을 "}
               <code className="text-[0.95em] font-medium text-black">
                 {"request_logs"}
               </code>
-              {" 테이블에 기록하고 관리자 페이지에서 조회할 수 있게 했습니다."}
-            </p>
-            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"요청자, 경로, 메서드, 상태 코드, IP, 요청 메타데이터를 기록해 점수 처리와 제출 과정에서 발생한 문제를 추적할 수 있게 했습니다. 로그인 사용자는 "}
-              <code className="text-[0.95em] font-medium text-black">
-                {"user:{id}"}
-              </code>
-              {", 비로그인 요청은 "}
-              <code className="text-[0.95em] font-medium text-black">
-                {"ip:{address}"}
-              </code>
-              {" 형태로 요청 출처를 남겼고, 관리자 페이지에서 요청 경로, method, status, IP, metadata 기준으로 검색하고 페이지네이션으로 조회할 수 있게 했습니다."}
+              {" 테이블에 남겼습니다. 로그에는 요청자, 경로, 메서드, 상태 코드, IP, 요청 메타데이터를 포함했고, 관리자 페이지에서는 요청 경로, method, status, IP, metadata 기준 검색과 페이지네이션으로 점수 처리와 제출 과정의 문제를 추적하도록 구성했습니다."}
             </p>
             <div className="px-4 sm:px-8">
               <DiagramFigure
-                src="/projects/sch-iot-rankingboard/sch-miniproject-page-5-request-logs.png"
+                src="/projects/sch-iot-rankingboard/sch-miniproject-request-logs-page.png"
                 alt="요청 로그를 확인하는 관리자 화면"
                 width={1920}
                 height={1080}
@@ -393,27 +338,27 @@ export default function SchMiniProjectPage() {
         </section>
 
         <section id="deployment-environment" className="scroll-mt-12 pt-24">
-          <SectionHeading>내부망 DNS 문제로 인한 서비스 배포 실패 해결</SectionHeading>
+          <SectionHeading>서버 배포 장애 대응: 내부망 DNS 설정 유실</SectionHeading>
           <div className="grid gap-5">
-            <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
-              {"문제"}
-            </h3>
+            <h4 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
+              {"장애 상황"}
+            </h4>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
               {"배포 과정에서 "}
               <strong className="font-medium text-black">
-                {"Docker Compose가 필요한 이미지를 pull하는 단계에서 실패하는 문제"}
+                {"Docker Compose가 필요한 이미지를 pull하는 단계에서 실패"}
               </strong>
-              {"가 있었습니다. 로그 확인 결과 IP 주소 대상 ping은 성공했지만 "}
+              {"했습니다. 로그 확인 결과 IP 주소 대상 ping은 성공했지만 "}
               <strong className="font-medium text-black">
                 {"도메인 이름으로는 ping이 실패"}
               </strong>
-              {"해 DNS가 원인이라고 판단했습니다."}
+              {"했습니다."}
             </p>
-            <h3 className="pt-4 text-[19px] font-medium leading-[1.4] tracking-normal text-black">
-              {"해결"}
-            </h3>
+            <h4 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
+              {"원인 확인"}
+            </h4>
             <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-              {"처음에는 DNS 서버 IP 설정 문제라고 보고, 서버의 "}
+              {"초기에 DNS 문제를 의심하여 서버의 "}
               {"netplan 설정에서 "}
               <code className="text-[0.95em] font-medium text-black">
                 {"nameservers.addresses"}
@@ -433,7 +378,13 @@ export default function SchMiniProjectPage() {
               <strong className="font-medium text-black">
                 {"학교 로컬 DNS 서버"}
               </strong>
-              {"를 통해 도메인을 해석해야 하는 구조일 가능성이 높다고 판단했습니다. 유실되어 있던 "}
+              {"를 통해 도메인을 해석해야 하는 구조일 가능성이 높다고 판단했습니다."}
+            </p>
+            <h4 className="pt-2 text-base font-semibold leading-relaxed tracking-normal text-black">
+              {"조치 및 재발 방지"}
+            </h4>
+            <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
+              {"유실되어 있던 "}
               <strong className="font-medium text-black">
                 {"학교 DNS 서버 IP"}
               </strong>
@@ -466,8 +417,20 @@ export default function SchMiniProjectPage() {
           </div>
         </section>
 
-        <ProjectBottomNavigation />
-      </main>
-    </div>
+    </ProjectPageLayout>
+  );
+}
+
+function GitHubIcon() {
+  return (
+    <svg
+      className="h-3.5 w-3.5 shrink-0 text-current"
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      focusable="false"
+    >
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.385.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.839 1.238 1.839 1.238 1.071 1.834 2.809 1.304 3.495.997.108-.775.419-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.652.243 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.371.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.568 21.796 24 17.299 24 12c0-6.63-5.373-12-12-12z" />
+    </svg>
   );
 }

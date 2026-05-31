@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { BlogDiagram } from "../_components/blog-diagram";
+import { CodeBlock, InlineCode, NoteRow, ReferenceList } from "../_components/blog-elements";
 
 export const metadata = {
   title: "CORS는 서버 에러가 아니라 브라우저의 차단이다 | Blog",
@@ -383,23 +383,23 @@ Backend:  http://localhost:8080`}
               실무 체크리스트
             </h2>
             <div className="mt-6">
-              <NoteRow
+              <NoteRow bordered
                 title="현재 프론트 Origin을 정확히 확인한다"
                 body="localhost와 127.0.0.1, http와 https, 3000과 8080은 모두 다를 수 있습니다. 브라우저 개발자 도구의 Request Headers에서 Origin 값을 먼저 확인합니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="서버 응답의 Access-Control-Allow-Origin을 본다"
                 body="응답에 헤더가 없는지, wildcard인지, 현재 Origin과 정확히 일치하는지 확인합니다. credentials 요청이면 wildcard를 사용할 수 없습니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="Preflight가 발생하는 요청인지 본다"
                 body="PUT, DELETE, Authorization, application/json 등이 있으면 OPTIONS 선요청이 나갈 수 있습니다. 프록시, ALB, API Gateway가 OPTIONS를 통과시키는지 확인합니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="쿠키/세션이면 프론트와 서버를 같이 본다"
                 body="서버에는 Access-Control-Allow-Credentials: true와 명시 Origin이 필요하고, 프론트 fetch에는 credentials: include가 필요합니다. SameSite 쿠키 정책도 함께 확인해야 합니다."
               />
-              <NoteRow
+              <NoteRow bordered
                 title="CORS와 API 보안을 혼동하지 않는다"
                 body="브라우저에서 막힌다고 API가 안전한 것은 아닙니다. curl, Postman, 서버 프로그램은 CORS를 우회할 수 있으므로 인증과 인가는 반드시 별도로 설계합니다."
               />
@@ -430,57 +430,9 @@ Backend:  http://localhost:8080`}
             </div>
           </section>
 
-          <footer className="pt-[88px]">
-            <h2 className="text-[18px] font-medium leading-[1.56] tracking-normal text-black">
-              참고 자료
-            </h2>
-            <ul className="mt-4 grid gap-2 text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
-              {references.map((reference) => (
-                <li key={reference.href}>
-                  <a
-                    href={reference.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-black underline-offset-4 hover:underline"
-                  >
-                    {reference.label}
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </footer>
+          <ReferenceList references={references} />
         </article>
       </main>
     </div>
-  );
-}
-
-function CodeBlock({ code }: { code: string }) {
-  return (
-    <pre className="mt-6 overflow-x-auto rounded-xl border border-[#e5e5e5] bg-[#fafafa] p-4 text-sm leading-relaxed text-black">
-      <code>{code}</code>
-    </pre>
-  );
-}
-
-function InlineCode({ children }: { children: ReactNode }) {
-  return (
-    <code className="rounded-[6px] bg-[#fafafa] px-1.5 py-0.5 font-mono text-sm text-black">
-      {children}
-    </code>
-  );
-}
-
-function NoteRow({ title, body }: { title: string; body: string }) {
-  return (
-    <section className="border-t border-[#e5e5e5] py-5 first:border-t-0">
-      <h3 className="text-[18px] font-medium leading-[1.56] tracking-normal text-black">
-        {title}
-      </h3>
-      <p className="mt-2 text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-        {body}
-      </p>
-    </section>
   );
 }
