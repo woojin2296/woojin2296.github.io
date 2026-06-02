@@ -17,6 +17,24 @@ type BlogPost = {
 
 const blogPosts: BlogPost[] = [
   {
+    title: "제로 트러스트 시스템은 위치가 아니라 매 요청의 신뢰를 검증하는 구조다",
+    description:
+      "제로 트러스트를 Policy Engine, Policy Administrator, Policy Enforcement Point, identity, device posture, least privilege, continuous monitoring 관점에서 정리했습니다.",
+    date: "2026.05",
+    category: "Security / Architecture",
+    tags: ["Zero Trust", "Security", "IAM"],
+    href: "/blog/zero-trust-system/",
+  },
+  {
+    title: "패킷 루핑은 같은 트래픽이 네트워크 안에서 계속 도는 현상이다",
+    description:
+      "패킷 루핑을 L2 switching loop와 L3 routing loop로 나누고 broadcast storm, MAC flapping, STP/RSTP, TTL, Hop Limit, ICMP Time Exceeded, traceroute 기반 장애 분석 흐름을 정리했습니다.",
+    date: "2026.05",
+    category: "Network / Troubleshooting",
+    tags: ["Packet Loop", "STP", "Routing"],
+    href: "/blog/packet-looping/",
+  },
+  {
     title: "Node capacity와 Pod IP 부족으로 Pending이 길어진 장애 분석",
     description:
       "Kubernetes Pod Pending 장애를 image pull이나 GitOps 문제가 아니라 scheduler memory, AWS VPC CNI Pod IP, nodegroup scaling boundary 관점에서 분리해 분석했습니다.",

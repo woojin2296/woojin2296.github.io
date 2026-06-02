@@ -7,7 +7,7 @@ import {
 import { ProjectBottomNavigation } from "@/app/_components/navigation/project-bottom-navigation";
 
 type ProjectPageLayoutProps = {
-  sectionLinks: ProjectSectionLink[];
+  sectionLinks: readonly ProjectSectionLink[];
   topAction?: ReactNode;
   children: ReactNode;
 };

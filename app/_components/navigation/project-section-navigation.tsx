@@ -11,7 +11,7 @@ export type ProjectSectionLink = {
 export function ProjectSectionNavigation({
   links,
 }: {
-  links: ProjectSectionLink[];
+  links: readonly ProjectSectionLink[];
 }) {
   const [activeId, setActiveId] = useState(links[0]?.id ?? "");
   const [barStyle, setBarStyle] = useState({ top: 0, height: 0 });
