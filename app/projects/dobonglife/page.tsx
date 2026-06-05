@@ -1,48 +1,65 @@
-import { ProjectHero } from "@/app/_components/project/project-hero";
 import { ProjectPageLayout } from "@/app/_components/project/project-page-layout";
-import { SkillIcon } from "@/app/_components/common/skill-icon";
+import { SkillIcon } from "@/components/text";
 import {
-  hero,
-  metadata as projectMetadata,
-  sectionLinks,
-} from "@/content/dobonglife";
-import { ContentSection, SectionDevider } from "@/components/section";
-import { ContentSubTitle, ContentTitle } from "@/components/title";
+  ContentSection,
+  HeadMetaItem,
+  HeadMetaSection,
+  HeadSection,
+  HeadTitleSection,
+  SectionDevider,
+} from "@/components/section";
+import {
+  ContentSubTitle,
+  ContentTitle,
+  HeadDescription,
+  HeadEyebrow,
+  HeadTitle,
+} from "@/components/title";
 import { ContentText } from "@/components/text";
-import { FigureGroup as ContentFigureGroup } from "@/components/figure";
+import { FigureGroup } from "@/components/figure";
 
-export const metadata = projectMetadata;
+export const metadata = {
+  title: "Dobong Life | Lim Woojin Portfolio",
+  description: "Dobong Life 소개 페이지",
+} as const;
+
+const sectionLinks = [
+  { id: "overview", label: "프로젝트 개요" },
+  { id: "role", label: "역할" },
+  { id: "skills", label: "기술 스택" },
+  { id: "legacy-upgrade", label: "AWS 인프라 및 CI/CD 방식 개선 (V1, V2, V3)" },
+  { id: "terraform-gitops", label: "Terraform 기반 IaC와 GitOps 운영 구조 구축" },
+  { id: "secret-variables", label: "Secret 저장 위치와 주입 흐름 분리" },
+  { id: "availability-scaling", label: "가용성 및 자동 확장 구성" },
+  { id: "monitoring", label: "모니터링 구성" },
+  { id: "tls-troubleshooting", label: "V1 환경 API 서버 운영 장애 대응: TLS 인증서 갱신 실패" },
+  { id: "retrospective", label: "프로젝트 회고" },
+] as const;
 
 export default function DobongLifePage() {
   return (
     <ProjectPageLayout sectionLinks={sectionLinks}>
-      <ProjectHero
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        description={hero.description}
-        meta={[
-          { label: "Period", value: hero.period },
-          {
-            label: "Position",
-            value: (
-              <>
-                {hero.affiliation} <br />
-                {hero.position}
-              </>
-            ),
-          },
-          {
-            label: "Role",
-            value: (
-              <span className="flex flex-col items-center leading-relaxed">
-                {hero.role.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </span>
-            ),
-          },
-        ]}
-      />
+      <HeadSection>
+        <HeadTitleSection>
+          <HeadEyebrow>Project No.1</HeadEyebrow>
+          <HeadTitle>도봉라이프(DobongLife)</HeadTitle>
+          <HeadDescription>
+            서울시 도봉구 지역상권 활성화 애플리케이션의 AWS 인프라를 구축하고 운영한 프로젝트
+          </HeadDescription>
+        </HeadTitleSection>
+
+        <HeadMetaSection>
+          <HeadMetaItem title="Period" description={["2026.04-current"]} />
+          <HeadMetaItem
+            title="Position"
+            description={["(주)유머스트알엔디", "사업부 IT팀"]}
+          />
+          <HeadMetaItem
+            title="Role"
+            description={["DevOps Engineer", "Cloud Engineer"]}
+          />
+        </HeadMetaSection>
+      </HeadSection>
 
       <ContentSection id="overview">
         <ContentTitle>프로젝트 개요</ContentTitle>
@@ -97,7 +114,7 @@ export default function DobongLifePage() {
           EC2에 **SSH**로 접속해 이미지를 내려받아 컨테이너를 갱신하는 방식이었습니다.
           `}
         </ContentText>
-        <ContentFigureGroup
+        <FigureGroup
           figures={[
             {
               src: "/projects/dobonglife/dobonglife-aws-infra-v1.jpg",
@@ -122,7 +139,7 @@ export default function DobongLifePage() {
           Amazon CloudWatch를 활용해 EC2 로그 수집 및 애플리케이션 로그 확인 환경을 구축했습니다.
           `}
         </ContentText>
-        <ContentFigureGroup
+        <FigureGroup
           figures={[
             {
               src: "/projects/dobonglife/dobonglife-aws-infra-v2.jpg",
@@ -141,7 +158,7 @@ export default function DobongLifePage() {
           **AWS Systems Manager**로 인스턴스 접근 방식을 전환하고, GitHub Actions와 **OIDC 기반 권한 위임**을 사용해 CD 파이프라인을 재구성했습니다.
           `}
         </ContentText>
-        <ContentFigureGroup
+        <FigureGroup
           figures={[
             {
               src: "/projects/dobonglife/dobonglife-ci-cd-v2.jpg",
@@ -163,7 +180,7 @@ export default function DobongLifePage() {
           `}
         </ContentText>
 
-        <ContentFigureGroup
+        <FigureGroup
           figures={[
             {
               src: "/projects/dobonglife/dobonglife-aws-infra-v3.jpg",
@@ -186,7 +203,7 @@ export default function DobongLifePage() {
           `}
         </ContentText>
 
-        <ContentFigureGroup
+        <FigureGroup
           figures={[
             {
               src: "/projects/dobonglife/dobonglife-ci-cd-v3.jpg",
@@ -208,7 +225,7 @@ export default function DobongLifePage() {
           **Argo CD**는 해당 변경을 감지해 EKS 클러스터에 동기화하도록 했습니다.
           `}
         </ContentText>
-        <ContentFigureGroup
+        <FigureGroup
           figures={[
             {
               src: "/projects/dobonglife/dobonglife-terraform-gitops-structure.jpg",
@@ -263,7 +280,7 @@ export default function DobongLifePage() {
           이를 통해 Pod 상태나 API 오류가 발생했을 때 관련 로그를 같은 관측 화면에서 함께 확인할 수 있도록 했습니다.
           `}
         </ContentText>
-        <ContentFigureGroup
+        <FigureGroup
           figures={[
             {
               src: "/projects/dobonglife/dobonglife-grafana-operations-overview.png",

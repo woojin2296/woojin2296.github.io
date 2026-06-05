@@ -9,6 +9,7 @@ import {
   type CSSProperties,
   type PointerEvent,
 } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
 export type FigureItem = {
@@ -19,6 +20,9 @@ export type FigureItem = {
 
 type FigureProps = FigureItem & {
   className?: string;
+  imageClassName?: string;
+  imageWrapperClassName?: string;
+  captionClassName?: string;
 };
 
 type FigureGroupProps = {
@@ -38,11 +42,14 @@ const MAX_SCALE = 3;
 const SCALE_STEP = 0.25;
 const DEFAULT_OFFSET: Offset = { x: 0, y: 0 };
 
-function Figure({
+export function Figure({
   src,
   alt,
   caption,
   className,
+  imageClassName,
+  imageWrapperClassName,
+  captionClassName,
 }: FigureProps) {
   const [expandedFigure, setExpandedFigure] = useState<FigureItem | null>(null);
 
@@ -53,14 +60,21 @@ function Figure({
           src={src}
           alt={alt}
           caption={caption}
+          className={imageWrapperClassName}
+          imageClassName={imageClassName}
           onExpand={setExpandedFigure}
         />
-        <figcaption className="text-sm font-normal leading-relaxed tracking-normal text-[#737373]">
+        <figcaption
+          className={cn(
+            "text-sm font-normal leading-relaxed tracking-normal text-[#737373]",
+            captionClassName,
+          )}
+        >
           {caption}
         </figcaption>
       </figure>
       {expandedFigure ? (
-        <FigureDialog
+        <FigureDialogPortal
           figure={expandedFigure}
           onClose={() => setExpandedFigure(null)}
         />
@@ -130,7 +144,7 @@ export function FigureGroup({
         ))}
       </div>
       {expandedFigure ? (
-        <FigureDialog
+        <FigureDialogPortal
           figure={expandedFigure}
           onClose={() => setExpandedFigure(null)}
         />
@@ -144,10 +158,12 @@ function FigureImage({
   alt,
   caption,
   className,
+  imageClassName,
   style,
   onExpand,
 }: FigureItem & {
   className?: string;
+  imageClassName?: string;
   style?: CSSProperties;
   onExpand: (figure: FigureItem) => void;
 }) {
@@ -167,9 +183,26 @@ function FigureImage({
         alt={alt}
         loading="lazy"
         decoding="async"
-        className="h-auto w-full object-contain"
+        className={cn("h-auto w-full object-contain", imageClassName)}
       />
     </button>
+  );
+}
+
+function FigureDialogPortal({
+  figure,
+  onClose,
+}: {
+  figure: FigureItem;
+  onClose: () => void;
+}) {
+  if (typeof document === "undefined") {
+    return null;
+  }
+
+  return createPortal(
+    <FigureDialog figure={figure} onClose={onClose} />,
+    document.body,
   );
 }
 

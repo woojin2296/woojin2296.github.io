@@ -1,8 +1,3 @@
-export const metadata = {
-  title: "Dobong Life | Lim Woojin Portfolio",
-  description: "Dobong Life 소개 페이지",
-} as const;
-
 const affiliation = "(주)유머스트알엔디";
 const position = "사업부 IT팀";
 const period = "2026.04-current";
@@ -27,11 +22,14 @@ const resumeSummary = [
 ] as const;
 const skillSummary = [
   { name: "AWS", primary: true },
+  { name: "EKS / Kubernetes", primary: true },
   { name: "Terraform", primary: true },
-  { name: "Kubernetes", primary: true },
-  { name: "Prometheus", primary: true },
-  { name: "Grafana", primary: true },
-  { name: "GitHub Actions", primary: false },
+  { name: "GitHub Actions", primary: true },
+  { name: "Argo CD", primary: true },
+  { name: "AWS Secrets Manager", primary: false },
+  { name: "Prometheus", primary: false },
+  { name: "Grafana", primary: false },
+  { name: "Loki", primary: false },
 ] as const;
 
 export const resumeProjectSummary = {
@@ -59,19 +57,6 @@ export const projectSummary = {
   techStack: skillSummary,
 } as const;
 
-export const sectionLinks = [
-  { id: "overview", label: "프로젝트 개요" },
-  { id: "role", label: "역할" },
-  { id: "skills", label: "기술 스택" },
-  { id: "legacy-upgrade", label: "AWS 인프라 및 CI/CD 방식 개선 (V1, V2, V3)" },
-  { id: "terraform-gitops", label: "Terraform 기반 IaC와 GitOps 운영 구조 구축" },
-  { id: "secret-variables", label: "Secret 저장 위치와 주입 흐름 분리" },
-  { id: "availability-scaling", label: "가용성 및 자동 확장 구성" },
-  { id: "monitoring", label: "모니터링 구성" },
-  { id: "tls-troubleshooting", label: "V1 환경 API 서버 운영 장애 대응: TLS 인증서 갱신 실패" },
-  { id: "retrospective", label: "프로젝트 회고" },
-] as const;
-
 export const hero = {
   eyebrow: "Project No.1",
   title: title,
@@ -93,28 +78,18 @@ export const overviewSection = {
 export const roleSection = {
   id: "role",
   title: "역할",
-  bullets: [
-    "단일 EC2 기반 아키텍처(V1)를 역할 기반 AWS 인프라(V2)와 EKS 기반 MSA 플랫폼(V3)으로 확장 설계",
-    "Terraform 기반 IaC를 적용하여 AWS 인프라를 코드로 관리하고, 스택 분리를 통해 재현성과 변경 추적성 확보",
-    "GitHub Actions, OIDC, SSM, Argo CD 기반 GitOps CI/CD 파이프라인 구축",
-    "AWS Secrets Manager, External Secrets Operator, Kubernetes Secret을 활용한 Secret 관리 및 주입 체계 구축",
-  ],
+  bullets: mainSummary,
 } as const;
 
 export const skillsSection = {
   id: "skills",
   title: "기술 스택",
-  emphasized: ["AWS", "Terraform", "Kubernetes", "Prometheus", "Grafana"],
+  emphasized: ["AWS", "EKS / Kubernetes", "Terraform", "GitHub Actions", "Argo CD"],
   items: [
-    "EKS",
-    "Argo CD",
-    "GitOps",
-    "GitHub Actions",
-    "Docker",
     "AWS Secrets Manager",
+    "Prometheus",
+    "Grafana",
     "Loki",
-    "Alloy",
-    "Nginx",
   ],
 } as const;
 
@@ -124,39 +99,39 @@ export const sections = [
     title: "AWS 인프라 및 CI/CD 방식 개선 (V1, V2, V3)",
     subsections: [
       {
-        title: "기존 레거시 인프라 구조 (V1)",
+        title: "기존 레거시 인프라 구조(V1)",
         paragraphs: [
           "기존 인프라는 단일 EC2에서 Nginx, Spring Boot, Redis를 함께 운영하는 구조였습니다. 배포 파이프라인의 경우 GitHub Actions에서 Docker 이미지를 빌드한 뒤 Docker Hub에 업로드하고, EC2에 SSH로 접속해 이미지를 내려받아 컨테이너를 갱신하는 방식이었습니다.",
         ],
         figures: [
           {
             src: "/projects/dobonglife/dobonglife-aws-infra-v1.jpg",
-            alt: "도봉라이프 V1 아키텍처 다이어그램",
+            alt: "도봉라이프 AWS 인프라 구조 다이어그램 V1",
             width: 5800,
             height: 2758,
-            caption: "레거시 인프라 아키텍처",
+            caption: "도봉라이프 AWS 인프라 구조 다이어그램 V1",
           },
           {
             src: "/projects/dobonglife/dobonglife-ci-cd-v1.jpg",
-            alt: "도봉라이프 V1 CI/CD 아키텍처 다이어그램",
+            alt: "도봉라이프 AWS 인프라 구조 다이어그램 V1",
             width: 4598,
             height: 3479,
-            caption: "레거시 인프라 CI/CD 파이프라인",
+            caption: "도봉라이프 AWS 인프라 구조 다이어그램 V1",
           },
         ],
       },
       {
-        title: "역할 기반 인프라 구조로 전환 (V2)",
+        title: "역할 기반 인프라 구조로 전환(V2)",
         paragraphs: [
           "프론트 서버를 별도로 배포해야 해 기존 인프라를 역할 기반 아키텍처로 분리하고 확장하였습니다. 이에 따라 Nginx, Backend, Frontend 서버를 역할별 EC2로 분리하고, 외부 접근 영역과 내부 서비스 영역을 Public/Private Subnet으로 나누었습니다. Redis는 ElastiCache로 분리해 애플리케이션 서버와 상태 저장 계층의 책임을 나누었고, Amazon CloudWatch를 활용해 EC2 로그 수집 및 애플리케이션 로그 확인 환경을 구축했습니다.",
         ],
         figures: [
           {
             src: "/projects/dobonglife/dobonglife-aws-infra-v2.jpg",
-            alt: "도봉라이프 V2 AWS 인프라 아키텍처 다이어그램",
+            alt: "도봉라이프 AWS 인프라 구조 다이어그램 V2",
             width: 5333,
             height: 2999,
-            caption: "역할 기반 AWS 인프라 구성",
+            caption: "도봉라이프 AWS 인프라 구조 다이어그램 V2",
           },
         ],
       },
@@ -168,10 +143,10 @@ export const sections = [
         figures: [
           {
             src: "/projects/dobonglife/dobonglife-ci-cd-v2.jpg",
-            alt: "도봉라이프 V2 CI/CD 아키텍처 다이어그램",
+            alt: "도봉라이프 CI/CD 파이프라인 구조 다이어그램 V2",
             width: 5756,
             height: 2779,
-            caption: "GitHub Actions, OIDC, SSM을 활용한 V2 CI/CD 파이프라인",
+            caption: "도봉라이프 CI/CD 파이프라인 구조 다이어그램 V2",
           },
         ],
       },
@@ -184,10 +159,10 @@ export const sections = [
         figures: [
           {
             src: "/projects/dobonglife/dobonglife-aws-infra-v3.jpg",
-            alt: "도봉라이프 V3 EKS 플랫폼 아키텍처 다이어그램",
+            alt: "도봉라이프 AWS 인프라 구조 다이어그램 V3",
             width: 4175,
             height: 3831,
-            caption: "V3 EKS 플랫폼 아키텍처",
+            caption: "도봉라이프 AWS 인프라 구조 다이어그램 V3",
           },
         ],
       },
@@ -200,10 +175,10 @@ export const sections = [
         figures: [
           {
             src: "/projects/dobonglife/dobonglife-ci-cd-v3.jpg",
-            alt: "도봉라이프 V3 GitOps 기반 CI/CD 파이프라인 다이어그램",
+            alt: "도봉라이프 CI/CD 파이프라인 구조 다이어그램 V3",
             width: 4995,
             height: 3202,
-            caption: "Argo CD와 GitOps 기반 V3 배포 파이프라인",
+            caption: "도봉라이프 CI/CD 파이프라인 구조 다이어그램 V3",
           },
         ],
       },
@@ -218,10 +193,10 @@ export const sections = [
     figures: [
       {
         src: "/projects/dobonglife/dobonglife-terraform-gitops-structure.jpg",
-        alt: "Terraform IaC 스택 분리와 GitOps, Argo CD, EKS 역할 분리 다이어그램",
+        alt: "도봉라이프 Terraform과 GitOps 운영 구조 다이어그램",
         width: 1693,
         height: 929,
-        caption: "Terraform IaC 스택 분리와 GitOps 운영 구조",
+        caption: "도봉라이프 Terraform과 GitOps 운영 구조 다이어그램",
       },
     ],
   },
@@ -249,17 +224,17 @@ export const sections = [
     figures: [
       {
         src: "/projects/dobonglife/dobonglife-grafana-operations-overview.png",
-        alt: "도봉라이프 Grafana 운영 상태 모니터링 대시보드",
+        alt: "도봉라이프 Grafana 운영 대시보드",
         width: 1905,
         height: 1080,
-        caption: "Grafana 클러스터 운영 상태 모니터링 화면",
+        caption: "도봉라이프 Grafana 운영 대시보드",
       },
       {
         src: "/projects/dobonglife/dobonglife-grafana-api-traffic-logs.png",
-        alt: "도봉라이프 Grafana API 트래픽 및 로그 모니터링 대시보드",
+        alt: "도봉라이프 API 트래픽과 오류 로그 대시보드",
         width: 1905,
         height: 1080,
-        caption: "Grafana API 트래픽 및 Gateway access log 모니터링 화면",
+        caption: "도봉라이프 API 트래픽과 오류 로그 대시보드",
       },
     ],
   },

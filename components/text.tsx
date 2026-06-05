@@ -111,3 +111,22 @@ function renderBoldSegments(text: string): ReactNode {
 
   return segments;
 }
+
+export function SkillIcon({
+  children,
+  emphasized,
+}: {
+  children: ReactNode;
+  emphasized?: boolean;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex h-8 items-center whitespace-nowrap rounded-full px-3 text-sm font-medium leading-none tracking-normal",
+        emphasized ? "bg-[#eeeeee] text-black" : "bg-[#fafafa] text-black",
+      )}
+    >
+      {children}
+    </span>
+  );
+}

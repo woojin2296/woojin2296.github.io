@@ -8,7 +8,7 @@ const data = {
   title: "판옵티콘(Panopticon)",
   subtitle: "데이터 수집 관제 시스템",
   description:
-    "연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템 개발",
+    "연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템을 개발한 프로젝트",
   period: ["2024.07-2026.02", "(1년 8개월 - 개발 및 운영)"] as const,
   affiliation: "순천향대학교 UBICOMP LAB",
   position: "학부연구생",

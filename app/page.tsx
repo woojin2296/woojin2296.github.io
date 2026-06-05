@@ -8,7 +8,6 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
-import { ExpandableImage } from "@/app/_components/common/expandable-image";
 import { SectionNavigation } from "@/app/_components/navigation/section-navigation";
 import { otherProjects } from "@/content/other-projects";
 import {
@@ -26,6 +25,7 @@ import {
 import { ContentSection } from "@/components/section";
 import { ContentText } from "@/components/text";
 import { ContentTitle } from "@/components/title";
+import { Figure } from "@/components/figure";
 
 export default function Home() {
   const mainPageContact = contact.filter((item) => item.type !== "portfolio");
@@ -35,57 +35,41 @@ export default function Home() {
       src: "/projects/dobonglife/dobonglife-aws-infra-v3.jpg",
       alt: "도봉라이프 V3 AWS 인프라 아키텍처 다이어그램",
       caption: "도봉라이프 인프라 아키텍처 - V3",
-      width: 4197,
-      height: 3811,
     },
     {
       src: "/projects/dobonglife/dobonglife-ci-cd-v3.jpg",
       alt: "도봉라이프 V3 CI/CD 아키텍처 다이어그램",
       caption: "도봉라이프 CI/CD 파이프라인 - V3",
-      width: 4995,
-      height: 3202,
     },
     {
       src: "/projects/dobonglife/dobonglife-aws-infra-v1.jpg",
       alt: "도봉라이프 V1 AWS 인프라 아키텍처 다이어그램",
       caption: "도봉라이프 인프라 아키텍처 - V1",
-      width: 5800,
-      height: 2758,
     },
     {
       src: "/projects/dobonglife/dobonglife-ci-cd-v1.jpg",
       alt: "도봉라이프 V1 CI/CD 아키텍처 다이어그램",
       caption: "도봉라이프 CI/CD 파이프라인 - V1",
-      width: 4598,
-      height: 3479,
     },
     {
       src: "/projects/dobonglife/dobonglife-aws-infra-v2.jpg",
       alt: "도봉라이프 V2 AWS 인프라 아키텍처 다이어그램",
       caption: "도봉라이프 인프라 아키텍처 - V2",
-      width: 5333,
-      height: 2999,
     },
     {
       src: "/projects/dobonglife/dobonglife-ci-cd-v2.jpg",
       alt: "도봉라이프 V2 CI/CD 아키텍처 다이어그램",
       caption: "도봉라이프 CI/CD 파이프라인 - V2",
-      width: 5756,
-      height: 2779,
     },
     {
       src: "/projects/panopticon/panopticon-system-architecture.jpg",
       alt: "판옵티콘 전체 아키텍처 다이어그램",
       caption: "판옵티콘 전체 아키텍처",
-      width: 4879,
-      height: 3279,
     },
     {
       src: "/projects/panopticon/panopticon-ci-cd.jpg",
       alt: "판옵티콘 self-hosted runner CI/CD 시퀀스 다이어그램",
       caption: "판옵티콘 CI/CD 파이프라인",
-      width: 4765,
-      height: 3357,
     },
   ];
 
@@ -116,20 +100,16 @@ export default function Home() {
           <div className="relative">
             <div className="flex gap-4 overflow-x-auto overflow-y-hidden pr-8 [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [-webkit-overflow-scrolling:touch] [mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [&::-webkit-scrollbar]:hidden">
               {architecturalDiagrams.map((diagram, index) => (
-                <figure key={index} className="shrink-0">
-                  <ExpandableImage
+                <Figure
+                  key={index}
+                  className="shrink-0 gap-2"
                     src={diagram.src}
                     alt={diagram.alt}
-                    width={diagram.width}
-                    height={diagram.height}
-                    unoptimized
-                    wrapperClassName="block h-32"
-                    className="h-full w-auto max-w-none object-contain object-top"
-                  />
-                  <figcaption className="mt-2 text-xs font-normal leading-[1.33] tracking-normal text-[#737373]">
-                    {diagram.caption}
-                  </figcaption>
-                </figure>
+                  caption={diagram.caption}
+                  imageWrapperClassName="block h-32 w-auto"
+                  imageClassName="h-full w-auto max-w-none object-contain object-top"
+                  captionClassName="text-xs leading-[1.33]"
+                />
               ))}
             </div>
           </div>

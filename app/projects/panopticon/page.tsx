@@ -1,57 +1,64 @@
-import { ProjectHero } from "@/app/_components/project/project-hero";
 import { ProjectPageLayout } from "@/app/_components/project/project-page-layout";
-import { SkillIcon } from "@/app/_components/common/skill-icon";
-import { panopticon } from "@/content/panopticon";
-import { ContentSection, SectionDevider } from "@/components/section";
+import { SkillIcon } from "@/components/text";
+import { ContentSection, HeadMetaItem, HeadMetaSection, HeadSection, HeadTitleSection, SectionDevider } from "@/components/section";
 import { ContentText } from "@/components/text";
-import { ContentTitle } from "@/components/title";
+import { ContentTitle, HeadDescription, HeadEyebrow, HeadTitle } from "@/components/title";
 import { FigureGroup as ContentFigureGroup } from "@/components/figure";
 
-export const metadata = panopticon.metadata;
+export const metadata = {
+  title:
+    "판옵티콘(Panopticon) - 연구실 실험 데이터 수집 관제 및 이상 알림 시스템",
+  description: "판옵티콘(Panopticon) 소개 페이지",
+} as const;
 
-const {
-  hero,
-  sectionLinks,
-} = panopticon;
+const sectionLinks = [
+  { id: "overview", label: "프로젝트 개요" },
+  { id: "role", label: "역할" },
+  { id: "skills", label: "기술 스택" },
+  { id: "monitoring-system", label: "데이터 수집 파이프라인 관제 시스템 개발" },
+  {
+    id: "monitoring-architecture",
+    label: "확장성을 고려한 모듈 아키텍처 설계",
+  },
+  {
+    id: "realtime-delivery",
+    label: "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현",
+  },
+  {
+    id: "deployment-automation",
+    label: "Self-hosted Runner 기반 내부망 배포 자동화 구축",
+  },
+  { id: "retrospective", label: "회고 및 개선 방향" },
+] as const;
 
 export default function PanopticonPage() {
   return (
     <ProjectPageLayout sectionLinks={sectionLinks}>
-      <ProjectHero
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        description={hero.description}
-        meta={[
-          {
-            label: "Period",
-            value: (
-              <span className="flex flex-col items-center leading-relaxed">
-                <span>{hero.period}</span>
-                <span>{hero.periodDetail}</span>
-              </span>
-            ),
-          },
-          {
-            label: "Position",
-            value: (
-              <span className="flex flex-col items-center leading-relaxed">
-                <span>{hero.affiliation}</span>
-                <span>{hero.position}</span>
-              </span>
-            ),
-          },
-          {
-            label: "Role",
-            value: (
-              <span className="flex flex-col items-center leading-relaxed">
-                {hero.role.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </span>
-            ),
-          },
-        ]}
-      />
+      <HeadSection>
+        <HeadTitleSection>
+          <HeadEyebrow>Project No.2</HeadEyebrow>
+          <HeadTitle>판옵티콘(Panopticon)</HeadTitle>
+          <HeadDescription>
+            연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템을 개발한
+            프로젝트
+          </HeadDescription>
+        </HeadTitleSection>
+
+        <HeadMetaSection>
+          <HeadMetaItem
+            title="Period"
+            description={["2024.07-2026.02", "(1년 8개월 - 개발 및 운영)"]}
+          />
+          <HeadMetaItem
+            title="Position"
+            description={["순천향대학교 UBICOMP LAB", "학부연구생"]}
+          />
+          <HeadMetaItem
+            title="Role"
+            description={["Team Lead", "Full Stack Developer"]}
+          />
+        </HeadMetaSection>
+      </HeadSection>
 
       <ContentSection id="overview">
         <ContentTitle>프로젝트 개요</ContentTitle>
@@ -89,7 +96,7 @@ export default function PanopticonPage() {
           <SkillIcon emphasized>Spring Boot</SkillIcon>
           <SkillIcon emphasized>MySQL</SkillIcon>
           <SkillIcon>Docker Compose</SkillIcon>
-          <SkillIcon>Github Actions</SkillIcon>
+          <SkillIcon>GitHub Actions</SkillIcon>
           <SkillIcon>Self-hosted Runner</SkillIcon>
         </div>
       </ContentSection>
@@ -180,8 +187,8 @@ export default function PanopticonPage() {
           figures={[
             {
               src: "/projects/panopticon/panopticon-ci-cd.jpg",
-              alt: "GitHub Actions와 self-hosted runner를 활용한 배포 자동화 구조",
-              caption: "GitHub Actions와 self-hosted runner를 활용한 배포 자동화 구조",
+              alt: "self-hosted runner를 사용한 CI/CD 시퀀스 다이어그램",
+              caption: "self-hosted runner를 사용한 CI/CD 시퀀스 다이어그램",
             },
           ]}
         />

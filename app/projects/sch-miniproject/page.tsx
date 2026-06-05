@@ -1,18 +1,32 @@
 import { ArrowUpRight } from "lucide-react";
-import { ProjectHero } from "@/app/_components/project/project-hero";
 import { ProjectPageLayout } from "@/app/_components/project/project-page-layout";
-import { SkillIcon } from "@/app/_components/common/skill-icon";
+import { SkillIcon } from "@/components/text";
 import { FigureGroup as ContentFigureGroup } from "@/components/figure";
 import {
   hero,
-  metadata as projectMetadata,
-  sectionLinks,
 } from "@/content/sch-miniproject";
-import { ContentSection, SectionDevider } from "@/components/section";
-import { ContentSubTitle, ContentTitle } from "@/components/title";
+import { ContentSection, HeadMetaItem, HeadMetaSection, HeadSection, HeadTitleSection, SectionDevider } from "@/components/section";
+import { ContentSubTitle, ContentTitle, HeadDescription, HeadEyebrow, HeadTitle } from "@/components/title";
 import { ContentText } from "@/components/text";
 
-export const metadata = projectMetadata;
+export const metadata = {
+  title: "SCH MiniProject PMS | Lim Woojin Portfolio",
+  description:
+    "SCH MiniProject PMS 소개 페이지",
+} as const;
+
+const sectionLinks = [
+  { id: "overview", label: "프로젝트 개요" },
+  { id: "role", label: "역할" },
+  { id: "skills", label: "기술 스택" },
+  { id: "pms-workflow", label: "과제 제출·랭킹 관리 시스템 구현" },
+  { id: "data-model", label: "아키텍처 및 데이터 구조 설계" },
+  { id: "auth-authorization", label: "세션 기반 인증과 API 경로 기반 인가 구현" },
+  { id: "security-validation", label: "파일 업로드 보안과 서버 검증 구현" },
+  { id: "audit-logging", label: "모니터링을 위한 요청 로그 관리 구현" },
+  { id: "deployment-environment", label: "서버 배포 장애 대응: 내부망 DNS 설정 유실" },
+  { id: "retrospective", label: "회고 및 개선 방향" },
+] as const;
 
 export default function SchMiniProjectPage() {
   return (
@@ -32,32 +46,30 @@ export default function SchMiniProjectPage() {
         </a>
       }
     >
-      <ProjectHero
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        description={hero.description}
-        meta={[
-          {
-            label: "Period",
-            value: (
-              <span className="flex flex-col items-center leading-relaxed">
-                <span>{hero.period}</span>
-                <span>{hero.periodDetail}</span>
-              </span>
-            ),
-          },
-          {
-            label: "Position",
-            value: (
-              <span className="flex flex-col items-center leading-relaxed">
-                <span>{hero.affiliation}</span>
-                <span>{hero.position}</span>
-              </span>
-            ),
-          },
-          { label: "Role", value: hero.role },
-        ]}
-      />
+      <HeadSection>
+        <HeadTitleSection>
+          <HeadEyebrow>Project No.3</HeadEyebrow>
+          <HeadTitle>SCH MiniProject PMS</HeadTitle>
+          <HeadDescription>
+            순천향대학교 사물인터넷학과 ML/DL 강의에서 사용하는 프로젝트 과제 관리 시스템을 개발한 프로젝트
+          </HeadDescription>
+        </HeadTitleSection>
+
+        <HeadMetaSection>
+          <HeadMetaItem
+            title="Period"
+            description={["2025.06-2026.02", "(10개월 - 개발 및 운영)"]}
+          />
+          <HeadMetaItem
+            title="Position"
+            description={["순천향대학교 ML/DL 강의", "개인 프로젝트"]}
+          />
+          <HeadMetaItem
+            title="Role"
+            description={["Full Stack Developer"]}
+          />
+        </HeadMetaSection>
+      </HeadSection>
 
       <ContentSection id="overview">
         <ContentTitle>프로젝트 개요</ContentTitle>
@@ -69,7 +81,7 @@ export default function SchMiniProjectPage() {
           학생은 결과를 제출하면 자신의 랭킹을 확인할 수 있고, 교수자는 학생 점수와 제출 파일을 웹에서
           관리할 수 있는 시스템을 구현했습니다. 실제 강의 성적에 반영되는 데이터를 다루기 때문에 점수
           위변조를 막는 서버 측 검증을 포함해 세션 기반 사용자 관리, 감사 로그, 파일 업로드 검증을
-          구현했습니다. 이 시스템은 졸업 전까지 약 10개월간 직접 운영했으며, 현재도 강의 운영 환경에서
+          구현했습니다. 이 시스템은 졸업 전까지 10개월간 직접 운영했으며, 현재도 강의 운영 환경에서
           계속 사용되고 있습니다. 현재 월 평균 약 40명의 학생이 과제 제출과 랭킹 조회 기능을 이용하고 있습니다.
           `}
         </ContentText>

@@ -313,7 +313,7 @@ export default function PortfolioPdfPage() {
         >
           <DetailParagraphs paragraphs={panopticonMonitoringSystem.paragraphs} />
           <DetailImageGrid
-            figures={panopticonMonitoringSystem.figures.slice(0, 2)}
+            figures={panopticonMonitoringSystem.figures}
           />
         </DetailSection>
         <DetailSection
@@ -805,7 +805,7 @@ function PillGroup({ section }: { section: ProjectSkillData }) {
   return (
     <div className="flex flex-wrap gap-2">
       {items.map((item, index) => (
-        <Pill key={item} strong={index < 5}>
+        <Pill key={item} strong={index < section.emphasized.length}>
           {item}
         </Pill>
       ))}

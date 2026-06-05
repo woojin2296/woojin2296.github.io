@@ -15,3 +15,27 @@ export function ContentSubTitle({ children, className }: { children: React.React
     </h3>
   );
 }
+
+export function HeadEyebrow({ children, className }: { children: React.ReactNode, className?: string }) {
+  return (
+    <p className={cn("text-xs uppercase tracking-[0.22em] text-[#737373]", className)}>
+      {children}
+    </p>
+  );
+}
+
+export function HeadTitle({ children, className }: { children: React.ReactNode, className?: string }) {
+  return (
+    <h1 className={cn("font-display text-4xl font-medium leading-[1.12] text-balance", className)}>
+      {children}
+    </h1>
+  );
+}
+
+export function HeadDescription({ children, className }: { children: React.ReactNode, className?: string }) {
+  return (
+    <p className={cn("text-base leading-relaxed text-[#737373]", className)}>
+      {children}
+    </p>
+  );
+}
