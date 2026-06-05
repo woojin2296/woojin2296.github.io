@@ -266,12 +266,12 @@ export default function DobongLifePage() {
         <ContentFigureGroup
           figures={[
             {
-              src: "/projects/dobonglife/dobonglife-grafana-operations-overview-masked.png",
+              src: "/projects/dobonglife/dobonglife-grafana-operations-overview.png",
               alt: "도봉라이프 Grafana 운영 대시보드",
               caption: "도봉라이프 Grafana 운영 대시보드",
             },
             {
-              src: "/projects/dobonglife/dobonglife-grafana-api-traffic-logs-masked.png",
+              src: "/projects/dobonglife/dobonglife-grafana-api-traffic-logs.png",
               alt: "도봉라이프 API 트래픽과 오류 로그 대시보드",
               caption: "도봉라이프 API 트래픽과 오류 로그 대시보드",
             },

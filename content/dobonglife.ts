@@ -246,14 +246,14 @@ export const sections = [
     ],
     figures: [
       {
-        src: "/projects/dobonglife/dobonglife-grafana-operations-overview-masked.png",
+        src: "/projects/dobonglife/dobonglife-grafana-operations-overview.png",
         alt: "도봉라이프 Grafana 운영 상태 모니터링 대시보드",
         width: 1905,
         height: 1080,
         caption: "Grafana 클러스터 운영 상태 모니터링 화면",
       },
       {
-        src: "/projects/dobonglife/dobonglife-grafana-api-traffic-logs-masked.png",
+        src: "/projects/dobonglife/dobonglife-grafana-api-traffic-logs.png",
         alt: "도봉라이프 Grafana API 트래픽 및 로그 모니터링 대시보드",
         width: 1905,
         height: 1080,
