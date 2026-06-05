@@ -89,7 +89,7 @@ export default function PanopticonPage() {
           <SkillIcon emphasized>Spring Boot</SkillIcon>
           <SkillIcon emphasized>MySQL</SkillIcon>
           <SkillIcon>Docker Compose</SkillIcon>
-          <SkillIcon>github Actions</SkillIcon>
+          <SkillIcon>Github Actions</SkillIcon>
           <SkillIcon>Self-hosted Runner</SkillIcon>
         </div>
       </ContentSection>
@@ -176,6 +176,15 @@ export default function PanopticonPage() {
           서버가 학교 내부망에 있어 외부에서 SSH로 접속하는 배포 파이프라인을 사용할 수 없었습니다. 내부망 서버에 self-hosted runner를 설치하고, GitHub Actions job이 해당 runner에서 실행되도록 구성했습니다. GitHub Actions는 내부망 runner에 job을 전달하고, runner가 서버 안에서 소스 갱신, Docker 이미지 빌드, Docker Compose 기반 컨테이너 재배포를 순서대로 수행하도록 구성했습니다.
           `}
         </ContentText>
+        <ContentFigureGroup
+          figures={[
+            {
+              src: "/projects/panopticon/panopticon-ci-cd.jpg",
+              alt: "GitHub Actions와 self-hosted runner를 활용한 배포 자동화 구조",
+              caption: "GitHub Actions와 self-hosted runner를 활용한 배포 자동화 구조",
+            },
+          ]}
+        />
       </ContentSection>
 
       <ContentSection id="retrospective">

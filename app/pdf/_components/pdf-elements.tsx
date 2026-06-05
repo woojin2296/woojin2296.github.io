@@ -138,7 +138,7 @@ export function PDFSectionTitle({ children }: PDFSectionTitleProps) {
   );
 }
 
-export function PDFSectionSubTitle({ children }: { children: ReactNode }) {
+function PDFSectionSubTitle({ children }: { children: ReactNode }) {
   return (
     <h3 className="text-[14.5px] font-semibold leading-snug text-black">
       {children}

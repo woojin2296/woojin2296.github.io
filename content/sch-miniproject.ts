@@ -259,13 +259,3 @@ export const sections = [
     ],
   },
 ] as const;
-
-export const schMiniProject = {
-  metadata: metadata,
-  sectionLinks: sectionLinks,
-  hero: hero,
-  overviewSection: overviewSection,
-  roleSection: roleSection,
-  skillsSection: skillsSection,
-  sections: sections,
-} as const;

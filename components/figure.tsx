@@ -38,7 +38,7 @@ const MAX_SCALE = 3;
 const SCALE_STEP = 0.25;
 const DEFAULT_OFFSET: Offset = { x: 0, y: 0 };
 
-export function Figure({
+function Figure({
   src,
   alt,
   caption,
