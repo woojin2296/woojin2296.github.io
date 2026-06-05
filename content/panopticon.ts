@@ -1,80 +1,97 @@
-export const metadata = {
-  title: "판옵티콘(Panopticon) - 연구실 실험 데이터 수집 관제 및 이상 알림 시스템",
+const metadata = {
+  title:
+    "판옵티콘(Panopticon) - 연구실 실험 데이터 수집 관제 및 이상 알림 시스템",
   description: "판옵티콘(Panopticon) 소개 페이지",
 } as const;
 
-const affiliation = "순천향대학교 UBICOMP LAB";
-const position = "학부연구생";
-const period = "2024.07 ~ 2026.02";
-const periodDetail = "(1년 8개월 - 개발 및 운영)";
-const role = ["Team Lead", "Full Stack Developer"] as const;
-const title = "판옵티콘(Panopticon)";
-const subtitle = "데이터 수집 관제 시스템";
-const description =
-  "연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템 개발";
-const mainSummary = [
-  "데이터 수집 파이프라인 관제 시스템 개발",
-  "확장성을 고려한 모듈 아키텍처 설계",
-  "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현",
-  "Self-hosted Runner 기반 내부망 배포 자동화 구축",
-] as const;
-const skillSummary = [
-  { name: "Next.js", primary: true },
-  { name: "Spring Boot", primary: true },
-  { name: "MySQL", primary: true },
-  { name: "Docker Compose", primary: false },
-  { name: "GitHub Actions", primary: false },
-  { name: "Self-hosted Runner", primary: false },
-] as const;
-
-export const resumeProjectSummary = {
-  title: title + " - " + subtitle,
-  affiliation: affiliation,
-  position: position,
-  period: period,
-  description: description,
-  summary: mainSummary,
+const data = {
+  title: "판옵티콘(Panopticon)",
+  subtitle: "데이터 수집 관제 시스템",
+  description:
+    "연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템 개발",
+  period: ["2024.07-2026.02", "(1년 8개월 - 개발 및 운영)"] as const,
+  affiliation: "순천향대학교 UBICOMP LAB",
+  position: "학부연구생",
+  role: ["Team Lead", "Full Stack Developer"] as const,
 } as const;
 
-export const projectSummary = {
+const summary = {
+  main: [
+    "팀 리드로서 요구사항 정리, 기능 범위 정의, 전체 시스템 아키텍처 설계",
+    "데이터 수집·조회·장애 상태 흐름을 고려한 DB 스키마 설계 및 Spring Boot API 구현",
+    "장치 상태, 최근 수집 시각, 센서 데이터를 한 화면에서 확인하는 관제 UI 설계 및 Next.js 프론트엔드 구현",
+    "self-hosted runner 기반 CI/CD 파이프라인 구축 및 Docker 기반 배포 환경 구성",
+    "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현",
+  ] as const,
+} as const;
+
+const skills = {
+  main: [
+    { name: "Next.js", primary: true },
+    { name: "Spring Boot", primary: true },
+    { name: "MySQL", primary: true },
+    { name: "Docker Compose", primary: false },
+    { name: "GitHub Actions", primary: false },
+    { name: "Self-hosted Runner", primary: false },
+  ] as const,
+  project: [
+    { name: "Next.js", primary: true },
+    { name: "Spring Boot", primary: true },
+    { name: "MySQL", primary: true },
+    { name: "Docker Compose", primary: false },
+    { name: "GitHub Actions", primary: false },
+    { name: "Self-hosted Runner", primary: false },
+  ] as const,
+} as const;
+
+const projectSummary = {
   link: "/projects/panopticon/",
-  title: title + " - " + subtitle,
-  affiliation: affiliation,
-  position: position,
-  period: period,
+  title: `${data.title} - ${data.subtitle}`,
+  affiliation: data.affiliation,
+  position: data.position,
+  period: data.period[0],
   image: {
     src: "/projects/panopticon/panopticon-system-architecture.jpg",
     alt: "판옵티콘 아키텍처 대표 이미지",
     width: 4879,
     height: 3279,
   },
-  summary: mainSummary,
-  techStack: skillSummary,
+  summary: summary.main,
+  techStack: skills.project,
 } as const;
 
-export const sectionLinks = [
+const sectionLinks = [
   { id: "overview", label: "프로젝트 개요" },
   { id: "role", label: "역할" },
   { id: "skills", label: "기술 스택" },
   { id: "monitoring-system", label: "데이터 수집 파이프라인 관제 시스템 개발" },
-  { id: "monitoring-architecture", label: "확장성을 고려한 모듈 아키텍처 설계" },
-  { id: "realtime-delivery", label: "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현" },
-  { id: "deployment-automation", label: "Self-hosted Runner 기반 내부망 배포 자동화 구축" },
+  {
+    id: "monitoring-architecture",
+    label: "확장성을 고려한 모듈 아키텍처 설계",
+  },
+  {
+    id: "realtime-delivery",
+    label: "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현",
+  },
+  {
+    id: "deployment-automation",
+    label: "Self-hosted Runner 기반 내부망 배포 자동화 구축",
+  },
   { id: "retrospective", label: "회고 및 개선 방향" },
 ] as const;
 
-export const hero = {
+const hero = {
   eyebrow: "Project No.2",
-  title: title,
-  description: description,
-  period: period,
-  periodDetail: periodDetail,
-  affiliation: affiliation,
-  position: position,
-  role: role,
+  title: data.title,
+  description: data.description,
+  period: data.period[0],
+  periodDetail: data.period[1],
+  affiliation: data.affiliation,
+  position: data.position,
+  role: data.role,
 } as const;
 
-export const overviewSection = {
+const overviewSection = {
   id: "overview",
   title: "프로젝트 개요",
   paragraphs: [
@@ -82,7 +99,7 @@ export const overviewSection = {
   ],
 } as const;
 
-export const roleSection = {
+const roleSection = {
   id: "role",
   title: "역할",
   bullets: [
@@ -93,14 +110,18 @@ export const roleSection = {
   ],
 } as const;
 
-export const skillsSection = {
+const skillsSection = {
   id: "skills",
   title: "기술 스택",
-  emphasized: ["Next.js", "Spring Boot", "MySQL"],
-  items: ["Docker Compose", "GitHub Actions", "Self-hosted Runner"],
+  emphasized: skills.main
+    .filter((skill) => skill.primary)
+    .map((skill) => skill.name),
+  items: skills.main
+    .filter((skill) => !skill.primary)
+    .map((skill) => skill.name),
 } as const;
 
-export const sections = [
+const sections = [
   {
     id: "monitoring-system",
     title: "데이터 수집 파이프라인 관제 시스템 개발",
@@ -191,6 +212,10 @@ export const sections = [
 
 export const panopticon = {
   metadata: metadata,
+  data: data,
+  summary: summary,
+  skills: skills,
+  projectSummary: projectSummary,
   sectionLinks: sectionLinks,
   hero: hero,
   overviewSection: overviewSection,

@@ -32,7 +32,7 @@ type PDFContactProps = {
   items: readonly PDFContactItem[];
 };
 
-type PDFProfileProps = {
+type PDFProfileData = {
   education: {
     school: string;
     major: string;
@@ -58,6 +58,10 @@ type PDFProfileProps = {
   };
 };
 
+type PDFProfileProps = {
+  data: PDFProfileData;
+};
+
 type PDFSkillStackGroup = {
   title: string;
   skills: readonly string[];
@@ -67,15 +71,19 @@ type PDFSkillStackProps = {
   items: readonly PDFSkillStackGroup[];
 };
 
-type PDFExperienceRowProps = {
+type PDFExperienceItem = {
   title: string;
   role: string;
   period: string;
   description: readonly string[];
+};
+
+type PDFExperienceRowProps = {
+  item: PDFExperienceItem;
   emphasized?: boolean;
 };
 
-type PDFAwardRowProps = {
+type PDFAwardItem = {
   date: string;
   prize: string;
   title: string;
@@ -83,13 +91,7 @@ type PDFAwardRowProps = {
 };
 
 type PDFAwardListProps = {
-  items: readonly PDFAwardRowProps[];
-};
-
-type ImageFigureProps = {
-  src: string;
-  alt: string;
-  caption: string;
+  items: readonly PDFAwardItem[];
 };
 
 export function PdfDocument({ children }: PdfDocumentProps) {
@@ -117,43 +119,6 @@ export function PdfPage({ children, dense = false }: PdfPageProps) {
     >
       {children}
     </section>
-  );
-}
-
-export function PdfHeader({
-  label,
-  title,
-  subtitle,
-  right,
-}: {
-  label?: string;
-  title: string;
-  subtitle?: string;
-  right?: ReactNode;
-}) {
-  return (
-    <header className="grid gap-5 border-b border-[#d9d9d9] pb-6 sm:grid-cols-[1fr_68mm] sm:items-end">
-      <div>
-        {label ? (
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#737373]">
-            {label}
-          </p>
-        ) : null}
-        <h1 className="mt-3 text-[34px] font-semibold leading-none tracking-normal text-black">
-          {title}
-        </h1>
-        {subtitle ? (
-          <p className="mt-3 text-[13px] leading-relaxed text-[#525252]">
-            {subtitle}
-          </p>
-        ) : null}
-      </div>
-      {right ? (
-        <div className="text-right text-[11px] leading-relaxed text-[#525252]">
-          {right}
-        </div>
-      ) : null}
-    </header>
   );
 }
 
@@ -202,11 +167,10 @@ export function PDFContact({ items }: PDFContactProps) {
 }
 
 export function PDFProfile({
-  education,
-  language,
-  military,
-  publication,
+  data,
 }: PDFProfileProps) {
+  const { education, language, military, publication } = data;
+
   return (
     <div className="mt-4 grid gap-x-8 gap-y-4 text-[13px] leading-relaxed text-black sm:grid-cols-2">
       <p className="grid grid-cols-[20mm_1fr] gap-2">
@@ -275,12 +239,11 @@ export function PDFSkillStack({ items }: PDFSkillStackProps) {
 }
 
 export function PDFExperienceRow({
-  title,
-  role,
-  period,
-  description,
+  item,
   emphasized = true,
 }: PDFExperienceRowProps) {
+  const { title, role, period, description } = item;
+
   return (
     <article className="[break-inside:avoid]">
       <div className="flex items-baseline gap-2">
@@ -302,7 +265,9 @@ export function PDFExperienceRow({
   );
 }
 
-export function PDFAwardRow({ date, prize, title, project }: PDFAwardRowProps) {
+function PDFAwardRow({ award }: { award: PDFAwardItem }) {
+  const { date, prize, title, project } = award;
+
   return (
     <div className="grid grid-cols-[33mm_1fr] items-start gap-8">
       <p className="text-[12px] font-medium leading-relaxed tracking-[0.16em] text-[#737373]">
@@ -324,20 +289,10 @@ export function PDFAwardList({ items }: PDFAwardListProps) {
   return (
     <div className="mt-4 grid gap-4">
       {items.map((award) => (
-        <PDFAwardRow
-          key={`${award.date}-${award.title}`}
-          date={award.date}
-          prize={award.prize}
-          title={award.title}
-          project={award.project}
-        />
+        <PDFAwardRow key={`${award.date}-${award.title}`} award={award} />
       ))}
     </div>
   );
-}
-
-export function MetaLine({ children }: { children: ReactNode }) {
-  return <p className="mt-1 text-[12px] leading-relaxed text-[#737373]">{children}</p>;
 }
 
 export function BodyText({ children }: { children: ReactNode }) {
@@ -370,40 +325,6 @@ export function ChipList({ items }: { items: string[] }) {
         >
           {item}
         </span>
-      ))}
-    </div>
-  );
-}
-
-export function ImageFigure({ src, alt, caption }: ImageFigureProps) {
-  return (
-    <figure className="grid gap-2 [break-inside:avoid]">
-      <div className="flex h-[56mm] items-center justify-center overflow-hidden border border-[#e5e5e5] bg-white p-3">
-        <img src={src} alt={alt} className="max-h-full w-full object-contain" />
-      </div>
-      <figcaption className="text-[9.5px] leading-relaxed text-[#737373]">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
-export function KeyValueGrid({
-  items,
-}: {
-  items: Array<{ label: string; value: string }>;
-}) {
-  return (
-    <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-      {items.map((item) => (
-        <div key={item.label}>
-          <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#737373]">
-            {item.label}
-          </p>
-          <p className="mt-1 text-[11px] leading-relaxed text-black">
-            {item.value}
-          </p>
-        </div>
       ))}
     </div>
   );

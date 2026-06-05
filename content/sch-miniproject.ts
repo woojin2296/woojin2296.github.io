@@ -6,7 +6,7 @@ export const metadata = {
 
 const affiliation = "순천향대학교 ML/DL 강의";
 const position = "개인 프로젝트";
-const period = "2025.06 ~ 2026.02";
+const period = "2025.06-2026.02";
 const periodDetail = "(약 10개월 - 개발 및 운영)";
 const role = "Full-stack Developer";
 const title = "SCH MiniProject PMS";
@@ -24,9 +24,9 @@ const mainSummary = [
   "서버 배포 장애 대응: 내부망 DNS 설정 유실",
 ] as const;
 const resumeSummary = [
-  "세션 기반 인증과 API 경로 기반 인가 구현",
-  "파일 업로드 보안과 서버 검증 구현",
-  "관리자 운영 로그 조회와 페이지네이션 기반 추적 기능 구성",
+  "과제 제출·랭킹 관리 시스템 아키텍처 및 데이터 구조 설계",
+  "세션 기반 인증과 API 경로 기반 인가 구현, 파일 업로드 보안과 서버 검증 구현",
+  "모니터링을 위한 요청 로그 관리 및 관리자 페이지 구현",
   "서버 배포 장애 대응: 내부망 DNS 설정 유실 문제 해결",
 ] as const;
 const skillSummary = [

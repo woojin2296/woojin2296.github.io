@@ -1,5 +1,5 @@
 import { projectSummary as dobonglifeProjectSummary } from "./dobonglife";
-import { projectSummary as panopticonProjectSummary } from "./panopticon";
+import { panopticon } from "./panopticon";
 import { projectSummary as schMiniProjectSummary } from "./sch-miniproject";
 
 export const profile = {
@@ -14,13 +14,13 @@ export const profile = {
 } as const;
 
 export const aboutSummary = {
-  title: "네트워크와 서비스 흐름을 이해하는 개발자 임우진입니다.",
-  body: "사용자의 요청이 네트워크와 서버를 지나 데이터베이스까지 처리되는 전체 흐름을 이해하고 설계하는 것을 좋아합니다. 프론트엔드, 백엔드, 인프라, 네트워크, 보안, 임베디드, AI 등 다양한 분야를 공부하며 프로젝트를 진행해왔고, 서비스의 여러 계층을 함께 이해해 장애 원인을 추적하고 해결합니다.",
+  title: "네트워크와 서비스 흐름을 이해하는 클라우드/DevOps 엔지니어 임우진입니다.",
+  body: "사용자의 요청이 네트워크와 서버를 지나 데이터베이스까지 처리되는 전체 흐름을 이해하고 설계하는 것을 좋아합니다. 프론트엔드, 백엔드, 인프라, 네트워크, 보안, 임베디드, AI 등 다양한 분야를 공부하며 프로젝트를 진행해왔고, 서비스의 여러 계층을 함께 이해해 장애 원인을 추적하고 해결합니다. 개발을 통해 다른 사람의 경험에 긍정적인 영향을 주는 개발자로 성장하려 합니다.",
 } as const;
 
 export const about = [
   {
-    title: "네트워크를 좋아하는 DevOps Engineer 임우진 입니다.",
+    title: "네트워크를 좋아하는 클라우드/DevOps 엔지니어 임우진 입니다.",
     body: "사용자의 요청이 네트워크와 서버를 지나 데이터베이스까지 처리되는 전체 흐름을 이해하고 설계하는 것을 좋아합니다. 계층별로 나누어진 시스템의 흐름을 따라가며, 서비스가 end-to-end로 연결되는 구조를 이해하는 것이 중요하다고 생각합니다.",
   },
   {
@@ -145,12 +145,12 @@ export const experience = {
     },
     {
       period: "2024.01 — 2026.02 · 2년",
-      title: "UBICOMP LAB",
+      title: "순천향대학교 UBICOMP LAB",
       role: "학부연구생",
       description: [
         "데이터 수집 파이프라인 관제 시스템 개발 - 판옵티콘",
-        "ROS 기반 PCD 수집",
-        "한국컴퓨터종합학술대회 학부생 논문 제출",
+        "ROS 기반 PCD 수집 파이프라인 구축",
+        "KCC2025 학부생 논문 제출",
       ],
     },
   ],
@@ -190,7 +190,7 @@ export const experience = {
 
 export const projectSummary = [
   dobonglifeProjectSummary,
-  panopticonProjectSummary,
+  panopticon.projectSummary,
   schMiniProjectSummary,
 ] as const;
 

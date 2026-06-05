@@ -3,17 +3,18 @@ import { ProjectHero } from "@/app/_components/project/project-hero";
 import { ProjectPageLayout } from "@/app/_components/project/project-page-layout";
 import { SectionHeading } from "@/app/_components/common/section-heading";
 import { SkillIcon } from "@/app/_components/common/skill-icon";
-import {
+import { panopticon } from "@/content/panopticon";
+
+export const metadata = panopticon.metadata;
+
+const {
   hero,
-  metadata as projectMetadata,
   overviewSection,
   roleSection,
   sectionLinks,
   sections,
   skillsSection,
-} from "@/content/panopticon";
-
-export const metadata = projectMetadata;
+} = panopticon;
 
 type Figure = {
   src: string;

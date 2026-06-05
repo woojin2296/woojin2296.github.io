@@ -13,7 +13,6 @@ import { SectionHeading } from "@/app/_components/common/section-heading";
 import { SectionNavigation } from "@/app/_components/navigation/section-navigation";
 import { otherProjects } from "@/content/other-projects";
 import {
-  about,
   awards,
   contact,
   education,
@@ -25,6 +24,9 @@ import {
   skills,
   projectSummary,
 } from "@/content/data";
+import { ContentSection } from "@/components/section";
+import { ContentText } from "@/components/text";
+import { ContentTitle } from "@/components/title";
 
 export default function Home() {
   const mainPageContact = contact.filter((item) => item.type !== "portfolio");
@@ -93,7 +95,7 @@ export default function Home() {
       <SectionNavigation />
 
       <main className="mx-auto max-w-[760px] px-5 pt-12 sm:px-6">
-        <header className="flex flex-col gap-4 py-[88px]">
+        <header className="flex flex-col gap-4 pt-12">
           <p className="text-xs uppercase tracking-[0.22em] text-[#737373]">
             Portfolio 2026
           </p>
@@ -102,43 +104,66 @@ export default function Home() {
           </h1>
         </header>
 
-        <section id="about" className="flex flex-col gap-[88px] py-[88px]">
-          {about.map((section, sectionIndex) => (
-            <section key={section.title} className="flex flex-col gap-4">
-              <h2 className="font-heading text-[24px] font-semibold leading-[1.33] tracking-normal text-black">
-                {section.title}
-              </h2>
-              <p className="text-base font-normal leading-relaxed tracking-normal text-[#737373]">
-                {section.body}
-              </p>
-              {sectionIndex === 0 ? (
-                <div className="relative">
-                  <div className="flex gap-4 overflow-x-auto overflow-y-hidden pr-8 [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [-webkit-overflow-scrolling:touch] [mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [&::-webkit-scrollbar]:hidden">
-                    {architecturalDiagrams.map((diagram, index) => (
-                      <figure key={index} className="shrink-0">
-                        <ExpandableImage
-                          src={diagram.src}
-                          alt={diagram.alt}
-                          width={diagram.width}
-                          height={diagram.height}
-                          unoptimized
-                          wrapperClassName="block h-32"
-                          className="h-full w-auto max-w-none object-contain object-top"
-                        />
-                        <figcaption className="mt-2 text-xs font-normal leading-[1.33] tracking-normal text-[#737373]">
-                          {diagram.caption}
-                        </figcaption>
-                      </figure>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-            </section>
-          ))}
-        </section>
+        <ContentSection id="about">
+          <ContentTitle>
+            네트워크를 좋아하는 클라우드/DevOps 엔지니어 임우진 입니다.
+          </ContentTitle>
+          <ContentText>
+            {`
+            사용자의 요청이 네트워크와 서버를 지나 데이터베이스까지 처리되는 전체 흐름을 이해하고 설계하는 것을 좋아합니다.
+            계층별로 나누어진 시스템의 흐름을 따라가며, 서비스가 end-to-end로 연결되는 구조를 이해하는 것이 중요하다고 생각합니다.
+            `}
+          </ContentText>
+          <div className="relative">
+            <div className="flex gap-4 overflow-x-auto overflow-y-hidden pr-8 [scrollbar-width:none] [-webkit-mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [-webkit-overflow-scrolling:touch] [mask-image:linear-gradient(to_right,black_calc(100%_-_56px),transparent)] [&::-webkit-scrollbar]:hidden">
+              {architecturalDiagrams.map((diagram, index) => (
+                <figure key={index} className="shrink-0">
+                  <ExpandableImage
+                    src={diagram.src}
+                    alt={diagram.alt}
+                    width={diagram.width}
+                    height={diagram.height}
+                    unoptimized
+                    wrapperClassName="block h-32"
+                    className="h-full w-auto max-w-none object-contain object-top"
+                  />
+                  <figcaption className="mt-2 text-xs font-normal leading-[1.33] tracking-normal text-[#737373]">
+                    {diagram.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </ContentSection>
 
-        <section id="projects" className="py-[88px]">
-          <SectionHeading>Projects</SectionHeading>
+        <ContentSection>
+          <ContentTitle>
+            여러 기술 분야를 이해하고 연결하는 개발자를 지향합니다.
+          </ContentTitle>
+          <ContentText>
+            {`
+            프론트엔드, 백엔드, 인프라, 네트워크, 보안, 임베디드, AI, 운영체제 등 다양한 분야를 공부하고 프로젝트를 진행해왔습니다.
+            하나의 기술만 사용하는 개발자가 아니라, 서비스의 전체 분야를 이해하고 필요한 기술을 적재적소에 사용할 수 있는 개발자를 지향합니다.
+            `}
+          </ContentText>
+        </ContentSection>
+
+        <ContentSection>
+          <ContentTitle>
+            불편함을 해결하고 자동화하기 위해 개발합니다.
+          </ContentTitle>
+          <ContentText>
+            {`
+            DevOps는 개발과 운영 사이에서 반복되는 배포, 검증, 모니터링 흐름을 정리하고
+            자동화해 서비스가 안정적으로 전달되도록 만드는 역할이라고 생각합니다.
+            복잡한 워크플로우를 단순화하고, 사람이 직접 확인하던 작업을 재현 가능한
+            시스템 흐름으로 바꾸는 데 관심이 있습니다.
+            `}
+          </ContentText>
+        </ContentSection>
+
+        <ContentSection id="projects" className="py-[88px]">
+          <ContentTitle>Projects</ContentTitle>
 
           <div className="mt-6 divide-y divide-[#e5e5e5] border-y border-[#e5e5e5]">
             {projectSummary.map((project, index) => (
@@ -271,7 +296,7 @@ export default function Home() {
               </div>
             </details>
           </div>
-        </section>
+        </ContentSection>
 
         <section id="experience" className="py-[88px]">
           <SectionHeading>Experience</SectionHeading>

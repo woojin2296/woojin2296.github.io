@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import {
   BodyText,
   BulletList,
@@ -14,13 +15,11 @@ import {
   PdfSection,
 } from "../_components/pdf-elements";
 import {
-  aboutSummary,
   contact,
   education,
   experience,
   language,
   military,
-  profile,
   publication,
   awards,
   skills,
@@ -29,10 +28,6 @@ import {
   projectSummary as dobonglifeProject,
   resumeProjectSummary as dobonglifeResumeProject,
 } from "@/content/dobonglife";
-import {
-  projectSummary as panopticonProject,
-  resumeProjectSummary as panopticonResumeProject,
-} from "@/content/panopticon";
 import {
   projectSummary as schMiniProjectProject,
   resumeProjectSummary as schMiniProjectResumeProject,
@@ -47,11 +42,25 @@ const resumeProjects = [
     techStack: dobonglifeProject.techStack.map((skill) => skill.name),
   },
   {
-    title: panopticonResumeProject.title,
-    meta: `${panopticonResumeProject.affiliation} | ${panopticonResumeProject.position} | ${panopticonResumeProject.period}`,
-    description: panopticonResumeProject.description,
-    bullets: panopticonResumeProject.summary,
-    techStack: panopticonProject.techStack.map((skill) => skill.name),
+    title: "판옵티콘(Panopticon) - 데이터 수집 관제 시스템",
+    meta: "순천향대학교 UBICOMP LAB | 학부연구생 | 2024.07-2026.02",
+    description:
+      "연구실 실험 데이터 수집 파이프라인 관제 및 이상 알림 시스템 개발",
+    bullets: [
+      "팀 리드로서 요구사항 정리, 기능 범위 정의, 전체 시스템 아키텍처 설계",
+      "데이터 수집·조회·장애 상태 흐름을 고려한 DB 스키마 설계 및 Spring Boot API 구현",
+      "장치 상태, 최근 수집 시각, 센서 데이터를 한 화면에서 확인하는 관제 UI 설계 및 Next.js 프론트엔드 구현",
+      "self-hosted runner 기반 CI/CD 파이프라인 구축 및 Docker 기반 배포 환경 구성",
+      "TCP Socket과 WebSocket을 사용한 상태 이벤트 전달 구조 구현",
+    ],
+    techStack: [
+      "Next.js",
+      "Spring Boot",
+      "MySQL",
+      "Docker Compose",
+      "GitHub Actions",
+      "Self-hosted Runner",
+    ],
   },
   {
     title: schMiniProjectResumeProject.title,
@@ -62,29 +71,106 @@ const resumeProjects = [
   },
 ];
 
+const resumeProfile = {
+  education,
+  language,
+  military,
+  publication,
+} as const;
+
+function Underline({ children }: { children: ReactNode }) {
+  return (
+    <u className="relative inline-block no-underline">
+      <span className="relative z-10">{children}</span>
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-[-3px] bottom-[0px] z-0 h-[0.55em] rounded-full bg-[#ffe1d2]"
+      />
+    </u>
+  );
+}
+
 export const metadata: Metadata = {
   title: "Woojin Lim Resume PDF",
   description: "PDF 변환용 임우진 이력서",
 };
 
 export default function ResumePdfPage() {
+  const projectBulletHighlights = [
+    "EKS 기반 MSA 플랫폼(V3)",
+    "Terraform 기반 IaC",
+    "self-hosted runner",
+    "TLS 인증서 갱신 실패 운영 장애 대응",
+    "모니터링 시스템",
+    "Secret 관리 및 주입 체계 구축",
+    "내부망 DNS 설정 유실 문제 해결",
+  ] as const;
+
+  const renderProjectBullet = (bullet: string) => {
+    const highlights = projectBulletHighlights
+      .map((highlight) => ({
+        highlight,
+        index: bullet.indexOf(highlight),
+      }))
+      .filter(({ index }) => index >= 0)
+      .sort((a, b) => a.index - b.index);
+
+    if (highlights.length === 0) {
+      return bullet;
+    }
+
+    const nodes: ReactNode[] = [];
+    let cursor = 0;
+
+    for (const { highlight, index } of highlights) {
+      if (index < cursor) continue;
+      if (index > cursor) nodes.push(bullet.slice(cursor, index));
+      nodes.push(
+        <span key={`${highlight}-${index}`} className="font-medium text-black">
+          {highlight}
+        </span>,
+      );
+      cursor = index + highlight.length;
+    }
+
+    if (cursor < bullet.length) nodes.push(bullet.slice(cursor));
+
+    return <>{nodes}</>;
+  };
+
   return (
     <PdfDocument>
       <PdfPage dense>
         <header>
           <div className="flex items-end gap-4">
             <h1 className="text-[34px] font-semibold leading-none tracking-normal text-black">
-              {profile.name} ({profile.englishName})
+              임우진 (Woojin Lim)
             </h1>
             <p className="pb-1 text-[15px] font-medium leading-none text-[#737373]">
-              {profile.birth.date} ({profile.birth.ageText})
+              2001.02.26 (만 25세)
             </p>
           </div>
         </header>
 
         <PdfSection className="mt-16">
-          <PDFSectionTitle>{aboutSummary.title}</PDFSectionTitle>
-          <BodyText>{aboutSummary.body}</BodyText>
+          <PDFSectionTitle>
+            <Underline>네트워크</Underline>와 <Underline>서비스 흐름</Underline>을 이해하는{" "}
+            <span className="text-[#1d4ed8]">
+              클라우드/DevOps 엔지니어 임우진
+            </span>
+            입니다.
+          </PDFSectionTitle>
+          <BodyText>
+            사용자의 요청이 네트워크와 서버를 지나 데이터베이스까지 처리되는
+            전체 흐름을 이해하고 설계하는 것을 좋아합니다. 프론트엔드, 백엔드,
+            인프라, 네트워크, 보안, 임베디드, AI 등 다양한 분야를 공부하며
+            프로젝트를 진행해왔고, 서비스의 여러 계층을 함께 이해해 장애 원인을
+            추적하고 해결합니다.{" "}
+            <span className="font-medium text-black">
+              개발을 통해 다른 사람의 경험에 긍정적인 영향을 주는 개발자
+            </span>
+            로 성장하려 합니다.
+          </BodyText>
         </PdfSection>
 
         <PdfSection>
@@ -98,12 +184,7 @@ export default function ResumePdfPage() {
 
         <PdfSection>
           <PDFSectionTitle>프로필</PDFSectionTitle>
-          <PDFProfile
-            education={education}
-            language={language}
-            military={military}
-            publication={publication}
-          />
+          <PDFProfile data={resumeProfile} />
         </PdfSection>
 
         <PdfSection>
@@ -117,10 +198,7 @@ export default function ResumePdfPage() {
             {experience.primary.map((item) => (
               <PDFExperienceRow
                 key={`${item.title}-${item.role}-${item.period}`}
-                title={item.title}
-                role={item.role}
-                period={item.period}
-                description={item.description}
+                item={item}
               />
             ))}
           </div>
@@ -133,10 +211,7 @@ export default function ResumePdfPage() {
             {experience.additional.map((item) => (
               <PDFExperienceRow
                 key={`${item.title}-${item.role}-${item.period}`}
-                title={item.title}
-                role={item.role}
-                period={item.period}
-                description={item.description}
+                item={item}
                 emphasized={false}
               />
             ))}
@@ -165,10 +240,12 @@ export default function ResumePdfPage() {
                   {project.meta}
                 </p>
                 <BodyText>{project.description}</BodyText>
-                <div className="mt-3">
-                  <BulletList items={project.bullets.slice(0, 4)} />
+                <div className="mt-2">
+                  <BulletList
+                    items={project.bullets.map(renderProjectBullet)}
+                  />
                 </div>
-                <div className="mt-3">
+                <div className="mt-2">
                   <ChipList items={project.techStack.slice()} />
                 </div>
               </article>
@@ -183,9 +260,10 @@ export default function ResumePdfPage() {
           <PDFAwardList items={awards} />
         </PdfSection>
 
-        <PdfSection>
+        <PdfSection className="mt-24">
           <PDFSectionTitle>
-            네트워크를 좋아하는 소프트웨어 엔지니어 임우진 입니다.
+            안녕하세요! 네트워크를 좋아하는 클라우드/DevOps 엔지니어
+            임우진입니다.
           </PDFSectionTitle>
           <div className="mt-4 grid gap-3 text-[13px] leading-relaxed text-[#525252]">
             <p>
@@ -194,7 +272,7 @@ export default function ResumePdfPage() {
               진로를 정하고 사물인터넷학과에 진학했습니다.
             </p>
             <p>
-              처음으로 개발자로써의 정체성이 만들어진 것은 마인크래프트
+              처음으로 개발자로서의 정체성이 만들어진 것은 마인크래프트
               플러그인을 개발해 약 100명의 동시 접속자가 이용하는 서버에
               서비스를 제공한 경험이었습니다. 사용자가 제가 만든 시스템을 실제로
               사용하고 즐기는 모습을 보며 처음으로 제가 만든 결과물이 누군가의
@@ -227,7 +305,7 @@ export default function ResumePdfPage() {
               진행했습니다. 제한된 환경에서도 팀원들과 협업하며 서비스를
               운영하고 문제를 해결한 경험을 통해 책임감과 실행력을 기를 수
               있었습니다. 그러나 앞으로는 보다 체계적인 환경에서 경험 많은
-              개발자들과 협업하며 성장하고 싶습니다.
+              개발자들과 협업하며 성장해 나가고 싶습니다.
             </p>
           </div>
         </PdfSection>

@@ -5,7 +5,7 @@ export const metadata = {
 
 const affiliation = "(주)유머스트알엔디";
 const position = "사업부 IT팀";
-const period = "2026.04 ~ current";
+const period = "2026.04-current";
 const role = ["DevOps Engineer", "Cloud Engineer"] as const;
 const title = "도봉라이프(DobongLife)";
 const subtitle = "AWS 인프라 구축 및 운영";
@@ -20,8 +20,8 @@ const mainSummary = [
 const resumeSummary = [
   "단일 EC2 기반 아키텍처(V1)를 역할 기반 AWS 인프라(V2)와 EKS 기반 MSA 플랫폼(V3)으로 확장 설계",
   "Terraform 기반 IaC를 적용하여 AWS 인프라를 코드로 관리하고, 스택 분리를 통해 재현성과 변경 추적성 확보",
-  "GitHub Actions, OIDC, SSM, Argo CD 기반 GitOps CI/CD 파이프라인 구축",
-  "AWS Secrets Manager, External Secrets Operator, Kubernetes Secret을 활용한 Secret 관리 및 주입 체계 구축",
+  "GitHub Actions, OIDC, SSM, Argo CD 기반 GitOps CI/CD 파이프라인 구축, TLS 인증서 갱신 실패 운영 장애 대응",
+  "Grafana, Prometheus를 활용한 모니터링 시스템 구축, AWS Secrets Manager를 활용한 Secret 관리 및 주입 체계 구축",
 ] as const;
 const skillSummary = [
   { name: "AWS", primary: true },
@@ -246,14 +246,14 @@ export const sections = [
     ],
     figures: [
       {
-        src: "/projects/dobonglife/dobonglife-grafana-operations-overview.png",
+        src: "/projects/dobonglife/dobonglife-grafana-operations-overview-masked.png",
         alt: "도봉라이프 Grafana 운영 상태 모니터링 대시보드",
         width: 1905,
         height: 1080,
         caption: "Grafana 클러스터 운영 상태 모니터링 화면",
       },
       {
-        src: "/projects/dobonglife/dobonglife-grafana-api-traffic-logs.png",
+        src: "/projects/dobonglife/dobonglife-grafana-api-traffic-logs-masked.png",
         alt: "도봉라이프 Grafana API 트래픽 및 로그 모니터링 대시보드",
         width: 1905,
         height: 1080,
