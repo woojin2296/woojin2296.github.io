@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const sectionLinks = [
-  { id: "about", label: "About" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "awards", label: "Awards" },
-  { id: "skills", label: "Skills" },
-  { id: "profile", label: "Profile" },
-  { id: "contact", label: "Contact" },
+  { id: "about", label: "소개" },
+  { id: "projects", label: "프로젝트" },
+  { id: "experience", label: "경험" },
+  { id: "awards", label: "수상 이력" },
+  { id: "skills", label: "기술 스택" },
+  { id: "profile", label: "프로필" },
+  { id: "contact", label: "연락처" },
 ];
 
 export function SectionNavigation() {
@@ -95,7 +95,7 @@ export function SectionNavigation() {
   return (
     <nav
       ref={navRef}
-      aria-label="Section navigation"
+      aria-label="메인 섹션 네비게이션"
       className="fixed left-[calc(50%_+_26rem)] top-1/4 z-20 hidden w-32 -translate-y-1/2 flex-col items-start gap-3 pl-4 xl:flex"
     >
       <span
@@ -122,10 +122,10 @@ export function SectionNavigation() {
             href={`#${link.id}`}
             aria-current={isActive ? "location" : undefined}
             className={cn(
-              "w-full overflow-hidden whitespace-nowrap pl-3 text-left text-[11px] uppercase tracking-[3px] transition-colors [-webkit-mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)] [mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)]",
+              "w-full overflow-hidden whitespace-nowrap pl-3 text-left text-xs leading-[1.33] tracking-normal transition-colors [-webkit-mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)] [mask-image:linear-gradient(to_right,black_0,black_calc(100%_-_18px),transparent_100%)]",
               isActive
-                ? "font-black text-[#0c0c0c]"
-                : "font-semibold text-[#5a6775] hover:text-[#0c0c0c]",
+                ? "font-medium text-black"
+                : "font-normal text-[#737373] hover:text-black",
             )}
           >
             {link.label}

@@ -11,11 +11,13 @@ const title = "도봉라이프(DobongLife)";
 const subtitle = "AWS 인프라 구축 및 운영";
 const description = "서울시 도봉구 지역상권 활성화 애플리케이션의 AWS 인프라를 구축하고 운영한 프로젝트";
 const mainSummary = [
-  "AWS 인프라 및 CI/CD 방식 개선 (V1, V2, V3)",
-  "Terraform과 GitOps 전체 구조",
-  "Secret 및 Variables 관리 경계",
-  "모니터링 구성",
-  "운영 장애 트러블슈팅: TLS 인증서 만료",
+  "단일 EC2 기반 아키텍처(V1)를 역할 기반 AWS 인프라(V2)와 EKS 기반 MSA 플랫폼(V3)으로 확장 설계",
+  "Terraform 기반 IaC를 적용하여 AWS 인프라를 코드로 관리하고, 스택 분리를 통해 재현성과 변경 추적성 확보",
+  "GitHub Actions, OIDC, SSM, Argo CD 기반 GitOps CI/CD 파이프라인 구축",
+  "AWS Secrets Manager를 활용한 Secret 관리 및 주입 체계 구축",
+  "HPA, Auto Scaling을 활용한 AWS 인프라의 확장성 및 가용성 확보",
+  "Grafana, Prometheus를 활용한 모니터링 시스템 구축",
+  "TLS 인증서 갱신 실패 운영 장애 대응",
 ] as const;
 const resumeSummary = [
   "단일 EC2 기반 아키텍처(V1)를 역할 기반 AWS 인프라(V2)와 EKS 기반 MSA 플랫폼(V3)으로 확장 설계",

@@ -9,7 +9,6 @@ import {
   Phone,
 } from "lucide-react";
 import { ExpandableImage } from "@/app/_components/common/expandable-image";
-import { SectionHeading } from "@/app/_components/common/section-heading";
 import { SectionNavigation } from "@/app/_components/navigation/section-navigation";
 import { otherProjects } from "@/content/other-projects";
 import {
@@ -162,10 +161,9 @@ export default function Home() {
           </ContentText>
         </ContentSection>
 
-        <ContentSection id="projects" className="py-[88px]">
+        <ContentSection id="projects">
           <ContentTitle>Projects</ContentTitle>
-
-          <div className="mt-6 divide-y divide-[#e5e5e5] border-y border-[#e5e5e5]">
+          <div className="divide-y divide-[#e5e5e5] border-y border-[#e5e5e5]">
             {projectSummary.map((project, index) => (
               <Link
                 key={index}
@@ -189,14 +187,14 @@ export default function Home() {
                       {project.period}
                     </p>
                   </div>
-                  <div className="w-full overflow-hidden px-0 py-2 sm:px-16">
+                  <div className="flex h-[300px] w-full items-center justify-center overflow-hidden px-0 py-2 sm:px-16">
                     <Image
                       src={project.image.src}
                       alt={project.image.alt}
                       width={project.image.width}
                       height={project.image.height}
                       unoptimized
-                      className="h-auto w-full object-contain object-left-top"
+                      className="block max-h-full w-auto max-w-full object-contain object-center"
                     />
                   </div>
                   <ul className="grid gap-2 text-base font-normal leading-relaxed tracking-normal text-[#525252]">
@@ -298,10 +296,10 @@ export default function Home() {
           </div>
         </ContentSection>
 
-        <section id="experience" className="py-[88px]">
-          <SectionHeading>Experience</SectionHeading>
+        <ContentSection id="experience">
+          <ContentTitle>Experience</ContentTitle>
 
-          <div className="mt-6 border-b border-[#e5e5e5]">
+          <div className="border-b border-[#e5e5e5]">
             {experience.primary.map((item) => (
               <div
                 key={`${item.period}-${item.title}`}
@@ -357,12 +355,11 @@ export default function Home() {
               </div>
             </details>
           </div>
-        </section>
+        </ContentSection>
 
-        <section id="awards" className="py-[88px]">
-          <SectionHeading>Awards</SectionHeading>
-
-          <div className="mt-6 grid gap-6">
+        <ContentSection id="awards">
+          <ContentTitle>수상 이력</ContentTitle>
+          <div className="grid gap-6">
             {awards.map((award) => (
               <div
                 key={`${award.date}-${award.title}`}
@@ -382,12 +379,12 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </ContentSection>
 
-        <section id="skills" className="py-[88px]">
-          <SectionHeading>Skills &amp; Tools</SectionHeading>
+        <ContentSection id="skills">
+          <ContentTitle>기술 스택</ContentTitle>
 
-          <div className="mt-6 grid gap-6">
+          <div className="grid gap-6">
             {skills.map((group) => (
               <div
                 key={group.title}
@@ -409,12 +406,11 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </ContentSection>
 
-        <section id="profile" className="py-[88px]">
-          <SectionHeading>Profile</SectionHeading>
-
-          <div className="mt-6 grid gap-6">
+        <ContentSection id="profile">
+          <ContentTitle>프로필</ContentTitle>
+          <div className="grid gap-6">
             {[
               {
                 label: "Education",
@@ -473,12 +469,12 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </ContentSection>
 
-        <section id="contact" className="py-[88px]">
-          <SectionHeading>Contact</SectionHeading>
+        <ContentSection id="contact">
+          <ContentTitle>연락처</ContentTitle>
 
-          <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+          <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
             {mainPageContact.map((item) => {
               const isExternal = "external" in item && item.external;
 
@@ -497,10 +493,10 @@ export default function Home() {
               );
             })}
           </div>
-        </section>
+        </ContentSection>
       </main>
 
-      <footer className="mx-auto max-w-[760px] px-5 sm:px-6">
+      <footer className="mt-24 mx-auto max-w-[760px] px-5 sm:px-6">
         <div className="py-8 text-center">
           <p className="text-[11px] text-[#a3a3a3]">
             &copy; 2026 {profile.name} ({profile.englishName}) &mdash; All
