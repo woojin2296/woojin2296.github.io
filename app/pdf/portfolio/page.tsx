@@ -110,6 +110,7 @@ const portfolioProfile = {
   military,
   publication,
 } as const;
+const portfolioContact = contact.find((item) => item.type === "portfolio");
 
 export default function PortfolioPdfPage() {
   return (
@@ -122,6 +123,22 @@ export default function PortfolioPdfPage() {
           <h1 className="mt-3 text-[36px] font-semibold leading-none tracking-normal text-black">
             {profile.displayName}
           </h1>
+          {portfolioContact ? (
+            <div className="mt-12 flex items-center justify-between gap-6 border-l border-[#d4d4d4] pl-4">
+              <p className="text-[12.5px] leading-relaxed text-[#737373]">
+                웹 포트폴리오에서 좀 더 편하게 확인하실 수 있습니다.
+              </p>
+              <a
+                href={portfolioContact.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-8 shrink-0 items-center rounded-full border border-[#d4d4d4] px-3 text-[11px] font-medium leading-none text-[#525252] no-underline"
+              >
+                웹 포트폴리오 보기
+                <span aria-hidden="true"> ↗</span>
+              </a>
+            </div>
+          ) : null}
         </header>
 
         <PdfSection className="grid gap-8">
@@ -685,10 +702,10 @@ function SubHeading({ children }: { children: ReactNode }) {
   );
 }
 
-function DetailText({ children }: { children: ReactNode }) {
+function DetailText({ children }: { children: string }) {
   return (
     <p className="text-[13px] font-normal leading-relaxed tracking-normal text-[#737373]">
-      {children}
+      {renderEmphasisSegments(children)}
     </p>
   );
 }
@@ -702,11 +719,42 @@ function DetailBullets({ items }: { items: readonly string[] }) {
             className="mt-[0.72em] h-1.5 w-1.5 shrink-0 rounded-full bg-black"
             aria-hidden="true"
           />
-          <span>{item}</span>
+          <span>{renderEmphasisSegments(item)}</span>
         </li>
       ))}
     </ul>
   );
+}
+
+function renderEmphasisSegments(text: string): ReactNode {
+  const segments: ReactNode[] = [];
+  const pattern = /\*\*(.+?)\*\*/g;
+  let cursor = 0;
+
+  for (const match of text.matchAll(pattern)) {
+    const index = match.index ?? 0;
+
+    if (index > cursor) {
+      segments.push(text.slice(cursor, index));
+    }
+
+    segments.push(
+      <strong key={`${match[1]}-${index}`} className="font-medium text-black">
+        {match[1]}
+      </strong>,
+    );
+    cursor = index + match[0].length;
+  }
+
+  if (segments.length === 0) {
+    return text;
+  }
+
+  if (cursor < text.length) {
+    segments.push(text.slice(cursor));
+  }
+
+  return segments;
 }
 
 function DetailImage({

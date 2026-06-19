@@ -102,6 +102,11 @@ export function PdfDocument({ children }: PdfDocumentProps) {
           size: A4;
           margin: 0;
         }
+
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
       `}</style>
       <div className="mx-auto grid w-[210mm] gap-6 print:w-full print:gap-0">
         {children}
