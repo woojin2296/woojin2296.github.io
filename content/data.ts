@@ -121,7 +121,13 @@ export const skills = [
 export const experience = {
   primary: [
     {
-      period: "2026.04 ~ Current",
+      period: "2026.07 ~ Current",
+      title: "(주)엔키화이트햇",
+      role: "사원",
+      description: ["DevOps 엔지니어"],
+    },
+    {
+      period: "2026.04 ~ 2026.06 · 3개월",
       title: "(주)유머스트알엔디",
       role: "계약직 사원",
       description: [
